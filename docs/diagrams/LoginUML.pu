@@ -1,0 +1,65 @@
+@startuml
+
+title Login
+
+class AppCompatActivity
+class ViewModelBase
+class ModelBase
+
+LoginView <|-- AppCompatActivity : extends
+LoginView ..> LoginViewModel : binds
+LoginViewModel <|-- ViewModelBase : extends
+LoginViewModel o-- LoginModel
+LoginModel <|-- ModelBase : extends
+LoginModel ..> WebRequestSingleton : calls
+LoginModel ..> UserInfoSingleton : calls
+
+class LoginView {
+    -Label _title
+    -Label _usernameLabel
+    -Label _passwordLabel
+    -Entry _usernameEntry
+    -Entry _passwordEntry
+    -Button _loginButton
+    -Button _signInButton
+    -void PropertyChanged()
+}
+
+class LoginViewModel{
+    -LoginModel _model
+    -string _username
+    -string _password
+
+    ~string Username
+    ~string Password
+    ~ICommand LoginCommand
+    ~ICommand SignInCommand
+
+    -void OnModelPropertyChanged()
+}
+
+class LoginModel {
+    ~bool Login(string username, string password)
+    ~bool SignIn(string username, string password)
+}
+
+class WebRequestSingleton {
+    -string _ipAddress
+    -int _timeout
+    -string _token
+
+    ~bool LoginRequest(string username, string password)
+    ~bool SignInRequest(string username, string password)
+    ~bool OrganizationListRequest(string username)
+    ~bool OrganizationConnect(string username, string organizationName)
+}
+
+class UserInfoSingleton {
+    -string _loggedUser
+    -List<string> _connectedOrganizations
+    
+    ~string LoggedUser
+    ~List<string> ConnectedOrganizations
+}
+
+@enduml
