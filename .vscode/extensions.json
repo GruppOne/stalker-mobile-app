@@ -1,0 +1,19 @@
+{
+  "recommendations": [
+    "ban.spellright",
+    "DavidAnson.vscode-markdownlint",
+    "GabrielBB.vscode-lombok",
+    "jebbs.plantuml",
+    "redhat.java",
+    "redhat.vscode-xml",
+    "redhat.vscode-yaml",
+    "ryanluker.vscode-coverage-gutters",
+    "shengchen.vscode-checkstyle",
+    "VisualStudioExptTeam.vscodeintellicode",
+    "vscjava.vscode-java-debug",
+    "vscjava.vscode-java-dependency",
+    "vscjava.vscode-java-test",
+    "wmaurer.vscode-jumpy",
+    "yzhang.markdown-all-in-one"
+  ]
+}
