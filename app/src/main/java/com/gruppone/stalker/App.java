@@ -12,6 +12,7 @@ public class App extends Application {
   public void onCreate(){
     super.onCreate();
     context = getApplicationContext();
+    TypefaceProvider.registerDefaultIconSets();
   }
 
   public static Context getAppContext(){
