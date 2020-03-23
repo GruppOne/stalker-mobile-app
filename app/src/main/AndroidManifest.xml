@@ -17,6 +17,13 @@
     android:supportsRtl="true"
     android:theme="@style/AppTheme"
     tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+
+
+    <activity android:name=".Display">
+      <intent-filter>
+        <action android:name="com.gruppone.stalker.DISPLAY" />
+      </intent-filter>
+    </activity>
     <activity android:name=".LoginActivity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
@@ -37,5 +44,8 @@
       </intent-filter>
     </activity>
 
+    <service
+      android:name=".LocationNotifier"
+      android:permission="android.permission.BIND_JOB_SERVICE" />
   </application>
 </manifest>
