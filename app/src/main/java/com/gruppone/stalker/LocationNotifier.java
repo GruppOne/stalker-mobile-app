@@ -11,8 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.core.app.JobIntentService;
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.*;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 
 public class LocationNotifier extends JobIntentService {
   static int JOB_ID = 1000;
@@ -79,25 +77,17 @@ public class LocationNotifier extends JobIntentService {
 
     LocationServices.getSettingsClient(activity)
                     .checkLocationSettings(builder.build())
-                    .addOnSuccessListener(
-                      new OnSuccessListener<LocationSettingsResponse>() {
-                        @Override
-                        public void onSuccess(LocationSettingsResponse locationSettingsResponse) {
-                        }
-                      })
-                    .addOnFailureListener(new OnFailureListener() {
-                      @Override
-                      public void onFailure(@NonNull Exception e) {
-                        if (e instanceof ResolvableApiException) {
-                          try {
-                            ResolvableApiException resolvableApiException = (ResolvableApiException) e;
-                            resolvableApiException.startResolutionForResult(
-                              activity, 1010);
-                          } catch (IntentSender.SendIntentException exc) {
-                            Toast.makeText(activity, "Nouse",
-                                           Toast.LENGTH_SHORT)
-                                 .show();
-                          }
+                    .addOnSuccessListener(locationSettingsResponse -> {
+                    })
+                    .addOnFailureListener(e -> {
+                      if (e instanceof ResolvableApiException) {
+                        try {
+                          ResolvableApiException resolvableApiException = (ResolvableApiException) e;
+                          resolvableApiException.startResolutionForResult(
+                            activity, 1010);
+                        } catch (IntentSender.SendIntentException exc) {
+                          Toast.makeText(activity, "Nouse", Toast.LENGTH_SHORT)
+                               .show();
                         }
                       }
                     });
