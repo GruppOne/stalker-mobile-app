@@ -3,19 +3,22 @@ apply plugin: 'com.android.application'
 android {
   compileSdkVersion 28
   buildToolsVersion "28.0.3"
+
   defaultConfig {
     applicationId "com.gruppone.stalker"
-    minSdkVersion 26
+    minSdkVersion 21
     //noinspection OldTargetApi
     targetSdkVersion 28
     versionCode 1
-    versionName "0.0.0"
+    versionName "0.1.0"
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
   }
+
   compileOptions {
     sourceCompatibility JavaVersion.VERSION_1_8
     targetCompatibility JavaVersion.VERSION_1_8
   }
+
   buildTypes {
     release {
       minifyEnabled false
@@ -28,9 +31,8 @@ android {
     warningsAsErrors true
 
     checkAllWarnings true
-    // TODO use enable and disable instead of checkAllWarnings
+    // use disable to individually remove lint checks that are redundant
     // disable "id1", "id2"
-    // enable "id3", "id4, "id5
   }
 }
 

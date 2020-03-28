@@ -19,17 +19,16 @@ allprojects {
   repositories {
     google()
     jcenter()
-
   }
-}
 
-// TODO check if this works as expected
-tasks.withType(JavaCompile) {
-  options.encoding = 'UTF-8'
-  options.compilerArgs = [
-    '-Xlint:all',
-    '-Werror'
-  ]
+  // TODO check if this works as expected
+  tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+    options.compilerArgs = [
+      '-Xlint:all',
+      '-Werror'
+    ]
+  }
 }
 
 task clean(type: Delete) {
