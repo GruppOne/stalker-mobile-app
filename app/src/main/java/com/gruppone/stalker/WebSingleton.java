@@ -1,6 +1,5 @@
 package com.gruppone.stalker;
 
-import android.content.Context;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
@@ -8,23 +7,21 @@ import com.android.volley.toolbox.Volley;
 public class WebSingleton {
   private static WebSingleton instance;
   private RequestQueue requestQueue;
-  private static Context ctx;
 
-  private WebSingleton(Context context) {
-    ctx = context.getApplicationContext();
+  private WebSingleton() {
     requestQueue = getRequestQueue();
   }
 
-  public static synchronized WebSingleton getInstance(Context context) {
+  public static synchronized WebSingleton getInstance() {
     if (instance == null) {
-      instance = new WebSingleton(context);
+      instance = new WebSingleton();
     }
     return instance;
   }
 
   public RequestQueue getRequestQueue() {
     if (requestQueue == null) {
-      requestQueue = Volley.newRequestQueue(ctx);
+      requestQueue = Volley.newRequestQueue(App.getAppContext());
     }
     return requestQueue;
   }
