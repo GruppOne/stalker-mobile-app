@@ -2,7 +2,6 @@ package com.gruppone.stalker;
 
 import android.util.Pair;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Place {

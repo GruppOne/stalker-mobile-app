@@ -19,8 +19,11 @@ public class LoginActivity extends StalkerActivity {
       new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-          viewModel.login(((EditText) findViewById(R.id.emailEditText)).getText().toString(),
-            ((EditText) findViewById(R.id.passwordEditText)).getText().toString());
+          viewModel.login(
+            ((EditText) findViewById(R.id.emailEditText)).getText()
+                                                         .toString(),
+            ((EditText) findViewById(R.id.passwordEditText)).getText()
+                                                            .toString());
         }
       });
   }
