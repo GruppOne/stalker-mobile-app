@@ -9,16 +9,16 @@ public class Organization {
   private String name;
   private List<Place> places;
 
-  public int GetId() {
+  public int getId() {
     return id;
   }
 
-  public String GetName() {
+  public String getName() {
     return name;
   }
 
-  public Boolean IsInside(Pair<Double, Double> point) {
-    Boolean ret = false;
+  public boolean isInside(Pair<Double, Double> point) {
+    boolean ret = false;
     for (Place place : places) {
       if (place.IsInside(point)) {
         ret = true;
