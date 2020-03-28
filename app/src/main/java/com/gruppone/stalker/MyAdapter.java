@@ -3,6 +3,7 @@ package com.gruppone.stalker;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
@@ -21,6 +22,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     mDataset = myDataset;
   }
 
+  @NonNull
   @Override
   public MyAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
     TextView v = (TextView) LayoutInflater.from(parent.getContext())
