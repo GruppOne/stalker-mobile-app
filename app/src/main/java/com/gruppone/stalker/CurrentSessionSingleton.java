@@ -13,6 +13,10 @@ public class CurrentSessionSingleton {
     //localization entry point
   }
 
+  boolean zeroOrganizations() {
+    return organizations == null || organizations.isEmpty();
+  }
+
   public static synchronized CurrentSessionSingleton getInstance() {
     if (instance == null) {
       instance = new CurrentSessionSingleton();
