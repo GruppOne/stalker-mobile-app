@@ -12,7 +12,7 @@ public class Place {
   }
 
   //to implement
-  public Boolean IsInside(Pair<Double, Double> point) {
+  public boolean isInside(Pair<Double, Double> point) {
     return true;
   }
 }
