@@ -8,7 +8,7 @@ public class CurrentSessionSingleton {
   private String loggedUser;
   private List<Organization> organizations;
 
-  void SetOrganizations(List<Organization> orgList) {
+  void setOrganizations(List<Organization> orgList) {
     organizations = orgList;
     //localization entry point
   }
