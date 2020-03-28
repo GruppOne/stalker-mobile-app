@@ -18,7 +18,7 @@ public class MainPageActivity extends StalkerActivity {
 
     viewModel = new ViewModelProvider(this).get(MainPageViewModel.class);
 
-    recyclerView = (RecyclerView) findViewById(R.id.organizationRecyclerView);
+    recyclerView = findViewById(R.id.organizationRecyclerView);
     recyclerView.setHasFixedSize(true);
     layoutManager = new LinearLayoutManager(this);
     recyclerView.setLayoutManager(layoutManager);
