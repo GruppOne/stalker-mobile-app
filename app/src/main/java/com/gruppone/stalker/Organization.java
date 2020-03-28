@@ -20,7 +20,7 @@ public class Organization {
   public boolean isInside(Pair<Double, Double> point) {
     boolean ret = false;
     for (Place place : places) {
-      if (place.IsInside(point)) {
+      if (place.isInside(point)) {
         ret = true;
         break;
       }
