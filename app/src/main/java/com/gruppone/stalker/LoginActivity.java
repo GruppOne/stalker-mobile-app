@@ -3,14 +3,9 @@ package com.gruppone.stalker;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import org.json.JSONObject;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends StalkerActivity {
   LoginViewModel viewModel;
 
   @Override
