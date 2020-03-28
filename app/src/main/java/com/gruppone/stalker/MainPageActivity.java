@@ -1,12 +1,11 @@
 package com.gruppone.stalker;
 
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-public class MainPageActivity extends AppCompatActivity {
+public class MainPageActivity extends StalkerActivity {
   private RecyclerView recyclerView;
   private RecyclerView.Adapter mAdapter;
   private RecyclerView.LayoutManager layoutManager;
