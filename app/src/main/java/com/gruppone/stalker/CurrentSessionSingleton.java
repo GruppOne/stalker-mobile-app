@@ -3,10 +3,15 @@ package com.gruppone.stalker;
 import java.util.List;
 
 public class CurrentSessionSingleton {
+
   private static CurrentSessionSingleton instance;
 
   private String loggedUser;
   private List<Organization> organizations;
+
+  private CurrentSessionSingleton() {
+    
+  }
 
   void setOrganizations(List<Organization> orgList) {
     organizations = orgList;
