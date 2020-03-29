@@ -26,6 +26,8 @@ allprojects {
     options.encoding = 'UTF-8'
     options.compilerArgs = [
       '-Xlint:all',
+      '-Xlint:-serial',
+      '-Xlint:-classfile',
       '-Werror'
     ]
   }
