@@ -1,10 +1,13 @@
 package com.gruppone.stalker;
 
 import com.android.volley.Request;
+import com.android.volley.Request.Method;
 import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
 public class WebSingleton {
+
   private static WebSingleton instance;
   private RequestQueue requestQueue;
 
@@ -28,5 +31,17 @@ public class WebSingleton {
 
   public <T> void addToRequestQueue(Request<T> request) {
     getRequestQueue().add(request);
+  }
+
+  public void userEntered(Organization organization, Place place) {
+    addToRequestQueue(new JsonObjectRequest(Method.GET, "localhost", null, null, null));
+  }
+
+  public void userExited(Organization organization, Place place) {
+    addToRequestQueue(new JsonObjectRequest(Method.GET, "localhost", null, null, null));
+  }
+
+  public void getOrganizationList() {
+    addToRequestQueue(new JsonObjectRequest(Method.GET, "localhost", null, null, null));
   }
 }
