@@ -10,6 +10,7 @@ public class WebSingleton {
 
   private static WebSingleton instance;
   private RequestQueue requestQueue;
+  private String url = "localhost";
 
   private WebSingleton() {
     requestQueue = getRequestQueue();
@@ -34,14 +35,14 @@ public class WebSingleton {
   }
 
   public void userEntered(Organization organization, Place place) {
-    addToRequestQueue(new JsonObjectRequest(Method.GET, "localhost", null, null, null));
+    addToRequestQueue(new JsonObjectRequest(Method.GET, url, null, null, null));
   }
 
   public void userExited(Organization organization, Place place) {
-    addToRequestQueue(new JsonObjectRequest(Method.GET, "localhost", null, null, null));
+    addToRequestQueue(new JsonObjectRequest(Method.GET, url, null, null, null));
   }
 
   public void getOrganizationList() {
-    addToRequestQueue(new JsonObjectRequest(Method.GET, "localhost", null, null, null));
+    addToRequestQueue(new JsonObjectRequest(Method.GET, url, null, null, null));
   }
 }
