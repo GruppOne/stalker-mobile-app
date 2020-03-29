@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class MainPageActivity extends StalkerActivity {
   private RecyclerView recyclerView;
-  private RecyclerView.Adapter mAdapter;
+  private RecyclerView.Adapter<OrganizationListAdapter.MyViewHolder> mAdapter;
   private RecyclerView.LayoutManager layoutManager;
   private MainPageViewModel viewModel;
 
