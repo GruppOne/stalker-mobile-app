@@ -11,6 +11,10 @@ public class Place {
 
   @Getter
   private List<Pair<Double, Double>> polyLine;
+  
+  public Place(List<Pair<Double, Double>> polyLine) {
+    this.polyLine = polyLine;
+  }
 
   public boolean isInside(Pair<Double, Double> point) {
     double xMin = Double.MAX_VALUE;

@@ -11,6 +11,12 @@ public class Organization {
 
   @Getter
   private String name;
+  
+  public Organization(Integer id, String name, List<Place> places) {
+    this.id = id;
+    this.name = name;
+    this.places = places;
+  }
 
   private List<Place> places;
 
