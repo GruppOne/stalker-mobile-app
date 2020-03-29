@@ -12,8 +12,23 @@ public class Place {
   @Getter
   private List<Pair<Double, Double>> polyLine;
 
-  //to implement
   public boolean isInside(Pair<Double, Double> point) {
-    return true;
+    double xMin = Double.MAX_VALUE;
+    double xMax = Double.MIN_VALUE;
+    double yMin = Double.MAX_VALUE;
+    double yMax = Double.MIN_VALUE;
+
+    for (Pair<Double, Double> polyPoint : polyLine) {
+      if (polyPoint.first < xMin)
+        xMin = polyPoint.first;
+      if (polyPoint.first > xMax)
+        xMax = polyPoint.first;
+      if (polyPoint.second < yMin)
+        yMin = polyPoint.second;
+      if (polyPoint.second > yMax)
+        yMax = polyPoint.second;
+    }
+
+    return (point.first > xMin) && (point.first < xMax) && (point.second > yMin) && (point.second < yMax);
   }
 }
