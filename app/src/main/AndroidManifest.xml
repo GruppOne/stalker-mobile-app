@@ -19,20 +19,20 @@
     tools:ignore="AllowBackup,GoogleAppIndexingWarning">
 
     <activity android:name=".StalkerActivity"/>
-
+    <activity android:name=".LoginActivity">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN"/>
+        <category android:name="android.intent.category.LAUNCHER"/>
+      </intent-filter>
+    </activity>
+    <activity
+      android:name=".MainPageActivity"
+      android:parentActivityName=".LoginActivity"/>
     <activity android:name=".Display">
       <intent-filter>
         <action android:name="com.gruppone.stalker.DISPLAY"/>
       </intent-filter>
     </activity>
-    <activity android:name=".LoginActivity">
-      <intent-filter>
-        <action android:name="android.intent.action.MAIN"/>
-
-        <category android:name="android.intent.category.LAUNCHER"/>
-      </intent-filter>
-    </activity>
-    <activity android:name=".MainPageActivity"/>
     <activity android:name=".MainActivity"/>
 
     <service
