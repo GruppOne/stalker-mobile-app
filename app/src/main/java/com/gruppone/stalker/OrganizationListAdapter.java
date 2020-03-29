@@ -6,7 +6,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
+import java.util.ArrayList;
+
+public class OrganizationListAdapter extends RecyclerView.Adapter<OrganizationListAdapter.MyViewHolder> {
   private String[] mDataset;
 
   public static class MyViewHolder extends RecyclerView.ViewHolder {
@@ -18,13 +20,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     }
   }
 
-  public MyAdapter(String[] myDataset) {
-    mDataset = myDataset;
+  public OrganizationListAdapter(ArrayList<String> dataset) {
+    mDataset = dataset.toArray(new String[dataset.size()]);
   }
 
   @NonNull
   @Override
-  public MyAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+  public OrganizationListAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
     TextView v = (TextView) LayoutInflater.from(parent.getContext())
                                           .inflate(R.layout.organization_view,
                                                    parent, false);
