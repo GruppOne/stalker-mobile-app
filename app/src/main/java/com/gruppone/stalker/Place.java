@@ -7,7 +7,7 @@ import java.util.List;
 public class Place {
   private List<Pair<Double, Double>> polyLine;
 
-  public List<Pair<Double, Double>> GetPolyLine() {
+  public List<Pair<Double, Double>> getPolyLine() {
     return polyLine;
   }
 
