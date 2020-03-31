@@ -4,10 +4,10 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class StalkerActivityTest {
+public class MainPageActivityInstrTest {
 
   @Test
-  public void onResume() {
+  public void onCreate() {
     //Arrange
 
     //Act

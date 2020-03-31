@@ -4,10 +4,10 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class MainActivityTest {
+public class CurrentSessionSingletonInstrTest {
 
   @Test
-  public void onCreate() {
+  public void setOrganizations() {
     //Arrange
 
     //Act

@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class LoginActivityTest {
+public class MainActivityInstrTest {
 
   @Test
   public void onCreate() {
