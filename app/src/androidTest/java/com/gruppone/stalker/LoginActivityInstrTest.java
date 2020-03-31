@@ -4,19 +4,10 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class AppTest {
+public class LoginActivityInstrTest {
 
   @Test
   public void onCreate() {
-    //Arrange
-
-    //Act
-
-    //Assert
-  }
-
-  @Test
-  public void getAppContext() {
     //Arrange
 
     //Act

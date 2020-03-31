@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class LocationNotifierTest {
+public class LocationNotifierInstrTest {
 
   @Test
   public void enqueue() {

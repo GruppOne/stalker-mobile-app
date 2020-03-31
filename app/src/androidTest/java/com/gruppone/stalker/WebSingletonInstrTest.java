@@ -6,7 +6,7 @@ import static org.junit.Assert.assertSame;
 import com.android.volley.RequestQueue;
 import org.junit.Test;
 
-public class WebSingletonTest {
+public class WebSingletonInstrTest {
 
   @Test
   public void getRequestQueue_notNull() {
