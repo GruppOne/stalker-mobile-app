@@ -6,11 +6,11 @@ public class CurrentSessionSingleton {
 
   private static CurrentSessionSingleton instance;
 
-  private String loggedUser;
+  private User loggedUser;
   private List<Organization> organizations;
 
   private CurrentSessionSingleton() {
-    
+
   }
 
   void setOrganizations(List<Organization> orgList) {
@@ -20,6 +20,10 @@ public class CurrentSessionSingleton {
 
   boolean zeroOrganizations() {
     return organizations == null || organizations.isEmpty();
+  }
+
+  User getLoggedUser() {
+    return loggedUser;
   }
 
   public static synchronized CurrentSessionSingleton getInstance() {
