@@ -1,5 +1,6 @@
 package com.gruppone.stalker;
 
+import androidx.lifecycle.MutableLiveData;
 import java.util.List;
 
 public class CurrentSessionSingleton {
@@ -7,19 +8,19 @@ public class CurrentSessionSingleton {
   private static CurrentSessionSingleton instance;
 
   private User loggedUser;
-  private List<Organization> organizations;
+  private MutableLiveData<List<Organization>> organizations = new MutableLiveData<>();
 
   private CurrentSessionSingleton() {
 
   }
 
   void setOrganizations(List<Organization> orgList) {
-    organizations = orgList;
+    organizations.postValue(orgList);
     //localization entry point
   }
 
   boolean zeroOrganizations() {
-    return organizations == null || organizations.isEmpty();
+    return organizations.getValue() == null || organizations.getValue().isEmpty();
   }
 
   User getLoggedUser() {
