@@ -2,19 +2,15 @@ package com.gruppone.stalker;
 
 import android.util.Pair;
 import java.util.List;
+import lombok.Getter;
 
 public class Place {
 
+  @Getter
   private int id;
+
+  @Getter
   private List<Pair<Double, Double>> polyLine;
-
-  public List<Pair<Double, Double>> getPolyLine() {
-    return polyLine;
-  }
-
-  public int getId() {
-    return id;
-  }
 
   //to implement
   public boolean isInside(Pair<Double, Double> point) {
