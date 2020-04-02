@@ -3,6 +3,7 @@
   <component name="ExternalDependencies">
     <plugin id="Coverage" />
     <plugin id="JUnit" />
+    <plugin id="Lombook Plugin" />
     <plugin id="com.intellij" min-version="193.6494.35" max-version="193.6494.35" />
     <plugin id="com.intellij.gradle" />
     <plugin id="org.editorconfig.editorconfigjetbrains" />
