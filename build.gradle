@@ -28,6 +28,7 @@ allprojects {
       '-Xlint:all',
       '-Xlint:-serial',
       '-Xlint:-classfile',
+      '-Xlint:-processing',
       '-Werror'
     ]
   }
