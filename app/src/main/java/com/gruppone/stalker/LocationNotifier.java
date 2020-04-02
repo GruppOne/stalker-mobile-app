@@ -29,10 +29,6 @@ public class LocationNotifier extends JobIntentService {
   }
 
   static void startLocationUpdates(Activity activity) {
-    if (CurrentSessionSingleton.getInstance()
-                               .zeroOrganizations()) {
-      return;
-    }
     checkPermissions(activity);
 
     FusedLocationProviderClient locationProviderClient = LocationServices.getFusedLocationProviderClient(
@@ -59,11 +55,6 @@ public class LocationNotifier extends JobIntentService {
   }
 
   static void checkPermissions(Activity activity) {
-    if (CurrentSessionSingleton.getInstance()
-                               .zeroOrganizations()) {
-      return;
-    }
-
     if (locationRequest == null) {
       locationRequest = LocationRequest.create();
       locationRequest.setInterval(300000);
