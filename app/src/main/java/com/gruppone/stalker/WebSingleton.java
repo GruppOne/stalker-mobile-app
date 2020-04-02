@@ -10,7 +10,7 @@ public class WebSingleton {
 
   private static WebSingleton instance;
   private RequestQueue requestQueue;
-  private String serverUrl = "10.0.2.2:8080";
+  private String serverUrl = "10.0.2.2:11111";
 
   private WebSingleton() {
     requestQueue = getRequestQueue();
