@@ -1,12 +1,9 @@
 package com.gruppone.stalker;
 
-<<<<<<< HEAD
-import androidx.lifecycle.MutableLiveData;
-=======
 import android.util.Pair;
-
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import java.util.ArrayList;
->>>>>>> feat: add methods to check if a point is inside an organization
 import java.util.List;
 import lombok.Getter;
 
@@ -28,15 +25,25 @@ public class CurrentSessionSingleton {
     //localization entry point
   }
 
+  LiveData<List<Organization>> getOrganizations() {
+    return organizations;
+  }
+
   boolean zeroOrganizations() {
     return organizations.getValue() == null || organizations.getValue().isEmpty();
   }
 
-  public List<Integer> getInsideId(Pair<Double,Double> point) {
+  public List<Integer> getInsideId(Pair<Double, Double> point) {
     List<Integer> ret = new ArrayList<>();
-    for (Organization org:organizations) {
-      if (org.isInside(point))
-        ret.add(org.getId());
+    if (!zeroOrganizations()) {
+      //organizations.getValue() could be null, but the !zeroOrganizations() check ensures it's not,
+      //so I silenced the linter warning
+      //noinspection ConstantConditions
+      for (Organization org : organizations.getValue()) {
+        if (org.isInside(point)) {
+          ret.add(org.getId());
+        }
+      }
     }
     return ret;
   }
