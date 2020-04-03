@@ -5,12 +5,13 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import java.util.ArrayList;
+import com.gruppone.stalker.OrganizationListAdapter.OrgViewHolder;
+import java.util.List;
 
 public class MainPageActivity extends StalkerActivity {
+
   private RecyclerView recyclerView;
-  private RecyclerView.Adapter<OrganizationListAdapter.MyViewHolder> mAdapter;
+  private RecyclerView.Adapter<OrgViewHolder> mAdapter;
   private RecyclerView.LayoutManager layoutManager;
   private MainPageViewModel viewModel;
 
@@ -21,19 +22,26 @@ public class MainPageActivity extends StalkerActivity {
 
     viewModel = new ViewModelProvider(this).get(MainPageViewModel.class);
 
-    final Observer<ArrayList<String>> organizationDataSetObserver = newOrganizationDataSet -> mAdapter.notifyDataSetChanged();
+    loadOrganizations();
 
-    viewModel.getOrganizationDataSet()
-             .observe(this, organizationDataSetObserver);
+    final Observer<List<Organization>> organizationDataSetObserver = newOrganizationDataSet -> mAdapter
+      .notifyDataSetChanged();
+
+    viewModel.getOrgsLiveData()
+      .observe(this, organizationDataSetObserver);
 
     recyclerView = findViewById(R.id.organizationRecyclerView);
     recyclerView.setHasFixedSize(true);
     layoutManager = new LinearLayoutManager(this);
     recyclerView.setLayoutManager(layoutManager);
-    mAdapter = new OrganizationListAdapter(viewModel.getOrganizationDataSet()
-                                                    .getValue());
+    mAdapter = new OrganizationListAdapter(viewModel.getOrgsLiveData()
+      .getValue());
 
     mAdapter.notifyDataSetChanged();
     recyclerView.setAdapter(mAdapter);
+  }
+
+  public void loadOrganizations() {
+    viewModel.loadOrganizations();
   }
 }
