@@ -5,37 +5,39 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import com.gruppone.stalker.OrganizationListAdapter.OrgViewHolder;
+import java.util.List;
 
-import java.util.ArrayList;
+public class OrganizationListAdapter extends RecyclerView.Adapter<OrgViewHolder> {
 
-public class OrganizationListAdapter extends RecyclerView.Adapter<OrganizationListAdapter.MyViewHolder> {
   private String[] mDataset;
 
-  public static class MyViewHolder extends RecyclerView.ViewHolder {
+  public static class OrgViewHolder extends RecyclerView.ViewHolder {
+
     public TextView textView;
 
-    public MyViewHolder(TextView v) {
+    public OrgViewHolder(TextView v) {
       super(v);
       textView = v;
     }
   }
 
-  public OrganizationListAdapter(ArrayList<String> dataset) {
+  public OrganizationListAdapter(List<Organization> dataset) {
     mDataset = dataset.toArray(new String[dataset.size()]);
   }
 
   @NonNull
   @Override
-  public OrganizationListAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+  public OrgViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
     TextView v = (TextView) LayoutInflater.from(parent.getContext())
-                                          .inflate(R.layout.organization_view,
-                                                   parent, false);
-    MyViewHolder vh = new MyViewHolder(v);
+      .inflate(R.layout.organization_view,
+        parent, false);
+    OrgViewHolder vh = new OrgViewHolder(v);
     return vh;
   }
 
   @Override
-  public void onBindViewHolder(MyViewHolder holder, int position) {
+  public void onBindViewHolder(OrgViewHolder holder, int position) {
     holder.textView.setText(mDataset[position]);
   }
 
