@@ -9,8 +9,7 @@ on:
 # TODO add PlantUML job
 # TODO add spellcheck job: https://github.com/marketplace/actions/spellcheck-action
 jobs:
-
-  lint:
+  lint-markdown:
     name: Lint *.md
     runs-on: ubuntu-18.04
 
