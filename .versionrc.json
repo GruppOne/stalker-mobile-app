@@ -45,7 +45,7 @@
     },
     {
       "type": "chore",
-      "section": "Configuration"
+      "hidden": true
     }
   ]
 }
