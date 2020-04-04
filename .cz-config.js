@@ -8,6 +8,11 @@ const depsScope = {
   value: 'deps',
 };
 
+const docsScope = {
+  name: '(docs)         Something related to documentation',
+  value: 'docs'
+};
+
 module.exports = {
   types: [
     {
@@ -84,6 +89,7 @@ module.exports = {
       'android',
       'idea',
       'vscode',
+      docsScope,
     ],
   },
 
