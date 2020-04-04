@@ -8,6 +8,7 @@ on:
 
 # TODO add PlantUML job
 # TODO add spellcheck job: https://github.com/marketplace/actions/spellcheck-action
+jobs:
 
   lint:
     name: Lint *.md
