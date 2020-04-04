@@ -11,27 +11,65 @@ import org.junit.Test;
 public class OrganizationTest {
 
   @Test
-  public void isInside() {
+  public void isInside_insidePoint() {
     //Arrange
-    List<Pair<Double, Double>> pairList = new ArrayList<>();
+    final List<Pair<Double, Double>> pairList = new ArrayList<>();
     pairList.add(new Pair<>(0.0, 0.0));
     pairList.add(new Pair<>(1.0, 0.0));
     pairList.add(new Pair<>(1.0, 1.0));
     pairList.add(new Pair<>(0.0, 1.0));
 
-    List<Place> placeList = new ArrayList<>();
+    final List<Place> placeList = new ArrayList<>();
     placeList.add(new Place(pairList));
 
-    Organization instance = new Organization(1, "test", placeList);
+    final Organization instance = new Organization(1, "test", placeList);
 
     //Act
-    Boolean firstIsInside = instance.isInside(new Pair<>(0.5, 0.5));
-    Boolean secondIsInside = instance.isInside(new Pair<>(5.0, 5.0));
-    Boolean thirdIsInside = instance.isInside(new Pair<>(0.0, 1.0));
+    final boolean isInside = instance.isInside(new Pair<>(0.5, 0.5));
 
     //Assert
-    assertTrue(firstIsInside);
-    assertFalse(secondIsInside);
-    assertFalse(thirdIsInside);
+    assertTrue(isInside);
+  }
+
+  @Test
+  public void isInside_borderPoint() {
+    //Arrange
+    final List<Pair<Double, Double>> pairList = new ArrayList<>();
+    pairList.add(new Pair<>(0.0, 0.0));
+    pairList.add(new Pair<>(1.0, 0.0));
+    pairList.add(new Pair<>(1.0, 1.0));
+    pairList.add(new Pair<>(0.0, 1.0));
+
+    final List<Place> placeList = new ArrayList<>();
+    placeList.add(new Place(pairList));
+
+    final Organization instance = new Organization(1, "test", placeList);
+
+    //Act
+    Boolean isInside = instance.isInside(new Pair<>(0.0, 1.0));
+
+    //Assert
+    assertFalse(isInside);
+  }
+
+  @Test
+  public void isInside_outsidePoint() {
+    //Arrange
+    final List<Pair<Double, Double>> pairList = new ArrayList<>();
+    pairList.add(new Pair<>(0.0, 0.0));
+    pairList.add(new Pair<>(1.0, 0.0));
+    pairList.add(new Pair<>(1.0, 1.0));
+    pairList.add(new Pair<>(0.0, 1.0));
+
+    final List<Place> placeList = new ArrayList<>();
+    placeList.add(new Place(pairList));
+
+    final Organization instance = new Organization(1, "test", placeList);
+
+    //Act
+    final boolean isInside = instance.isInside(new Pair<>(5.0, 5.0));
+
+    //Assert
+    assertFalse(isInside);
   }
 }
