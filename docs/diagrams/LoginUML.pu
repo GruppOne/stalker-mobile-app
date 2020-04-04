@@ -2,6 +2,8 @@
 
 title Login
 
+!include ../style/class.pu
+
 class AppCompatActivity
 class ViewModelBase
 class ModelBase
@@ -57,7 +59,7 @@ class WebRequestSingleton {
 class UserInfoSingleton {
     -string _loggedUser
     -List<string> _connectedOrganizations
-    
+
     ~string LoggedUser
     ~List<string> ConnectedOrganizations
 }
