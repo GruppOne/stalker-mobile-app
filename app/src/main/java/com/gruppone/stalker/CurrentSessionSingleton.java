@@ -33,7 +33,7 @@ public class CurrentSessionSingleton {
     return organizations.getValue() == null || organizations.getValue().isEmpty();
   }
 
-  public List<Integer> getInsideId(Pair<Double, Double> point) {
+  public List<Integer> getInsideId(Point point) {
     List<Integer> ret = new ArrayList<>();
     if (!zeroOrganizations()) {
       //organizations.getValue() could be null, but the !zeroOrganizations() check ensures it's not,
