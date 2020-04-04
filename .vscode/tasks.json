@@ -1,4 +1,33 @@
 {
   "version": "2.0.0",
-  "tasks": []
+  "tasks": [
+    {
+      "label": "build plantuml images",
+      "type": "shell",
+      "command": "java",
+      "args": [
+        "-jar",
+        "${env:PLANTUML_JAR}",
+        "-progress",
+        "-failfast",
+        "-checkmetadata",
+        "-charset",
+        "UTF-8",
+        "-x",
+        "${workspaceRoot}/docs/style/*.pu",
+        "-o",
+        "img",
+        "${workspaceRoot}/docs/diagrams/*.pu"
+      ],
+      "presentation": {
+        "echo": true,
+        "reveal": "silent",
+        "focus": false,
+        "panel": "dedicated",
+        "showReuseMessage": true,
+        "clear": false
+      },
+      "problemMatcher": []
+    }
+  ]
 }
