@@ -1,10 +1,12 @@
 package com.gruppone.stalker;
 
 import java.util.List;
+import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @EqualsAndHashCode
+@AllArgsConstructor
 public class Place {
 
   @Getter
@@ -12,10 +14,6 @@ public class Place {
 
   @Getter
   private List<Point> polyLine;
-
-  public Place(List<Point> polyLine) {
-    this.polyLine = polyLine;
-  }
 
   public boolean isInside(Point point) {
     double xMin = Double.MAX_VALUE;

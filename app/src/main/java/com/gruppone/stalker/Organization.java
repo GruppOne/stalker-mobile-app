@@ -1,10 +1,12 @@
 package com.gruppone.stalker;
 
 import java.util.List;
+import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 @EqualsAndHashCode
+@AllArgsConstructor
 public class Organization {
 
   @Getter
@@ -12,12 +14,6 @@ public class Organization {
 
   @Getter
   private String name;
-
-  public Organization(Integer id, String name, List<Place> places) {
-    this.id = id;
-    this.name = name;
-    this.places = places;
-  }
 
   private List<Place> places;
 
