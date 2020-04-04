@@ -1,10 +1,10 @@
 const emptyScope = {
-  name: '               empty scope',
+  name: '               An empty scope',
   value: '',
 };
 
 const depsScope = {
-  name: 'deps:          a generic dependency',
+  name: '(deps)         A generic dependency',
   value: 'deps',
 };
 
@@ -41,6 +41,10 @@ module.exports = {
     {
       value: 'build',
       name: 'build:      Changes that affect the build system or external dependencies',
+    },
+    {
+      value: 'ci',
+      name: 'ci:         Changes to our CI configuration files and scripts',
     },
     {
       value: 'chore',

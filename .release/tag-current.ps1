@@ -6,5 +6,5 @@ if ($LASTEXITCODE) {
   Write-Error "Something wrong with standard-version"
 }
 else {
-  Write-Output "All good! you can push the generated tag."
+  Write-Output "All good! you can push the generated tag with the command written up here"
 }

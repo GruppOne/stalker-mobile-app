@@ -1,9 +1,11 @@
 package com.gruppone.stalker;
 
+import android.location.Location;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends StalkerActivity {
+
+  private Location currentLocation;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
