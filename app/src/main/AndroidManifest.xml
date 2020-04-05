@@ -8,6 +8,7 @@
   <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
   <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
+  <!-- XXX android:usesCleartextTraffic is not supposed to be there in production!! -->
   <application
     android:name=".App"
     android:allowBackup="true"
@@ -16,18 +17,24 @@
     android:roundIcon="@mipmap/ic_launcher_round"
     android:supportsRtl="true"
     android:theme="@style/AppTheme"
-    tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+    android:usesCleartextTraffic="true"
+    tools:ignore="AllowBackup,GoogleAppIndexingWarning,UnusedAttribute">
 
     <activity android:name=".StalkerActivity"/>
     <activity android:name=".LoginActivity">
+      <!--<intent-filter>
+        <action android:name="android.intent.action.MAIN"/>
+        <category android:name="android.intent.category.LAUNCHER"/>
+      </intent-filter>-->
+    </activity>
+    <activity
+      android:name=".MainPageActivity"
+      android:parentActivityName=".LoginActivity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
         <category android:name="android.intent.category.LAUNCHER"/>
       </intent-filter>
     </activity>
-    <activity
-      android:name=".MainPageActivity"
-      android:parentActivityName=".LoginActivity"/>
     <activity android:name=".Display">
       <intent-filter>
         <action android:name="com.gruppone.stalker.DISPLAY"/>

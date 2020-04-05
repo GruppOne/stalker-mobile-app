@@ -1,25 +1,30 @@
 package com.gruppone.stalker;
 
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-
 import java.util.ArrayList;
+import java.util.List;
+import org.json.JSONException;
 
 public class MainPageModel {
-  private MutableLiveData<ArrayList<String>> organizationDataSet = new MutableLiveData<>();
 
-  LiveData<ArrayList<String>> getOrganizationDataSet() {
-    organizationDataSet.setValue(new ArrayList<String>() {{
-      add("Università degli studi di Padova");
-      add("Alphabet Inc.");
-      add("Imola Informatica");
-      add("Touch Multimedia");
-    }});
-    return organizationDataSet;
+  void loadOrganizations() {
+    WebSingleton.getInstance().getOrganizationList(jsonArray -> {
+      List<Organization> organizations = new ArrayList<>();
+
+      try {
+        for (int i = 0; i < jsonArray.length(); ++i) {
+          organizations
+            .add(new Organization(jsonArray.getJSONObject(i)));
+        }
+      } catch (JSONException e) {
+        throw new RuntimeException(e);
+      }
+
+      CurrentSessionSingleton.getInstance().setOrganizations(organizations);
+    }, null);
   }
 
-  void Reload() {
-    //Chiamata a WebSingleton
-    organizationDataSet.setValue(organizationDataSet.getValue());
+  public LiveData<List<Organization>> getOrgsLiveData() {
+    return CurrentSessionSingleton.getInstance().getOrganizations();
   }
 }
