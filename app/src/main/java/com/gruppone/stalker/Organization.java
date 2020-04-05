@@ -48,7 +48,6 @@ public class Organization {
     for (Place place : places) {
       if (place.isInside(point)) {
         ret.add(place.getId());
-        break;
       }
     }
     return ret;
