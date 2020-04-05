@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.os.Looper;
+import android.util.Pair;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.core.app.JobIntentService;
@@ -14,6 +15,8 @@ import com.google.android.gms.location.*;
 
 public class LocationNotifier extends JobIntentService {
   static int JOB_ID = 1000;
+  private CurrentSessionSingleton currentSession = CurrentSessionSingleton.getInstance();
+  private WebSingleton web = WebSingleton.getInstance();
 
   private static LocationRequest locationRequest;
 
@@ -23,9 +26,9 @@ public class LocationNotifier extends JobIntentService {
 
   @Override
   protected void onHandleWork(@NonNull Intent intent) {
-    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-    intent.setComponent(new ComponentName(this, Display.class));
-    startActivity(intent);
+    LocationResult location = intent.getExtras().getParcelable("lastLocation");
+    Point point = Point.buildFromDegrees(location.getLastLocation().getLongitude(), location.getLastLocation().getLatitude());
+    web.locationUpdate(currentSession.getLoggedUser().getId(), currentSession.getInsidePlaces(point));
   }
 
   //TODO Move these functions in a separate interface
