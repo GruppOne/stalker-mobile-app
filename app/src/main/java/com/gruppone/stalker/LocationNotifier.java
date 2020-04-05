@@ -28,6 +28,7 @@ public class LocationNotifier extends JobIntentService {
     startActivity(intent);
   }
 
+  //TODO Move these functions in a separate interface
   static void startLocationUpdates(Activity activity) {
     checkPermissions(activity);
 
