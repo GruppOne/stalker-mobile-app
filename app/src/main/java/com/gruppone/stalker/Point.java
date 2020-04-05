@@ -11,22 +11,22 @@ public class Point {
   double x, y;
 
   public static Point buildFromDegrees(double longitude, double latitude) {
-    return new Point(xMarcator(longitude), yMarcator(latitude));
+    return new Point(xMercator(longitude), yMercator(latitude));
   }
 
   //constants and private functions to convert longitude and latitude into a cartesian system on the plane
   private static final double EARTH_EQUAT_RADIUS = 6378137.0;
   private static final double EARTH_POLAR_RADIUS = 6356752.3142;
 
-  private static double xMarcator(double longitude) {
+  private static double xMercator(double longitude) {
     return EARTH_EQUAT_RADIUS * Math.toRadians(longitude);
   }
 
-  private static double yMarcator(double latitude) {
+  private static double yMercator(double latitude) {
     //Above 89.5° or below -89.5° the projection breaks
     latitude = Math.min(Math.max(latitude, -89.5), 89.5);
 
-    //Marcator projection:
+    //Mercator projection:
     double earthDimensionalRateNormalized =
       1.0 - Math.pow(EARTH_POLAR_RADIUS / EARTH_EQUAT_RADIUS, 2);
 
