@@ -8,7 +8,10 @@ import com.android.volley.Response.Listener;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import java.util.List;
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 //TODO Add decorator to Requests to handle authentication (API key or actual login)
 public class WebSingleton {
@@ -39,11 +42,22 @@ public class WebSingleton {
     getRequestQueue().add(request);
   }
 
-  public void userEntered(Organization organization, Place place) {
-    addToRequestQueue(new JsonObjectRequest(Method.GET, serverUrl, null, null, null));
+  public void locationUpdateInside(Integer userId, List<Integer> places) {
+    String fullUrl = serverUrl + "/location/update";
+    try {
+      JSONObject request = new JSONObject();
+      request.put("timestamp-ms", System.currentTimeMillis());
+      request.put("userId", userId);
+      request.put("anonymous", false);
+      request.put("inside", true);
+      request.put("placeIds", new JSONArray(places));
+      addToRequestQueue(new JsonObjectRequest(Method.POST, fullUrl, request, null, null));
+    } catch (JSONException ex) {
+      throw new RuntimeException(ex);
+    }
   }
 
-  public void userExited(Organization organization, Place place) {
+  public void locationUpdateOutside(Organization organization, Place place) {
     addToRequestQueue(new JsonObjectRequest(Method.GET, serverUrl, null, null, null));
   }
 

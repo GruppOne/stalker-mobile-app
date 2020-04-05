@@ -1,6 +1,5 @@
 package com.gruppone.stalker;
 
-import android.util.Pair;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import java.util.ArrayList;
@@ -33,16 +32,14 @@ public class CurrentSessionSingleton {
     return organizations.getValue() == null || organizations.getValue().isEmpty();
   }
 
-  public List<Integer> getInsideId(Point point) {
+  public List<Integer> getInsidePlaces(Point point) {
     List<Integer> ret = new ArrayList<>();
     if (!zeroOrganizations()) {
       //organizations.getValue() could be null, but the !zeroOrganizations() check ensures it's not,
       //so I silenced the linter warning
       //noinspection ConstantConditions
       for (Organization org : organizations.getValue()) {
-        if (org.isInside(point)) {
-          ret.add(org.getId());
-        }
+        ret.addAll(org.getInsidePlaces(point));
       }
     }
     return ret;

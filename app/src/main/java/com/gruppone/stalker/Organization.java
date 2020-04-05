@@ -37,12 +37,17 @@ public class Organization {
     }
   }
 
-  public boolean isInside(Point point) {
-    boolean ret = false;
+  public Organization(Integer id, String name, List<Place> places) {
+    this.id = id;
+    this.name = name;
+    this.places = places;
+  }
+
+  public List<Integer> getInsidePlaces(Point point) {
+    List<Integer> ret = new ArrayList<>();
     for (Place place : places) {
       if (place.isInside(point)) {
-        ret = true;
-        break;
+        ret.add(place.getId());
       }
     }
     return ret;
