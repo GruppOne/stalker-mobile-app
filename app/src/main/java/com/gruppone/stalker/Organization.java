@@ -1,9 +1,5 @@
 package com.gruppone.stalker;
 
-<<<<<<< HEAD
-=======
-import android.util.Pair;
->>>>>>> feat: change the type of id in user class
 import java.util.ArrayList;
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -22,7 +18,6 @@ public class Organization {
 
   @Getter
   private String name;
-<<<<<<< HEAD
 
   private List<Place> places;
 
@@ -42,21 +37,14 @@ public class Organization {
     }
   }
 
-  public boolean isInside(Point point) {
-    boolean ret = false;
-=======
-
   public Organization(Integer id, String name, List<Place> places) {
     this.id = id;
     this.name = name;
     this.places = places;
   }
 
-  private List<Place> places;
-
-  public List<Integer> getInsidePlaces(Pair<Double, Double> point) {
+  public List<Integer> getInsidePlaces(Point point) {
     List<Integer> ret = new ArrayList<>();
->>>>>>> feat: change the type of id in user class
     for (Place place : places) {
       if (place.isInside(point)) {
         ret.add(place.getId());
