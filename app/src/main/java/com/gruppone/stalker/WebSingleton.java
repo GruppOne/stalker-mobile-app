@@ -14,7 +14,7 @@ public class WebSingleton {
 
   private static WebSingleton instance;
   private RequestQueue requestQueue;
-  private String serverUrl = "192.168.1.113:11111";
+  private String serverUrl = "http://10.0.2.2:11111";
 
   private WebSingleton() {
     requestQueue = getRequestQueue();
