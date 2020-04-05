@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.3.1](https://github.com/GruppOne/stalker-mobile-app/compare/v0.3.0...v0.3.1) (2020-04-05)
+
+
+### Bug Fixes
+
+* change algo for point inside polyline ([839d8f9](https://github.com/GruppOne/stalker-mobile-app/commit/839d8f9e0f0c80add6e89e7ee0711cc12230761b))
+
+
+### Configuration
+
+* **deps:** add vectorial math support ([da0c2f4](https://github.com/GruppOne/stalker-mobile-app/commit/da0c2f49e379d4ca683f9ed3f5afd7a9e8ab6f80))
+
+
+### Documentation
+
+* add todo comments ([5565bb5](https://github.com/GruppOne/stalker-mobile-app/commit/5565bb5ec407aa1e59007cb6a6589a42af37c75f))
+
 ## [0.3.0](https://github.com/GruppOne/stalker-mobile-app/compare/v0.2.0...v0.3.0) (2020-04-05)
 
 
