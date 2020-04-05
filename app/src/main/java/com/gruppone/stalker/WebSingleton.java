@@ -10,6 +10,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 
+//TODO Add decorator to Requests to handle authentication (API key or actual login)
 public class WebSingleton {
 
   private static WebSingleton instance;

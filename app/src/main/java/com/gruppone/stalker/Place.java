@@ -2,6 +2,7 @@ package com.gruppone.stalker;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.vecmath.Vector3d;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -12,6 +13,12 @@ import org.json.JSONObject;
 @EqualsAndHashCode
 @AllArgsConstructor
 public class Place {
+
+  private enum Position {
+    LEFT,
+    ALIGNED,
+    RIGHT
+  }
 
   @Getter
   private int id;
@@ -38,27 +45,49 @@ public class Place {
   }
 
   public boolean isInside(Point point) {
-    double xMin = Double.MAX_VALUE;
-    double xMax = Double.MIN_VALUE;
-    double yMin = Double.MAX_VALUE;
-    double yMax = Double.MIN_VALUE;
+    List<Position> positions = new ArrayList<>();
 
-    for (Point polyPoint : polyLine) {
-      if (polyPoint.getX() < xMin) {
-        xMin = polyPoint.getX();
-      }
-      if (polyPoint.getX() > xMax) {
-        xMax = polyPoint.getX();
-      }
-      if (polyPoint.getY() < yMin) {
-        yMin = polyPoint.getY();
-      }
-      if (polyPoint.getY() > yMax) {
-        yMax = polyPoint.getY();
+    for (int i = 0; i < polyLine.size(); ++i) {
+      Point origin = polyLine.get(i);
+      Point vertex = polyLine.get((i != polyLine.size() - 1) ? i + 1 : 0);
+
+      positions.add(relativePosition(origin, vertex, point));
+    }
+
+    Position position = Position.ALIGNED;
+
+    for (Position current : positions) {
+      if (current != Position.ALIGNED) {
+        if (position == Position.ALIGNED) {
+          position = current;
+        } else if (position != current) {
+          return false;
+        }
       }
     }
 
-    return (point.getX() > xMin) && (point.getX() < xMax) && (point.getY() > yMin) && (point.getY()
-      < yMax);
+    return true;
+  }
+
+  private static Position relativePosition(Point origin, Point vertex, Point point) {
+    Vector3d baseDirection = new Vector3d(vertex.getX() - origin.getX(),
+      vertex.getY() - origin.getY(), 0);
+    baseDirection.normalize();
+
+    Vector3d trialDirection = new Vector3d(point.getX() - origin.getX(),
+      point.getY() - origin.getY(), 0);
+    trialDirection.normalize();
+
+    Vector3d crossProduct = new Vector3d();
+    crossProduct.cross(baseDirection, trialDirection);
+
+    if (crossProduct.z > 0) {
+      return Position.LEFT;
+    } else if (crossProduct.z == 0) {
+      return Position.ALIGNED;
+    } else {
+      //if(crossProduct.z<0)
+      return Position.RIGHT;
+    }
   }
 }
