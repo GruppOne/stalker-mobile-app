@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.3.0](https://github.com/GruppOne/stalker-mobile-app/compare/v0.2.0...v0.3.0) (2020-04-05)
+
+
+### Features
+
+* add chain of methods for LiveData implementation ([931b5bc](https://github.com/GruppOne/stalker-mobile-app/commit/931b5bcaa3bedcca841e9401b08e46ebdc6b6af5))
+* add class to represent a Point ([4a657f9](https://github.com/GruppOne/stalker-mobile-app/commit/4a657f98186533904fc6d4e84eb127fbc9f06c3f))
+* add constructors for JSON parsing ([a3517a0](https://github.com/GruppOne/stalker-mobile-app/commit/a3517a01163530fb178ae6956d8349a87453bcf6))
+* add Marcator projection helper functions ([416b8a1](https://github.com/GruppOne/stalker-mobile-app/commit/416b8a1e017cf2ab9b58c614b3f033dd753920d7))
+* change launcher entry point ([1ec2c1a](https://github.com/GruppOne/stalker-mobile-app/commit/1ec2c1a51948eda50b9f7376915e5f7f9f20e839))
+* implement organization list reception ([a521ebc](https://github.com/GruppOne/stalker-mobile-app/commit/a521ebcffb08efafb58584ee3b47e2e749822955))
+
+
+### Bug Fixes
+
+* bypass ssl security to allow http requests (not https) ([e53de3d](https://github.com/GruppOne/stalker-mobile-app/commit/e53de3dc569422e956bd7a9af637b8bb40b6086a))
+* set correct server url ([65edb19](https://github.com/GruppOne/stalker-mobile-app/commit/65edb19258073cbe1da6b38c1b1f83c80d7f6dec))
+* update json names according to api ([bfc11b7](https://github.com/GruppOne/stalker-mobile-app/commit/bfc11b70a551edf94ec07c397d8353ceb8c71546))
+* wrap single org layout in a FrameLayout ([c426607](https://github.com/GruppOne/stalker-mobile-app/commit/c42660747bb8159e036fda1b88194d9cd17a04ec))
+
 ## [0.2.0](https://github.com/GruppOne/stalker-mobile-app/compare/v0.1.0...v0.2.0) (2020-04-04)
 
 
