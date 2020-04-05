@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.4.0](https://github.com/GruppOne/stalker-mobile-app/compare/v0.3.1...v0.4.0) (2020-04-05)
+
+
+### Features
+
+* add locationUpdate call to server ([6beeedc](https://github.com/GruppOne/stalker-mobile-app/commit/6beeedc0b39d1447b5437ea369ad96f96d23af63))
+* add locationUpdateInside to webSingleton ([551d00e](https://github.com/GruppOne/stalker-mobile-app/commit/551d00ea946434a413169a3b9fd9fb9859d12360))
+* change getInsideId method in CurrentSessionSingleton ([eeda979](https://github.com/GruppOne/stalker-mobile-app/commit/eeda979fbc49cd95b6f5c8221fc074d49c313cfb))
+* change the type of id in user class ([6531dfe](https://github.com/GruppOne/stalker-mobile-app/commit/6531dfe70a6dcf87ccd8930fc35bfd8a4b48813a))
+* modify Organization class after merge ([c85f06e](https://github.com/GruppOne/stalker-mobile-app/commit/c85f06e5a4eccce6182eb454eb9efc3f773ed5a2))
+* remove break from getInsidePlaces ([0433e79](https://github.com/GruppOne/stalker-mobile-app/commit/0433e795f52c0fc76832009284236450063e298f))
+
 ### [0.3.1](https://github.com/GruppOne/stalker-mobile-app/compare/v0.3.0...v0.3.1) (2020-04-05)
 
 
