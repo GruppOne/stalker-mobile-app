@@ -24,7 +24,7 @@ public class Place {
       id = jsonPlace.getInt("id");
       polyLine = new ArrayList<>();
 
-      JSONArray jsonPolyLine = jsonPlace.getJSONArray("polyline");
+      JSONArray jsonPolyLine = jsonPlace.getJSONArray("polygon");
 
       for (int i = 1; i < jsonPolyLine.length(); ++i) {
         JSONObject jsonPoint = jsonPolyLine.getJSONObject(i);
