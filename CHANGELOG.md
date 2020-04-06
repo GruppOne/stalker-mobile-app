@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.5.2](https://github.com/GruppOne/stalker-mobile-app/compare/v0.5.1...v0.5.2) (2020-04-06)
+
+
+### Bug Fixes
+
+* add (hardcoded) user ([9800a1c](https://github.com/GruppOne/stalker-mobile-app/commit/9800a1c51ca074a60ec9cc077e5ea9fc90d52fde))
+* align json structure with new api released ([cfc5ab0](https://github.com/GruppOne/stalker-mobile-app/commit/cfc5ab0d559a2ee2e9d092b90858fdb28656f72a))
+* correct problem with header maps ([35f6b93](https://github.com/GruppOne/stalker-mobile-app/commit/35f6b93fbcb732ee399fcc23f296d6f0a6ba34b8))
+* fix typing error in intent retrieval ([f25b526](https://github.com/GruppOne/stalker-mobile-app/commit/f25b526ed1a7b9de7f0e446a195b5d39acf1e395))
+* make User a value class ([146d83a](https://github.com/GruppOne/stalker-mobile-app/commit/146d83afa90690fd86329632b48a8f41e88c73b2))
+
 ### [0.5.1](https://github.com/GruppOne/stalker-mobile-app/compare/v0.5.0...v0.5.1) (2020-04-06)
 
 
