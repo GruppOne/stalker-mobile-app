@@ -6,7 +6,10 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.toolbox.Volley;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -44,7 +47,10 @@ public class WebSingleton {
     String fullUrl = serverUrl + "/location/update";
     try {
       JSONObject request = new JSONObject();
-      request.put("timestamp-ms", System.currentTimeMillis());
+
+      SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssX", Locale.getDefault());
+
+      request.put("timestampMs", format.format(new Date()));
       request.put("userId", userId);
       request.put("anonymous", false);
       request.put("inside", true);
@@ -61,11 +67,11 @@ public class WebSingleton {
       HeadersAdders.buildObjReqWithHeaders(Method.GET, serverUrl, null, null, null));
   }
 
-  public void getOrganizationList(Listener<JSONArray> successListener,
+  public void getOrganizationList(Listener<JSONObject> successListener,
     ErrorListener errorListener) {
     String fullUrl = serverUrl + "/organizations";
     addToRequestQueue(
       HeadersAdders
-        .buildArrReqWithHeaders(Method.GET, fullUrl, null, successListener, errorListener));
+        .buildObjReqWithHeaders(Method.GET, fullUrl, null, successListener, errorListener));
   }
 }
