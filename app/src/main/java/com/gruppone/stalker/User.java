@@ -1,9 +1,9 @@
 package com.gruppone.stalker;
 
-import lombok.Getter;
+import lombok.Value;
 
+@Value
 public class User {
 
-  @Getter
-  private int id;
+  int id;
 }
