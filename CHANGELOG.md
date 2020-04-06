@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.5.0](https://github.com/GruppOne/stalker-mobile-app/compare/v0.4.0...v0.5.0) (2020-04-06)
+
+
+### Features
+
+* add api key header to requests ([c3eeac2](https://github.com/GruppOne/stalker-mobile-app/commit/c3eeac283ad15c196c0111c22480ba6fdaf91c49))
+
+
+### Bug Fixes
+
+* correct typo in function call ([ec8b816](https://github.com/GruppOne/stalker-mobile-app/commit/ec8b8166f1e150f83d8e8e3b56c69463e0044601))
+
+
+### Configuration
+
+* add api key to BuildConfig ([4001793](https://github.com/GruppOne/stalker-mobile-app/commit/400179325fcea8d3ac5b0656cc4086398e25f5eb))
+
 ## [0.4.0](https://github.com/GruppOne/stalker-mobile-app/compare/v0.3.1...v0.4.0) (2020-04-05)
 
 
