@@ -194,3 +194,6 @@ fabric.properties
 
 # VS Code ignores
 .vscode/spellright.dict
+
+# API key
+.apikey
