@@ -31,10 +31,10 @@ public class LocationNotifier extends JobIntentService {
 
   @Override
   protected void onHandleWork(@NonNull Intent intent) {
-    LocationResult location = intent.getExtras().getParcelable("lastLocation");
+    LocationResult location = intent.getParcelableExtra("lastLocation");
     Point point = Point.buildFromDegrees(location.getLastLocation().getLongitude(),
       location.getLastLocation().getLatitude());
-    web.locationUpdate(currentSession.getLoggedUser().getId(),
+    web.locationUpdateInside(currentSession.getLoggedUser().getId(),
       currentSession.getInsidePlaces(point));
   }
 
