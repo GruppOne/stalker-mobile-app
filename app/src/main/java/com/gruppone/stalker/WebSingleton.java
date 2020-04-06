@@ -5,8 +5,6 @@ import com.android.volley.Request.Method;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import java.util.List;
 import org.json.JSONArray;
@@ -51,20 +49,23 @@ public class WebSingleton {
       request.put("anonymous", false);
       request.put("inside", true);
       request.put("placeIds", new JSONArray(places));
-      addToRequestQueue(new JsonObjectRequest(Method.POST, fullUrl, request, null, null));
+      addToRequestQueue(
+        HeadersAdders.buildObjReqWithHeaders(Method.POST, fullUrl, request, null, null));
     } catch (JSONException ex) {
       throw new RuntimeException(ex);
     }
   }
 
   public void locationUpdateOutside(Organization organization, Place place) {
-    addToRequestQueue(new JsonObjectRequest(Method.GET, serverUrl, null, null, null));
+    addToRequestQueue(
+      HeadersAdders.buildObjReqWithHeaders(Method.GET, serverUrl, null, null, null));
   }
 
   public void getOrganizationList(Listener<JSONArray> successListener,
     ErrorListener errorListener) {
     String fullUrl = serverUrl + "/organization";
     addToRequestQueue(
-      new JsonArrayRequest(Method.GET, fullUrl, null, successListener, errorListener));
+      HeadersAdders
+        .buildArrReqWithHeaders(Method.GET, fullUrl, null, successListener, errorListener));
   }
 }
