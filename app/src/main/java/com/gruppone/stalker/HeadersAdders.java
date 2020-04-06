@@ -27,8 +27,8 @@ public abstract class HeadersAdders {
     return new JsonArrayRequest(method, url, jsonRequest, listener, errorListener) {
       @Override
       public Map<String, String> getHeaders() throws AuthFailureError {
-        Map<String, String> map = super.getHeaders();
-        map.putAll(HeadersAdders.getHeaders());
+        Map<String, String> map = HeadersAdders.getHeaders();
+        map.putAll(super.getHeaders());
         return map;
       }
     };
@@ -42,8 +42,8 @@ public abstract class HeadersAdders {
     return new JsonObjectRequest(method, url, jsonRequest, listener, errorListener) {
       @Override
       public Map<String, String> getHeaders() throws AuthFailureError {
-        Map<String, String> map = super.getHeaders();
-        map.putAll(HeadersAdders.getHeaders());
+        Map<String, String> map = HeadersAdders.getHeaders();
+        map.putAll(super.getHeaders());
         return map;
       }
     };
