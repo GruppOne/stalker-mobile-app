@@ -1,5 +1,6 @@
 package com.gruppone.stalker;
 
+import android.util.Log;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import java.util.ArrayList;
@@ -10,8 +11,9 @@ public class CurrentSessionSingleton {
 
   private static CurrentSessionSingleton instance;
 
+  //TODO hardcoded!
   @Getter
-  private User loggedUser;
+  private User loggedUser = new User(1);
 
   private MutableLiveData<List<Organization>> organizations = new MutableLiveData<>();
 
