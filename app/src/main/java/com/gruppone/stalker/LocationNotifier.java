@@ -2,9 +2,9 @@ package com.gruppone.stalker;
 
 import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
 import androidx.annotation.NonNull;
 import androidx.core.app.JobIntentService;
-import com.google.android.gms.location.LocationResult;
 
 public class LocationNotifier extends JobIntentService {
 
@@ -18,9 +18,9 @@ public class LocationNotifier extends JobIntentService {
 
   @Override
   protected void onHandleWork(@NonNull Intent intent) {
-    LocationResult location = intent.getParcelableExtra("lastLocation");
-    Point point = Point.buildFromDegrees(location.getLastLocation().getLongitude(),
-      location.getLastLocation().getLatitude());
+    Location location = intent.getParcelableExtra("lastLocation");
+    Point point = Point.buildFromDegrees(location.getLongitude(),
+      location.getLatitude());
     web.locationUpdateInside(currentSession.getLoggedUser().getId(),
       currentSession.getInsidePlaces(point));
   }
