@@ -63,7 +63,7 @@ public class WebSingleton {
 
   public void getOrganizationList(Listener<JSONArray> successListener,
     ErrorListener errorListener) {
-    String fullUrl = serverUrl + "/organization";
+    String fullUrl = serverUrl + "/organizations";
     addToRequestQueue(
       HeadersAdders
         .buildArrReqWithHeaders(Method.GET, fullUrl, null, successListener, errorListener));
