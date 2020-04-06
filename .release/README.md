@@ -6,6 +6,9 @@
   - [Git Tools - Rerere](https://git-scm.com/book/en/v2/Git-Tools-Rerere)
   - [git-rerere](https://git-scm.com/docs/git-rerere)
 
+- Capire il sistema a moduli di PowerShell. In particolare il fatto che i moduli vengono importati
+  _solo nella sessione corrente_. Se si chiude e riapre la shell il modulo non sarà più disponibile, e va reimportato.
+
 ## Preparazione
 
 1. Posizionarsi sulla branch che va rilasciata.
@@ -13,7 +16,9 @@
 1. Eseguire `git rebase master`. Se rerere è abilitato, i conflitti dovrebbero venire risolti automaticamente grazie
    allo step precedente
 1. Determinare il successivo numero di versione `x.y.z`.
-1. Generare il changelog automatico eseguendo `npm run prepare-release -- --release-as x.y.z`.
+1. Importare il modulo contenente le funzioni per effettuare la release automatica con `Import-Module -PassThru ./.release/StalkerReleaser.psm1`
+1. Invocare il comando `Invoke-PrepareRelease`
+1. Controllare che il commit generato automaticamente sia andato a buon fine.
 1. Effettuare un `git push` del commit generato automaticamente.
 1. Marcare la PR come "Ready for review".
 1. Attendere che i verificatori completino la Code Review.
