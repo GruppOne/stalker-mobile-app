@@ -6,6 +6,7 @@ import android.content.Context;
 import com.beardedhen.androidbootstrap.TypefaceProvider;
 
 public class App extends Application {
+
   //It's not a leak because the reference is bound to the application context
   @SuppressLint("StaticFieldLeak")
   private static Context context;
