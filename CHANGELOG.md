@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.5.1](https://github.com/GruppOne/stalker-mobile-app/compare/v0.5.0...v0.5.1) (2020-04-06)
+
+
+### Bug Fixes
+
+* add hook to start location updates ([26eeb98](https://github.com/GruppOne/stalker-mobile-app/commit/26eeb98aa7e0be8d923b35871a560d47ad04d0b4))
+* correct plural in endpoint ([ebf8cbe](https://github.com/GruppOne/stalker-mobile-app/commit/ebf8cbef62a85ef88b777b37558890209be13bae))
+
 ## [0.5.0](https://github.com/GruppOne/stalker-mobile-app/compare/v0.4.0...v0.5.0) (2020-04-06)
 
 
