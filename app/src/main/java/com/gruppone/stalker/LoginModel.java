@@ -1,6 +1,7 @@
 package com.gruppone.stalker;
 
 public class LoginModel {
+
   public Boolean login(String email, String password) {
     return true;
     //WebSingleton.getInstance(App.getAppContext())
