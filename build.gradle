@@ -21,7 +21,6 @@ allprojects {
     jcenter()
   }
 
-  // TODO check if this works as expected
   tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
     options.compilerArgs = [
