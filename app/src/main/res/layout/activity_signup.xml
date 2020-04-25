@@ -2,11 +2,11 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
-  tools:context=".LoginActivity"
+  tools:context=".SignupActivity"
   android:layout_width="match_parent"
   android:layout_height="match_parent">
 
-  <include layout="@layout/mainpage_structure"/>
+  <include layout="@layout/main_page_structure"/>
 
   <TextView
     android:id="@+id/signupTitleText"
@@ -85,7 +85,6 @@
         </LinearLayout>
         <com.google.android.material.textfield.TextInputLayout
           android:id="@+id/dateEditText"
-          app:layout_constraintBottom_toTopOf="@id/emailEditText"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_marginTop="8dp"
@@ -103,7 +102,6 @@
         </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout
           android:id="@+id/emailEditText"
-          app:layout_constraintBottom_toTopOf="@id/passwordEditText"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_marginTop="8dp"
@@ -121,7 +119,6 @@
         </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout
           android:id="@+id/passwordEditText"
-          app:layout_constraintBottom_toTopOf="@id/buttonsContainer"
           android:layout_marginTop="8dp"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
