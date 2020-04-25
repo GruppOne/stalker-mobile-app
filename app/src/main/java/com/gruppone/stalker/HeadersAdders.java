@@ -11,7 +11,7 @@ public abstract class HeadersAdders {
 
   private static Map<String, String> getHeaders() {
     Map<String, String> headers = new HashMap<>();
-    headers.put("STALKER-ADMIN-API-KEY", BuildConfig.apikey);
+    headers.put("STALKER-ADMIN-API-KEY", BuildConfig.ADMIN_API_KEY);
 
     //TODO add jwt token as alternative to api key
     //headers.put("TOKEN", CurrentSessionSingleton.getToken();
