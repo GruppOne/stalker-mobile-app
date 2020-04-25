@@ -1,17 +1,13 @@
-name: Documentation
+name: Documentation jobs
 
 on:
   pull_request:
-  # push:
-  #   branches:
-  #     - '!master'
+    branches:
+      - master
 
-# TODO add PlantUML job
-# TODO add spellcheck job: https://github.com/marketplace/actions/spellcheck-action
 jobs:
-
-  lint:
-    name: Lint *.md
+  lint-markdown:
+    name: Lint markdown files
     runs-on: ubuntu-18.04
 
     steps:

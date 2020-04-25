@@ -75,8 +75,8 @@ module.exports = {
     ],
     ci: [
       // this comments forces prettier to keep the array on multiple lines
-      emptyScope,
       'actions',
+      emptyScope,
     ],
     chore: [
       // this comments forces prettier to keep the array on multiple lines
