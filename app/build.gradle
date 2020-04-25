@@ -1,8 +1,6 @@
 apply plugin: 'com.android.application'
 
-def apiKeyFile = rootProject.file(".apikey")
-def apiKey = new Properties()
-apiKey.load(new FileInputStream(apiKeyFile))
+println "Current admin API key is ${ADMIN_API_KEY}"
 
 android {
   compileSdkVersion 28
@@ -19,8 +17,8 @@ android {
     versionName "0.5.2"
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-    buildConfigField("String", "ADMIN_API_KEY", apiKey['key'])
-    // buildConfigField("String", "ADMIN_API_KEY", ADMIN_API_KEY)
+    // buildConfigField("String", "ADMIN_API_KEY", apiKey['key'])
+    buildConfigField("String", "ADMIN_API_KEY", ADMIN_API_KEY)
   }
 
   compileOptions {
