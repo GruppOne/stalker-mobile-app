@@ -1,0 +1,61 @@
+name: Dynamic analysis and testing
+
+on:
+  pull_request:
+    branches:
+      - master
+  push:
+    branches:
+      - master
+
+jobs:
+  test:
+    name: Run gradle check
+    runs-on: ubuntu-18.04
+
+    if: github.event_name == 'pull_request'
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+
+      - name: Fetch master too
+        run: |
+          git fetch --no-tags --prune origin master
+
+      - name: Setup JDK 8
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+
+      - name: Setup Gradle wrapper
+        run: ./gradlew --console=plain --warning-mode=all --info
+
+      - name: Run gradle check (with minimum coverage at 80%)
+        run: ./gradlew --console=plain --warning-mode=all --info check
+
+      - name: Upload results to SonarCloud
+        if: always()
+        run: ./gradlew --console=plain --warning-mode=all --info sonarqube -Dsonar.login=${{ secrets.SONARCLOUD_LOGIN }} -Dsonar.pullrequest.key=${{ github.event.number }} -Dsonar.pullrequest.branch=${{ github.head_ref }}
+
+  sonarcloud-master-scanner:
+    name: Fully scan master with SonarCloud
+    runs-on: ubuntu-18.04
+
+    if: github.event_name == 'push'
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup JDK 8
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+
+      - name: Setup Gradle wrapper
+        run: ./gradlew --console=plain --warning-mode=all --info
+
+      - name: Run SonarCloud scanner task
+        run: ./gradlew --console=plain --warning-mode=all --info sonarqube -Dsonar.login=${{ secrets.SONARCLOUD_LOGIN }}
