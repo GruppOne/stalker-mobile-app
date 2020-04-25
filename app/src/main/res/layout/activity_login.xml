@@ -6,7 +6,7 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent">
 
-  <include layout="@layout/mainpage_structure"/>
+  <include layout="@layout/main_page_structure"/>
 
   <TextView
     android:id="@+id/loginTitleText"
@@ -44,7 +44,6 @@
         android:orientation="vertical">
         <com.google.android.material.textfield.TextInputLayout
           android:id="@+id/emailEditText"
-          app:layout_constraintBottom_toTopOf="@id/passwordEditText"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           app:boxStrokeColor="@color/colorAccent"
@@ -61,7 +60,6 @@
         </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout
           android:id="@+id/passwordEditText"
-          app:layout_constraintBottom_toTopOf="@id/buttonsContainer"
           android:layout_marginTop="8dp"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
