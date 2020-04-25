@@ -1,8 +1,12 @@
 <resources>
   <string name="app_name">Stalker</string>
+  <string name="homepageText">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed…</string>
+  <string name="login">Login</string>
+  <string name="signup">Signup</string>
+  <string name="reload">Reload</string>
+  <string name="firstName">First name</string>
+  <string name="lastName">Last name</string>
+  <string name="birth">Birth date</string>
   <string name="email">Email</string>
   <string name="password">Password</string>
-  <string name="login">Login</string>
-  <string name="reload">Reload</string>
-  <string name="homepageText">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed…</string>
 </resources>
