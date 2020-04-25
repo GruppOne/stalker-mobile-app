@@ -50,6 +50,9 @@
           android:textColorHint="@color/colorAccent"
           app:hintTextColor="@color/textOnMatCard"
           android:hint="@string/email"
+          app:endIconMode="custom"
+          app:endIconDrawable="@drawable/ic_email_black_24dp"
+          app:endIconTint="@color/textOnMatCard"
           style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
           <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -67,6 +70,8 @@
           android:textColorHint="@color/colorAccent"
           app:hintTextColor="@color/textOnMatCard"
           android:hint="@string/password"
+          app:endIconMode="password_toggle"
+          app:endIconTint="@color/textOnMatCard"
           style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
           <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -90,6 +95,15 @@
           app:backgroundTint="@color/colorAccent"
           android:textColor="@color/whiteText"
           android:text="@string/login"/>
+        <Button
+          android:id="@+id/goToSignUp"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="8dp"
+          android:text="@string/goToSignUp"
+          android:textAllCaps="false"
+          style="@style/Widget.MaterialComponents.Button.TextButton"
+          />
       </LinearLayout>
     </LinearLayout>
   </com.google.android.material.card.MaterialCardView>

@@ -2,12 +2,21 @@ package com.gruppone.stalker;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.EditText;
 import androidx.lifecycle.ViewModelProvider;
 
 public class LoginActivity extends StalkerActivity {
 
   LoginViewModel viewModel;
+
+  @Override
+  protected void onPause() {
+    super.onPause();
+    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+  }
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +32,19 @@ public class LoginActivity extends StalkerActivity {
         ((EditText) findViewById(R.id.passwordEditText)).getText()
           .toString())) {
         Intent intent = new Intent(LoginActivity.this, MainPageActivity.class);
+        startActivity(intent);
+      }
+    });
+
+    goToSignUp();
+  }
+
+  private void goToSignUp(){
+    Button signUp = (Button) findViewById(R.id.goToSignUp);
+    signUp.setOnClickListener(new OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
         startActivity(intent);
       }
     });

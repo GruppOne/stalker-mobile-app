@@ -2,28 +2,28 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
-  tools:context=".SignupActivity"
+  tools:context=".SignUpActivity"
   android:layout_width="match_parent"
   android:layout_height="match_parent">
 
   <include layout="@layout/main_page_structure"/>
 
   <TextView
-    android:id="@+id/signupTitleText"
+    android:id="@+id/signUpTitleText"
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintLeft_toLeftOf="parent"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginTop="200dp"
     android:layout_marginStart="8dp"
-    android:text="@string/signup"
+    android:text="@string/signUp"
     android:textSize="20sp"
     android:textColor="@color/whiteText"
     android:textAppearance="?attr/textAppearanceHeadline6"
     />
 
   <com.google.android.material.card.MaterialCardView
-    app:layout_constraintTop_toBottomOf="@id/signupTitleText"
+    app:layout_constraintTop_toBottomOf="@id/signUpTitleText"
     android:backgroundTint="@color/whiteBackground"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -50,6 +50,7 @@
           android:baselineAligned="false">
           <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/firstNameEditText"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="50"
             android:layout_marginEnd="4dp"
@@ -57,6 +58,9 @@
             android:textColorHint="@color/colorAccent"
             app:hintTextColor="@color/textOnMatCard"
             android:hint="@string/firstName"
+            app:endIconMode="custom"
+            app:endIconDrawable="@drawable/ic_person_outline_black_24dp"
+            app:endIconTint="@color/textOnMatCard"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
             <com.google.android.material.textfield.TextInputEditText
               android:layout_width="match_parent"
@@ -67,6 +71,7 @@
           </com.google.android.material.textfield.TextInputLayout>
           <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/lastNameEditText"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="50"
             android:layout_marginStart="4dp"
@@ -74,6 +79,9 @@
             android:textColorHint="@color/colorAccent"
             app:hintTextColor="@color/textOnMatCard"
             android:hint="@string/lastName"
+            app:endIconMode="custom"
+            app:endIconDrawable="@drawable/ic_person_outline_black_24dp"
+            app:endIconTint="@color/textOnMatCard"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
             <com.google.android.material.textfield.TextInputEditText
               android:layout_width="match_parent"
@@ -92,6 +100,9 @@
           android:textColorHint="@color/colorAccent"
           app:hintTextColor="@color/textOnMatCard"
           android:hint="@string/birth"
+          app:endIconMode="custom"
+          app:endIconDrawable="@drawable/ic_event_black_24dp"
+          app:endIconTint="@color/textOnMatCard"
           style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
           <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -109,6 +120,9 @@
           android:textColorHint="@color/colorAccent"
           app:hintTextColor="@color/textOnMatCard"
           android:hint="@string/email"
+          app:endIconMode="custom"
+          app:endIconDrawable="@drawable/ic_email_black_24dp"
+          app:endIconTint="@color/textOnMatCard"
           style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
           <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -126,6 +140,8 @@
           android:textColorHint="@color/colorAccent"
           app:hintTextColor="@color/textOnMatCard"
           android:hint="@string/password"
+          app:endIconMode="password_toggle"
+          app:endIconTint="@color/textOnMatCard"
           style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
           <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -148,7 +164,16 @@
           android:layout_height="60dp"
           app:backgroundTint="@color/colorAccent"
           android:textColor="@color/whiteText"
-          android:text="@string/signup"/>
+          android:text="@string/signUp"/>
+        <Button
+          android:id="@+id/goToLogin"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="8dp"
+          android:text="@string/goToLogin"
+          android:textAllCaps="false"
+          style="@style/Widget.MaterialComponents.Button.TextButton"
+          />
       </LinearLayout>
     </LinearLayout>
   </com.google.android.material.card.MaterialCardView>
