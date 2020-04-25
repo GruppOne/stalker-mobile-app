@@ -22,18 +22,18 @@
 
     <activity android:name=".StalkerActivity"/>
     <activity android:name=".LoginActivity">
-      <!--<intent-filter>
-        <action android:name="android.intent.action.MAIN"/>
-        <category android:name="android.intent.category.LAUNCHER"/>
-      </intent-filter>-->
-    </activity>
-    <activity
-      android:name=".MainPageActivity"
-      android:parentActivityName=".LoginActivity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
         <category android:name="android.intent.category.LAUNCHER"/>
       </intent-filter>
+    </activity>
+    <activity
+      android:name=".MainPageActivity"
+      android:parentActivityName=".LoginActivity">
+      <!--<intent-filter>
+        <action android:name="android.intent.action.MAIN"/>
+        <category android:name="android.intent.category.LAUNCHER"/>
+      </intent-filter>-->
     </activity>
     <activity android:name=".Display">
       <intent-filter>
