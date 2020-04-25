@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:background="@color/background">
+
+  <LinearLayout android:id="@+id/BackGroundImageContainer"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintLeft_toLeftOf="parent"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <ImageView
+      android:layout_width="wrap_content"
+      android:layout_height="400dp"
+      android:contentDescription="@string/backgroundImageDescription"
+      style="@style/BackGroundImageView"/>
+  </LinearLayout>
+
+  <com.google.android.material.appbar.AppBarLayout
+    android:id="@+id/topAppBar"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintLeft_toLeftOf="parent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:alpha="0.7">
+    <com.google.android.material.appbar.MaterialToolbar
+      android:layout_width="match_parent"
+      android:layout_height="?attr/actionBarSize"
+      app:title="@string/app_name"
+      style="@style/Widget.MaterialComponents.Toolbar.Primary"
+      app:titleTextColor="@color/whiteText"
+      />
+  </com.google.android.material.appbar.AppBarLayout>
+
+  <TextView
+    app:layout_constraintTop_toBottomOf="@id/topAppBar"
+    app:layout_constraintLeft_toLeftOf="parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="40dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android:text="@string/homepageText"
+    android:textSize="24sp"
+    android:textColor="@color/whiteText"
+    android:textAppearance="?attr/textAppearanceHeadline6"
+    />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
