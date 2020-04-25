@@ -1,59 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:tools="http://schemas.android.com/tools"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent"
   xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
   tools:context=".LoginActivity"
-  android:background="@color/background">
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
 
-  <LinearLayout android:id="@+id/BackGroundImageContainer"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintLeft_toLeftOf="parent"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="vertical">
-  <ImageView
-    app:layout_constraintTop_toTopOf="@id/BackGroundImageContainer"
-    style="@style/BackGroundImageView"
-    android:layout_width="wrap_content"
-    android:layout_height="400dp"
-    tools:ignore="ContentDescription" />
-  </LinearLayout>
-
-  <com.google.android.material.appbar.AppBarLayout
-    android:id="@+id/topAppBar"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintLeft_toLeftOf="parent"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:alpha="0.7">
-    <com.google.android.material.appbar.MaterialToolbar
-      android:layout_width="match_parent"
-      android:layout_height="?attr/actionBarSize"
-      app:title="@string/app_name"
-      style="@style/Widget.MaterialComponents.Toolbar.Primary"
-      app:titleTextColor="@color/whiteText"
-      />
-
-  </com.google.android.material.appbar.AppBarLayout>
+  <include layout="@layout/mainpage_structure"/>
 
   <TextView
-    app:layout_constraintTop_toBottomOf="@id/topAppBar"
+    android:id="@+id/loginTitleText"
+    app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintLeft_toLeftOf="parent"
-    android:textColor="@color/whiteText"
-    android:id="@+id/titleText"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginTop="40dp"
-    android:layout_marginLeft="8dp"
-    android:layout_marginRight="8dp"
-    android:text="@string/homepageText"
-    android:textSize="24sp"
+    android:layout_marginTop="200dp"
+    android:layout_marginStart="8dp"
+    android:text="@string/login"
+    android:textSize="20sp"
+    android:textColor="@color/whiteText"
     android:textAppearance="?attr/textAppearanceHeadline6"
     />
 
-  <!--<include layout="@layout/login_card" android:id="@+id/login"/>-->
-  <include layout="@layout/signup_card" android:id="@+id/signup"/>
+  <com.google.android.material.card.MaterialCardView
+    app:layout_constraintTop_toBottomOf="@id/loginTitleText"
+    android:backgroundTint="@color/whiteBackground"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp">
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="vertical">
+
+      <!-- Inputs -->
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:orientation="vertical">
+        <com.google.android.material.textfield.TextInputLayout
+          android:id="@+id/emailEditText"
+          app:layout_constraintBottom_toTopOf="@id/passwordEditText"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          app:boxStrokeColor="@color/colorAccent"
+          android:textColorHint="@color/colorAccent"
+          app:hintTextColor="@color/textOnMatCard"
+          android:hint="@string/email"
+          style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+          <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/textOnMatCard"
+            />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+          android:id="@+id/passwordEditText"
+          app:layout_constraintBottom_toTopOf="@id/buttonsContainer"
+          android:layout_marginTop="8dp"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          app:boxStrokeColor="@color/colorAccent"
+          android:textColorHint="@color/colorAccent"
+          app:hintTextColor="@color/textOnMatCard"
+          android:hint="@string/password"
+          style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+          <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:textColor="@color/textOnMatCard"
+            />
+        </com.google.android.material.textfield.TextInputLayout>
+      </LinearLayout>
+
+      <!-- Buttons -->
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:orientation="vertical">
+        <com.google.android.material.button.MaterialButton
+          android:id="@+id/loginButton"
+          android:layout_width="match_parent"
+          android:layout_height="60dp"
+          app:backgroundTint="@color/colorAccent"
+          android:textColor="@color/whiteText"
+          android:text="@string/login"/>
+      </LinearLayout>
+    </LinearLayout>
+  </com.google.android.material.card.MaterialCardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
