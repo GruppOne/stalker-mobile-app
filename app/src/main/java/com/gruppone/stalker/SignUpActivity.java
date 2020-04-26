@@ -18,16 +18,7 @@ public class SignUpActivity extends StalkerActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_sign_up);
 
-    goToLogin();
-  }
-
-  private void goToLogin(){
-    Button login = (Button) findViewById(R.id.goToLogin);
-    login.setOnClickListener(new OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        finish();
-      }
-    });
+    // change activity view on "Already have an account? Login" click
+    findViewById(R.id.goToLogin).setOnClickListener(v -> finish());
   }
 }
