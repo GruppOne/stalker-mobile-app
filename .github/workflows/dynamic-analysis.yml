@@ -31,14 +31,14 @@ jobs:
           java-version: 1.8
 
       - name: Setup Gradle wrapper
-        run: ./gradlew --console=plain --warning-mode=all --info
+        run: ./gradlew --console=plain --warning-mode=all
 
-      - name: Run gradle check (with minimum coverage at 80%)
-        run: ./gradlew --console=plain --warning-mode=all --info check
+      - name: Run gradle check
+        run: ./gradlew --console=plain --warning-mode=all --continue check
 
       - name: Upload results to SonarCloud
         if: always()
-        run: ./gradlew --console=plain --warning-mode=all --info sonarqube -Dsonar.login=${{ secrets.SONARCLOUD_LOGIN }} -Dsonar.pullrequest.key=${{ github.event.number }} -Dsonar.pullrequest.branch=${{ github.head_ref }}
+        run: ./gradlew --console=plain --warning-mode=all --continue sonarqube -Dsonar.login=${{ secrets.SONARCLOUD_LOGIN }} -Dsonar.pullrequest.key=${{ github.event.number }} -Dsonar.pullrequest.branch=${{ github.head_ref }}
 
   sonarcloud-master-scanner:
     name: Fully scan master with SonarCloud
@@ -55,7 +55,11 @@ jobs:
           java-version: 1.8
 
       - name: Setup Gradle wrapper
-        run: ./gradlew --console=plain --warning-mode=all --info
+        run: ./gradlew --console=plain --warning-mode=all
+
+      - name: Run gradle check
+        run: ./gradlew --console=plain --warning-mode=all --continue check
 
       - name: Run SonarCloud scanner task
-        run: ./gradlew --console=plain --warning-mode=all --info sonarqube -Dsonar.login=${{ secrets.SONARCLOUD_LOGIN }}
+        if: always()
+        run: ./gradlew --console=plain --warning-mode=all sonarqube -Dsonar.login=${{ secrets.SONARCLOUD_LOGIN }}
