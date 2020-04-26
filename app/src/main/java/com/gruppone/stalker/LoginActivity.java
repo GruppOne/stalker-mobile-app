@@ -36,17 +36,10 @@ public class LoginActivity extends StalkerActivity {
       }
     });
 
-    goToSignUp();
-  }
-
-  private void goToSignUp(){
-    Button signUp = (Button) findViewById(R.id.goToSignUp);
-    signUp.setOnClickListener(new OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
-        startActivity(intent);
-      }
+    // change activity view on "Not yet registered? Sign up" click
+    findViewById(R.id.goToSignUp).setOnClickListener(v -> {
+      Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
+      startActivity(intent);
     });
   }
 }
