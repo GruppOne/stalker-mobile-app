@@ -1,5 +1,6 @@
 package com.gruppone.stalker;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +36,7 @@ public class OrganizationListAdapter extends ListAdapter<Organization, OrgViewHo
       }
 
       @Override
+      @SuppressLint("DiffUtilEquals")
       public boolean areContentsTheSame(@NonNull Organization oldOrganization,
         @NonNull Organization newOrganization) {
         return oldOrganization.equals(newOrganization);
