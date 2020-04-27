@@ -9,7 +9,7 @@ import java.util.Map;
 
 public abstract class HeadersAdders {
 
-  private static Map<String, String> getHeaders() {
+  static Map<String, String> getHeaders() {
     Map<String, String> headers = new HashMap<>();
     headers.put("STALKER-ADMIN-API-KEY", BuildConfig.ADMIN_API_KEY);
 
