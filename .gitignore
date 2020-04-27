@@ -12,6 +12,9 @@
 /captures
 .externalNativeBuild
 .cxx
+**/*.project
+**/*.classpath
+**/org.eclipse.*
 
 # Logs
 logs
