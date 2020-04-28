@@ -47,6 +47,10 @@ android {
     // disable "id1", "id2"
 
     disable "AnnotationProcessorOnCompilePath"
+
+    //the linter itself says that the unused ids aren't necessarily bad,
+    // because they make it easier to work directly on code.
+    disable "UnusedIds"
   }
 }
 
