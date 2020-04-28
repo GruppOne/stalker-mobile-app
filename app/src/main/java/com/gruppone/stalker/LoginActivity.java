@@ -3,6 +3,7 @@ package com.gruppone.stalker;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.EditText;
+import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
 
 public class LoginActivity extends StalkerActivity {

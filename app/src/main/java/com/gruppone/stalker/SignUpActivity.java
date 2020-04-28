@@ -1,6 +1,7 @@
 package com.gruppone.stalker;
 
 import android.os.Bundle;
+import androidx.annotation.Nullable;
 
 public class SignUpActivity extends StalkerActivity {
 
@@ -11,7 +12,7 @@ public class SignUpActivity extends StalkerActivity {
   }
 
   @Override
-  protected void onCreate(Bundle savedInstanceState) {
+  protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_sign_up);
 
