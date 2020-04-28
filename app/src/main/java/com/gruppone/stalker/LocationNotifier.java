@@ -12,7 +12,7 @@ public class LocationNotifier extends JobIntentService {
   private CurrentSessionSingleton currentSession = CurrentSessionSingleton.getInstance();
   private WebSingleton web = WebSingleton.getInstance();
 
-  public static void enqueue(Context ctx, Intent work) {
+  public static void enqueue(@NonNull Context ctx, @NonNull Intent work) {
     enqueueWork(ctx, LocationNotifier.class, JOB_ID, work);
   }
 

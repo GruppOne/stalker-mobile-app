@@ -1,6 +1,6 @@
 package com.gruppone.stalker;
 
-import android.util.Log;
+import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import java.util.ArrayList;
@@ -21,20 +21,23 @@ public class CurrentSessionSingleton {
 
   }
 
-  void setOrganizations(List<Organization> orgList) {
+  void setOrganizations(@NonNull List<Organization> orgList) {
     organizations.postValue(orgList);
     //localization entry point
   }
 
+  @NonNull
   LiveData<List<Organization>> getOrganizations() {
     return organizations;
   }
 
+  @NonNull
   boolean zeroOrganizations() {
     return organizations.getValue() == null || organizations.getValue().isEmpty();
   }
 
-  public List<Integer> getInsidePlaces(Point point) {
+  @NonNull
+  public List<Integer> getInsidePlaces(@NonNull Point point) {
     List<Integer> ret = new ArrayList<>();
     if (!zeroOrganizations()) {
       //organizations.getValue() could be null, but the !zeroOrganizations() check ensures it's not,
@@ -47,6 +50,7 @@ public class CurrentSessionSingleton {
     return ret;
   }
 
+  @NonNull
   public static synchronized CurrentSessionSingleton getInstance() {
     if (instance == null) {
       instance = new CurrentSessionSingleton();

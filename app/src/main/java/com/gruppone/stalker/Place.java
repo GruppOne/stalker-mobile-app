@@ -6,6 +6,7 @@ import javax.vecmath.Vector3d;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NonNull;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -26,7 +27,7 @@ public class Place {
   @Getter
   private List<Point> polyLine;
 
-  public Place(JSONObject jsonPlace) {
+  public Place(@NonNull JSONObject jsonPlace) {
     try {
       id = jsonPlace.getInt("id");
       polyLine = new ArrayList<>();
@@ -44,7 +45,7 @@ public class Place {
     }
   }
 
-  public boolean isInside(Point point) {
+  public boolean isInside(@NonNull Point point) {
     List<Position> positions = new ArrayList<>();
 
     for (int i = 0; i < polyLine.size(); ++i) {
@@ -69,7 +70,8 @@ public class Place {
     return true;
   }
 
-  private static Position relativePosition(Point origin, Point vertex, Point point) {
+  @NonNull
+  private static Position relativePosition(@NonNull Point origin, @NonNull Point vertex, @NonNull Point point) {
     Vector3d baseDirection = new Vector3d(vertex.getX() - origin.getX(),
       vertex.getY() - origin.getY(), 0);
     baseDirection.normalize();

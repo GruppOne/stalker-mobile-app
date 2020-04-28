@@ -3,4 +3,8 @@
   <issue id="InvalidPackage">
     <ignore path="*/javax.vecmath/*"/>
   </issue>
+  <issue id="UnknownNullness">
+    <ignore path="*/Display.java"/>
+    <ignore path="*/MainActivity.java"/>
+  </issue>
 </lint>

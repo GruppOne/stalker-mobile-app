@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
 
 public class LoginActivity extends StalkerActivity {
@@ -19,7 +20,7 @@ public class LoginActivity extends StalkerActivity {
   }
 
   @Override
-  protected void onCreate(Bundle savedInstanceState) {
+  protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_login);
 

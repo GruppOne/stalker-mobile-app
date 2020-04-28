@@ -1,12 +1,16 @@
 package com.gruppone.stalker;
 
+import android.annotation.SuppressLint;
+import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 
 public class LoginViewModel extends ViewModel {
 
   private LoginModel model = new LoginModel();
 
-  public Boolean login(String email, String password) {
+  //XXX needs to return void, because of all the callback stuff
+  @SuppressLint("UnknownNullness")
+  public Boolean login(@NonNull String email, @NonNull String password) {
     return model.login(email, password);
   }
 }

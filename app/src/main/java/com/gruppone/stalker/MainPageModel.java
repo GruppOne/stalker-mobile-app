@@ -1,5 +1,6 @@
 package com.gruppone.stalker;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +28,7 @@ public class MainPageModel {
     }, null);
   }
 
+  @NonNull
   public LiveData<List<Organization>> getOrgsLiveData() {
     return CurrentSessionSingleton.getInstance().getOrganizations();
   }

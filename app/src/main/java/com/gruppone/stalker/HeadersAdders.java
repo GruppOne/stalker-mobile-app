@@ -1,5 +1,6 @@
 package com.gruppone.stalker;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import com.android.volley.AuthFailureError;
 import com.android.volley.toolbox.JsonArrayRequest;
@@ -7,8 +8,12 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import java.util.HashMap;
 import java.util.Map;
 
+//XXX Since we now know that all request and response bodies are always JSON objects
+//    and never arrays, all this ordeal with a separate interface can be resolved
+//    by just using a Decorator pattern on the JsonObjectRequest type
 public abstract class HeadersAdders {
 
+  @NonNull
   static Map<String, String> getHeaders() {
     Map<String, String> headers = new HashMap<>();
     headers.put("STALKER-ADMIN-API-KEY", BuildConfig.ADMIN_API_KEY);
@@ -19,10 +24,11 @@ public abstract class HeadersAdders {
     return headers;
   }
 
+  @NonNull
   public static JsonArrayRequest buildArrReqWithHeaders(int method,
-    String url,
+    @NonNull String url,
     @Nullable org.json.JSONArray jsonRequest,
-    com.android.volley.Response.Listener<org.json.JSONArray> listener,
+    @Nullable com.android.volley.Response.Listener<org.json.JSONArray> listener,
     @Nullable com.android.volley.Response.ErrorListener errorListener) {
     return new JsonArrayRequest(method, url, jsonRequest, listener, errorListener) {
       @Override
@@ -34,10 +40,11 @@ public abstract class HeadersAdders {
     };
   }
 
+  @NonNull
   public static JsonObjectRequest buildObjReqWithHeaders(int method,
-    String url,
+    @NonNull String url,
     @Nullable org.json.JSONObject jsonRequest,
-    com.android.volley.Response.Listener<org.json.JSONObject> listener,
+    @Nullable com.android.volley.Response.Listener<org.json.JSONObject> listener,
     @Nullable com.android.volley.Response.ErrorListener errorListener) {
     return new JsonObjectRequest(method, url, jsonRequest, listener, errorListener) {
       @Override

@@ -1,15 +1,16 @@
 package com.gruppone.stalker;
 
 import lombok.AllArgsConstructor;
+import lombok.NonNull;
 import lombok.Value;
 
 @Value
 @AllArgsConstructor
 public class Point {
 
-
   double x, y;
 
+  @NonNull
   public static Point buildFromDegrees(double longitude, double latitude) {
     return new Point(xMercator(longitude), yMercator(latitude));
   }
