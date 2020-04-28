@@ -71,7 +71,8 @@ public class Place {
   }
 
   @NonNull
-  private static Position relativePosition(@NonNull Point origin, @NonNull Point vertex, @NonNull Point point) {
+  private static Position relativePosition(@NonNull Point origin, @NonNull Point vertex,
+    @NonNull Point point) {
     Vector3d baseDirection = new Vector3d(vertex.getX() - origin.getX(),
       vertex.getY() - origin.getY(), 0);
     baseDirection.normalize();
