@@ -51,6 +51,10 @@ android {
     //the linter itself says that the unused ids aren't necessarily bad,
     // because they make it easier to work directly on code.
     disable "UnusedIds"
+
+    //we can think about different resolutions for images when this rush is done
+    disable "IconDensities"
+    disable "ConvertToWebp"
   }
 }
 
