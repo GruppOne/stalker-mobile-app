@@ -93,16 +93,15 @@ tasks.withType(Test) {
     jacoco.includeNoLocationClasses = true
 }
 
-tasks.findByName('jacocoTestReport').mustRunAfter('test')
-
 jacocoAndroidUnitTestReport {
   csv.enabled false
   html.enabled false
   xml.enabled true
 }
 
+tasks.findByName('jacocoTestReport').mustRunAfter('test')
+
 project.tasks["check"].dependsOn "jacocoTestReport"
-// project.tasks["sonarqube"].dependsOn "check"
 
 sonarqube {
   properties {
@@ -119,3 +118,7 @@ sonarqube {
     property 'sonar.coverage.jacoco.xmlReportPaths', "${buildDir}/jacoco/jacoco.xml"
   }
 }
+
+tasks.findByName('sonarqube').mustRunAfter('lint')
+tasks.findByName('sonarqube').mustRunAfter('jacocoTestReport')
+tasks.findByName('sonarqube').mustRunAfter('check')
