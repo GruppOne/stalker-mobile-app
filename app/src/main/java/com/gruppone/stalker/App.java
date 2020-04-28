@@ -3,6 +3,8 @@ package com.gruppone.stalker;
 import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
+import androidx.annotation.NonNull;
+import com.beardedhen.androidbootstrap.TypefaceProvider;
 
 public class App extends Application {
 
@@ -15,6 +17,7 @@ public class App extends Application {
     context = getApplicationContext();
   }
 
+  @NonNull
   public static Context getAppContext() {
     return context;
   }

@@ -1,8 +1,14 @@
 package com.gruppone.stalker;
 
+import android.annotation.SuppressLint;
+import androidx.annotation.NonNull;
+
 public class LoginModel {
 
-  public Boolean login(String email, String password) {
+  //XXX needs to return void, because of all the callback stuff
+  //XXX also, needs to be fixed to actually work
+  @SuppressLint("UnknownNullness")
+  public Boolean login(@NonNull String email, @NonNull String password) {
     return true;
     //WebSingleton.getInstance(App.getAppContext())
     //            .addToRequestQueue(new JsonObjectRequest(

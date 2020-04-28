@@ -1,5 +1,6 @@
 package com.gruppone.stalker;
 
+import androidx.annotation.Nullable;
 import com.android.volley.Request;
 import com.android.volley.Request.Method;
 import com.android.volley.RequestQueue;
@@ -10,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import lombok.NonNull;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,6 +27,7 @@ public class WebSingleton {
     requestQueue = getRequestQueue();
   }
 
+  @NonNull
   public static synchronized WebSingleton getInstance() {
     if (instance == null) {
       instance = new WebSingleton();
@@ -32,6 +35,7 @@ public class WebSingleton {
     return instance;
   }
 
+  @NonNull
   public RequestQueue getRequestQueue() {
     if (requestQueue == null) {
       requestQueue = Volley.newRequestQueue(App.getAppContext());
@@ -39,11 +43,11 @@ public class WebSingleton {
     return requestQueue;
   }
 
-  public <T> void addToRequestQueue(Request<T> request) {
+  public <T> void addToRequestQueue(@NonNull Request<T> request) {
     getRequestQueue().add(request);
   }
 
-  public void locationUpdateInside(Integer userId, List<Integer> places) {
+  public void locationUpdateInside(int userId, @NonNull List<Integer> places) {
     String fullUrl = serverUrl + "/location/update";
     try {
       JSONObject request = new JSONObject();
@@ -62,13 +66,13 @@ public class WebSingleton {
     }
   }
 
-  public void locationUpdateOutside(Organization organization, Place place) {
+  public void locationUpdateOutside(@NonNull Organization organization, @NonNull Place place) {
     addToRequestQueue(
       HeadersAdders.buildObjReqWithHeaders(Method.GET, serverUrl, null, null, null));
   }
 
-  public void getOrganizationList(Listener<JSONObject> successListener,
-    ErrorListener errorListener) {
+  public void getOrganizationList(@Nullable Listener<JSONObject> successListener,
+    @Nullable ErrorListener errorListener) {
     String fullUrl = serverUrl + "/organizations";
     addToRequestQueue(
       HeadersAdders
