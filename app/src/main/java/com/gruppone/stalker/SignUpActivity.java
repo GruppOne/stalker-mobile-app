@@ -1,9 +1,6 @@
 package com.gruppone.stalker;
 
-  import android.view.View;
-  import android.view.View.OnClickListener;
-  import android.widget.Button;
-  import android.os.Bundle;
+import android.os.Bundle;
 
 public class SignUpActivity extends StalkerActivity {
 
