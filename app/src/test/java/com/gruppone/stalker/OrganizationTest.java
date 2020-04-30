@@ -11,21 +11,25 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Test;
 
+
 public class OrganizationTest {
 
   @Test
   public void contructor() {
     //Arrange
-    JSONObject jsonOrg = new JSONObject();
+    JSONObject jsonOrg = mock(JSONObject.class);
     int id = 1;
     String name = "unipd";
-    JSONArray jsonPlaces = new JSONArray();
+    JSONArray jsonPlaces = mock(JSONArray.class);
+
     try {
-      jsonOrg.put("id", id);
-      jsonOrg.put("name", name);
-      jsonOrg.put("places", jsonPlaces);
+      when(jsonOrg.getInt("id")).thenReturn(id);
+      when(jsonOrg.getString("name")).thenReturn(name);
+      when(jsonOrg.getJSONArray("places")).thenReturn(jsonPlaces);
+
+      when(jsonPlaces.length()).thenReturn(0);
     } catch (JSONException e) {
-      throw new RuntimeException();
+      throw new RuntimeException(e);
     }
 
     //Act
@@ -40,7 +44,7 @@ public class OrganizationTest {
   @Test
   public void getInsidePlaces() {
     //Arrange
-    Point point=new Point(0.5,0.5);
+    Point point = new Point(0.5, 0.5);
     List<Place> places = new ArrayList<>();
     Place place1 = mock(Place.class);
     when(place1.isInside(point)).thenReturn(true);
@@ -58,7 +62,7 @@ public class OrganizationTest {
     List<Integer> insidePlaces = sut.getInsidePlaces(point);
 
     //Assert
-    List<Integer> expected=new ArrayList<>();
+    List<Integer> expected = new ArrayList<>();
     expected.add(1);
 
     assertEquals(expected, insidePlaces);
