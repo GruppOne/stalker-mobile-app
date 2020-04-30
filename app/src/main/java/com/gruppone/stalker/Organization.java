@@ -20,6 +20,7 @@ public class Organization {
   @Getter
   private String name;
 
+  @Getter
   private List<Place> places;
 
   public Organization(@NonNull JSONObject jsonOrg) {
