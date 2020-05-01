@@ -1,5 +1,6 @@
 package com.gruppone.stalker;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import com.android.volley.Request;
 import com.android.volley.Request.Method;
@@ -11,7 +12,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import lombok.NonNull;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
