@@ -200,3 +200,6 @@ fabric.properties
 
 # API key
 .apikey
+
+# Nested build folder
+app/build
