@@ -15,7 +15,7 @@ import org.junit.Test;
 public class OrganizationTest {
 
   @Test
-  public void contructor() {
+  public void constructor() {
     //Arrange
     JSONObject jsonOrg = mock(JSONObject.class);
     int id = 1;
