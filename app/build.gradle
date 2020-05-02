@@ -146,10 +146,16 @@ spotless {
   java {
     target '**/*.java'
 
-    googleJavaFormat().aosp()
+    googleJavaFormat()
 
-    trimTrailingWhitespace()
-    indentWithSpaces(2)
     endWithNewline()
+    // already set by googleJavaFormat()
+    // indentWithSpaces(2)
+    paddedCell()
+    removeUnusedImports()
+    trimTrailingWhitespace()
   }
+
+  encoding 'UTF-8'
+  lineEndings("UNIX")
 }
