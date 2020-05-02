@@ -1,7 +1,8 @@
 apply plugin: 'com.android.application'
 
-apply plugin: 'com.hiya.jacoco-android'
+//apply plugin: 'com.hiya.jacoco-android'
 apply plugin: 'org.sonarqube'
+apply from: 'jacoco_offline.gradle'
 
 android {
   compileSdkVersion 28
@@ -91,6 +92,8 @@ dependencies {
   annotationProcessor 'org.projectlombok:lombok:1.18.12'
 
   implementation 'com.google.android.material:material:1.1.0'
+
+  jacocoAnt 'org.jacoco:org.jacoco.ant:0.8.4:nodeps'
 }
 
 jacoco {
@@ -103,11 +106,11 @@ tasks.withType(Test) {
     jacoco.includeNoLocationClasses = true
 }
 
-jacocoAndroidUnitTestReport {
-  csv.enabled false
-  html.enabled false
-  xml.enabled true
-}
+//jacocoAndroidUnitTestReport {
+//  csv.enabled false
+//  html.enabled true
+//  xml.enabled true
+//}
 
 tasks.findByName('jacocoTestReport').mustRunAfter('test')
 
@@ -125,7 +128,7 @@ sonarqube {
     property "sonar.login", "${env.SONARCLOUD_LOGIN.orNull()}"
 
     property 'sonar.androidLint.reportPaths', "${buildDir}/reports/lint-results.xml"
-    property 'sonar.coverage.jacoco.xmlReportPaths', "${buildDir}/jacoco/jacoco.xml"
+    property 'sonar.coverage.jacoco.xmlReportPaths', "${buildDir}/reports/jacocoXml/jacoco.xml"
   }
 }
 
