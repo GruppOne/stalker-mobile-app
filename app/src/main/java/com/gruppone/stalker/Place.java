@@ -1,12 +1,12 @@
 package com.gruppone.stalker;
 
+import androidx.annotation.NonNull;
 import java.util.ArrayList;
 import java.util.List;
 import javax.vecmath.Vector3d;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NonNull;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
