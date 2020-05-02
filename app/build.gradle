@@ -2,6 +2,8 @@ apply plugin: 'com.android.application'
 
 //apply plugin: 'com.hiya.jacoco-android'
 apply plugin: 'org.sonarqube'
+apply plugin: "com.diffplug.gradle.spotless"
+
 apply from: 'jacoco_offline.gradle'
 
 android {
@@ -135,3 +137,19 @@ sonarqube {
 tasks.findByName('sonarqube').mustRunAfter('lint')
 tasks.findByName('sonarqube').mustRunAfter('jacocoTestReport')
 tasks.findByName('sonarqube').mustRunAfter('check')
+
+// ===============================
+// = FORMATTING
+// ===============================
+
+spotless {
+  java {
+    target '**/*.java'
+
+    googleJavaFormat().aosp()
+
+    trimTrailingWhitespace()
+    indentWithSpaces(2)
+    endWithNewline()
+  }
+}
