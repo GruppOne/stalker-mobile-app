@@ -1,7 +1,7 @@
 package com.gruppone.stalker;
 
+import androidx.annotation.NonNull;
 import lombok.AllArgsConstructor;
-import lombok.NonNull;
 import lombok.Value;
 
 @Value
