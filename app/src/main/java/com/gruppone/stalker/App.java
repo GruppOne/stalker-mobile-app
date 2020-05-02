@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
 import androidx.annotation.NonNull;
-import com.beardedhen.androidbootstrap.TypefaceProvider;
 
 public class App extends Application {
 

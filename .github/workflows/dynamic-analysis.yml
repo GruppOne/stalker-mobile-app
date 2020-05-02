@@ -29,7 +29,8 @@ jobs:
         run: ./gradlew --console=plain --warning-mode=all
 
       - name: Run gradle check
-        run: ./gradlew --console=plain --warning-mode=all --continue check
+        # no need to run spotlessCheck here.
+        run: ./gradlew --console=plain --warning-mode=all --continue check -x spotlessCheck
 
       - name: Upload results to SonarCloud
         if: always()

@@ -19,7 +19,9 @@ buildscript {
     // TODO these tools are conceptually global but they need to be imported inside app/build.gradle.
     //   I have no idea how to handle this differently
     classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.8"
-    classpath "com.hiya:jacoco-android:0.2"
+    classpath "com.diffplug.spotless:spotless-plugin-gradle:3.28.1"
+
+    // classpath "com.hiya:jacoco-android:0.2"
   }
 }
 
