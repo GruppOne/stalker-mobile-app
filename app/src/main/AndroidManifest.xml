@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:tools="http://schemas.android.com/tools"
-  package="com.gruppone.stalker">
+  package="tech.gruppone.stalker.app">
 
   <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
   <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
@@ -38,7 +38,7 @@
     </activity>
     <activity android:name=".Display">
       <!--<intent-filter>
-        <action android:name="com.gruppone.stalker.DISPLAY"/>
+        <action android:name="tech.gruppone.stalker.DISPLAY"/>
       </intent-filter>-->
     </activity>
     <activity android:name=".MainActivity"/>
