@@ -1,8 +1,9 @@
-package tech.gruppone.stalker.app;
+package tech.gruppone.stalker.app.viewmodel;
 
 import android.annotation.SuppressLint;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
+import tech.gruppone.stalker.app.model.LoginModel;
 
 public class LoginViewModel extends ViewModel {
 

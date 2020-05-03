@@ -1,4 +1,4 @@
-package tech.gruppone.stalker.app;
+package tech.gruppone.stalker.app.view;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,6 +6,9 @@ import android.widget.EditText;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
 import tech.gruppone.stalker.R;
+import tech.gruppone.stalker.app.viewmodel.LoginViewModel;
+import tech.gruppone.stalker.app.R;
+import tech.gruppone.stalker.app.utility.StalkerActivity;
 
 public class LoginActivity extends StalkerActivity {
 

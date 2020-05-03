@@ -1,4 +1,4 @@
-package tech.gruppone.stalker.app;
+package tech.gruppone.stalker.app.utility;
 
 import android.annotation.SuppressLint;
 import android.app.Application;

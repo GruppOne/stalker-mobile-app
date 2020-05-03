@@ -1,4 +1,4 @@
-package tech.gruppone.stalker.app;
+package tech.gruppone.stalker.app.model;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
@@ -6,10 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONException;
+import tech.gruppone.stalker.app.business.CurrentSessionSingleton;
+import tech.gruppone.stalker.app.business.Organization;
+import tech.gruppone.stalker.app.utility.WebSingleton;
 
 public class MainPageModel {
 
-  void loadOrganizations() {
+  public void loadOrganizations() {
     WebSingleton.getInstance()
         .getOrganizationList(
             jsonObject -> {

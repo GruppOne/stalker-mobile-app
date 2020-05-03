@@ -1,4 +1,4 @@
-package tech.gruppone.stalker.app;
+package tech.gruppone.stalker.app.business.location;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -13,12 +13,13 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
+import tech.gruppone.stalker.app.utility.App;
 
 public abstract class GooglePositionInterface {
 
   private static LocationRequest locationRequest;
 
-  static void startLocationUpdates(Activity activity) {
+  public static void startLocationUpdates(Activity activity) {
     checkPermissions(activity);
 
     FusedLocationProviderClient locationProviderClient =
@@ -40,7 +41,7 @@ public abstract class GooglePositionInterface {
         Looper.getMainLooper());
   }
 
-  static void checkPermissions(Activity activity) {
+  public static void checkPermissions(Activity activity) {
     if (locationRequest == null) {
       locationRequest = LocationRequest.create();
       locationRequest.setInterval(300000);

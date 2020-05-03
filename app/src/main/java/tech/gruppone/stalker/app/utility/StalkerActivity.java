@@ -1,6 +1,7 @@
-package tech.gruppone.stalker.app;
+package tech.gruppone.stalker.app.utility;
 
 import androidx.appcompat.app.AppCompatActivity;
+import tech.gruppone.stalker.app.business.location.GooglePositionInterface;
 
 public class StalkerActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package tech.gruppone.stalker.app;
+package tech.gruppone.stalker.app.utility;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,6 +15,8 @@ import java.util.Locale;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import tech.gruppone.stalker.app.business.Organization;
+import tech.gruppone.stalker.app.business.Place;
 
 // TODO Add decorator to Requests to handle authentication (API key or actual login)
 public class WebSingleton {

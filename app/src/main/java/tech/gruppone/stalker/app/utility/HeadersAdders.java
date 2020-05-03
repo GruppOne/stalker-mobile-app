@@ -1,4 +1,4 @@
-package tech.gruppone.stalker.app;
+package tech.gruppone.stalker.app.utility;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
