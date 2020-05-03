@@ -28,7 +28,7 @@ public class MainPageModel {
                 throw new RuntimeException(e);
               }
 
-              CurrentSessionSingleton.getInstance().setOrganizations(organizations);
+              CurrentSessionSingleton.getInstance().setOrganizationList(organizations);
             },
             null);
   }

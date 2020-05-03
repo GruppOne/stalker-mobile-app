@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.IntentSender;
 import android.os.Looper;
 import android.widget.Toast;
+import androidx.annotation.NonNull;
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationAvailability;
@@ -19,7 +20,7 @@ public abstract class GooglePositionInterface {
 
   private static LocationRequest locationRequest;
 
-  public static void startLocationUpdates(Activity activity) {
+  public static void startLocationUpdates(@NonNull Activity activity) {
     checkPermissions(activity);
 
     FusedLocationProviderClient locationProviderClient =
@@ -41,7 +42,7 @@ public abstract class GooglePositionInterface {
         Looper.getMainLooper());
   }
 
-  public static void checkPermissions(Activity activity) {
+  public static void checkPermissions(@NonNull Activity activity) {
     if (locationRequest == null) {
       locationRequest = LocationRequest.create();
       locationRequest.setInterval(300000);
