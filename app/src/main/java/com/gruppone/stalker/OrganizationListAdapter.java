@@ -28,28 +28,27 @@ public class OrganizationListAdapter extends ListAdapter<Organization, OrgViewHo
   }
 
   public OrganizationListAdapter() {
-    super(new ItemCallback<Organization>() {
-      @Override
-      public boolean areItemsTheSame(@NonNull Organization oldOrganization,
-        @NonNull Organization newOrganization) {
-        return oldOrganization.getId() == newOrganization.getId();
-      }
+    super(
+        new ItemCallback<Organization>() {
+          @Override
+          public boolean areItemsTheSame(
+              @NonNull Organization oldOrganization, @NonNull Organization newOrganization) {
+            return oldOrganization.getId() == newOrganization.getId();
+          }
 
-      @Override
-      @SuppressLint("DiffUtilEquals")
-      public boolean areContentsTheSame(@NonNull Organization oldOrganization,
-        @NonNull Organization newOrganization) {
-        return oldOrganization.equals(newOrganization);
-      }
-    });
+          @Override
+          @SuppressLint("DiffUtilEquals")
+          public boolean areContentsTheSame(
+              @NonNull Organization oldOrganization, @NonNull Organization newOrganization) {
+            return oldOrganization.equals(newOrganization);
+          }
+        });
   }
 
   @NonNull
   @Override
   public OrgViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-    View v = LayoutInflater.from(parent.getContext())
-      .inflate(viewType,
-        parent, false);
+    View v = LayoutInflater.from(parent.getContext()).inflate(viewType, parent, false);
     return new OrgViewHolder(v);
   }
 

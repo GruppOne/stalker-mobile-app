@@ -7,7 +7,7 @@ import androidx.annotation.NonNull;
 
 public class App extends Application {
 
-  //It's not a leak because the reference is bound to the application context
+  // It's not a leak because the reference is bound to the application context
   @SuppressLint("StaticFieldLeak")
   private static Context context;
 

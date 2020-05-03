@@ -16,7 +16,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-//TODO Add decorator to Requests to handle authentication (API key or actual login)
+// TODO Add decorator to Requests to handle authentication (API key or actual login)
 public class WebSingleton {
 
   private static WebSingleton instance;
@@ -60,7 +60,7 @@ public class WebSingleton {
       request.put("inside", true);
       request.put("placeIds", new JSONArray(places));
       addToRequestQueue(
-        HeadersAdders.buildObjReqWithHeaders(Method.POST, fullUrl, request, null, null));
+          HeadersAdders.buildObjReqWithHeaders(Method.POST, fullUrl, request, null, null));
     } catch (JSONException ex) {
       throw new RuntimeException(ex);
     }
@@ -68,14 +68,14 @@ public class WebSingleton {
 
   public void locationUpdateOutside(@NonNull Organization organization, @NonNull Place place) {
     addToRequestQueue(
-      HeadersAdders.buildObjReqWithHeaders(Method.GET, serverUrl, null, null, null));
+        HeadersAdders.buildObjReqWithHeaders(Method.GET, serverUrl, null, null, null));
   }
 
-  public void getOrganizationList(@Nullable Listener<JSONObject> successListener,
-    @Nullable ErrorListener errorListener) {
+  public void getOrganizationList(
+      @Nullable Listener<JSONObject> successListener, @Nullable ErrorListener errorListener) {
     String fullUrl = serverUrl + "/organizations";
     addToRequestQueue(
-      HeadersAdders
-        .buildObjReqWithHeaders(Method.GET, fullUrl, null, successListener, errorListener));
+        HeadersAdders.buildObjReqWithHeaders(
+            Method.GET, fullUrl, null, successListener, errorListener));
   }
 }

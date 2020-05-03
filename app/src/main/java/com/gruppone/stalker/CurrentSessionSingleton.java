@@ -11,19 +11,16 @@ public class CurrentSessionSingleton {
 
   private static CurrentSessionSingleton instance;
 
-  //TODO hardcoded!
-  @Getter
-  private User loggedUser = new User(1);
+  // TODO hardcoded!
+  @Getter private User loggedUser = new User(1);
 
   private MutableLiveData<List<Organization>> organizations = new MutableLiveData<>();
 
-  private CurrentSessionSingleton() {
-
-  }
+  private CurrentSessionSingleton() {}
 
   void setOrganizations(@NonNull List<Organization> orgList) {
     organizations.postValue(orgList);
-    //localization entry point
+    // localization entry point
   }
 
   @NonNull
@@ -40,8 +37,9 @@ public class CurrentSessionSingleton {
   public List<Integer> getInsidePlaces(@NonNull Point point) {
     List<Integer> ret = new ArrayList<>();
     if (!zeroOrganizations()) {
-      //organizations.getValue() could be null, but the !zeroOrganizations() check ensures it's not,
-      //so I silenced the linter warning
+      // organizations.getValue() could be null, but the !zeroOrganizations() check ensures it's
+      // not,
+      // so I silenced the linter warning
       //noinspection ConstantConditions
       for (Organization org : organizations.getValue()) {
         ret.addAll(org.getInsidePlaces(point));

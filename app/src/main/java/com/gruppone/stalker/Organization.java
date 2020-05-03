@@ -14,14 +14,11 @@ import org.json.JSONObject;
 @AllArgsConstructor
 public class Organization {
 
-  @Getter
-  private int id;
+  @Getter private int id;
 
-  @Getter
-  private String name;
+  @Getter private String name;
 
-  @Getter
-  private List<Place> places;
+  @Getter private List<Place> places;
 
   public Organization(@NonNull JSONObject jsonOrg) {
     try {

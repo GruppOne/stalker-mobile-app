@@ -16,7 +16,7 @@ public class PlaceTest {
 
   @Test
   public void constructor() {
-    //Arrange
+    // Arrange
     JSONObject jsonPlace = mock(JSONObject.class);
     int id = 1;
     JSONArray jsonPolyline = mock(JSONArray.class);
@@ -30,17 +30,17 @@ public class PlaceTest {
       throw new RuntimeException(e);
     }
 
-    //Act
+    // Act
     Place sut = new Place(jsonPlace);
 
-    //Assert
+    // Assert
     assertEquals(id, sut.getId());
     assertEquals(new ArrayList<>(), sut.getPolyLine());
   }
 
   @Test
   public void isInside() {
-    //Arrange
+    // Arrange
     List<Point> polyline = new ArrayList<>();
     polyline.add(new Point(0, 0));
     polyline.add(new Point(0, 1));
@@ -51,10 +51,10 @@ public class PlaceTest {
 
     Place sut = new Place(1, polyline);
 
-    //Act
+    // Act
     boolean inside = sut.isInside(point);
 
-    //Assert
+    // Assert
     assertTrue(inside);
   }
 }

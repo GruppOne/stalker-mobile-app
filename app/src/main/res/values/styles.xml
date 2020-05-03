@@ -8,6 +8,7 @@
     <item name="windowActionBar">false</item>
     <item name="windowNoTitle">true</item>
   </style>
+
   <style name="BackGroundImageView">
     <item name="android:alpha">1</item>
     <item name="android:scaleType">centerCrop</item>

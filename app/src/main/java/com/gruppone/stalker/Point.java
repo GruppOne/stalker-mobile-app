@@ -15,7 +15,8 @@ public class Point {
     return new Point(xMercator(longitude), yMercator(latitude));
   }
 
-  //constants and private functions to convert longitude and latitude into a cartesian system on the plane
+  // constants and private functions to convert longitude and latitude into a cartesian system on
+  // the plane
   private static final double EARTH_EQUAT_RADIUS = 6378137.0;
   private static final double EARTH_POLAR_RADIUS = 6356752.3142;
 
@@ -24,21 +25,23 @@ public class Point {
   }
 
   private static double yMercator(double latitude) {
-    //Above 89.5° or below -89.5° the projection breaks
+    // Above 89.5° or below -89.5° the projection breaks
     latitude = Math.min(Math.max(latitude, -89.5), 89.5);
 
-    //Mercator projection:
+    // Mercator projection:
     double earthDimensionalRateNormalized =
-      1.0 - Math.pow(EARTH_POLAR_RADIUS / EARTH_EQUAT_RADIUS, 2);
+        1.0 - Math.pow(EARTH_POLAR_RADIUS / EARTH_EQUAT_RADIUS, 2);
 
-    double latitudeOnEarthProj = Math.sqrt(earthDimensionalRateNormalized) *
-      Math.sin(Math.toRadians(latitude));
+    double latitudeOnEarthProj =
+        Math.sqrt(earthDimensionalRateNormalized) * Math.sin(Math.toRadians(latitude));
 
-    latitudeOnEarthProj = Math.pow(((1.0 - latitudeOnEarthProj) / (1.0 + latitudeOnEarthProj)),
-      0.5 * Math.sqrt(earthDimensionalRateNormalized));
+    latitudeOnEarthProj =
+        Math.pow(
+            ((1.0 - latitudeOnEarthProj) / (1.0 + latitudeOnEarthProj)),
+            0.5 * Math.sqrt(earthDimensionalRateNormalized));
 
     double inputOnEarthProjNormalized =
-      Math.tan(0.5 * ((Math.PI * 0.5) - Math.toRadians(latitude))) / latitudeOnEarthProj;
+        Math.tan(0.5 * ((Math.PI * 0.5) - Math.toRadians(latitude))) / latitudeOnEarthProj;
 
     return (-1) * EARTH_EQUAT_RADIUS * Math.log(inputOnEarthProjNormalized);
   }
