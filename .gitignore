@@ -203,3 +203,5 @@ fabric.properties
 
 # Nested build folder
 app/build
+
+.idea/sonarlint
