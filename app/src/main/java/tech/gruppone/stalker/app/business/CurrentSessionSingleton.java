@@ -28,7 +28,7 @@ public class CurrentSessionSingleton {
     return organizations;
   }
 
-    public boolean zeroOrganizations() {
+  public boolean zeroOrganizations() {
     return organizations.getValue() == null || organizations.getValue().isEmpty();
   }
 
