@@ -1,8 +1,10 @@
-package tech.gruppone.stalker.app;
+package tech.gruppone.stalker.app.view;
 
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import tech.gruppone.stalker.R;
+import tech.gruppone.stalker.app.R;
+import tech.gruppone.stalker.app.utility.StalkerActivity;
 
 public class SignUpActivity extends StalkerActivity {
 

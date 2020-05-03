@@ -1,4 +1,4 @@
-package tech.gruppone.stalker.app;
+package tech.gruppone.stalker.app.business;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
@@ -18,18 +18,18 @@ public class CurrentSessionSingleton {
 
   private CurrentSessionSingleton() {}
 
-  void setOrganizations(@NonNull List<Organization> orgList) {
+  public void setOrganizations(@NonNull List<Organization> orgList) {
     organizations.postValue(orgList);
     // localization entry point
   }
 
   @NonNull
-  LiveData<List<Organization>> getOrganizations() {
+  public LiveData<List<Organization>> getOrganizations() {
     return organizations;
   }
 
   @NonNull
-  boolean zeroOrganizations() {
+  public boolean zeroOrganizations() {
     return organizations.getValue() == null || organizations.getValue().isEmpty();
   }
 

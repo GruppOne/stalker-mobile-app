@@ -1,4 +1,4 @@
-package tech.gruppone.stalker.app;
+package tech.gruppone.stalker.app.model;
 
 import android.annotation.SuppressLint;
 import androidx.annotation.NonNull;

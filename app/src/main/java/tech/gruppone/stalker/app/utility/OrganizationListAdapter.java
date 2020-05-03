@@ -1,4 +1,4 @@
-package tech.gruppone.stalker.app;
+package tech.gruppone.stalker.app.utility;
 
 import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
@@ -10,7 +10,9 @@ import androidx.recyclerview.widget.DiffUtil.ItemCallback;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 import tech.gruppone.stalker.R;
-import tech.gruppone.stalker.app.OrganizationListAdapter.OrgViewHolder;
+import tech.gruppone.stalker.app.business.Organization;
+import tech.gruppone.stalker.app.R;
+import tech.gruppone.stalker.app.utility.OrganizationListAdapter.OrgViewHolder;
 
 public class OrganizationListAdapter extends ListAdapter<Organization, OrgViewHolder> {
 

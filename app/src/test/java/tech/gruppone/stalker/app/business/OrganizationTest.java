@@ -1,4 +1,4 @@
-package tech.gruppone.stalker.app;
+package tech.gruppone.stalker.app.business;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
@@ -10,9 +10,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Test;
-import tech.gruppone.stalker.app.Organization;
-import tech.gruppone.stalker.app.Place;
-import tech.gruppone.stalker.app.Point;
 
 public class OrganizationTest {
 

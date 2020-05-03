@@ -1,9 +1,11 @@
-package tech.gruppone.stalker.app;
+package tech.gruppone.stalker.app.viewmodel;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 import java.util.List;
+import tech.gruppone.stalker.app.model.MainPageModel;
+import tech.gruppone.stalker.app.business.Organization;
 
 public class MainPageViewModel extends ViewModel {
 

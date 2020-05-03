@@ -1,14 +1,11 @@
-package tech.gruppone.stalker.app;
-
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertSame;
+package tech.gruppone.stalker.app.utility;
 
 import com.android.volley.RequestQueue;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
-import tech.gruppone.stalker.app.WebSingleton;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({WebSingleton.class})

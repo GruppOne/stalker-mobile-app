@@ -5,7 +5,7 @@
   android:layout_height="match_parent"
   app:layout_constraintVertical_chainStyle="spread_inside"
   xmlns:app="http://schemas.android.com/apk/res-auto"
-  tools:context=".MainPageActivity">
+  tools:context=".view.MainPageActivity">
 
   <view
     class="androidx.recyclerview.widget.RecyclerView"

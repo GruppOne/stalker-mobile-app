@@ -14,37 +14,37 @@
     android:allowBackup="true"
     android:icon="@mipmap/ic_launcher"
     android:label="@string/app_name"
-    android:name=".App"
+    android:name=".utility.App"
     android:roundIcon="@mipmap/ic_launcher_round"
     android:supportsRtl="true"
     android:theme="@style/AppTheme"
     android:usesCleartextTraffic="true"
     tools:ignore="AllowBackup,GoogleAppIndexingWarning,UnusedAttribute">
-    <activity android:name=".StalkerActivity"/>
-    <activity android:name=".LoginActivity">
+    <activity android:name=".utility.StalkerActivity"/>
+    <activity android:name=".view.LoginActivity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
         <category android:name="android.intent.category.LAUNCHER"/>
       </intent-filter>
     </activity>
-    <activity android:name=".SignUpActivity"/>
+    <activity android:name=".view.SignUpActivity"/>
     <activity
-      android:name=".MainPageActivity"
-      android:parentActivityName=".LoginActivity">
+      android:name=".view.MainPageActivity"
+      android:parentActivityName=".view.LoginActivity">
       <!-- <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
         <category android:name="android.intent.category.LAUNCHER"/>
       </intent-filter> -->
     </activity>
-    <activity android:name=".Display">
+    <activity android:name=".view.Display">
       <!--<intent-filter>
         <action android:name="tech.gruppone.stalker.DISPLAY"/>
       </intent-filter>-->
     </activity>
-    <activity android:name=".MainActivity"/>
+    <activity android:name=".view.MainActivity"/>
 
     <service
-      android:name=".LocationNotifier"
+      android:name=".business.location.LocationNotifier"
       android:permission="android.permission.BIND_JOB_SERVICE"/>
   </application>
 </manifest>

@@ -1,4 +1,4 @@
-package tech.gruppone.stalker.app;
+package tech.gruppone.stalker.app.business;
 
 import androidx.annotation.NonNull;
 import lombok.AllArgsConstructor;
