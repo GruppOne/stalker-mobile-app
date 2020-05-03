@@ -61,23 +61,20 @@ public class WebSingleton {
       request.put("inside", true);
       request.put("placeIds", new JSONArray(places));
       request.put("timestampMs", format.format(new Date()));
-      addToRequestQueue(
-          HeadersAdders.buildObjReqWithHeaders(Method.POST, fullUrl, request, null, null));
+      addToRequestQueue(new AuthenticatedRequest(Method.POST, fullUrl, request, null, null));
     } catch (JSONException ex) {
       throw new RuntimeException(ex);
     }
   }
 
   public void locationUpdateOutside(@NonNull Organization organization, @NonNull Place place) {
-    addToRequestQueue(
-        HeadersAdders.buildObjReqWithHeaders(Method.GET, serverUrl, null, null, null));
+    addToRequestQueue(new AuthenticatedRequest(Method.GET, serverUrl, null, null, null));
   }
 
   public void getOrganizationList(
       @Nullable Listener<JSONObject> successListener, @Nullable ErrorListener errorListener) {
     String fullUrl = serverUrl + "/organizations";
     addToRequestQueue(
-        HeadersAdders.buildObjReqWithHeaders(
-            Method.GET, fullUrl, null, successListener, errorListener));
+        new AuthenticatedRequest(Method.GET, fullUrl, null, successListener, errorListener));
   }
 }
