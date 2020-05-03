@@ -11,9 +11,7 @@ android {
   buildToolsVersion "28.0.3"
 
   defaultConfig {
-    // TODO change to:
-    // applicationId "tech.gruppone.stalker.mobile-app"
-    applicationId "com.gruppone.stalker"
+    applicationId "tech.gruppone.stalker.app"
     minSdkVersion 21
     //noinspection OldTargetApi
     targetSdkVersion 28
