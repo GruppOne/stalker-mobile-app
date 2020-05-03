@@ -4,8 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 import java.util.List;
-import tech.gruppone.stalker.app.model.MainPageModel;
 import tech.gruppone.stalker.app.business.Organization;
+import tech.gruppone.stalker.app.model.MainPageModel;
 
 public class MainPageViewModel extends ViewModel {
 

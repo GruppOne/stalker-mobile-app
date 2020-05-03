@@ -103,7 +103,7 @@ jacoco {
 // TODO how to enforce minimum coverage?
 
 tasks.withType(Test) {
-    jacoco.includeNoLocationClasses = true
+  jacoco.includeNoLocationClasses = true
 }
 
 //jacocoAndroidUnitTestReport {

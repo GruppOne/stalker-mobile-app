@@ -5,12 +5,11 @@ import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import tech.gruppone.stalker.R;
-import tech.gruppone.stalker.app.business.location.GooglePositionInterface;
-import tech.gruppone.stalker.app.viewmodel.MainPageViewModel;
-import tech.gruppone.stalker.app.utility.OrganizationListAdapter;
 import tech.gruppone.stalker.app.R;
+import tech.gruppone.stalker.app.business.location.GooglePositionInterface;
+import tech.gruppone.stalker.app.utility.OrganizationListAdapter;
 import tech.gruppone.stalker.app.utility.StalkerActivity;
+import tech.gruppone.stalker.app.viewmodel.MainPageViewModel;
 
 public class MainPageActivity extends StalkerActivity {
 

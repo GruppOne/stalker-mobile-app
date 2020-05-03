@@ -18,7 +18,7 @@ public class CurrentSessionSingleton {
 
   private CurrentSessionSingleton() {}
 
-  public void setOrganizations(@NonNull List<Organization> orgList) {
+  public void setOrganizationList(@NonNull List<Organization> orgList) {
     organizations.postValue(orgList);
     // localization entry point
   }
@@ -28,8 +28,7 @@ public class CurrentSessionSingleton {
     return organizations;
   }
 
-  @NonNull
-  public boolean zeroOrganizations() {
+    public boolean zeroOrganizations() {
     return organizations.getValue() == null || organizations.getValue().isEmpty();
   }
 

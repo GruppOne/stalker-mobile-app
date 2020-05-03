@@ -7,6 +7,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import java.util.HashMap;
 import java.util.Map;
+import tech.gruppone.stalker.app.BuildConfig;
 
 // XXX Since we now know that all request and response bodies are always JSON objects
 //    and never arrays, all this ordeal with a separate interface can be resolved

@@ -5,7 +5,6 @@ import android.location.Location;
 import android.os.Bundle;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
-import tech.gruppone.stalker.R;
 import tech.gruppone.stalker.app.R;
 
 public class Display extends AppCompatActivity {
