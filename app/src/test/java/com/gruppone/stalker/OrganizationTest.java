@@ -11,12 +11,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Test;
 
-
 public class OrganizationTest {
 
   @Test
   public void constructor() {
-    //Arrange
+    // Arrange
     JSONObject jsonOrg = mock(JSONObject.class);
     int id = 1;
     String name = "unipd";
@@ -32,10 +31,10 @@ public class OrganizationTest {
       throw new RuntimeException(e);
     }
 
-    //Act
+    // Act
     Organization sut = new Organization(jsonOrg);
 
-    //Assert
+    // Assert
     assertEquals(id, sut.getId());
     assertEquals(name, sut.getName());
     assertEquals(new ArrayList<Place>(), sut.getPlaces());
@@ -43,7 +42,7 @@ public class OrganizationTest {
 
   @Test
   public void getInsidePlaces() {
-    //Arrange
+    // Arrange
     Point point = new Point(0.5, 0.5);
     List<Place> places = new ArrayList<>();
     Place place1 = mock(Place.class);
@@ -58,10 +57,10 @@ public class OrganizationTest {
 
     Organization sut = new Organization(1, "test", places);
 
-    //Act
+    // Act
     List<Integer> insidePlaces = sut.getInsidePlaces(point);
 
-    //Assert
+    // Assert
     List<Integer> expected = new ArrayList<>();
     expected.add(1);
 

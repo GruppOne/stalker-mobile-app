@@ -10,22 +10,24 @@ import org.json.JSONException;
 public class MainPageModel {
 
   void loadOrganizations() {
-    WebSingleton.getInstance().getOrganizationList(jsonObject -> {
-      List<Organization> organizations = new ArrayList<>();
+    WebSingleton.getInstance()
+        .getOrganizationList(
+            jsonObject -> {
+              List<Organization> organizations = new ArrayList<>();
 
-      try {
-        JSONArray array = jsonObject.getJSONArray("organizations");
+              try {
+                JSONArray array = jsonObject.getJSONArray("organizations");
 
-        for (int i = 0; i < array.length(); ++i) {
-          organizations
-            .add(new Organization(array.getJSONObject(i)));
-        }
-      } catch (JSONException e) {
-        throw new RuntimeException(e);
-      }
+                for (int i = 0; i < array.length(); ++i) {
+                  organizations.add(new Organization(array.getJSONObject(i)));
+                }
+              } catch (JSONException e) {
+                throw new RuntimeException(e);
+              }
 
-      CurrentSessionSingleton.getInstance().setOrganizations(organizations);
-    }, null);
+              CurrentSessionSingleton.getInstance().setOrganizations(organizations);
+            },
+            null);
   }
 
   @NonNull

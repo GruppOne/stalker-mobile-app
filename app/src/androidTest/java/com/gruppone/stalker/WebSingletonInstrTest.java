@@ -15,35 +15,35 @@ public class WebSingletonInstrTest {
 
   @Test
   public void getRequestQueue_notNull() {
-    //Arrange
+    // Arrange
     WebSingleton sut = WebSingleton.getInstance();
 
-    //Act
+    // Act
     RequestQueue queue = sut.getRequestQueue();
 
-    //Assert
+    // Assert
     assertNotNull(queue);
   }
 
   @Test
   public void getRequestQueue_sameQueue() {
-    //Arrange
+    // Arrange
     WebSingleton sut = WebSingleton.getInstance();
 
-    //Act
+    // Act
     RequestQueue queue1 = sut.getRequestQueue();
     RequestQueue queue2 = sut.getRequestQueue();
 
-    //Assert
+    // Assert
     assertSame(queue1, queue2);
   }
 
   @Test
   public void addToRequestQueue() {
-    //Arrange
+    // Arrange
 
-    //Act
+    // Act
 
-    //Assert
+    // Assert
   }
 }

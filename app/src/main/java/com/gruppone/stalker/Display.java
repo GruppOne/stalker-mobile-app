@@ -16,10 +16,8 @@ public class Display extends AppCompatActivity {
     Intent intent = getIntent();
     Location location = intent.getParcelableExtra("lastLocation");
 
-    ((TextView) findViewById(R.id.latitude)).setText(
-      String.valueOf(location.getLatitude()));
+    ((TextView) findViewById(R.id.latitude)).setText(String.valueOf(location.getLatitude()));
 
-    ((TextView) findViewById(R.id.longitude)).setText(
-      String.valueOf(location.getLongitude()));
+    ((TextView) findViewById(R.id.longitude)).setText(String.valueOf(location.getLongitude()));
   }
 }

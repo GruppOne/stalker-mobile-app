@@ -21,11 +21,9 @@ public class Place {
     RIGHT
   }
 
-  @Getter
-  private int id;
+  @Getter private int id;
 
-  @Getter
-  private List<Point> polyLine;
+  @Getter private List<Point> polyLine;
 
   public Place(@NonNull JSONObject jsonPlace) {
     try {
@@ -37,8 +35,9 @@ public class Place {
       for (int i = 1; i < jsonPolyLine.length(); ++i) {
         JSONObject jsonPoint = jsonPolyLine.getJSONObject(i);
 
-        polyLine.add(Point
-          .buildFromDegrees(jsonPoint.getDouble("longitude"), jsonPoint.getDouble("latitude")));
+        polyLine.add(
+            Point.buildFromDegrees(
+                jsonPoint.getDouble("longitude"), jsonPoint.getDouble("latitude")));
       }
     } catch (JSONException e) {
       throw new RuntimeException(e);
@@ -71,14 +70,14 @@ public class Place {
   }
 
   @NonNull
-  private static Position relativePosition(@NonNull Point origin, @NonNull Point vertex,
-    @NonNull Point point) {
-    Vector3d baseDirection = new Vector3d(vertex.getX() - origin.getX(),
-      vertex.getY() - origin.getY(), 0);
+  private static Position relativePosition(
+      @NonNull Point origin, @NonNull Point vertex, @NonNull Point point) {
+    Vector3d baseDirection =
+        new Vector3d(vertex.getX() - origin.getX(), vertex.getY() - origin.getY(), 0);
     baseDirection.normalize();
 
-    Vector3d trialDirection = new Vector3d(point.getX() - origin.getX(),
-      point.getY() - origin.getY(), 0);
+    Vector3d trialDirection =
+        new Vector3d(point.getX() - origin.getX(), point.getY() - origin.getY(), 0);
     trialDirection.normalize();
 
     Vector3d crossProduct = new Vector3d();
@@ -89,7 +88,7 @@ public class Place {
     } else if (crossProduct.z == 0) {
       return Position.ALIGNED;
     } else {
-      //if(crossProduct.z<0)
+      // if(crossProduct.z<0)
       return Position.RIGHT;
     }
   }
