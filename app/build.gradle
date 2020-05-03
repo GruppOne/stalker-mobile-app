@@ -146,7 +146,7 @@ spotless {
   java {
     target '**/*.java'
 
-    googleJavaFormat()
+    googleJavaFormat("1.7")
 
     endWithNewline()
     // already set by googleJavaFormat()
@@ -157,5 +157,6 @@ spotless {
   }
 
   encoding 'UTF-8'
+  //noinspection GroovyAssignabilityCheck
   lineEndings("UNIX")
 }
