@@ -23,7 +23,12 @@ public class LocationNotifier extends JobIntentService {
   protected void onHandleWork(@NonNull Intent intent) {
     Location location = intent.getParcelableExtra("lastLocation");
     Point point = Point.buildFromDegrees(location.getLongitude(), location.getLatitude());
+
+    //getValue() can return null, so there's a warning that getId() could throw NullPtr,
+    //but the location updates only start *after* a successful login, and the login sets the user.
+    //After being set, nothing changes it, so it can never be null
+    //noinspection ConstantConditions
     web.locationUpdateInside(
-        currentSession.getLoggedUser().getId(), currentSession.getInsidePlaces(point));
+        currentSession.getLoggedUser().getValue().getId(), currentSession.getInsidePlaces(point));
   }
 }
