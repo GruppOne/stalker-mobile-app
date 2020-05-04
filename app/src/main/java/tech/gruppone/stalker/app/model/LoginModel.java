@@ -5,11 +5,8 @@ import androidx.annotation.NonNull;
 
 public class LoginModel {
 
-  // XXX needs to return void, because of all the callback stuff
-  // XXX also, needs to be fixed to actually work
-  @SuppressLint("UnknownNullness")
-  public Boolean login(@NonNull String email, @NonNull String password) {
-    return true;
+  // XXX needs to be fixed to actually work
+  public void login(@NonNull String email, @NonNull String password) {
     // WebSingleton.getInstance(App.getAppContext())
     //            .addToRequestQueue(new JsonObjectRequest(
     //              "https://pokeapi.co/api/v2/pokemon/ditto/", null,
