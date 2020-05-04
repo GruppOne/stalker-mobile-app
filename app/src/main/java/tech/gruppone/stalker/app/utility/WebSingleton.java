@@ -72,6 +72,7 @@ public class WebSingleton {
 
   public void signup(
       @NonNull User user,
+      @NonNull String passwordHash,
       @Nullable Listener<JSONObject> successListener,
       @Nullable ErrorListener errorListener) {
     String fullUrl = serverUrl + "/users";
@@ -81,7 +82,7 @@ public class WebSingleton {
 
     try {
       loginData.put("email", user.getEmail());
-      loginData.put("password", user.getPasswordHash());
+      loginData.put("password", passwordHash);
 
       userData.put("email", user.getEmail());
       userData.put("firstName", user.getFirstName());
