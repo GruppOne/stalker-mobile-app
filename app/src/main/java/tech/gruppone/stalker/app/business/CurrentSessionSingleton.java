@@ -12,8 +12,7 @@ public class CurrentSessionSingleton {
 
   private static CurrentSessionSingleton instance;
 
-  // TODO hardcoded!
-  @Getter private User loggedUser = new User(1);
+  private MutableLiveData<User> loggedUser = new MutableLiveData<>();
 
   @Getter @Setter String jwt = "";
 
@@ -21,9 +20,16 @@ public class CurrentSessionSingleton {
 
   private CurrentSessionSingleton() {}
 
+  public void setUser(@NonNull User user) {
+    loggedUser.postValue(user);
+  }
+
+  public LiveData<User> getLoggedUser() {
+    return loggedUser;
+  }
+
   public void setOrganizationList(@NonNull List<Organization> orgList) {
     organizations.postValue(orgList);
-    // localization entry point
   }
 
   @NonNull
