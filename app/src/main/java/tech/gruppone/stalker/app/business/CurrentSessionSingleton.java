@@ -27,6 +27,7 @@ public class CurrentSessionSingleton {
     loggedUser.postValue(user);
   }
 
+  @NonNull
   public LiveData<User> getLoggedUser() {
     return loggedUser;
   }
