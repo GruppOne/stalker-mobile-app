@@ -20,7 +20,6 @@ import tech.gruppone.stalker.app.business.Organization;
 import tech.gruppone.stalker.app.business.Place;
 import tech.gruppone.stalker.app.business.User;
 
-// TODO Add decorator to Requests to handle authentication (API key or actual login)
 public class WebSingleton {
 
   private static WebSingleton instance;
