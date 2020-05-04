@@ -15,7 +15,6 @@ public class User {
   @NonFinal @Setter int id;
 
   @NonNull String email;
-  @NonNull String passwordHash;
   @NonNull String firstName;
   @NonNull String lastName;
   @NonNull String birthDate;
