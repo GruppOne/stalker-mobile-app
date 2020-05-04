@@ -7,6 +7,7 @@ import com.android.volley.Request.Method;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -17,6 +18,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import tech.gruppone.stalker.app.business.Organization;
 import tech.gruppone.stalker.app.business.Place;
+import tech.gruppone.stalker.app.business.User;
 
 // TODO Add decorator to Requests to handle authentication (API key or actual login)
 public class WebSingleton {
@@ -47,6 +49,53 @@ public class WebSingleton {
 
   public <T> void addToRequestQueue(@NonNull Request<T> request) {
     getRequestQueue().add(request);
+  }
+
+  public void login(
+      @NonNull String email,
+      @NonNull String passwordHash,
+      @Nullable Listener<JSONObject> successListener,
+      @Nullable ErrorListener errorListener) {
+    String fullUrl = serverUrl + "/user/login";
+    JSONObject requestBody = new JSONObject();
+
+    try {
+      requestBody.put("email", email);
+      requestBody.put("password", passwordHash);
+    } catch (JSONException e) {
+      throw new RuntimeException(e);
+    }
+
+    addToRequestQueue(
+        new JsonObjectRequest(Method.POST, fullUrl, requestBody, successListener, errorListener));
+  }
+
+  public void signup(
+      @NonNull User user,
+      @Nullable Listener<JSONObject> successListener,
+      @Nullable ErrorListener errorListener) {
+    String fullUrl = serverUrl + "/users";
+    JSONObject requestBody = new JSONObject();
+    JSONObject loginData = new JSONObject();
+    JSONObject userData = new JSONObject();
+
+    try {
+      loginData.put("email", user.getEmail());
+      loginData.put("password", user.getPasswordHash());
+
+      userData.put("email", user.getEmail());
+      userData.put("firstName", user.getFirstName());
+      userData.put("lastName", user.getLastName());
+      userData.put("birthDate", user.getBirthDate());
+
+      requestBody.put("loginData", loginData);
+      requestBody.put("userData", userData);
+    } catch (JSONException e) {
+      throw new RuntimeException(e);
+    }
+
+    addToRequestQueue(
+        new JsonObjectRequest(Method.POST, fullUrl, requestBody, successListener, errorListener));
   }
 
   public void locationUpdateInside(int userId, @NonNull List<Integer> places) {
