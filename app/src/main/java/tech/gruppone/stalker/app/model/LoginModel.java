@@ -10,18 +10,8 @@ import tech.gruppone.stalker.app.utility.WebSingleton;
 
 public class LoginModel {
 
-  public void login(@NonNull String email, @NonNull String password) {
-    String hashedPassword;
-
-    try {
-      MessageDigest messageDigest = MessageDigest.getInstance("SHA-512");
-
-      hashedPassword = Arrays.toString(messageDigest.digest(password.getBytes()));
-    } catch (NoSuchAlgorithmException e) {
-      throw new RuntimeException(e);
-    }
-
-    WebSingleton.getInstance()
+  public void login(@NonNull String email, @NonNull String hashedPassword) {
+        WebSingleton.getInstance()
         .login(
             email,
             hashedPassword,
