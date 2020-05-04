@@ -3,10 +3,13 @@ package tech.gruppone.stalker.app.business;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import com.auth0.android.jwt.JWT;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Getter;
-import lombok.Setter;
+import org.json.JSONException;
+import org.json.JSONObject;
+import tech.gruppone.stalker.app.utility.WebSingleton;
 
 public class CurrentSessionSingleton {
 
@@ -14,7 +17,7 @@ public class CurrentSessionSingleton {
 
   private MutableLiveData<User> loggedUser = new MutableLiveData<>();
 
-  @Getter @Setter String jwt = "";
+  @Getter String jwt = "";
 
   private MutableLiveData<List<Organization>> organizations = new MutableLiveData<>();
 
@@ -26,6 +29,36 @@ public class CurrentSessionSingleton {
 
   public LiveData<User> getLoggedUser() {
     return loggedUser;
+  }
+
+  public void setJwt(@NonNull String token) {
+    jwt = token;
+
+    // Suppressed check on null
+    // If the token is invalid, the JWT constructor throws
+    // If the token is valid, then it's coming out of our server, and so it holds the id
+    @SuppressWarnings("ConstantConditions")
+    int id = Integer.parseInt(new JWT(token).getId());
+
+    WebSingleton.getInstance()
+        .getUserInfo(
+            id,
+            jsonObject -> {
+              try {
+                JSONObject userData = jsonObject.getJSONObject("userData");
+
+                String email = userData.getString("email");
+                String firstName = userData.getString("firstName");
+                String lastName = userData.getString("lastName");
+                String birthDate = userData.getString("birthDate");
+
+                CurrentSessionSingleton.this.setUser(
+                    new User(id, email, firstName, lastName, birthDate));
+              } catch (JSONException e) {
+                throw new RuntimeException(e);
+              }
+            },
+            null);
   }
 
   public void setOrganizationList(@NonNull List<Organization> orgList) {
