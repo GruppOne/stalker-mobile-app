@@ -29,12 +29,11 @@ public class LoginActivity extends StalkerActivity {
     findViewById(R.id.loginButton)
         .setOnClickListener(
             v -> {
-              if (viewModel.login(
+              viewModel.login(
                   ((EditText) findViewById(R.id.emailEditText)).getText().toString(),
-                  ((EditText) findViewById(R.id.passwordEditText)).getText().toString())) {
-                Intent intent = new Intent(LoginActivity.this, MainPageActivity.class);
-                startActivity(intent);
-              }
+                  ((EditText) findViewById(R.id.passwordEditText)).getText().toString());
+              // Intent intent = new Intent(LoginActivity.this, MainPageActivity.class);
+              // startActivity(intent);
             });
 
     // change activity view on "Not yet registered? Sign up" click
