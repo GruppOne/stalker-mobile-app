@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 import org.json.JSONObject;
 import tech.gruppone.stalker.app.BuildConfig;
+import tech.gruppone.stalker.app.business.CurrentSessionSingleton;
 
 public class AuthenticatedRequest extends JsonObjectRequest {
   public AuthenticatedRequest(
@@ -24,7 +25,17 @@ public class AuthenticatedRequest extends JsonObjectRequest {
   @Override
   public Map<String, String> getHeaders() throws AuthFailureError {
     Map<String, String> headers = new HashMap<>(super.getHeaders());
-    headers.put("STALKER-ADMIN-API-KEY", BuildConfig.ADMIN_API_KEY);
+
+    headers.put("Content-type", "application/json");
+
+    String jwt = CurrentSessionSingleton.getInstance().getJwt();
+
+    if (!jwt.equals("")) {
+      headers.put("Authorization", "Bearer " + jwt);
+    } else {
+      headers.put("STALKER-ADMIN-API-KEY", BuildConfig.ADMIN_API_KEY);
+    }
+
     return headers;
   }
 }
