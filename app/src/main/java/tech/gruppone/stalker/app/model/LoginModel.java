@@ -1,25 +1,39 @@
 package tech.gruppone.stalker.app.model;
 
-import android.annotation.SuppressLint;
 import androidx.annotation.NonNull;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
+import org.json.JSONException;
+import tech.gruppone.stalker.app.business.CurrentSessionSingleton;
+import tech.gruppone.stalker.app.utility.WebSingleton;
 
 public class LoginModel {
 
-  // XXX needs to be fixed to actually work
   public void login(@NonNull String email, @NonNull String password) {
-    // WebSingleton.getInstance(App.getAppContext())
-    //            .addToRequestQueue(new JsonObjectRequest(
-    //              "https://pokeapi.co/api/v2/pokemon/ditto/", null,
-    //              new Response.Listener<JSONObject>() {
-    //                @Override
-    //                public void onResponse(JSONObject jsonObject) {
-    //                  //TODO
-    //                }
-    //              }, new Response.ErrorListener() {
-    //              @Override
-    //              public void onErrorResponse(VolleyError volleyError) {
-    //                //TODO
-    //              }
-    //            }));
+    String hashedPassword;
+
+    try {
+      MessageDigest messageDigest = MessageDigest.getInstance("SHA-512");
+
+      hashedPassword = Arrays.toString(messageDigest.digest(password.getBytes()));
+    } catch (NoSuchAlgorithmException e) {
+      throw new RuntimeException(e);
+    }
+
+    WebSingleton.getInstance()
+        .login(
+            email,
+            hashedPassword,
+            jsonObject -> {
+              try {
+                String token = jsonObject.getString("jwt");
+
+                CurrentSessionSingleton.getInstance().setJwt(token);
+              } catch (JSONException e) {
+                throw new RuntimeException(e);
+              }
+            },
+            null);
   }
 }
