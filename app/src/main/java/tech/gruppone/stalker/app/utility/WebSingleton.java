@@ -98,6 +98,16 @@ public class WebSingleton {
         new JsonObjectRequest(Method.POST, fullUrl, requestBody, successListener, errorListener));
   }
 
+  public void getUserInfo(
+      int id,
+      @Nullable Listener<JSONObject> successListener,
+      @Nullable ErrorListener errorListener) {
+    String fullUrl = serverUrl + "/user/" + id;
+
+    addToRequestQueue(
+        new AuthenticatedRequest(Method.GET, fullUrl, null, successListener, errorListener));
+  }
+
   public void locationUpdateInside(int userId, @NonNull List<Integer> places) {
     String fullUrl = serverUrl + "/location/update";
     try {
