@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Getter;
+import lombok.Setter;
 
 public class CurrentSessionSingleton {
 
@@ -13,6 +14,8 @@ public class CurrentSessionSingleton {
 
   // TODO hardcoded!
   @Getter private User loggedUser = new User(1);
+
+  @Getter @Setter String jwt = "";
 
   private MutableLiveData<List<Organization>> organizations = new MutableLiveData<>();
 
