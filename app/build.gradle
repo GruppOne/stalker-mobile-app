@@ -20,6 +20,7 @@ android {
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
     buildConfigField("String", "ADMIN_API_KEY", "\"${ADMIN_API_KEY}\"")
+    buildConfigField("String", "SERVER_URL", "\"${SERVER_URL}\"")
   }
 
   compileOptions {

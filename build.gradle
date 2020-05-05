@@ -1,3 +1,5 @@
+import org.codehaus.groovy.runtime.GStringImpl
+
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
@@ -54,5 +56,6 @@ task clean(type: Delete) {
 
 ext {
   // TODO this will probably not be needed when jwts are configured correctly
-  ADMIN_API_KEY = "${env.ADMIN_API_KEY.orElse("password")}"
+  ADMIN_API_KEY = "${env.ADMIN_API_KEY.orElse("password")}" as GStringImpl
+  SERVER_URL= "${env.SERVER_URL.orElse("http://10.0.2.2:11111")}" as GStringImpl
 }

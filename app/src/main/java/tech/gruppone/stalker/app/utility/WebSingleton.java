@@ -16,6 +16,7 @@ import java.util.Locale;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import tech.gruppone.stalker.app.BuildConfig;
 import tech.gruppone.stalker.app.business.Organization;
 import tech.gruppone.stalker.app.business.Place;
 import tech.gruppone.stalker.app.business.User;
@@ -24,7 +25,7 @@ public class WebSingleton {
 
   private static WebSingleton instance;
   private RequestQueue requestQueue;
-  private String serverUrl = "http://10.0.2.2:11111";
+  private String serverUrl = BuildConfig.SERVER_URL;
 
   private WebSingleton() {
     requestQueue = getRequestQueue();
