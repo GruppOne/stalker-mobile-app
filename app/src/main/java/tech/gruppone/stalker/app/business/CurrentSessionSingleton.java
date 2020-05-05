@@ -39,7 +39,7 @@ public class CurrentSessionSingleton {
     // If the token is invalid, the JWT constructor throws
     // If the token is valid, then it's coming out of our server, and so it holds the id
     @SuppressWarnings("ConstantConditions")
-    int id = Integer.parseInt(new JWT(token).getId());
+    int id = Integer.parseInt(new JWT(token).getSubject());
 
     WebSingleton.getInstance()
         .getUserInfo(
