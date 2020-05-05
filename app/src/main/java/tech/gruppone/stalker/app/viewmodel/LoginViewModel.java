@@ -21,7 +21,7 @@ public class LoginViewModel extends ViewModel {
     } catch (NoSuchAlgorithmException e) {
       throw new RuntimeException(e);
     }
-    
+
     model.login(email, hashedPassword);
   }
 }
