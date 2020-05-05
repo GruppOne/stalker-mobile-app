@@ -43,7 +43,7 @@
         android:layout_margin="8dp"
         android:orientation="vertical">
         <com.google.android.material.textfield.TextInputLayout
-          android:id="@+id/emailEditText"
+          android:id="@+id/emailLoginEditText"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           app:boxStrokeColor="@color/colorAccent"
@@ -62,7 +62,7 @@
             />
         </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout
-          android:id="@+id/passwordEditText"
+          android:id="@+id/passwordLoginEditText"
           android:layout_marginTop="8dp"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
