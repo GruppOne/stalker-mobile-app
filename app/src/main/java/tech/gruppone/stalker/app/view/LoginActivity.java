@@ -30,8 +30,8 @@ public class LoginActivity extends StalkerActivity {
         .setOnClickListener(
             v -> {
               viewModel.login(
-                  ((EditText) findViewById(R.id.emailEditText)).getText().toString(),
-                  ((EditText) findViewById(R.id.passwordEditText)).getText().toString());
+                  ((EditText) findViewById(R.id.emailLoginEditText)).getText().toString(),
+                  ((EditText) findViewById(R.id.passwordLoginEditText)).getText().toString());
               // Intent intent = new Intent(LoginActivity.this, MainPageActivity.class);
               // startActivity(intent);
             });
