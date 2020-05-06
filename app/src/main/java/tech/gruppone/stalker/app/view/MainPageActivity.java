@@ -36,17 +36,8 @@ public class MainPageActivity extends StalkerActivity {
 
     recyclerView.setAdapter(adapter);
 
-    // XXX THIS WILL BE REFACTORED AWAY AFTER THE POC
-    // XXX THE IDEA IS THAT WE START TRACING LOCATIONS AFTER THE LOGIN
-    // XXX MOMENTARILY, WE LEAVE IT HERE
-    // XXX #LucaNonGuardareStaRoba
-    if (firstRun) {
-      GooglePositionInterface.startLocationUpdates(this);
-      firstRun = false;
-    }
+    GooglePositionInterface.startLocationUpdates(this);
   }
-
-  static boolean firstRun = true;
 
   public void loadOrganizations() {
     viewModel.loadOrganizations();
