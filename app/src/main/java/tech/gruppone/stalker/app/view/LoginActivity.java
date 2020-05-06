@@ -2,9 +2,9 @@ package tech.gruppone.stalker.app.view;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.EditText;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
+import com.google.android.material.textfield.TextInputLayout;
 import tech.gruppone.stalker.app.R;
 import tech.gruppone.stalker.app.utility.StalkerActivity;
 import tech.gruppone.stalker.app.viewmodel.LoginViewModel;
@@ -29,9 +29,16 @@ public class LoginActivity extends StalkerActivity {
     findViewById(R.id.loginButton)
         .setOnClickListener(
             v -> {
+              //noinspection ConstantConditions
               viewModel.login(
-                  ((EditText) findViewById(R.id.emailLoginEditText)).getText().toString(),
-                  ((EditText) findViewById(R.id.passwordLoginEditText)).getText().toString());
+                  ((TextInputLayout) findViewById(R.id.emailLoginEditText))
+                      .getEditText()
+                      .getText()
+                      .toString(),
+                  ((TextInputLayout) findViewById(R.id.passwordLoginEditText))
+                      .getEditText()
+                      .getText()
+                      .toString());
               // Intent intent = new Intent(LoginActivity.this, MainPageActivity.class);
               // startActivity(intent);
             });
