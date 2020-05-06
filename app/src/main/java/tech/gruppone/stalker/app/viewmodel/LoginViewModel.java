@@ -1,15 +1,21 @@
 package tech.gruppone.stalker.app.viewmodel;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
+import tech.gruppone.stalker.app.business.User;
 import tech.gruppone.stalker.app.model.LoginModel;
 
 public class LoginViewModel extends ViewModel {
 
   private LoginModel model = new LoginModel();
+
+  public LiveData<User> getUserLiveData() {
+    return model.getUserLiveData();
+  }
 
   public void login(@NonNull String email, @NonNull String password) {
     String hashedPassword;
