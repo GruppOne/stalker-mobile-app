@@ -39,8 +39,15 @@ public class LoginActivity extends StalkerActivity {
                       .getEditText()
                       .getText()
                       .toString());
-              // Intent intent = new Intent(LoginActivity.this, MainPageActivity.class);
-              // startActivity(intent);
+            });
+
+    viewModel
+        .getUserLiveData()
+        .observe(
+            this,
+            user -> {
+              Intent intent = new Intent(LoginActivity.this, MainPageActivity.class);
+              startActivity(intent);
             });
 
     // change activity view on "Not yet registered? Sign up" click
