@@ -32,7 +32,7 @@ public class Place {
 
       JSONArray jsonPolyLine = jsonPlace.getJSONArray("polygon");
 
-      for (int i = 1; i < jsonPolyLine.length(); ++i) {
+      for (int i = 0; i < jsonPolyLine.length(); ++i) {
         JSONObject jsonPoint = jsonPolyLine.getJSONObject(i);
 
         polyLine.add(
