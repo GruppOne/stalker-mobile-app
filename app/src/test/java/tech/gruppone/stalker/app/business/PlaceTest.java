@@ -36,6 +36,35 @@ public class PlaceTest {
   }
 
   @Test
+  public void constructor_polyLineNotNull() {
+    // Arrange
+    JSONObject jsonPlace = Mockito.mock(JSONObject.class);
+    int id = 1;
+    JSONArray jsonPolyline = Mockito.mock(JSONArray.class);
+    JSONObject jsonPoint = Mockito.mock(JSONObject.class);
+
+    try {
+      Mockito.when(jsonPlace.getInt("id")).thenReturn(id);
+      Mockito.when(jsonPlace.getJSONArray("polygon")).thenReturn(jsonPolyline);
+
+      Mockito.when(jsonPolyline.length()).thenReturn(1);
+      Mockito.when(jsonPolyline.getJSONObject(0)).thenReturn(jsonPoint);
+
+      Mockito.when(jsonPoint.getDouble("longitude")).thenReturn(0.0);
+      Mockito.when(jsonPoint.getDouble("latitude")).thenReturn(0.0);
+    } catch (JSONException e) {
+      throw new RuntimeException(e);
+    }
+
+    // Act
+    Place sut = new Place(jsonPlace);
+
+    // Assert
+    Assert.assertEquals(id, sut.getId());
+    Assert.assertNotEquals(new ArrayList<>(), sut.getPolyLine());
+  }
+
+  @Test
   public void isInside() {
     // Arrange
     List<Point> polyline = new ArrayList<>();
