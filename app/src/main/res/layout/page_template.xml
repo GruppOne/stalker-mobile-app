@@ -19,31 +19,30 @@
       style="@style/BackGroundImageView"/>
   </LinearLayout>
 
-  <com.google.android.material.appbar.AppBarLayout
-    android:id="@+id/topAppBar"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintLeft_toLeftOf="parent"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:alpha="0.7">
-    <com.google.android.material.appbar.MaterialToolbar
-      android:layout_width="match_parent"
-      android:layout_height="?attr/actionBarSize"
-      app:title="@string/app_name"
-      style="@style/Widget.MaterialComponents.Toolbar.Primary"
-      app:titleTextColor="@color/whiteText"
-      />
-  </com.google.android.material.appbar.AppBarLayout>
+  <include layout="@menu/top_bar"/>
 
   <TextView
+    android:id="@+id/firstText"
     app:layout_constraintTop_toBottomOf="@id/topAppBar"
     app:layout_constraintLeft_toLeftOf="parent"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginTop="40dp"
     android:layout_marginLeft="8dp"
+    android:text="@string/homepageFirstText"
+    android:textSize="24sp"
+    android:textColor="@color/whiteText"
+    android:textAppearance="?attr/textAppearanceHeadline6"
+    />
+  <TextView
+    android:id="@+id/secondText"
+    app:layout_constraintTop_toBottomOf="@id/firstText"
+    app:layout_constraintRight_toRightOf="parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="8dp"
     android:layout_marginRight="8dp"
-    android:text="@string/homepageText"
+    android:text="@string/homepageSecondText"
     android:textSize="24sp"
     android:textColor="@color/whiteText"
     android:textAppearance="?attr/textAppearanceHeadline6"

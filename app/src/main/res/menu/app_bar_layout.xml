@@ -1,0 +1,17 @@
+<com.google.android.material.appbar.AppBarLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  android:id="@+id/topAppBarPages"
+  app:layout_constraintTop_toTopOf="parent"
+  app:layout_constraintLeft_toLeftOf="parent"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content">
+  <com.google.android.material.appbar.MaterialToolbar
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    app:title="@string/app_name"
+    style="@style/Widget.MaterialComponents.Toolbar.Primary"
+    android:backgroundTint="@color/colorSecondary"
+    app:titleTextColor="@color/whiteText"
+    />
+</com.google.android.material.appbar.AppBarLayout>
