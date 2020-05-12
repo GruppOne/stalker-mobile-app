@@ -1,6 +1,10 @@
 <resources>
   <string name="app_name">Stalker</string>
+<<<<<<< HEAD
   <string name="homepageFirstText">We can protect you…</string>
+=======
+  <string name="homepageFirstText">We can protect you...</string>
+>>>>>>> feat(style): add new colors and strings
   <string name="homepageSecondText">Wherever you are.</string>
   <string name="login">Login</string>
   <string name="signUp">Sign up</string>
@@ -24,4 +28,7 @@
   <string name="connect">connect</string>
   <string name="connect_to_these_organizations">Connect to these organizations</string>
   <string name="title_activity_organization">Map</string>
+  <string name="organizations">Organizations</string>
+  <string name="connected">Connected</string>
+  <string name="report">Report</string>
 </resources>
