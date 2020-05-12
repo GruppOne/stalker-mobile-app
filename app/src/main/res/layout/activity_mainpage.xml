@@ -7,30 +7,25 @@
   xmlns:app="http://schemas.android.com/apk/res-auto"
   tools:context=".view.MainPageActivity">
 
-  <view
-    class="androidx.recyclerview.widget.RecyclerView"
-    android:scrollbars="vertical"
-    android:id="@+id/organizationRecyclerView"
-    android:layout_width="match_parent"
-    android:layout_height="0dp"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintBottom_toTopOf="@id/reloadButton"
-    app:layout_constraintRight_toRightOf="parent"
-    app:layout_constraintLeft_toLeftOf="parent"
-    />
+  <include layout="@menu/app_bar_layout"/>
 
-  <Button
-    android:id="@+id/reloadButton"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:padding="20dp"
-    android:text="@string/reload"
-    app:layout_constraintTop_toBottomOf="@id/organizationRecyclerView"
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/view_container"
+    app:layout_constraintTop_toBottomOf="@id/topAppBarPages"
+    app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
+    android:layout_width="match_parent"
+    android:layout_height="0dp">
+    <include layout="@layout/organization_list"/>
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+  <com.google.android.material.bottomnavigation.BottomNavigationView
+    android:id="@+id/bottom_navigation"
+    app:layout_constraintTop_toBottomOf="@id/view_container"
     app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintRight_toRightOf="parent"
-    app:layout_constraintLeft_toLeftOf="parent"
-    android:layout_marginTop="8dp"
-    android:layout_marginBottom="8dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:menu="@menu/bottom_bar_menu"
+    app:backgroundTint="?colorSecondary"
     />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
