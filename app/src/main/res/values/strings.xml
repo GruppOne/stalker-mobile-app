@@ -1,6 +1,7 @@
 <resources>
   <string name="app_name">Stalker</string>
-  <string name="homepageText">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed…</string>
+  <string name="homepageFirstText">We can protect you...</string>
+  <string name="homepageSecondText">Wherever you are.</string>
   <string name="login">Login</string>
   <string name="signUp">Sign up</string>
   <string name="reload">Reload</string>
@@ -12,4 +13,7 @@
   <string name="goToSignUp">Not yet registered? Sign up</string>
   <string name="goToLogin">Already have an account? Login</string>
   <string name="backgroundImageDescription">Picture of a walking crowd</string>
+  <string name="organizations">Organizations</string>
+  <string name="connected">Connected</string>
+  <string name="report">Report</string>
 </resources>
