@@ -1,0 +1,17 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+  <item
+    android:id="@+id/page_1"
+    android:enabled="true"
+    android:icon="@drawable/ic_list_black_24dp"
+    android:title="@string/organizations"/>
+  <item
+    android:id="@+id/page_2"
+    android:enabled="true"
+    android:icon="@drawable/ic_account_tree_black_24dp"
+    android:title="@string/connected"/>
+  <item
+    android:id="@+id/page_3"
+    android:enabled="true"
+    android:icon="@drawable/ic_timeline_black_24dp"
+    android:title="@string/report"/>
+</menu>
