@@ -44,7 +44,7 @@
     <activity android:name=".view.MainActivity"/>
 
     <service
-      android:name=".business.location.LocationNotifier"
+      android:name=".utility.location.LocationNotifier"
       android:permission="android.permission.BIND_JOB_SERVICE"/>
   </application>
 </manifest>

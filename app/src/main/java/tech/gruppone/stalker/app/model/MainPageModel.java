@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.json.JSONArray;
 import org.json.JSONException;
-import tech.gruppone.stalker.app.business.CurrentSessionSingleton;
+import tech.gruppone.stalker.app.utility.CurrentSessionSingleton;
 import tech.gruppone.stalker.app.business.Organization;
 import tech.gruppone.stalker.app.utility.WebSingleton;
 

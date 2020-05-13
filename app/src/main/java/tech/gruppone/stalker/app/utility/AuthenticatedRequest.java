@@ -9,7 +9,6 @@ import java.util.HashMap;
 import java.util.Map;
 import org.json.JSONObject;
 import tech.gruppone.stalker.app.BuildConfig;
-import tech.gruppone.stalker.app.business.CurrentSessionSingleton;
 
 public class AuthenticatedRequest extends JsonObjectRequest {
   public AuthenticatedRequest(

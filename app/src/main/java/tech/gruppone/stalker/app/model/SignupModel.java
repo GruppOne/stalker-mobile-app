@@ -2,7 +2,7 @@ package tech.gruppone.stalker.app.model;
 
 import androidx.annotation.NonNull;
 import org.json.JSONException;
-import tech.gruppone.stalker.app.business.CurrentSessionSingleton;
+import tech.gruppone.stalker.app.utility.CurrentSessionSingleton;
 import tech.gruppone.stalker.app.business.User;
 import tech.gruppone.stalker.app.utility.WebSingleton;
 
