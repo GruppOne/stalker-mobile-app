@@ -5,8 +5,8 @@ import android.content.Intent;
 import android.location.Location;
 import androidx.annotation.NonNull;
 import androidx.core.app.JobIntentService;
-import tech.gruppone.stalker.app.utility.CurrentSessionSingleton;
 import tech.gruppone.stalker.app.business.Point;
+import tech.gruppone.stalker.app.utility.CurrentSessionSingleton;
 import tech.gruppone.stalker.app.utility.WebSingleton;
 
 public class LocationNotifier extends JobIntentService {
