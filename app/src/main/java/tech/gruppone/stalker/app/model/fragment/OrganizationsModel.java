@@ -1,4 +1,4 @@
-package tech.gruppone.stalker.app.model;
+package tech.gruppone.stalker.app.model.fragment;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
@@ -10,7 +10,7 @@ import tech.gruppone.stalker.app.utility.CurrentSessionSingleton;
 import tech.gruppone.stalker.app.business.Organization;
 import tech.gruppone.stalker.app.utility.WebSingleton;
 
-public class MainPageModel {
+public class OrganizationsModel {
 
   public void loadOrganizations() {
     WebSingleton.getInstance()

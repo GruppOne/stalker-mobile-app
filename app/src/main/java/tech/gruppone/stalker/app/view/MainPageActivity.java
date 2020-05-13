@@ -2,44 +2,42 @@ package tech.gruppone.stalker.app.view;
 
 import android.os.Bundle;
 import androidx.annotation.Nullable;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import tech.gruppone.stalker.app.R;
-import tech.gruppone.stalker.app.utility.location.GooglePositionInterface;
-import tech.gruppone.stalker.app.utility.OrganizationListAdapter;
 import tech.gruppone.stalker.app.utility.StalkerActivity;
-import tech.gruppone.stalker.app.viewmodel.MainPageViewModel;
+import tech.gruppone.stalker.app.utility.location.GooglePositionInterface;
 
 public class MainPageActivity extends StalkerActivity {
-
-  private MainPageViewModel viewModel;
 
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_mainpage);
 
-    findViewById(R.id.reloadButton)
-        .setOnClickListener(v -> MainPageActivity.this.loadOrganizations());
-
-    viewModel = new ViewModelProvider(this).get(MainPageViewModel.class);
-
-    RecyclerView recyclerView = findViewById(R.id.organizationRecyclerView);
-    recyclerView.setHasFixedSize(true);
-
-    recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-    OrganizationListAdapter adapter = new OrganizationListAdapter();
-
-    viewModel.getOrgsLiveData().observe(this, adapter::submitList);
-
-    recyclerView.setAdapter(adapter);
+    ((BottomNavigationView) findViewById(R.id.bottom_navigation))
+        .setOnNavigationItemSelectedListener(
+            menuItem -> {
+              switch (menuItem.getItemId()) {
+                case R.id.organizations_page:
+                  MainPageActivity.this.setOrganizationsPage();
+                  return true;
+                case R.id.connected_page:
+                  MainPageActivity.this.setConnectedPage();
+                  return true;
+                case R.id.report_page:
+                  MainPageActivity.this.setReportPage();
+                  return true;
+                default:
+                  return false;
+              }
+            });
 
     GooglePositionInterface.startLocationUpdates(this);
   }
 
-  public void loadOrganizations() {
-    viewModel.loadOrganizations();
-  }
+  private void setOrganizationsPage() {}
+
+  private void setConnectedPage() {}
+
+  private void setReportPage() {}
 }

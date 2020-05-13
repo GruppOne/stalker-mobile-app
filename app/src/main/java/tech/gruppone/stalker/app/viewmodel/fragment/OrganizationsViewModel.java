@@ -1,15 +1,15 @@
-package tech.gruppone.stalker.app.viewmodel;
+package tech.gruppone.stalker.app.viewmodel.fragment;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 import java.util.List;
 import tech.gruppone.stalker.app.business.Organization;
-import tech.gruppone.stalker.app.model.MainPageModel;
+import tech.gruppone.stalker.app.model.fragment.OrganizationsModel;
 
-public class MainPageViewModel extends ViewModel {
+public class OrganizationsViewModel extends ViewModel {
 
-  private MainPageModel model = new MainPageModel();
+  private OrganizationsModel model = new OrganizationsModel();
 
   public void loadOrganizations() {
     model.loadOrganizations();
