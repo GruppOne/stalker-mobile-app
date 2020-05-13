@@ -1,4 +1,4 @@
-package tech.gruppone.stalker.app.business;
+package tech.gruppone.stalker.app.utility;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
@@ -9,7 +9,9 @@ import java.util.List;
 import lombok.Getter;
 import org.json.JSONException;
 import org.json.JSONObject;
-import tech.gruppone.stalker.app.utility.WebSingleton;
+import tech.gruppone.stalker.app.business.Organization;
+import tech.gruppone.stalker.app.business.Point;
+import tech.gruppone.stalker.app.business.User;
 
 public class CurrentSessionSingleton {
 

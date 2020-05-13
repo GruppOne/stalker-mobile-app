@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import tech.gruppone.stalker.app.R;
-import tech.gruppone.stalker.app.business.location.GooglePositionInterface;
+import tech.gruppone.stalker.app.utility.location.GooglePositionInterface;
 import tech.gruppone.stalker.app.utility.OrganizationListAdapter;
 import tech.gruppone.stalker.app.utility.StalkerActivity;
 import tech.gruppone.stalker.app.viewmodel.MainPageViewModel;
