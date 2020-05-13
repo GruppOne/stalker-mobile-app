@@ -6,8 +6,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import tech.gruppone.stalker.app.R;
 import tech.gruppone.stalker.app.utility.StalkerActivity;
 import tech.gruppone.stalker.app.utility.location.GooglePositionInterface;
+import tech.gruppone.stalker.app.viewmodel.MainPageViewModel;
 
 public class MainPageActivity extends StalkerActivity {
+
+  MainPageViewModel viewModel = new MainPageViewModel();
 
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -31,6 +34,11 @@ public class MainPageActivity extends StalkerActivity {
                   return false;
               }
             });
+
+    ((BottomNavigationView) findViewById(R.id.bottom_navigation))
+        .setOnNavigationItemReselectedListener(menuItem -> {});
+
+    viewModel.loadOrganizations();
 
     GooglePositionInterface.startLocationUpdates(this);
   }
