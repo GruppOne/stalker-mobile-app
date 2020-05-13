@@ -1,16 +1,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
   <item
-    android:id="@+id/page_1"
+    android:id="@+id/organizations_page"
     android:enabled="true"
     android:icon="@drawable/ic_list_black_24dp"
     android:title="@string/organizations"/>
   <item
-    android:id="@+id/page_2"
+    android:id="@+id/connected_page"
     android:enabled="true"
     android:icon="@drawable/ic_account_tree_black_24dp"
     android:title="@string/connected"/>
   <item
-    android:id="@+id/page_3"
+    android:id="@+id/report_page"
     android:enabled="true"
     android:icon="@drawable/ic_timeline_black_24dp"
     android:title="@string/report"/>
