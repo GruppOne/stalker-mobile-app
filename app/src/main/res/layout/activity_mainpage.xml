@@ -9,8 +9,8 @@
 
   <include layout="@menu/app_bar_layout"/>
 
-  <fragment
-    android:name=".view.fragment.OrganizationsFragment"
+  <androidx.fragment.app.FragmentContainerView
+    android:name="tech.gruppone.stalker.app.view.fragment.OrganizationsFragment"
     android:id="@+id/organizations_fragment"
     android:layout_width="match_parent"
     android:layout_height="0dp"
