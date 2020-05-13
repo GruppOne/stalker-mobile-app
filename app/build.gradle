@@ -8,61 +8,59 @@ apply from: 'jacoco_offline.gradle'
 
 
 android {
-  compileSdkVersion 28
-  buildToolsVersion "28.0.3"
+    compileSdkVersion 28
+    buildToolsVersion "28.0.3"
 
-  defaultConfig {
-    applicationId "tech.gruppone.stalker.app"
+    defaultConfig {
+        applicationId "tech.gruppone.stalker.app"
     // TODO: check if this can be lowered
     // it's this high because otherwise instrumented tests don't work
     minSdkVersion 26
-    //noinspection OldTargetApi
-    targetSdkVersion 28
-    versionCode 8
-    versionName "0.5.2"
-    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        //noinspection OldTargetApi
+        targetSdkVersion 28
+        versionCode 8
+        versionName "0.5.2"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-    buildConfigField("String", "ADMIN_API_KEY", "\"${ADMIN_API_KEY}\"")
-    buildConfigField("String", "SERVER_URL", "\"${SERVER_URL}\"")
-    buildConfigField("String", "GOOGLE_MAPS_API_KEY", "\"${GOOGLE_MAPS_API_KEY}\"")
-    // resValue("String", "GOOGLE_MAPS_API_KEY", "\"${GOOGLE_MAPS_API_KEY}\"")
-  }
-
-  compileOptions {
-    sourceCompatibility JavaVersion.VERSION_1_8
-    targetCompatibility JavaVersion.VERSION_1_8
-  }
-  buildTypes {
-    release {
-      minifyEnabled false
-      proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-
-      testCoverageEnabled true
+        buildConfigField("String", "ADMIN_API_KEY", "\"${ADMIN_API_KEY}\"")
+        buildConfigField("String", "SERVER_URL", "\"${SERVER_URL}\"")
     }
 
-    debug {
-      testCoverageEnabled true
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
-  }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
 
-  lintOptions {
-    abortOnError true
-    warningsAsErrors true
+            testCoverageEnabled true
+        }
 
-    checkAllWarnings true
-    // use disable to individually remove lint checks that are redundant
-    // disable "id1", "id2"
+        debug {
+            testCoverageEnabled true
+        }
+    }
 
-    disable "AnnotationProcessorOnCompilePath"
+    lintOptions {
+        abortOnError true
+        warningsAsErrors true
 
-    //the linter itself says that the unused ids aren't necessarily bad,
-    // because they make it easier to work directly on code.
-    disable "UnusedIds"
+        checkAllWarnings true
+        // use disable to individually remove lint checks that are redundant
+        // disable "id1", "id2"
 
-    //we can think about different resolutions for images when this rush is done
-    disable "IconDensities"
-    disable "ConvertToWebp"
-  }
+        disable "AnnotationProcessorOnCompilePath"
+
+        //the linter itself says that the unused ids aren't necessarily bad,
+        // because they make it easier to work directly on code.
+        disable "UnusedIds"
+
+        //we can think about different resolutions for images when this rush is done
+        disable "IconDensities"
+        disable "ConvertToWebp"
+    }
 }
 
 dependencies {
@@ -88,34 +86,34 @@ dependencies {
   androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
   androidTestImplementation 'org.mockito:mockito-android:3.3.3'
 
-  implementation 'androidx.lifecycle:lifecycle-viewmodel:2.2.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel:2.2.0'
 
-  implementation 'com.android.volley:volley:1.1.1'
+    implementation 'com.android.volley:volley:1.1.1'
 
   implementation 'androidx.recyclerview:recyclerview:1.1.0'
 
-  implementation 'com.google.android.gms:play-services-location:17.0.0'
+    implementation 'com.google.android.gms:play-services-location:17.0.0'
 
-  implementation 'javax.vecmath:vecmath:1.5.2'
+    implementation 'javax.vecmath:vecmath:1.5.2'
 
-  compileOnly 'org.projectlombok:lombok:1.18.12'
-  annotationProcessor 'org.projectlombok:lombok:1.18.12'
+    compileOnly 'org.projectlombok:lombok:1.18.12'
+    annotationProcessor 'org.projectlombok:lombok:1.18.12'
 
-  implementation 'com.google.android.material:material:1.1.0'
+    implementation 'com.google.android.material:material:1.1.0'
 
-  implementation 'com.auth0.android:jwtdecode:2.0.0'
+    implementation 'com.auth0.android:jwtdecode:2.0.0'
 
-  jacocoAnt 'org.jacoco:org.jacoco.ant:0.8.4:nodeps'
+    jacocoAnt 'org.jacoco:org.jacoco.ant:0.8.4:nodeps'
 }
 
 jacoco {
-  toolVersion = "0.8.4"
+    toolVersion = "0.8.4"
 }
 
 // TODO how to enforce minimum coverage?
 
 tasks.withType(Test) {
-  jacoco.includeNoLocationClasses = true
+    jacoco.includeNoLocationClasses = true
 }
 
 //jacocoAndroidUnitTestReport {
@@ -129,19 +127,19 @@ tasks.findByName('jacocoTestReport').mustRunAfter('test')
 project.tasks["check"].dependsOn "jacocoTestReport"
 
 sonarqube {
-  properties {
-    property "sonar.sourceEncoding", "UTF-8"
+    properties {
+        property "sonar.sourceEncoding", "UTF-8"
 
-    property "sonar.projectName", "stalker-mobile-app"
-    property "sonar.projectKey", "GruppOne_stalker-mobile-app"
-    property "sonar.organization", "grupp-one"
+        property "sonar.projectName", "stalker-mobile-app"
+        property "sonar.projectKey", "GruppOne_stalker-mobile-app"
+        property "sonar.organization", "grupp-one"
 
-    property "sonar.host.url", "https://sonarcloud.io"
-    property "sonar.login", "${env.SONARCLOUD_LOGIN.orNull()}"
+        property "sonar.host.url", "https://sonarcloud.io"
+        property "sonar.login", "${env.SONARCLOUD_LOGIN.orNull()}"
 
-    property 'sonar.androidLint.reportPaths', "${buildDir}/reports/lint-results.xml"
-    property 'sonar.coverage.jacoco.xmlReportPaths', "${buildDir}/reports/jacocoXml/jacoco.xml"
-  }
+        property 'sonar.androidLint.reportPaths', "${buildDir}/reports/lint-results.xml"
+        property 'sonar.coverage.jacoco.xmlReportPaths', "${buildDir}/reports/jacocoXml/jacoco.xml"
+    }
 }
 
 tasks.findByName('sonarqube').mustRunAfter('lint')
@@ -155,20 +153,20 @@ project.tasks["sonarqube"].dependsOn "check"
 // ===============================
 
 spotless {
-  java {
-    target '**/*.java'
+    java {
+        target '**/*.java'
 
-    googleJavaFormat("1.7")
+        googleJavaFormat("1.7")
 
-    endWithNewline()
-    // already set by googleJavaFormat()
-    // indentWithSpaces(2)
-    paddedCell()
-    removeUnusedImports()
-    trimTrailingWhitespace()
-  }
+        endWithNewline()
+        // already set by googleJavaFormat()
+        // indentWithSpaces(2)
+        paddedCell()
+        removeUnusedImports()
+        trimTrailingWhitespace()
+    }
 
-  encoding 'UTF-8'
-  //noinspection GroovyAssignabilityCheck
-  lineEndings("UNIX")
+    encoding 'UTF-8'
+    //noinspection GroovyAssignabilityCheck
+    lineEndings("UNIX")
 }
