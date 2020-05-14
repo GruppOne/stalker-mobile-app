@@ -1,13 +1,16 @@
 package tech.gruppone.stalker.app.viewmodel;
 
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
 import tech.gruppone.stalker.app.business.User;
 import tech.gruppone.stalker.app.model.LoginModel;
+import tech.gruppone.stalker.app.utility.App;
 
 public class LoginViewModel extends ViewModel {
 
@@ -28,8 +31,11 @@ public class LoginViewModel extends ViewModel {
 
     try {
       MessageDigest messageDigest = MessageDigest.getInstance("SHA-512");
+      messageDigest.reset();
 
-      hashedPassword = Arrays.toString(messageDigest.digest(password.getBytes()));
+      messageDigest.update(password.getBytes(StandardCharsets.UTF_8));
+
+      hashedPassword = String.format("%0128x", new BigInteger(1, messageDigest.digest()));
     } catch (NoSuchAlgorithmException e) {
       throw new RuntimeException(e);
     }
