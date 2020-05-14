@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  tools:context=".view.OrganizationActivity"
+  android:backgroundTint="@color/background">
+
+  <include layout="@menu/app_bar_layout"/>
+
+  <LinearLayout
+    app:layout_constraintTop_toBottomOf="@id/topAppBarPages"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <com.google.android.material.card.MaterialCardView
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:backgroundTint="@color/whiteBackground"
+      android:layout_marginTop="8dp">
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="8dp">
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="GruppOne"
+          android:textColor="@color/textOnMatCard"
+          android:textSize="22sp"
+          android:paddingBottom="10dp"/>
+        <TextView
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="GruppOne"
+          android:textColor="@color/organizationDescription"
+          android:textSize="16sp"
+          android:paddingBottom="10dp"/>
+        <androidx.fragment.app.FragmentContainerView
+          xmlns:map="http://schemas.android.com/apk/res-auto"
+          android:id="@+id/map"
+          android:layout_width="match_parent"
+          android:layout_height="300dp"
+          android:name="com.google.android.gms.maps.SupportMapFragment"
+          tools:context=".view.OrganizationActivity"/>
+      </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+  </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

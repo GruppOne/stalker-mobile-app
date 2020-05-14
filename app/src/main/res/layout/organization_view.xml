@@ -24,7 +24,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:textSize="16sp"
-    android:textColor="#8c8c8c"
+    android:textColor="@color/organizationDescription"
     android:layout_marginStart="8dp"
     android:layout_marginEnd="30dp"
     android:paddingBottom="8dp"
