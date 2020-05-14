@@ -48,7 +48,8 @@ public class CurrentSessionSingleton {
             id,
             jsonObject -> {
               try {
-                JSONObject userData = jsonObject.getJSONObject("userData");
+                JSONObject user=jsonObject.getJSONObject("user");
+                JSONObject userData = user.getJSONObject("userData");
 
                 String email = userData.getString("email");
                 String firstName = userData.getString("firstName");
