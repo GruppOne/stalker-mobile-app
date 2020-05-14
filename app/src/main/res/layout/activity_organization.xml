@@ -10,42 +10,64 @@
 
   <include layout="@menu/app_bar_layout"/>
 
-  <LinearLayout
+  <androidx.constraintlayout.widget.ConstraintLayout
     app:layout_constraintTop_toBottomOf="@id/topAppBarPages"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <com.google.android.material.card.MaterialCardView
+      app:layout_constraintTop_toTopOf="parent"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:backgroundTint="@color/whiteBackground"
       android:layout_marginTop="8dp">
-      <LinearLayout
+      <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="8dp">
+        android:padding="8dp"
+        android:orientation="vertical">
         <TextView
-          android:layout_width="wrap_content"
+          android:id="@+id/name"
+          app:layout_constraintTop_toTopOf="parent"
+          android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:text="GruppOne"
           android:textColor="@color/textOnMatCard"
           android:textSize="22sp"
-          android:paddingBottom="10dp"/>
+          android:paddingBottom="10dp"
+          android:layout_marginEnd="30dp"/>
         <TextView
+          android:id="@+id/privatePublicIcon"
+          app:layout_constraintTop_toTopOf="parent"
+          app:layout_constraintRight_toRightOf="parent"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:text="GruppOne"
+          android:layout_marginTop="8dp"
+          />
+        <TextView
+          android:id="@+id/description"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          app:layout_constraintTop_toBottomOf="@id/name"
+          app:layout_constraintLeft_toLeftOf="parent"
           android:textColor="@color/organizationDescription"
           android:textSize="16sp"
           android:paddingBottom="10dp"/>
         <androidx.fragment.app.FragmentContainerView
           xmlns:map="http://schemas.android.com/apk/res-auto"
           android:id="@+id/map"
+          app:layout_constraintTop_toBottomOf="@id/description"
           android:layout_width="match_parent"
           android:layout_height="300dp"
           android:name="com.google.android.gms.maps.SupportMapFragment"
           tools:context=".view.OrganizationActivity"/>
-      </LinearLayout>
+        <com.google.android.material.button.MaterialButton
+          app:layout_constraintTop_toBottomOf="@id/map"
+          android:layout_width="match_parent"
+          android:layout_height="60dp"
+          android:layout_marginTop="8dp"
+          app:backgroundTint="@color/colorAccent"
+          android:textColor="@color/whiteText"
+          android:text="@string/connect"/>
+      </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
-  </LinearLayout>
+  </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
