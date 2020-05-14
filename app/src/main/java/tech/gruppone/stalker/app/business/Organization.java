@@ -23,10 +23,11 @@ public class Organization {
   public Organization(@NonNull JSONObject jsonOrg) {
     try {
       id = jsonOrg.getInt("id");
-      name = jsonOrg.getString("name");
+      JSONObject data=jsonOrg.getJSONObject("data");
+      name = data.getString("name");
       places = new ArrayList<>();
 
-      JSONArray jsonPlaces = jsonOrg.getJSONArray("places");
+      JSONArray jsonPlaces = data.getJSONArray("places");
 
       for (int i = 0; i < jsonPlaces.length(); ++i) {
         places.add(new Place(jsonPlaces.getJSONObject(i)));
