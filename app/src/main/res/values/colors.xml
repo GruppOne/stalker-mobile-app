@@ -9,4 +9,5 @@
   <color name="whiteText">#ffffff</color>
   <color name="whiteBackground">#ffffff</color>
   <color name="textOnMatCard">#000000</color>
+  <color name="organizationDescription">#8c8c8c</color>
 </resources>
