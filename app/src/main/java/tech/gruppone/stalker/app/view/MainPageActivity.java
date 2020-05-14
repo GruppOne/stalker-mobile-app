@@ -2,7 +2,10 @@ package tech.gruppone.stalker.app.view;
 
 import android.os.Bundle;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentManager;
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import java.util.Objects;
 import tech.gruppone.stalker.app.R;
 import tech.gruppone.stalker.app.utility.StalkerActivity;
 import tech.gruppone.stalker.app.utility.location.GooglePositionInterface;
@@ -11,6 +14,7 @@ import tech.gruppone.stalker.app.viewmodel.MainPageViewModel;
 public class MainPageActivity extends StalkerActivity {
 
   MainPageViewModel viewModel = new MainPageViewModel();
+  FragmentManager fragmentManager = getSupportFragmentManager();
 
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -38,14 +42,28 @@ public class MainPageActivity extends StalkerActivity {
     ((BottomNavigationView) findViewById(R.id.bottom_navigation))
         .setOnNavigationItemReselectedListener(menuItem -> {});
 
+    setOrganizationsPage();
+
     viewModel.loadOrganizations();
 
     GooglePositionInterface.startLocationUpdates(this);
   }
 
-  private void setOrganizationsPage() {}
+  private void setOrganizationsPage() {
+    fragmentManager
+        .beginTransaction()
+        .hide(Objects.requireNonNull(fragmentManager.findFragmentById(R.id.connected_fragment)))
+        .show(Objects.requireNonNull(fragmentManager.findFragmentById(R.id.organizations_fragment)))
+        .commit();
+  }
 
-  private void setConnectedPage() {}
+  private void setConnectedPage() {
+    fragmentManager
+        .beginTransaction()
+        .hide(Objects.requireNonNull(fragmentManager.findFragmentById(R.id.organizations_fragment)))
+        .show(Objects.requireNonNull(fragmentManager.findFragmentById(R.id.connected_fragment)))
+        .commit();
+  }
 
   private void setReportPage() {}
 }
