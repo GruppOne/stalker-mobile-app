@@ -57,7 +57,8 @@ task clean(type: Delete) {
 ext {
   // TODO this will probably not be needed when jwts are configured correctly
   ADMIN_API_KEY = "${env.ADMIN_API_KEY.orElse("password")}" as GStringImpl
-  SERVER_URL= "${env.SERVER_URL.orElse("http://10.0.2.2:11111")}" as GStringImpl
+  SERVER_URL = "${env.SERVER_URL.orElse("http://10.0.2.2:11111")}" as GStringImpl
+  GOOGLE_MAPS_API_KEY = "${env.GOOGLE_MAPS_API_KEY.orElse("password")}" as GStringImpl
 }
 
 apply plugin: 'android-reporting'
