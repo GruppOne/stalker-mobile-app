@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import org.json.JSONException;
 import tech.gruppone.stalker.app.business.User;
+import tech.gruppone.stalker.app.model.fragment.OrganizationsModel;
 import tech.gruppone.stalker.app.utility.CurrentSessionSingleton;
 import tech.gruppone.stalker.app.utility.WebSingleton;
 
@@ -27,6 +28,8 @@ public class LoginModel {
               } catch (JSONException e) {
                 throw new RuntimeException(e);
               }
+
+              new OrganizationsModel().loadOrganizations();
             },
             null);
   }

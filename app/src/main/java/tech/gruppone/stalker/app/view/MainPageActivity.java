@@ -3,17 +3,14 @@ package tech.gruppone.stalker.app.view;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
-import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import java.util.Objects;
 import tech.gruppone.stalker.app.R;
 import tech.gruppone.stalker.app.utility.StalkerActivity;
 import tech.gruppone.stalker.app.utility.location.GooglePositionInterface;
-import tech.gruppone.stalker.app.viewmodel.MainPageViewModel;
 
 public class MainPageActivity extends StalkerActivity {
 
-  MainPageViewModel viewModel = new MainPageViewModel();
   FragmentManager fragmentManager = getSupportFragmentManager();
 
   @Override
@@ -43,8 +40,6 @@ public class MainPageActivity extends StalkerActivity {
         .setOnNavigationItemReselectedListener(menuItem -> {});
 
     setOrganizationsPage();
-
-    viewModel.loadOrganizations();
 
     GooglePositionInterface.startLocationUpdates(this);
   }
