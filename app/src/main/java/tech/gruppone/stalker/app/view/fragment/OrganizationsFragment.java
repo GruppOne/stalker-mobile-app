@@ -16,8 +16,8 @@ import tech.gruppone.stalker.app.viewmodel.fragment.OrganizationsViewModel;
 
 public class OrganizationsFragment extends Fragment {
 
-  OrganizationsViewModel viewModel;
-  View view;
+  private OrganizationsViewModel viewModel;
+  private View view;
 
   public OrganizationsFragment() {
     // Required empty public constructor
