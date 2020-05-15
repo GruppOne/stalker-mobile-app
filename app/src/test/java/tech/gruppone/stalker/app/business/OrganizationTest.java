@@ -97,7 +97,7 @@ public class OrganizationTest {
     when(place2.getId()).thenReturn(2);
     places.add(place2);
 
-    Organization sut = new Organization(1, "test", places);
+    Organization sut = new Organization(1, "test", "test", false, places);
 
     // Act
     List<Integer> insidePlaces = sut.getInsidePlaces(point);
