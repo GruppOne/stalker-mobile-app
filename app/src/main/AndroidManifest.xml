@@ -18,6 +18,10 @@
     android:theme="@style/AppTheme"
     android:usesCleartextTraffic="true"
     tools:ignore="AllowBackup,GoogleAppIndexingWarning,UnusedAttribute">
+    <meta-data
+      android:name="com.google.android.maps.v2.API_KEY"
+      android:value="@string/GOOGLE_MAPS_API_KEY"/>
+
     <activity
       android:label="@string/title_activity_organization"
       android:name=".view.OrganizationActivity">
