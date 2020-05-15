@@ -1,6 +1,8 @@
 package tech.gruppone.stalker.app.utility;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,23 +14,33 @@ import androidx.recyclerview.widget.RecyclerView;
 import tech.gruppone.stalker.app.R;
 import tech.gruppone.stalker.app.business.Organization;
 import tech.gruppone.stalker.app.utility.OrganizationListAdapter.OrgViewHolder;
+import tech.gruppone.stalker.app.view.OrganizationActivity;
 
 public class OrganizationListAdapter extends ListAdapter<Organization, OrgViewHolder> {
 
-  public static class OrgViewHolder extends RecyclerView.ViewHolder {
+  public static class OrgViewHolder extends RecyclerView.ViewHolder
+      implements View.OnClickListener {
 
+    private int id;
     private TextView name;
     private TextView description;
     private TextView privatePublicIcon;
+
+    private Context context;
 
     public OrgViewHolder(@NonNull View v) {
       super(v);
       name = v.findViewById(R.id.organizationName);
       description = v.findViewById(R.id.organizationDescription);
       privatePublicIcon = v.findViewById(R.id.privatePublicIcon);
+
+      v.setOnClickListener(this);
+
+      context = v.getContext();
     }
 
     public void bindTo(@NonNull Organization organization) {
+      id = organization.getId();
       name.setText(organization.getName());
       description.setText(organization.getDescription());
       privatePublicIcon.setCompoundDrawablesRelativeWithIntrinsicBounds(
@@ -38,6 +50,13 @@ public class OrganizationListAdapter extends ListAdapter<Organization, OrgViewHo
           0,
           0,
           0);
+    }
+
+    @Override
+    public void onClick(View v) {
+      Intent intent = new Intent(context, OrganizationActivity.class);
+      intent.putExtra("organizationId", id);
+      context.startActivity(intent);
     }
   }
 
