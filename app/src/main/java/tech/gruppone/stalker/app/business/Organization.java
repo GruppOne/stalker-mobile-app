@@ -18,6 +18,8 @@ public class Organization {
   @Getter private final int id;
 
   @Getter private final String name;
+  @Getter private final String description;
+  @Getter private final boolean isPrivate;
   @Getter private final List<Place> places;
   @Getter @Setter private boolean connected = false;
 
@@ -26,6 +28,8 @@ public class Organization {
       id = jsonOrg.getInt("id");
       JSONObject data = jsonOrg.getJSONObject("data");
       name = data.getString("name");
+      description = data.getString("description");
+      isPrivate = data.getBoolean("isPrivate");
       places = new ArrayList<>();
 
       JSONArray jsonPlaces = data.getJSONArray("places");
