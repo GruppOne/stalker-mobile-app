@@ -17,15 +17,27 @@ public class OrganizationListAdapter extends ListAdapter<Organization, OrgViewHo
 
   public static class OrgViewHolder extends RecyclerView.ViewHolder {
 
-    private TextView textView;
+    private TextView name;
+    private TextView description;
+    private TextView privatePublicIcon;
 
     public OrgViewHolder(@NonNull View v) {
       super(v);
-      textView = v.findViewById(R.id.organizationName);
+      name = v.findViewById(R.id.organizationName);
+      description = v.findViewById(R.id.organizationDescription);
+      privatePublicIcon = v.findViewById(R.id.privatePublicIcon);
     }
 
     public void bindTo(@NonNull Organization organization) {
-      textView.setText(organization.getName());
+      name.setText(organization.getName());
+      description.setText(organization.getDescription());
+      privatePublicIcon.setCompoundDrawablesRelativeWithIntrinsicBounds(
+          organization.isPrivate()
+              ? R.drawable.ic_lock_black_24dp
+              : R.drawable.ic_lock_open_black_24dp,
+          0,
+          0,
+          0);
     }
   }
 
