@@ -3,27 +3,28 @@ package tech.gruppone.stalker.app.business;
 import androidx.annotation.NonNull;
 import java.util.ArrayList;
 import java.util.List;
-import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 @EqualsAndHashCode
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class Organization {
 
-  @Getter private int id;
+  @Getter private final int id;
 
-  @Getter private String name;
-
-  @Getter private List<Place> places;
+  @Getter private final String name;
+  @Getter private final List<Place> places;
+  @Getter @Setter private boolean connected = false;
 
   public Organization(@NonNull JSONObject jsonOrg) {
     try {
       id = jsonOrg.getInt("id");
-      JSONObject data=jsonOrg.getJSONObject("data");
+      JSONObject data = jsonOrg.getJSONObject("data");
       name = data.getString("name");
       places = new ArrayList<>();
 
