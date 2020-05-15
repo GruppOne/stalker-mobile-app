@@ -1,7 +1,15 @@
 package tech.gruppone.stalker.app.viewmodel.fragment;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
+import java.util.List;
+import tech.gruppone.stalker.app.business.Organization;
+import tech.gruppone.stalker.app.model.fragment.ConnectedModel;
 
 public class ConnectedViewModel extends ViewModel {
-  // TODO: Implement the ViewModel
+  ConnectedModel model = new ConnectedModel();
+
+  public LiveData<List<Organization>> getConnectedOrganizations() {
+    return model.getConnectedOrganizations();
+  }
 }
