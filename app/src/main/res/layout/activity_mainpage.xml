@@ -9,13 +9,19 @@
 
   <include layout="@menu/app_bar_layout"/>
 
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:id="@+id/mainPageFragmentLayout"
+    app:layout_constraintTop_toBottomOf="@id/topAppBarPages"
+    app:layout_constraintBottom_toTopOf="@id/bottom_navigation">
   <fragment
     android:name="tech.gruppone.stalker.app.view.fragment.OrganizationsFragment"
     android:id="@+id/organizations_fragment"
     android:layout_width="match_parent"
     android:layout_height="0dp"
-    app:layout_constraintTop_toBottomOf="@id/topAppBarPages"
-    app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
     tools:ignore="FragmentTagUsage"/>
 
   <fragment
@@ -23,13 +29,14 @@
     android:id="@+id/connected_fragment"
     android:layout_width="match_parent"
     android:layout_height="0dp"
-    app:layout_constraintTop_toBottomOf="@id/topAppBarPages"
-    app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
     tools:ignore="FragmentTagUsage"/>
+  </androidx.constraintlayout.widget.ConstraintLayout>
 
   <com.google.android.material.bottomnavigation.BottomNavigationView
     android:id="@+id/bottom_navigation"
-    app:layout_constraintTop_toBottomOf="@id/organizations_fragment"
+    app:layout_constraintTop_toBottomOf="@id/mainPageFragmentLayout"
     app:layout_constraintBottom_toBottomOf="parent"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
