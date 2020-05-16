@@ -1,18 +1,37 @@
 package tech.gruppone.stalker.app.business;
 
 import androidx.annotation.NonNull;
-import lombok.AllArgsConstructor;
 import lombok.Value;
+import lombok.experimental.NonFinal;
 
 @Value
-@AllArgsConstructor
 public class Point {
 
-  double x, y;
+  double x;
+  double y;
+
+  // TODO implement reverse Mercator projection
+  @NonFinal double longitude;
+  @NonFinal double latitude;
+
+  private Point(double x, double y) {
+    this.x = x;
+    this.y = y;
+
+    // TODO implement reverse Mercator projection
+    longitude = 0;
+    latitude = 0;
+  }
 
   @NonNull
   public static Point buildFromDegrees(double longitude, double latitude) {
-    return new Point(xMercator(longitude), yMercator(latitude));
+    Point point = new Point(xMercator(longitude), yMercator(latitude));
+
+    // TODO implement reverse Mercator projection
+    point.longitude = longitude;
+    point.latitude = latitude;
+
+    return point;
   }
 
   // constants and private functions to convert longitude and latitude into a cartesian system on
