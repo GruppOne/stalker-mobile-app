@@ -5,15 +5,19 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Polygon;
+import com.google.android.gms.maps.model.PolygonOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.LatLng;
 import java.util.Objects;
+import tech.gruppone.stalker.app.BuildConfig;
 import tech.gruppone.stalker.app.R;
 import tech.gruppone.stalker.app.viewmodel.OrganizationViewModel;
 
@@ -53,6 +57,8 @@ public class OrganizationActivity extends FragmentActivity implements OnMapReady
     mapFragment.getMapAsync(this);
 
     findViewById(R.id.connectButton).setOnClickListener(v -> viewModel.connect());
+
+    Toast.makeText(this, BuildConfig.GOOGLE_MAPS_API_KEY, Toast.LENGTH_SHORT).show();
   }
 
   /**
@@ -71,9 +77,13 @@ public class OrganizationActivity extends FragmentActivity implements OnMapReady
   public void onMapReady(GoogleMap googleMap) {
 >>>>>>> feat: implement connection to an organization
 
-    // Add a marker in Sydney and move the camera
-    LatLng sydney = new LatLng(-34, 151);
-    googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-    googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+    for (PolygonOptions polygonOptions : viewModel.getPolygons()) {
+      // TODO find a way to attach the actual Place object to the polygon in the tag (setTag()).
+      //      This way, we can use the tag for fast retrieval of the place info, and we can
+      //      display them in a dialog or something
+      Polygon polygon = googleMap.addPolygon(polygonOptions);
+    }
+
+    googleMap.moveCamera(CameraUpdateFactory.newLatLngBounds(viewModel.getBound(), 1000, 2000, 50));
   }
 }
