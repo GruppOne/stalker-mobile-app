@@ -6,12 +6,14 @@ import androidx.lifecycle.MutableLiveData;
 import com.auth0.android.jwt.JWT;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import lombok.Getter;
 import org.json.JSONException;
 import org.json.JSONObject;
 import tech.gruppone.stalker.app.business.Organization;
 import tech.gruppone.stalker.app.business.Point;
 import tech.gruppone.stalker.app.business.User;
+import tech.gruppone.stalker.app.utility.excpetions.OrganizationNotFoundException;
 
 public class CurrentSessionSingleton {
 
@@ -21,7 +23,8 @@ public class CurrentSessionSingleton {
 
   @Getter String jwt = "";
 
-  private MutableLiveData<List<Organization>> organizations = new MutableLiveData<>();
+  private MutableLiveData<List<Organization>> organizations =
+      new MutableLiveData<>(new ArrayList<>());
 
   private CurrentSessionSingleton() {}
 
@@ -73,8 +76,29 @@ public class CurrentSessionSingleton {
     return organizations;
   }
 
+  @NonNull
+  public Organization getOrganization(int organizationId) throws OrganizationNotFoundException {
+    for (Organization organization : Objects.requireNonNull(getOrganizations().getValue())) {
+      if (organization.getId() == organizationId) {
+        return organization;
+      }
+    }
+
+    throw new OrganizationNotFoundException("Missing organization with id: " + organizationId);
+  }
+
   public boolean zeroOrganizations() {
     return organizations.getValue() == null || organizations.getValue().isEmpty();
+  }
+
+  public void connectOrganization(int organizationId) {
+    for (Organization organization : Objects.requireNonNull(organizations.getValue())) {
+      if (organization.getId() == organizationId) {
+        organization.setConnected(true);
+
+        break;
+      }
+    }
   }
 
   @NonNull
