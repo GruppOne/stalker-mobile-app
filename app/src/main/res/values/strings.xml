@@ -1,10 +1,6 @@
 <resources>
   <string name="app_name">Stalker</string>
-<<<<<<< HEAD
-  <string name="homepageFirstText">We can protect you…</string>
-=======
-  <string name="homepageFirstText">We can protect you...</string>
->>>>>>> feat(style): add new colors and strings
+  <string name="homepageFirstText">Feel safe…</string>
   <string name="homepageSecondText">Wherever you are.</string>
   <string name="login">Login</string>
   <string name="signUp">Sign up</string>
@@ -22,6 +18,7 @@
   <string name="emptyPassword">Insert your password</string>
   <string name="invalidPassword">The password must be between 8 and 32 characters long, and must contain at least a lowercase letter, an uppercase letter, and a number</string>
   <string name="emptyField">Fill this field</string>
+  <string name="logoImageDescription">Picture of Stalker logo</string>
   <string name="organizations">Organizations</string>
   <string name="connected">Connected</string>
   <string name="report">Report</string>
