@@ -86,7 +86,9 @@ public class CurrentSessionSingleton {
       // so I silenced the linter warning
       //noinspection ConstantConditions
       for (Organization org : organizations.getValue()) {
-        ret.addAll(org.getInsidePlaces(point));
+        if (org.isConnected()) {
+          ret.addAll(org.getInsidePlaces(point));
+        }
       }
     }
     return ret;
