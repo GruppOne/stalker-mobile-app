@@ -26,7 +26,7 @@
         android:padding="8dp"
         android:orientation="vertical">
         <TextView
-          android:id="@+id/name"
+          android:id="@+id/organizationName"
           android:textIsSelectable="true"
           app:layout_constraintTop_toTopOf="parent"
           android:layout_width="match_parent"
@@ -36,7 +36,7 @@
           android:paddingBottom="10dp"
           android:layout_marginEnd="30dp"/>
         <TextView
-          android:id="@+id/privatePublicIcon"
+          android:id="@+id/organizationPrivatePublicIcon"
           android:textIsSelectable="false"
           app:layout_constraintTop_toTopOf="parent"
           app:layout_constraintRight_toRightOf="parent"
@@ -45,11 +45,11 @@
           android:layout_marginTop="8dp"
           />
         <TextView
-          android:id="@+id/description"
+          android:id="@+id/organizationDescription"
           android:textIsSelectable="true"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          app:layout_constraintTop_toBottomOf="@id/name"
+          app:layout_constraintTop_toBottomOf="@id/organizationName"
           app:layout_constraintLeft_toLeftOf="parent"
           android:textColor="@color/organizationDescription"
           android:textSize="16sp"
@@ -57,12 +57,13 @@
         <androidx.fragment.app.FragmentContainerView
           xmlns:map="http://schemas.android.com/apk/res-auto"
           android:id="@+id/map"
-          app:layout_constraintTop_toBottomOf="@id/description"
+          app:layout_constraintTop_toBottomOf="@id/organizationDescription"
           android:layout_width="match_parent"
           android:layout_height="300dp"
           android:name="com.google.android.gms.maps.SupportMapFragment"
           tools:context=".view.OrganizationActivity"/>
         <com.google.android.material.button.MaterialButton
+          android:id="@+id/connectButton"
           app:layout_constraintTop_toBottomOf="@id/map"
           android:layout_width="match_parent"
           android:layout_height="60dp"
