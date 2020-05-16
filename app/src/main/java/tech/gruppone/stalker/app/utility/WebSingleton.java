@@ -137,4 +137,17 @@ public class WebSingleton {
     addToRequestQueue(
         new AuthenticatedRequest(Method.GET, fullUrl, null, successListener, errorListener));
   }
+
+  public void connect(
+      int userId,
+      int organizationId,
+      @Nullable Listener<JSONObject> successListener,
+      @Nullable ErrorListener errorListener) {
+    String fullUrl =
+        serverUrl + "/user/" + userId + "/organization/" + organizationId + "/connection";
+    JSONObject body = new JSONObject();
+
+    addToRequestQueue(
+        new AuthenticatedRequest(Method.POST, fullUrl, body, successListener, errorListener));
+  }
 }
