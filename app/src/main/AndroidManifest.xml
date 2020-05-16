@@ -27,13 +27,7 @@
       android:name=".view.OrganizationActivity">
     </activity>
     <activity android:name=".utility.StalkerActivity"/>
-    <activity android:name=".view.LoginActivity">
-      <intent-filter>
-        <action android:name="android.intent.action.MAIN"/>
-
-        <category android:name="android.intent.category.LAUNCHER"/>
-      </intent-filter>
-    </activity>
+    <activity android:name=".view.LoginActivity"/>
     <activity android:name=".view.SignUpActivity"/>
     <activity
       android:name=".view.MainPageActivity"
@@ -52,7 +46,12 @@
       </intent-filter>
             -->
     </activity>
-    <activity android:name=".view.MainActivity"/>
+    <activity android:name=".view.MainActivity">
+    <intent-filter>
+      <action android:name="android.intent.action.MAIN"/>
+      <category android:name="android.intent.category.LAUNCHER"/>
+    </intent-filter>
+    </activity>
 
     <service
       android:name=".utility.location.LocationNotifier"
