@@ -1,5 +1,6 @@
 package tech.gruppone.stalker.app.utility;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertSame;
 import static org.mockito.Mockito.times;
@@ -7,10 +8,17 @@ import static org.mockito.Mockito.verify;
 import static org.powermock.api.mockito.PowerMockito.method;
 import static org.powermock.api.mockito.PowerMockito.mock;
 import static org.powermock.api.mockito.PowerMockito.stub;
+import static org.powermock.api.mockito.PowerMockito.when;
+import static org.powermock.api.mockito.PowerMockito.whenNew;
 
+import android.content.Context;
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import java.util.ArrayList;
+import java.util.List;
+import org.json.JSONObject;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,7 +27,7 @@ import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 @RunWith(PowerMockRunner.class)
-@PrepareForTest({WebSingleton.class, HeadersAdders.class})
+@PrepareForTest({WebSingleton.class, App.class})
 public class WebSingletonTest {
 
   @Rule
@@ -45,7 +53,7 @@ public class WebSingletonTest {
     // Arrange
     final RequestQueue queue = mock(RequestQueue.class);
 
-    PowerMockito.stub(PowerMockito.method(WebSingleton.class, "getRequestQueue")).toReturn(queue);
+    stub(method(WebSingleton.class, "getRequestQueue")).toReturn(queue);
 
     final WebSingleton firstInstance = WebSingleton.getInstance();
     final WebSingleton secondInstance = WebSingleton.getInstance();
@@ -72,13 +80,14 @@ public class WebSingletonTest {
     verify(queue, times(1)).add(req);
   }
 
- /* @Test
-  public void getRequestQueue() throws Exception {
+  @Test
+  public void getRequestQueue() {
     //Arrange
-    final
-    whenNew(WebSingleton.class).withNoArguments().thenReturn()
+    PowerMockito.mockStatic(Volley.class);
     final RequestQueue queue = mock(RequestQueue.class);
-    stub(method(Volley.class, "newRequestQueue")).toReturn(queue);
+    final Context context = mock(Context.class);
+    stub(method(App.class, "getAppContext")).toReturn(context);
+    when(Volley.newRequestQueue(context)).thenReturn(queue);
 
     final WebSingleton sut = WebSingleton.getInstance();
 
@@ -87,9 +96,9 @@ public class WebSingletonTest {
 
     //Assert
     assertEquals(result, queue);
-  }*/
+  }
 
-/*  @Test(expected=JSONException.class)
+  @Test
   public void locationUpdateInside() throws Exception {
     //Arrange
     final RequestQueue queue = mock(RequestQueue.class);
@@ -98,9 +107,6 @@ public class WebSingletonTest {
 
     stub(method(WebSingleton.class, "getRequestQueue")).toReturn(queue);
     stub(method(HeadersAdders.class, "buildObjReqWithHeaders")).toReturn(request);
-    //stub(method(JSONObject.class, "put")).toReturn(jsonObject);
-
-    when(jsonObject.put(anyString(), any(Object.class))).thenReturn(jsonObject);
     whenNew(JSONObject.class).withAnyArguments().thenReturn(jsonObject);
 
     final WebSingleton sut = WebSingleton.getInstance();
@@ -112,6 +118,6 @@ public class WebSingletonTest {
 
     //Assert
     verify(queue, times(1)).add(request);
-  }*/
+  }
 
 }
