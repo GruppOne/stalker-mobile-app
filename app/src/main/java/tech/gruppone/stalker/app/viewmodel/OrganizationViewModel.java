@@ -1,11 +1,13 @@
 package tech.gruppone.stalker.app.viewmodel;
 
+import android.graphics.Color;
 import androidx.lifecycle.ViewModel;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.PolygonOptions;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import tech.gruppone.stalker.app.business.Organization;
 import tech.gruppone.stalker.app.business.Place;
 import tech.gruppone.stalker.app.business.Point;
@@ -35,10 +37,12 @@ public class OrganizationViewModel extends ViewModel {
     List<PolygonOptions> polygonOptionsList = new ArrayList<>();
 
     for (Place place : organization.getPlaces()) {
+      int color = getRandomColor();
+      int transparentColor = Color.argb(50, Color.red(color), Color.green(color), Color.blue(color));
       PolygonOptions polygonOptions = new PolygonOptions();
 
       for (Point point : place.getPolyLine()) {
-        polygonOptions.add(new LatLng(point.getLatitude(), point.getLongitude()));
+        polygonOptions.add(new LatLng(point.getLatitude(), point.getLongitude())).strokeColor(color).fillColor(transparentColor);
       }
 
       polygonOptionsList.add(polygonOptions);
@@ -60,5 +64,10 @@ public class OrganizationViewModel extends ViewModel {
 
   public void retrieveOrganization(int organizationId) {
     organization = model.getOrganization(organizationId);
+  }
+
+  public int getRandomColor() {
+    Random rnd = new Random();
+    return Color.rgb(rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
   }
 }
