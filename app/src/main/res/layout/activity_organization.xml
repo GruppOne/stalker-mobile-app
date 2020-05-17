@@ -42,7 +42,6 @@
           app:layout_constraintRight_toRightOf="parent"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_marginTop="8dp"
           />
         <TextView
           android:id="@+id/organizationDescription"
@@ -59,7 +58,7 @@
           android:id="@+id/map"
           app:layout_constraintTop_toBottomOf="@id/organizationDescription"
           android:layout_width="match_parent"
-          android:layout_height="300dp"
+          android:layout_height="350dp"
           android:name="com.google.android.gms.maps.SupportMapFragment"
           tools:context=".view.OrganizationActivity"/>
         <com.google.android.material.button.MaterialButton
