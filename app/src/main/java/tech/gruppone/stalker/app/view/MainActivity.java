@@ -5,11 +5,9 @@ import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
 import tech.gruppone.stalker.app.R;
-import tech.gruppone.stalker.app.utility.StalkerActivity;
+import androidx.appcompat.app.AppCompatActivity;
 
-public class MainActivity extends StalkerActivity {
-
-  private Location currentLocation;
+public class SplashScreenActivity extends AppCompatActivity {
 
   @Override
   protected void onPause() {
@@ -20,14 +18,14 @@ public class MainActivity extends StalkerActivity {
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
+    setContentView(R.layout.activity_splashscreen);
 
     int secondsDelayed = 1;
     new Handler()
         .postDelayed(
             new Runnable() {
               public void run() {
-                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                startActivity(new Intent(SplashScreenActivity.this, LoginActivity.class));
                 finish();
               }
             },
