@@ -56,11 +56,11 @@ public class WebSingleton {
 
       SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssX", Locale.getDefault());
 
-      request.put("timestampMs", format.format(new Date()));
       request.put("userId", userId);
       request.put("anonymous", false);
       request.put("inside", true);
       request.put("placeIds", new JSONArray(places));
+      request.put("timestampMs", format.format(new Date()));
       addToRequestQueue(
           HeadersAdders.buildObjReqWithHeaders(Method.POST, fullUrl, request, null, null));
     } catch (JSONException ex) {
