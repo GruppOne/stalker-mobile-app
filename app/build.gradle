@@ -145,6 +145,8 @@ tasks.findByName('sonarqube').mustRunAfter('lint')
 tasks.findByName('sonarqube').mustRunAfter('jacocoTestReport')
 tasks.findByName('sonarqube').mustRunAfter('check')
 
+project.tasks["sonarqube"].dependsOn "check"
+
 // ===============================
 // = FORMATTING
 // ===============================
