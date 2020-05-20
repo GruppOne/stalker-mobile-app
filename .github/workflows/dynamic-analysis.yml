@@ -41,8 +41,8 @@ jobs:
             --warning-mode=all \
             --info \
             sonarqube \
-            -x :app:compileDebugAndroidTestJavaWithJavac \
-            -x :app:compileDebugUnitTestJavaWithJavac \
+#            -x :app:compileDebugAndroidTestJavaWithJavac \
+#            -x :app:compileDebugUnitTestJavaWithJavac \
             -Dsonar.login=${{ secrets.SONARCLOUD_LOGIN }} \
             -Dsonar.pullrequest.key=${{ github.event.number }} \
             -Dsonar.pullrequest.branch=${{ github.head_ref }}
