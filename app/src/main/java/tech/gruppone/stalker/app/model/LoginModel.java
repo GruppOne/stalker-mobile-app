@@ -9,6 +9,7 @@ import tech.gruppone.stalker.app.utility.WebSingleton;
 
 public class LoginModel {
 
+  @NonNull
   public LiveData<User> getUserLiveData() {
     return CurrentSessionSingleton.getInstance().getLoggedUser();
   }
