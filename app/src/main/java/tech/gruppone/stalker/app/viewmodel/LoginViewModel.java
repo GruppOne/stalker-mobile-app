@@ -13,6 +13,7 @@ public class LoginViewModel extends ViewModel {
 
   private LoginModel model = new LoginModel();
 
+  @NonNull
   public LiveData<User> getUserLiveData() {
     return model.getUserLiveData();
   }
