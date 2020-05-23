@@ -63,7 +63,7 @@ def coverageSourceDirs = [
      *   - gradle createOfflineInstrTestCoverageReport //To generate *.exec file from offline instrumented class
      *   - gradle jacocoTestReport //To generate html report from newly created *.exec task
      */
-task jacocoTestReport(dependsOn: ['instrument', 'testDebugUnitTest']) {
+task jacocoTestReport(dependsOn: ['instrument', 'testDebugUnitTest','connectedDebugAndroidTest']) {
   doLast {
     ant.taskdef(name: 'report',
       classname: 'org.jacoco.ant.ReportTask',
@@ -74,6 +74,7 @@ task jacocoTestReport(dependsOn: ['instrument', 'testDebugUnitTest']) {
     ant.report() {
       executiondata {
         ant.file(file: "$buildDir.path/jacoco/testDebugUnitTest.exec")
+        ant.file(file: "$buildDir.path/outputs/code_coverage/debugAndroidTest/connected/CPH1917 - 9-coverage.ec")
       }
       structure(name: 'Example') {
         classfiles {
