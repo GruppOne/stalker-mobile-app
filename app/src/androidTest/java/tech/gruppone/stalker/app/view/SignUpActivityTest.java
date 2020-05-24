@@ -1,8 +1,6 @@
 package tech.gruppone.stalker.app.view;
 
-import static androidx.test.espresso.Espresso.pressBack;
 import static org.junit.Assert.*;
-
 
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.rule.ActivityTestRule;
@@ -11,13 +9,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(AndroidJUnit4.class)
-public class LoginActivityTest {
+public class SignUpActivityTest {
 
   @Rule
-  public ActivityTestRule<LoginActivity> activityRule = new ActivityTestRule<>(LoginActivity.class, true, true);
+  public ActivityTestRule<SignUpActivity> activityRule = new ActivityTestRule<>(SignUpActivity.class, true, true);
 
   @Test
-  public void onPause() {
-    assertTrue(true);
-  }
+  public void onPause() {}
+
+  @Test
+  public void onCreate() {}
 }
