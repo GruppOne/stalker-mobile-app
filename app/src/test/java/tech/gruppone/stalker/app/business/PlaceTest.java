@@ -1,5 +1,8 @@
 package tech.gruppone.stalker.app.business;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.util.ArrayList;
 import java.util.List;
 import org.json.JSONArray;
@@ -81,22 +84,22 @@ public class PlaceTest {
     boolean inside = sut.isInside(point);
 
     // Assert
-    Assert.assertTrue(inside);
+    assertTrue(inside);
   }
 
   @Test
   public void isInside_insidePoint() {
     // Arrange
-    final List<Pair<Double, Double>> pairList = new ArrayList<>();
-    pairList.add(new Pair<>(0.0, 0.0));
-    pairList.add(new Pair<>(1.0, 0.0));
-    pairList.add(new Pair<>(1.0, 1.0));
-    pairList.add(new Pair<>(0.0, 1.0));
+    final List<Point> pairList = new ArrayList<>();
+    pairList.add(Point.buildFromDegrees(45.411222, 11.887321));
+    pairList.add(Point.buildFromDegrees(45.411113, 11.887784));
+    pairList.add(Point.buildFromDegrees(45.411442, 11.887945));
+    pairList.add(Point.buildFromDegrees(45.411554, 11.887474));
 
-    final Place instance = new Place(pairList);
+    final Place instance = new Place(1, pairList);
 
     // Act
-    final boolean isInside = instance.isInside(new Pair<>(0.5, 0.5));
+    final boolean isInside = instance.isInside(Point.buildFromDegrees(45.411329, 11.887631));
 
     // Assert
     assertTrue(isInside);
@@ -105,16 +108,16 @@ public class PlaceTest {
   @Test
   public void isInside_outsidePoint() {
     // Arrange
-    final List<Pair<Double, Double>> pairList = new ArrayList<>();
-    pairList.add(new Pair<>(0.0, 0.0));
-    pairList.add(new Pair<>(1.0, 0.0));
-    pairList.add(new Pair<>(1.0, 1.0));
-    pairList.add(new Pair<>(0.0, 1.0));
+    final List<Point> pairList = new ArrayList<>();
+    pairList.add(Point.buildFromDegrees(45.411222, 11.887321));
+    pairList.add(Point.buildFromDegrees(45.411113, 11.887784));
+    pairList.add(Point.buildFromDegrees(45.411442, 11.887945));
+    pairList.add(Point.buildFromDegrees(45.411554, 11.887474));
 
-    final Place instance = new Place(pairList);
+    final Place instance = new Place(1, pairList);
 
     // Act
-    final boolean isInside = instance.isInside(new Pair<>(5.0, 5.0));
+    final boolean isInside = instance.isInside(Point.buildFromDegrees(45.411463, 11.886950));
 
     // Assert
     assertFalse(isInside);
@@ -123,18 +126,18 @@ public class PlaceTest {
   @Test
   public void isInside_borderPoint() {
     // Arrange
-    final List<Pair<Double, Double>> pairList = new ArrayList<>();
-    pairList.add(new Pair<>(0.0, 0.0));
-    pairList.add(new Pair<>(1.0, 0.0));
-    pairList.add(new Pair<>(1.0, 1.0));
-    pairList.add(new Pair<>(0.0, 1.0));
+    final List<Point> pairList = new ArrayList<>();
+    pairList.add(Point.buildFromDegrees(45.411222, 11.887321));
+    pairList.add(Point.buildFromDegrees(45.411113, 11.887784));
+    pairList.add(Point.buildFromDegrees(45.411442, 11.887945));
+    pairList.add(Point.buildFromDegrees(45.411554, 11.887474));
 
-    final Place instance = new Place(pairList);
+    final Place instance = new Place(1, pairList);
 
     // Act
-    final boolean isInside = instance.isInside(new Pair<>(0.0, 0.0));
+    final boolean isInside = instance.isInside(Point.buildFromDegrees(45.411554, 11.887474));
 
     // Assert
-    assertFalse(isInside);
+    assertTrue(isInside);
   }
 }
