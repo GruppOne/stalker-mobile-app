@@ -7,4 +7,7 @@
     <ignore path="*/Display.java"/>
     <ignore path="*/MainActivity.java"/>
   </issue>
+  <issue id="UnusedResources">
+    <ignore path="*/res/*"/>
+  </issue>
 </lint>
