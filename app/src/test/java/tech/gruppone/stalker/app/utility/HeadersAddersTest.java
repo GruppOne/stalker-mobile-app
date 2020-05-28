@@ -4,9 +4,7 @@ import static org.junit.Assert.*;
 
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.JsonRequest;
 import java.util.Map;
-import org.json.JSONObject;
 import org.junit.Test;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 
@@ -15,34 +13,34 @@ public class HeadersAddersTest {
 
   @Test
   public void getHeaders() {
-    //Arrange
+    // Arrange
 
-    //Act
+    // Act
     Map<String, String> result = HeadersAdders.getHeaders();
 
-    //Assert
+    // Assert
     assertNotNull(result);
   }
 
   @Test
   public void buildArrReqWithHeaders() {
-    //Arrange
+    // Arrange
 
-    //Act
+    // Act
     JsonArrayRequest result = HeadersAdders.buildArrReqWithHeaders(1, "test", null, null, null);
 
-    //Assert
+    // Assert
     assertNotNull(result);
   }
 
   @Test
   public void buildObjReqWithHeaders() {
-    //Arrange
+    // Arrange
 
-    //Act
+    // Act
     JsonObjectRequest result = HeadersAdders.buildObjReqWithHeaders(1, "test", null, null, null);
 
-    //Assert
+    // Assert
     assertNotNull(result);
   }
 }

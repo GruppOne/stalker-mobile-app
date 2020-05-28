@@ -25,8 +25,7 @@ import org.powermock.modules.junit4.PowerMockRunner;
 @PrepareForTest({WebSingleton.class, HeadersAdders.class})
 public class WebSingletonTest {
 
-  @Rule
-  InstantTaskExecutorRule taskExecutorRule = new InstantTaskExecutorRule();
+  @Rule InstantTaskExecutorRule taskExecutorRule = new InstantTaskExecutorRule();
 
   @Test
   public void getInstance_notNull() {
@@ -75,27 +74,27 @@ public class WebSingletonTest {
     verify(queue, times(1)).add(req);
   }
 
-//  @Test
-//  public void getRequestQueue() {
-//    //Arrange
-//    PowerMockito.mockStatic(Volley.class);
-//    final RequestQueue queue = mock(RequestQueue.class);
-//    final Context context = mock(Context.class);
-//    stub(method(App.class, "getAppContext")).toReturn(context);
-//    when(Volley.newRequestQueue(context)).thenReturn(queue);
-//
-//    final WebSingleton sut = WebSingleton.getInstance();
-//
-//    //Act
-//    final RequestQueue result = sut.getRequestQueue();
-//
-//    //Assert
-//    assertEquals(result, queue);
-//  }
+  //  @Test
+  //  public void getRequestQueue() {
+  //    //Arrange
+  //    PowerMockito.mockStatic(Volley.class);
+  //    final RequestQueue queue = mock(RequestQueue.class);
+  //    final Context context = mock(Context.class);
+  //    stub(method(App.class, "getAppContext")).toReturn(context);
+  //    when(Volley.newRequestQueue(context)).thenReturn(queue);
+  //
+  //    final WebSingleton sut = WebSingleton.getInstance();
+  //
+  //    //Act
+  //    final RequestQueue result = sut.getRequestQueue();
+  //
+  //    //Assert
+  //    assertEquals(result, queue);
+  //  }
 
   @Test
   public void locationUpdateInside() throws Exception {
-    //Arrange
+    // Arrange
     final RequestQueue queue = mock(RequestQueue.class);
     final JsonObjectRequest request = mock(JsonObjectRequest.class);
     final JSONObject jsonObject = mock(JSONObject.class);
@@ -108,11 +107,10 @@ public class WebSingletonTest {
     final List<Integer> intList = new ArrayList<>();
     intList.add(1);
 
-    //Act
+    // Act
     sut.locationUpdateInside(1, intList);
 
-    //Assert
+    // Assert
     verify(queue, times(1)).add(request);
   }
-
 }
