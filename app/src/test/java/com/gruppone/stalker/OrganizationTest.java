@@ -12,7 +12,7 @@ public class OrganizationTest {
 
   @Test
   public void isInside_insidePoint() {
-    //Arrange
+    // Arrange
     final List<Pair<Double, Double>> pairList = new ArrayList<>();
     pairList.add(new Pair<>(0.0, 0.0));
     pairList.add(new Pair<>(1.0, 0.0));
@@ -24,16 +24,16 @@ public class OrganizationTest {
 
     final Organization instance = new Organization(1, "test", placeList);
 
-    //Act
+    // Act
     final boolean isInside = instance.isInside(new Pair<>(0.5, 0.5));
 
-    //Assert
+    // Assert
     assertTrue(isInside);
   }
 
   @Test
   public void isInside_borderPoint() {
-    //Arrange
+    // Arrange
     final List<Pair<Double, Double>> pairList = new ArrayList<>();
     pairList.add(new Pair<>(0.0, 0.0));
     pairList.add(new Pair<>(1.0, 0.0));
@@ -45,16 +45,16 @@ public class OrganizationTest {
 
     final Organization instance = new Organization(1, "test", placeList);
 
-    //Act
+    // Act
     Boolean isInside = instance.isInside(new Pair<>(0.0, 1.0));
 
-    //Assert
+    // Assert
     assertFalse(isInside);
   }
 
   @Test
   public void isInside_outsidePoint() {
-    //Arrange
+    // Arrange
     final List<Pair<Double, Double>> pairList = new ArrayList<>();
     pairList.add(new Pair<>(0.0, 0.0));
     pairList.add(new Pair<>(1.0, 0.0));
@@ -66,10 +66,10 @@ public class OrganizationTest {
 
     final Organization instance = new Organization(1, "test", placeList);
 
-    //Act
+    // Act
     final boolean isInside = instance.isInside(new Pair<>(5.0, 5.0));
 
-    //Assert
+    // Assert
     assertFalse(isInside);
   }
 }

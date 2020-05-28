@@ -5,16 +5,15 @@ import org.junit.Test;
 public class GooglePositionInterfaceTest {
 
   @Test
-  public void startLocationUpdates() {
-  }
+  public void startLocationUpdates() {}
 
   @Test
   public void checkPermissions() {
-    //Arrange
+    // Arrange
 
-    //Act
+    // Act
 
-    //Assert
+    // Assert
 
   }
 }

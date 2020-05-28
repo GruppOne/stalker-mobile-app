@@ -20,77 +20,75 @@ import org.mockito.Mockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
-
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({CurrentSessionSingleton.class, Organization.class, LiveData.class})
 public class CurrentSessionSingletonTest {
 
-  @Rule
-  InstantTaskExecutorRule taskExecutorRule = new InstantTaskExecutorRule();
+  @Rule InstantTaskExecutorRule taskExecutorRule = new InstantTaskExecutorRule();
 
   @Test
   public void setOrganizationList() {
-    //Arrange
+    // Arrange
     final Organization organization = mock(Organization.class);
     final List<Organization> organizationList = new ArrayList<>();
     organizationList.add(organization);
     final CurrentSessionSingleton sut = CurrentSessionSingleton.getInstance();
 
-    //Act
+    // Act
     sut.setOrganizationList(organizationList);
 
-    //Assert
+    // Assert
     assertNotEquals(sut.getOrganizations(), organizationList);
   }
 
   @Test
   public void zeroOrganizations_true() {
-    //Arrange
+    // Arrange
     final CurrentSessionSingleton sut = CurrentSessionSingleton.getInstance();
     final List<Organization> organizationList = new ArrayList<>();
 
-    //Act
+    // Act
     sut.setOrganizationList(organizationList);
 
-    //Assert
+    // Assert
     assertTrue(sut.zeroOrganizations());
   }
 
   @Test
   public void zeroOrganizations_false() {
-    //Arrange
+    // Arrange
     final CurrentSessionSingleton sut = CurrentSessionSingleton.getInstance();
     final Organization organization = mock(Organization.class);
     final List<Organization> organizationList = new ArrayList<>();
     organizationList.add(organization);
 
-    //Act
+    // Act
     sut.setOrganizationList(organizationList);
 
-    //Assert
+    // Assert
     assertFalse(sut.zeroOrganizations());
   }
 
   @Test
   public void getInsidePlaces_EmptyList() {
-    //Arrange
+    // Arrange
     final CurrentSessionSingleton sut = CurrentSessionSingleton.getInstance();
-    final Point point = new Point(0,0);
+    final Point point = new Point(0, 0);
 
     stub(method(CurrentSessionSingleton.class, "zeroOrganizations")).toReturn(true);
 
-    //Act
+    // Act
     List<Integer> result = sut.getInsidePlaces(point);
 
-    //Assert
+    // Assert
     assertTrue(result.isEmpty());
   }
 
   @Test
   public void getInsidePlaces_NotEmptyList() {
-    //Arrange
+    // Arrange
     final CurrentSessionSingleton sut = CurrentSessionSingleton.getInstance();
-    final Point point = new Point(0,0);
+    final Point point = new Point(0, 0);
     final Organization organization = mock(Organization.class);
     final List<Organization> organizationList = new ArrayList<>();
     organizationList.add(organization);
@@ -101,10 +99,10 @@ public class CurrentSessionSingletonTest {
     stub(method(LiveData.class, "getValue")).toReturn(organizationList);
     Mockito.when(organization.getInsidePlaces(point)).thenReturn(intList);
 
-    //Act
+    // Act
     List<Integer> result = sut.getInsidePlaces(point);
 
-    //Assert
+    // Assert
     assertFalse(result.isEmpty());
     assertEquals(1, result.size());
   }

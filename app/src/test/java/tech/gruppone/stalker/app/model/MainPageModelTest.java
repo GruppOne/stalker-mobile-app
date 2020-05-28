@@ -20,7 +20,7 @@ import tech.gruppone.stalker.app.business.Organization;
 @PrepareForTest({CurrentSessionSingleton.class})
 public class MainPageModelTest {
 
-/*  @Test
+  /*  @Test
   public void loadOrganizations() {
     //Arrange
     final MainPageModel sut = new MainPageModel();
@@ -34,17 +34,17 @@ public class MainPageModelTest {
 
   @Test
   public void getOrgsLiveData() {
-    //Arrange
+    // Arrange
     final MainPageModel sut = new MainPageModel();
     final CurrentSessionSingleton currentSessionSingleton = mock(CurrentSessionSingleton.class);
     final LiveData<List<Organization>> orgData = new MutableLiveData<>();
     stub(method(CurrentSessionSingleton.class, "getInstance")).toReturn(currentSessionSingleton);
     when(currentSessionSingleton.getOrganizations()).thenReturn(orgData);
 
-    //Act
+    // Act
     final LiveData<List<Organization>> result = sut.getOrgsLiveData();
 
-    //Assert
+    // Assert
     Assert.assertNotEquals(null, result);
   }
 }

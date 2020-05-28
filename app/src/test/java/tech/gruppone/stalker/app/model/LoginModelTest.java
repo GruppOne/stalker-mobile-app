@@ -8,15 +8,15 @@ public class LoginModelTest {
 
   @Test
   public void login() {
-    //Arrange
+    // Arrange
     final LoginModel sut = new LoginModel();
     final String username = "test";
     final String password = "test";
 
-    //Act
+    // Act
     final boolean result = sut.login(username, password);
 
-    //Assert
+    // Assert
     assertTrue(result);
   }
 }
