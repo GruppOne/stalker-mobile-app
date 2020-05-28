@@ -4,7 +4,6 @@ import static org.junit.Assert.*;
 
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.rule.ActivityTestRule;
-import com.android.dx.command.Main;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,7 +12,8 @@ import org.junit.runner.RunWith;
 public class MainPageActivityTest {
 
   @Rule
-  public ActivityTestRule<MainPageActivity> activityRule = new ActivityTestRule<>(MainPageActivity.class, true, true);
+  public ActivityTestRule<MainPageActivity> activityRule =
+      new ActivityTestRule<>(MainPageActivity.class, true, true);
 
   @Test
   public void onCreate() {}

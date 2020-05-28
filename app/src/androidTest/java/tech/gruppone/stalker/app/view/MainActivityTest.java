@@ -12,7 +12,8 @@ import org.junit.runner.RunWith;
 public class MainActivityTest {
 
   @Rule
-  public ActivityTestRule<MainActivity> activityRule = new ActivityTestRule<>(MainActivity.class, true, true);
+  public ActivityTestRule<MainActivity> activityRule =
+      new ActivityTestRule<>(MainActivity.class, true, true);
 
   @Test
   public void onCreate() {}

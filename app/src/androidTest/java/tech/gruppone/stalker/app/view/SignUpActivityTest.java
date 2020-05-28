@@ -12,7 +12,8 @@ import org.junit.runner.RunWith;
 public class SignUpActivityTest {
 
   @Rule
-  public ActivityTestRule<SignUpActivity> activityRule = new ActivityTestRule<>(SignUpActivity.class, true, true);
+  public ActivityTestRule<SignUpActivity> activityRule =
+      new ActivityTestRule<>(SignUpActivity.class, true, true);
 
   @Test
   public void onPause() {}
