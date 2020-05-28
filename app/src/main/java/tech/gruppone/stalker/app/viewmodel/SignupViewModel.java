@@ -11,6 +11,23 @@ import tech.gruppone.stalker.app.model.SignupModel;
 public class SignupViewModel extends ViewModel {
   SignupModel model = new SignupModel();
 
+  public boolean invalidEmail(@NonNull String email) {
+    // maybe this regex could be more restrictive
+    return !email.matches("^[a-zA-Z0-9_!#$%&Æ*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$");
+  }
+
+  public boolean invalidPassword(@NonNull String password) {
+    // between 8 and 32 characters
+    return password.length() <= 8
+        || password.length() >= 32
+        // contains at least a lowercase letter
+        || password.equals(password.toUpperCase())
+        // contains at least an uppercase letter
+        || password.equals(password.toLowerCase())
+        // contains at least a number
+        || !password.matches(".*\\d.*");
+  }
+
   public void signup(
       @NonNull String email,
       @NonNull String password,
