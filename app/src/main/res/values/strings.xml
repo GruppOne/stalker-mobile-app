@@ -12,4 +12,9 @@
   <string name="goToSignUp">Not yet registered? Sign up</string>
   <string name="goToLogin">Already have an account? Login</string>
   <string name="backgroundImageDescription">Picture of a walking crowd</string>
+  <string name="emptyEmail">Insert an email</string>
+  <string name="invalidEmail">Invalid email</string>
+  <string name="emptyPassword">Insert your password</string>
+  <string name="invalidPassword">The password must be between 8 and 32 characters long, and must contain at least a lowercase letter, an uppercase letter, and a number</string>
+  <string name="emptyField">Fill this field</string>
 </resources>

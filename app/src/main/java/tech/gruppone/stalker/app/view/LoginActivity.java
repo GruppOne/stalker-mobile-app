@@ -1,7 +1,12 @@
 package tech.gruppone.stalker.app.view;
 
+import static java.util.Objects.requireNonNull;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.widget.EditText;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
 import com.google.android.material.textfield.TextInputLayout;
@@ -26,19 +31,69 @@ public class LoginActivity extends StalkerActivity {
 
     viewModel = new ViewModelProvider(this).get(LoginViewModel.class);
 
+    TextInputLayout emailInsertLayout = findViewById(R.id.emailLoginEditText);
+    TextInputLayout passwordInsertLayout = findViewById(R.id.passwordLoginEditText);
+
+    EditText emailInsertEditText = requireNonNull(emailInsertLayout.getEditText());
+    EditText passwordInsertEditText = requireNonNull(passwordInsertLayout.getEditText());
+
+    emailInsertEditText.addTextChangedListener(
+        new TextWatcher() {
+          @Override
+          public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+          @Override
+          public void onTextChanged(CharSequence s, int start, int before, int count) {
+            emailInsertLayout.setError(null);
+            emailInsertLayout.setErrorEnabled(false);
+          }
+
+          @Override
+          public void afterTextChanged(Editable s) {}
+        });
+
+    passwordInsertEditText.addTextChangedListener(
+        new TextWatcher() {
+          @Override
+          public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+          @Override
+          public void onTextChanged(CharSequence s, int start, int before, int count) {
+            passwordInsertLayout.setError(null);
+            passwordInsertLayout.setErrorEnabled(false);
+          }
+
+          @Override
+          public void afterTextChanged(Editable s) {}
+        });
+
     findViewById(R.id.loginButton)
         .setOnClickListener(
             v -> {
-              //noinspection ConstantConditions
-              viewModel.login(
-                  ((TextInputLayout) findViewById(R.id.emailLoginEditText))
-                      .getEditText()
-                      .getText()
-                      .toString(),
-                  ((TextInputLayout) findViewById(R.id.passwordLoginEditText))
-                      .getEditText()
-                      .getText()
-                      .toString());
+              String email = emailInsertEditText.getText().toString();
+              String password = passwordInsertEditText.getText().toString();
+
+              boolean ok = true;
+
+              if (email.isEmpty()) {
+                emailInsertLayout.setErrorEnabled(true);
+                emailInsertLayout.setError(getString(R.string.emptyEmail));
+                ok = false;
+              } else if (!viewModel.validateEmail(email)) {
+                emailInsertLayout.setErrorEnabled(true);
+                emailInsertLayout.setError(getString(R.string.invalidEmail));
+                ok = false;
+              }
+
+              if (password.isEmpty()) {
+                passwordInsertLayout.setErrorEnabled(true);
+                passwordInsertLayout.setError(getString(R.string.emptyPassword));
+                ok = false;
+              }
+
+              if (ok) {
+                viewModel.login(email, password);
+              }
             });
 
     viewModel
