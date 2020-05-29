@@ -28,7 +28,7 @@ public class Place {
   public Place(@NonNull JSONObject jsonPlace) {
     try {
       id = jsonPlace.getInt("id");
-      JSONObject data=jsonPlace.getJSONObject("data");
+      JSONObject data = jsonPlace.getJSONObject("data");
 
       polyLine = new ArrayList<>();
 
