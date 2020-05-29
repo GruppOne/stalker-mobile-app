@@ -79,7 +79,7 @@ public class LoginActivity extends StalkerActivity {
                 emailInsertLayout.setErrorEnabled(true);
                 emailInsertLayout.setError(getString(R.string.emptyEmail));
                 ok = false;
-              } else if (!viewModel.validateEmail(email)) {
+              } else if (viewModel.invalidEmail(email)) {
                 emailInsertLayout.setErrorEnabled(true);
                 emailInsertLayout.setError(getString(R.string.invalidEmail));
                 ok = false;
