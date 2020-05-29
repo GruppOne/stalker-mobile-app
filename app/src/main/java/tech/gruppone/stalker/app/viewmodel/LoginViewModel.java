@@ -18,9 +18,9 @@ public class LoginViewModel extends ViewModel {
     return model.getUserLiveData();
   }
 
-  public boolean validateEmail(@NonNull String email) {
+  public boolean invalidEmail(@NonNull String email) {
     // maybe this regex could be more restrictive
-    return email.matches("^[a-zA-Z0-9_!#$%&Æ*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$");
+    return !email.matches("^[a-zA-Z0-9_!#$%&Æ*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$");
   }
 
   public void login(@NonNull String email, @NonNull String password) {
