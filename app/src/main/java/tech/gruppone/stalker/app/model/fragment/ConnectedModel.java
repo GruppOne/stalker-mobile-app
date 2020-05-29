@@ -1,5 +1,6 @@
 package tech.gruppone.stalker.app.model.fragment;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Transformations;
 import java.util.ArrayList;
@@ -8,6 +9,8 @@ import tech.gruppone.stalker.app.business.Organization;
 import tech.gruppone.stalker.app.utility.CurrentSessionSingleton;
 
 public class ConnectedModel {
+
+  @NonNull
   public LiveData<List<Organization>> getConnectedOrganizations() {
     return Transformations.map(
         CurrentSessionSingleton.getInstance().getOrganizations(),

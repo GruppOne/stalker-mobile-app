@@ -9,7 +9,8 @@
   >
   <TextView
     android:id="@+id/organizationName"
-    app:layout_constraintBottom_toTopOf="@id/organizationDescription"
+    android:textIsSelectable="false"
+    app:layout_constraintTop_toTopOf="parent"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:textSize="22sp"
@@ -20,6 +21,7 @@
     />
   <TextView
     android:id="@+id/organizationDescription"
+    android:textIsSelectable="false"
     app:layout_constraintTop_toBottomOf="@id/organizationName"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -31,6 +33,7 @@
     />
   <TextView
     android:id="@+id/privatePublicIcon"
+    android:textIsSelectable="false"
     app:layout_constraintTop_toTopOf="@id/organizationName"
     app:layout_constraintLeft_toRightOf="@id/organizationName"
     android:layout_width="wrap_content"

@@ -1,6 +1,8 @@
 package tech.gruppone.stalker.app.view;
 
 import android.os.Bundle;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -15,7 +17,7 @@ public class OrganizationActivity extends FragmentActivity implements OnMapReady
   private GoogleMap mMap;
 
   @Override
-  protected void onCreate(Bundle savedInstanceState) {
+  protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_organization);
     // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -33,7 +35,7 @@ public class OrganizationActivity extends FragmentActivity implements OnMapReady
    * app.
    */
   @Override
-  public void onMapReady(GoogleMap googleMap) {
+  public void onMapReady(@NonNull GoogleMap googleMap) {
     mMap = googleMap;
 
     // Add a marker in Sydney and move the camera
