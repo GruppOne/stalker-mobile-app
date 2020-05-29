@@ -42,8 +42,11 @@ public class OrganizationsFragment extends Fragment {
   }
 
   @Override
+  @NonNull
   public View onCreateView(
-      @NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+      @NonNull LayoutInflater inflater,
+      @Nullable ViewGroup container,
+      @Nullable Bundle savedInstanceState) {
     view = inflater.inflate(R.layout.organizations_fragment, container, false);
 
     view.findViewById(R.id.reloadButton)

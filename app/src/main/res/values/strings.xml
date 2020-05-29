@@ -1,6 +1,6 @@
 <resources>
   <string name="app_name">Stalker</string>
-  <string name="homepageFirstText">We can protect you...</string>
+  <string name="homepageFirstText">We can protect you…</string>
   <string name="homepageSecondText">Wherever you are.</string>
   <string name="login">Login</string>
   <string name="signUp">Sign up</string>

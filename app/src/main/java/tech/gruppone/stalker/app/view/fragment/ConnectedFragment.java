@@ -16,10 +16,12 @@ import tech.gruppone.stalker.app.viewmodel.fragment.ConnectedViewModel;
 
 public class ConnectedFragment extends Fragment {
 
+  @SuppressWarnings("FieldCanBeLocal")
   private ConnectedViewModel viewModel;
   private View view;
 
   @Override
+  @NonNull
   public View onCreateView(
       @NonNull LayoutInflater inflater,
       @Nullable ViewGroup container,
