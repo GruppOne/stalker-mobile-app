@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
+import java.util.Locale;
 import tech.gruppone.stalker.app.business.User;
 import tech.gruppone.stalker.app.model.SignupModel;
 
@@ -21,9 +22,9 @@ public class SignupViewModel extends ViewModel {
     return password.length() <= 8
         || password.length() >= 32
         // contains at least a lowercase letter
-        || password.equals(password.toUpperCase())
+        || password.equals(password.toUpperCase(Locale.getDefault()))
         // contains at least an uppercase letter
-        || password.equals(password.toLowerCase())
+        || password.equals(password.toLowerCase(Locale.getDefault()))
         // contains at least a number
         || !password.matches(".*\\d.*");
   }
