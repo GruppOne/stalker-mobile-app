@@ -1,6 +1,5 @@
 package tech.gruppone.stalker.app.viewmodel;
 
-import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
@@ -10,7 +9,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import tech.gruppone.stalker.app.business.User;
 import tech.gruppone.stalker.app.model.LoginModel;
-import tech.gruppone.stalker.app.utility.App;
 
 public class LoginViewModel extends ViewModel {
 

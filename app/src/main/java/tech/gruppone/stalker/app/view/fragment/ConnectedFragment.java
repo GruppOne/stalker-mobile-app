@@ -18,6 +18,7 @@ public class ConnectedFragment extends Fragment {
 
   @SuppressWarnings("FieldCanBeLocal")
   private ConnectedViewModel viewModel;
+
   private View view;
 
   @Override
