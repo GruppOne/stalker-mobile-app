@@ -1,6 +1,6 @@
 package tech.gruppone.stalker.app.view;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.rule.ActivityTestRule;
