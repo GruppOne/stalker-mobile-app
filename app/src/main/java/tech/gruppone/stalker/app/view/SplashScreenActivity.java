@@ -1,11 +1,10 @@
 package tech.gruppone.stalker.app.view;
 
 import android.content.Intent;
-import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
-import tech.gruppone.stalker.app.R;
 import androidx.appcompat.app.AppCompatActivity;
+import tech.gruppone.stalker.app.R;
 
 public class SplashScreenActivity extends AppCompatActivity {
 

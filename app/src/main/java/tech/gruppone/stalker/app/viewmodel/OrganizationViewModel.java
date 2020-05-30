@@ -38,11 +38,15 @@ public class OrganizationViewModel extends ViewModel {
 
     for (Place place : organization.getPlaces()) {
       int color = getRandomColor();
-      int transparentColor = Color.argb(50, Color.red(color), Color.green(color), Color.blue(color));
+      int transparentColor =
+          Color.argb(50, Color.red(color), Color.green(color), Color.blue(color));
       PolygonOptions polygonOptions = new PolygonOptions();
 
       for (Point point : place.getPolyLine()) {
-        polygonOptions.add(new LatLng(point.getLatitude(), point.getLongitude())).strokeColor(color).fillColor(transparentColor);
+        polygonOptions
+            .add(new LatLng(point.getLatitude(), point.getLongitude()))
+            .strokeColor(color)
+            .fillColor(transparentColor);
       }
 
       polygonOptionsList.add(polygonOptions);

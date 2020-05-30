@@ -2,10 +2,9 @@ package tech.gruppone.stalker.app.view;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import android.widget.TextView;
-import android.widget.Toast;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -14,10 +13,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.Polygon;
 import com.google.android.gms.maps.model.PolygonOptions;
-import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.LatLng;
 import java.util.Objects;
-import tech.gruppone.stalker.app.BuildConfig;
 import tech.gruppone.stalker.app.R;
 import tech.gruppone.stalker.app.viewmodel.OrganizationViewModel;
 
