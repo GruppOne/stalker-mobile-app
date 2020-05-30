@@ -1,5 +1,6 @@
 package tech.gruppone.stalker.app.model;
 
+import androidx.annotation.NonNull;
 import java.util.Objects;
 import tech.gruppone.stalker.app.business.Organization;
 import tech.gruppone.stalker.app.utility.CurrentSessionSingleton;
@@ -8,6 +9,7 @@ import tech.gruppone.stalker.app.utility.excpetions.OrganizationNotFoundExceptio
 
 public class OrganizationModel {
 
+  @NonNull
   public Organization getOrganization(int organizationId) {
     try {
       return CurrentSessionSingleton.getInstance().getOrganization(organizationId);

@@ -1,6 +1,7 @@
 package tech.gruppone.stalker.app.viewmodel;
 
 import android.graphics.Color;
+import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
@@ -21,10 +22,12 @@ public class OrganizationViewModel extends ViewModel {
     model.connect(organization.getId());
   }
 
+  @NonNull
   public String getName() {
     return organization.getName();
   }
 
+  @NonNull
   public String getDescription() {
     return organization.getDescription();
   }
@@ -33,6 +36,7 @@ public class OrganizationViewModel extends ViewModel {
     return organization.isPrivate();
   }
 
+  @NonNull
   public List<PolygonOptions> getPolygons() {
     List<PolygonOptions> polygonOptionsList = new ArrayList<>();
 
@@ -55,6 +59,7 @@ public class OrganizationViewModel extends ViewModel {
     return polygonOptionsList;
   }
 
+  @NonNull
   public LatLngBounds getBound() {
     LatLngBounds.Builder builder = LatLngBounds.builder();
 
