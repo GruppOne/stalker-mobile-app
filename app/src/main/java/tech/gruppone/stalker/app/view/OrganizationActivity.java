@@ -68,12 +68,7 @@ public class OrganizationActivity extends FragmentActivity implements OnMapReady
    * app.
    */
   @Override
-<<<<<<< HEAD
   public void onMapReady(@NonNull GoogleMap googleMap) {
-    mMap = googleMap;
-=======
-  public void onMapReady(GoogleMap googleMap) {
->>>>>>> feat: implement connection to an organization
 
     for (PolygonOptions polygonOptions : viewModel.getPolygons()) {
       // TODO find a way to attach the actual Place object to the polygon in the tag (setTag()).
