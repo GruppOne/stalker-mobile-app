@@ -1,12 +1,16 @@
 package tech.gruppone.stalker.app.utility;
 
+import static java.util.Objects.requireNonNull;
+
+import android.annotation.SuppressLint;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import com.auth0.android.jwt.JWT;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
+import java.util.Map;
 import lombok.Getter;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -23,8 +27,9 @@ public class CurrentSessionSingleton {
 
   @Getter String jwt = "";
 
-  private MutableLiveData<List<Organization>> organizations =
-      new MutableLiveData<>(new ArrayList<>());
+  @SuppressLint("UseSparseArrays")
+  private MutableLiveData<Map<Integer, LiveData<Organization>>> organizations =
+      new MutableLiveData<>(new HashMap<>());
 
   private CurrentSessionSingleton() {}
 
@@ -68,53 +73,60 @@ public class CurrentSessionSingleton {
   }
 
   public void setOrganizationList(@NonNull List<Organization> orgList) {
-    organizations.postValue(orgList);
+    @SuppressLint("UseSparseArrays")
+    Map<Integer, LiveData<Organization>> map = new HashMap<>();
+
+    for (Organization organization : orgList) {
+      map.put(organization.getId(), new MutableLiveData<>(organization));
+    }
+
+    organizations.postValue(map);
   }
 
   @NonNull
-  public LiveData<List<Organization>> getOrganizations() {
+  public LiveData<Map<Integer, LiveData<Organization>>> getOrganizations() {
     return organizations;
   }
 
   @NonNull
-  public Organization getOrganization(int organizationId) throws OrganizationNotFoundException {
-    for (Organization organization : Objects.requireNonNull(getOrganizations().getValue())) {
-      if (organization.getId() == organizationId) {
-        return organization;
-      }
+  public LiveData<Organization> getOrganization(int organizationId)
+      throws OrganizationNotFoundException {
+    LiveData<Organization> organization =
+        requireNonNull(organizations.getValue()).get(organizationId);
+
+    if (organization == null) {
+      throw new OrganizationNotFoundException(
+          "There isn't an organization with the given id of " + organizationId);
     }
 
-    throw new OrganizationNotFoundException("Missing organization with id: " + organizationId);
+    return organization;
   }
 
   public boolean zeroOrganizations() {
-    return organizations.getValue() == null || organizations.getValue().isEmpty();
+    return requireNonNull(organizations.getValue()).isEmpty();
   }
 
-  public void connectOrganization(int organizationId) {
-    for (Organization organization : Objects.requireNonNull(organizations.getValue())) {
-      if (organization.getId() == organizationId) {
-        organization.setConnected(true);
+  public void connectOrganization(int organizationId) throws OrganizationNotFoundException {
+    // Necessary cast, since java generics are invariant
+    // We wouldn't need it if they could be covariant (in kotlin, for example)
+    MutableLiveData<Organization> organization =
+        (MutableLiveData<Organization>) getOrganization(organizationId);
 
-        break;
-      }
-    }
+    organization.postValue(requireNonNull(organization.getValue()).withConnected(true));
   }
 
   @NonNull
   public List<Integer> getInsidePlaces(@NonNull Point point) {
     List<Integer> ret = new ArrayList<>();
-    if (!zeroOrganizations()) {
-      // organizations.getValue() could be null, but the !zeroOrganizations() check ensures it's
-      // not,
-      // so I silenced the linter warning
-      //noinspection ConstantConditions
-      for (Organization org : organizations.getValue()) {
-        if (org.isConnected()) {
-          ret.addAll(org.getInsidePlaces(point));
-        }
+
+    for (LiveData<Organization> organizationLiveData :
+        requireNonNull(organizations.getValue()).values()) {
+      Organization org = requireNonNull(organizationLiveData.getValue());
+      if (org.isConnected()) {
+        ret.addAll(org.getInsidePlaces(point));
       }
     }
+
     return ret;
   }
 
