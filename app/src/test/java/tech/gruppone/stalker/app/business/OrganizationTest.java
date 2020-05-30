@@ -85,7 +85,7 @@ public class OrganizationTest {
   @Test
   public void getInsidePlaces() {
     // Arrange
-    Point point = new Point(0.5, 0.5);
+    Point point = Point.buildFromDegrees(40, 40);
     List<Place> places = new ArrayList<>();
     Place place1 = mock(Place.class);
     when(place1.isInside(point)).thenReturn(true);

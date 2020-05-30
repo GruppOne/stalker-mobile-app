@@ -1,4 +1,4 @@
-package tech.gruppone.stalker.app.business;
+package tech.gruppone.stalker.app.utility;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -19,6 +19,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
+import tech.gruppone.stalker.app.business.Organization;
+import tech.gruppone.stalker.app.business.Point;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({CurrentSessionSingleton.class, Organization.class, LiveData.class})
@@ -73,7 +75,7 @@ public class CurrentSessionSingletonTest {
   public void getInsidePlaces_EmptyList() {
     // Arrange
     final CurrentSessionSingleton sut = CurrentSessionSingleton.getInstance();
-    final Point point = new Point(0, 0);
+    final Point point = Point.buildFromDegrees(0, 0);
 
     stub(method(CurrentSessionSingleton.class, "zeroOrganizations")).toReturn(true);
 
@@ -88,7 +90,7 @@ public class CurrentSessionSingletonTest {
   public void getInsidePlaces_NotEmptyList() {
     // Arrange
     final CurrentSessionSingleton sut = CurrentSessionSingleton.getInstance();
-    final Point point = new Point(0, 0);
+    final Point point = Point.buildFromDegrees(0, 0);
     final Organization organization = mock(Organization.class);
     final List<Organization> organizationList = new ArrayList<>();
     organizationList.add(organization);

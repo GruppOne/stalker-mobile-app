@@ -68,26 +68,6 @@ public class PlaceTest {
   }
 
   @Test
-  public void isInside() {
-    // Arrange
-    List<Point> polyline = new ArrayList<>();
-    polyline.add(new Point(0, 0));
-    polyline.add(new Point(0, 1));
-    polyline.add(new Point(1, 1));
-    polyline.add(new Point(1, 0));
-
-    Point point = new Point(0.5, 0.5);
-
-    Place sut = new Place(1, polyline);
-
-    // Act
-    boolean inside = sut.isInside(point);
-
-    // Assert
-    assertTrue(inside);
-  }
-
-  @Test
   public void isInside_insidePoint() {
     // Arrange
     final List<Point> pairList = new ArrayList<>();

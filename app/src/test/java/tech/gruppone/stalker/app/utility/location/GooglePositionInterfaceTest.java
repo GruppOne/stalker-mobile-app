@@ -1,4 +1,4 @@
-package tech.gruppone.stalker.app.business.location;
+package tech.gruppone.stalker.app.utility.location;
 
 import org.junit.Test;
 
