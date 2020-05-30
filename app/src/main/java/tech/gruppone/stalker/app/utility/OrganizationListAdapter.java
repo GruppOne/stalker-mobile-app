@@ -53,7 +53,7 @@ public class OrganizationListAdapter extends ListAdapter<Organization, OrgViewHo
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(@NonNull View v) {
       Intent intent = new Intent(context, OrganizationActivity.class);
       intent.putExtra("organizationId", id);
       context.startActivity(intent);

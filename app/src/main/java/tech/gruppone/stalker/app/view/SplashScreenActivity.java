@@ -3,6 +3,7 @@ package tech.gruppone.stalker.app.view;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import tech.gruppone.stalker.app.R;
 
@@ -15,7 +16,7 @@ public class SplashScreenActivity extends AppCompatActivity {
   }
 
   @Override
-  public void onCreate(Bundle savedInstanceState) {
+  public void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_splashscreen);
 
