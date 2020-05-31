@@ -2,6 +2,7 @@ package tech.gruppone.stalker.app.utility;
 
 import static java.util.Objects.requireNonNull;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -73,6 +74,7 @@ public class OrganizationListAdapter extends ListAdapter<LiveData<Organization>,
           }
 
           @Override
+          @SuppressLint("DiffUtilEquals")
           public boolean areContentsTheSame(
               @NonNull LiveData<Organization> oldItem, @NonNull LiveData<Organization> newItem) {
             return requireNonNull(oldItem.getValue()).equals(newItem.getValue());
