@@ -2,6 +2,7 @@ package tech.gruppone.stalker.app.business;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,12 +19,14 @@ public class PlaceTest {
   public void constructor() {
     // Arrange
     JSONObject jsonPlace = Mockito.mock(JSONObject.class);
+    JSONObject placeData = mock(JSONObject.class);
     int id = 1;
     JSONArray jsonPolyline = Mockito.mock(JSONArray.class);
 
     try {
       Mockito.when(jsonPlace.getInt("id")).thenReturn(id);
-      Mockito.when(jsonPlace.getJSONArray("polygon")).thenReturn(jsonPolyline);
+      Mockito.when(jsonPlace.getJSONObject("data")).thenReturn(placeData);
+      Mockito.when(placeData.getJSONArray("polygon")).thenReturn(jsonPolyline);
 
       Mockito.when(jsonPolyline.length()).thenReturn(0);
     } catch (JSONException e) {
@@ -42,13 +45,15 @@ public class PlaceTest {
   public void constructor_polyLineNotNull() {
     // Arrange
     JSONObject jsonPlace = Mockito.mock(JSONObject.class);
+    JSONObject placeData = mock(JSONObject.class);
     int id = 1;
     JSONArray jsonPolyline = Mockito.mock(JSONArray.class);
     JSONObject jsonPoint = Mockito.mock(JSONObject.class);
 
     try {
       Mockito.when(jsonPlace.getInt("id")).thenReturn(id);
-      Mockito.when(jsonPlace.getJSONArray("polygon")).thenReturn(jsonPolyline);
+      Mockito.when(jsonPlace.getJSONObject("data")).thenReturn(placeData);
+      Mockito.when(placeData.getJSONArray("polygon")).thenReturn(jsonPolyline);
 
       Mockito.when(jsonPolyline.length()).thenReturn(1);
       Mockito.when(jsonPolyline.getJSONObject(0)).thenReturn(jsonPoint);

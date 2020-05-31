@@ -11,8 +11,11 @@ import static org.powermock.api.support.membermodification.MemberModifier.stub;
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -92,13 +95,16 @@ public class CurrentSessionSingletonTest {
     final CurrentSessionSingleton sut = CurrentSessionSingleton.getInstance();
     final Point point = Point.buildFromDegrees(0, 0);
     final Organization organization = mock(Organization.class);
-    final List<Organization> organizationList = new ArrayList<>();
-    organizationList.add(organization);
+    final Map<Integer, LiveData<Organization>> organizationMap = new TreeMap<>();
+    organizationMap.put(1, new MutableLiveData<>(organization));
     final List<Integer> intList = new ArrayList<>();
     intList.add(1);
 
     stub(method(CurrentSessionSingleton.class, "zeroOrganizations")).toReturn(false);
-    stub(method(LiveData.class, "getValue")).toReturn(organizationList);
+    stub(method(CurrentSessionSingleton.class, "getOrganizations"))
+        .toReturn(new MutableLiveData<>(organizationMap));
+
+    Mockito.when(organization.isConnected()).thenReturn(true);
     Mockito.when(organization.getInsidePlaces(point)).thenReturn(intList);
 
     // Act
