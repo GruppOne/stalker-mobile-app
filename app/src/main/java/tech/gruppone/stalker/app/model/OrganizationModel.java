@@ -1,6 +1,7 @@
 package tech.gruppone.stalker.app.model;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
 import java.util.Objects;
 import tech.gruppone.stalker.app.business.Organization;
 import tech.gruppone.stalker.app.utility.CurrentSessionSingleton;
@@ -10,7 +11,7 @@ import tech.gruppone.stalker.app.utility.excpetions.OrganizationNotFoundExceptio
 public class OrganizationModel {
 
   @NonNull
-  public Organization getOrganization(int organizationId) {
+  public LiveData<Organization> getOrganization(int organizationId) {
     try {
       return CurrentSessionSingleton.getInstance().getOrganization(organizationId);
     } catch (OrganizationNotFoundException e) {
@@ -24,7 +25,13 @@ public class OrganizationModel {
             Objects.requireNonNull(CurrentSessionSingleton.getInstance().getLoggedUser().getValue())
                 .getId(),
             organizationId,
-            jsonObject -> CurrentSessionSingleton.getInstance().connectOrganization(organizationId),
+            jsonObject -> {
+              try {
+                CurrentSessionSingleton.getInstance().connectOrganization(organizationId);
+              } catch (OrganizationNotFoundException e) {
+                throw new RuntimeException(e);
+              }
+            },
             null);
   }
 }
