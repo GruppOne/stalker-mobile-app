@@ -3,7 +3,9 @@ package tech.gruppone.stalker.app.business;
 import androidx.annotation.NonNull;
 import java.util.ArrayList;
 import java.util.List;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Value;
 import lombok.With;
 import org.json.JSONArray;
@@ -11,7 +13,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 @Value
-@AllArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PACKAGE)
+@Builder
 public class Organization {
 
   int id;
