@@ -211,5 +211,12 @@ public class WebSingleton {
 
     addToRequestQueue(
         new AuthenticatedRequest(Method.DELETE, fullUrl, null, successListener, errorListener));
+    }
+
+  public void getUserHistory(int id, @Nullable Listener<JSONObject> successListener,
+    @Nullable ErrorListener errorListener){
+
+    String fullUrl = serverUrl + "/user/" + id + "/history";
+    addToRequestQueue(new AuthenticatedRequest(Method.GET, fullUrl, null, successListener, errorListener));
   }
 }
