@@ -1,6 +1,7 @@
 package tech.gruppone.stalker.app.utility;
 
-import android.annotation.SuppressLint;
+import static java.util.Objects.requireNonNull;
+
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.DiffUtil.ItemCallback;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,7 +18,7 @@ import tech.gruppone.stalker.app.business.Organization;
 import tech.gruppone.stalker.app.utility.OrganizationListAdapter.OrgViewHolder;
 import tech.gruppone.stalker.app.view.OrganizationActivity;
 
-public class OrganizationListAdapter extends ListAdapter<Organization, OrgViewHolder> {
+public class OrganizationListAdapter extends ListAdapter<LiveData<Organization>, OrgViewHolder> {
 
   public static class OrgViewHolder extends RecyclerView.ViewHolder
       implements View.OnClickListener {
@@ -39,7 +41,8 @@ public class OrganizationListAdapter extends ListAdapter<Organization, OrgViewHo
       context = v.getContext();
     }
 
-    public void bindTo(@NonNull Organization organization) {
+    public void bindTo(@NonNull LiveData<Organization> newOrganizationLiveData) {
+      Organization organization = requireNonNull(newOrganizationLiveData.getValue());
       id = organization.getId();
       name.setText(organization.getName());
       description.setText(organization.getDescription());
@@ -62,18 +65,17 @@ public class OrganizationListAdapter extends ListAdapter<Organization, OrgViewHo
 
   public OrganizationListAdapter() {
     super(
-        new ItemCallback<Organization>() {
+        new ItemCallback<LiveData<Organization>>() {
           @Override
           public boolean areItemsTheSame(
-              @NonNull Organization oldOrganization, @NonNull Organization newOrganization) {
-            return oldOrganization.getId() == newOrganization.getId();
+              @NonNull LiveData<Organization> oldItem, @NonNull LiveData<Organization> newItem) {
+            return oldItem == newItem;
           }
 
           @Override
-          @SuppressLint("DiffUtilEquals")
           public boolean areContentsTheSame(
-              @NonNull Organization oldOrganization, @NonNull Organization newOrganization) {
-            return oldOrganization.equals(newOrganization);
+              @NonNull LiveData<Organization> oldItem, @NonNull LiveData<Organization> newItem) {
+            return requireNonNull(oldItem.getValue()).equals(newItem.getValue());
           }
         });
   }
