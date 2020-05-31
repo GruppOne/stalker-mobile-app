@@ -17,12 +17,14 @@ import lombok.Setter;
 import lombok.Value;
 import org.json.JSONException;
 import org.json.JSONObject;
+import tech.gruppone.stalker.app.business.HistoryResponse;
 import tech.gruppone.stalker.app.business.Organization;
 import tech.gruppone.stalker.app.business.Place;
 import tech.gruppone.stalker.app.business.Point;
 import tech.gruppone.stalker.app.business.User;
 import tech.gruppone.stalker.app.utility.excpetions.OrganizationNotFoundException;
 import tech.gruppone.stalker.app.utility.web.WebSingleton;
+import tech.gruppone.stalker.app.business.UserHistory;
 
 public class CurrentSessionSingleton {
 
@@ -38,6 +40,8 @@ public class CurrentSessionSingleton {
   @SuppressLint("UseSparseArrays")
   private final MutableLiveData<Map<Integer, LiveData<Organization>>> organizations =
       new MutableLiveData<>(new TreeMap<>());
+
+  private MutableLiveData<List<UserHistory>> userHistoryMutableLiveData = new MutableLiveData<>();
 
   private CurrentSessionSingleton() {}
 
@@ -215,6 +219,14 @@ public class CurrentSessionSingleton {
     public int organizationId;
   }
 
+  /*@NonNull
+  public void setUserHistoryMutableLiveData (@NonNull HistoryResponse historyResponse){
+    userHistoryMutableLiveData.postValue(historyResponse);
+  }*/
+
+  public void setHistoryResponse (HistoryResponse historyResponse){
+    userHistoryMutableLiveData.postValue(historyResponse.getUserHistoryList());
+  }
   @NonNull
   public static synchronized CurrentSessionSingleton getInstance() {
     if (instance == null) {
