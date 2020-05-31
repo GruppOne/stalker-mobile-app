@@ -8,6 +8,7 @@ import static org.powermock.api.support.membermodification.MemberModifier.stub;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import java.util.List;
+import java.util.Map;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -38,12 +39,12 @@ public class MainPageModelTest {
     // Arrange
     final OrganizationsModel sut = new OrganizationsModel();
     final CurrentSessionSingleton currentSessionSingleton = mock(CurrentSessionSingleton.class);
-    final LiveData<List<Organization>> orgData = new MutableLiveData<>();
+    final LiveData<Map<Integer, LiveData<Organization>>> orgData = new MutableLiveData<>();
     stub(method(CurrentSessionSingleton.class, "getInstance")).toReturn(currentSessionSingleton);
     when(currentSessionSingleton.getOrganizations()).thenReturn(orgData);
 
     // Act
-    final LiveData<List<Organization>> result = sut.getOrgsLiveData();
+    final LiveData<Map<Integer, LiveData<Organization>>> result = sut.getOrgsLiveData();
 
     // Assert
     Assert.assertNotEquals(null, result);
