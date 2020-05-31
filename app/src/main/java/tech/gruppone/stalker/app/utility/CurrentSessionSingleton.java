@@ -8,9 +8,9 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import com.auth0.android.jwt.JWT;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 import lombok.Getter;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -29,7 +29,7 @@ public class CurrentSessionSingleton {
 
   @SuppressLint("UseSparseArrays")
   private MutableLiveData<Map<Integer, LiveData<Organization>>> organizations =
-      new MutableLiveData<>(new HashMap<>());
+      new MutableLiveData<>(new TreeMap<>());
 
   private CurrentSessionSingleton() {}
 
@@ -74,7 +74,7 @@ public class CurrentSessionSingleton {
 
   public void setOrganizationList(@NonNull List<Organization> orgList) {
     @SuppressLint("UseSparseArrays")
-    Map<Integer, LiveData<Organization>> map = new HashMap<>();
+    Map<Integer, LiveData<Organization>> map = new TreeMap<>();
 
     for (Organization organization : orgList) {
       map.put(organization.getId(), new MutableLiveData<>(organization));
