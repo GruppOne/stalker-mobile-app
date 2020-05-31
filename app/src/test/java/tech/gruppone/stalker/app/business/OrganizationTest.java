@@ -19,14 +19,20 @@ public class OrganizationTest {
   public void constructor() {
     // Arrange
     JSONObject jsonOrg = mock(JSONObject.class);
+    JSONObject jsonData = mock(JSONObject.class);
     int id = 1;
     String name = "unipd";
+    String description = "unipd";
+    boolean priv = true;
     JSONArray jsonPlaces = mock(JSONArray.class);
 
     try {
       when(jsonOrg.getInt("id")).thenReturn(id);
-      when(jsonOrg.getString("name")).thenReturn(name);
-      when(jsonOrg.getJSONArray("places")).thenReturn(jsonPlaces);
+      when(jsonOrg.getJSONObject("data")).thenReturn(jsonData);
+      when(jsonData.getString("name")).thenReturn(name);
+      when(jsonData.getString("description")).thenReturn(description);
+      when(jsonData.getBoolean("isPrivate")).thenReturn(priv);
+      when(jsonData.getJSONArray("places")).thenReturn(jsonPlaces);
 
       when(jsonPlaces.length()).thenReturn(0);
     } catch (JSONException e) {
@@ -46,23 +52,31 @@ public class OrganizationTest {
   public void constructor_jsonPlaces_notNull() {
     // Arrange
     JSONObject jsonOrg = mock(JSONObject.class);
+    JSONObject jsonData = mock(JSONObject.class);
     int id = 1;
     String name = "unipd";
+    String description = "unipd";
+    boolean priv = true;
     JSONArray jsonPlaces = mock(JSONArray.class);
     JSONObject jsonPlace = mock(JSONObject.class);
+    JSONObject placeData = mock(JSONObject.class);
     JSONArray jsonPolyline = Mockito.mock(JSONArray.class);
     JSONObject jsonPoint = Mockito.mock(JSONObject.class);
 
     try {
       when(jsonOrg.getInt("id")).thenReturn(id);
-      when(jsonOrg.getString("name")).thenReturn(name);
-      when(jsonOrg.getJSONArray("places")).thenReturn(jsonPlaces);
+      when(jsonOrg.getJSONObject("data")).thenReturn(jsonData);
+      when(jsonData.getString("name")).thenReturn(name);
+      when(jsonData.getString("description")).thenReturn(description);
+      when(jsonData.getBoolean("isPrivate")).thenReturn(priv);
+      when(jsonData.getJSONArray("places")).thenReturn(jsonPlaces);
 
       when(jsonPlaces.length()).thenReturn(1);
       when(jsonPlaces.getJSONObject(0)).thenReturn(jsonPlace);
 
       Mockito.when(jsonPlace.getInt("id")).thenReturn(id);
-      Mockito.when(jsonPlace.getJSONArray("polygon")).thenReturn(jsonPolyline);
+      Mockito.when(jsonPlace.getJSONObject("data")).thenReturn(placeData);
+      Mockito.when(placeData.getJSONArray("polygon")).thenReturn(jsonPolyline);
 
       Mockito.when(jsonPolyline.length()).thenReturn(1);
       Mockito.when(jsonPolyline.getJSONObject(0)).thenReturn(jsonPoint);

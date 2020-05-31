@@ -120,7 +120,7 @@ public class CurrentSessionSingleton {
     List<Integer> ret = new ArrayList<>();
 
     for (LiveData<Organization> organizationLiveData :
-        requireNonNull(organizations.getValue()).values()) {
+        requireNonNull(getOrganizations().getValue()).values()) {
       Organization org = requireNonNull(organizationLiveData.getValue());
       if (org.isConnected()) {
         ret.addAll(org.getInsidePlaces(point));
