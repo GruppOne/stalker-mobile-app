@@ -63,7 +63,38 @@ def coverageSourceDirs = [
      *   - gradle createOfflineInstrTestCoverageReport //To generate *.exec file from offline instrumented class
      *   - gradle jacocoTestReport //To generate html report from newly created *.exec task
      */
-task jacocoTestReport(dependsOn: ['instrument', 'testDebugUnitTest','connectedDebugAndroidTest']) {
+task jacocoTestReport(dependsOn: ['instrument', 'testDebugUnitTest']) {
+  doLast {
+    ant.taskdef(name: 'report',
+      classname: 'org.jacoco.ant.ReportTask',
+      classpath: configurations.jacocoAnt.asPath)
+
+    mkdir "$buildDir.path/reports/jacocoXml"
+
+    ant.report() {
+      executiondata {
+        ant.file(file: "$buildDir.path/jacoco/testDebugUnitTest.exec")
+      }
+      structure(name: 'Example') {
+        classfiles {
+          fileset(dir: "$project.buildDir/intermediates/javac/debug/classes")
+        }
+        sourcefiles {
+          fileset(dir: 'src/main/java')
+        }
+      }
+      //Uncomment if we want the task to generate jacoco html reports. However, the current script does not exclude files.
+      //An alternative is to used jacocoTestReport after this task finishes
+      html(destdir: "$buildDir.path/reports/jacocoHtml")
+      xml destfile: "$buildDir.path/reports/jacocoXml/jacoco.xml"
+    }
+  }
+  //Uncomment if we want the task to generate jacoco html reports. However, the current script does not exclude files.
+  //An alternative is to used jacocoTestReport after this task finishes
+  //html(destdir: "$buildDir.path/reports/jacocoHtml")
+}
+
+task jacocoTestReportFull(dependsOn: ['instrument', 'testDebugUnitTest', 'connectedDebugAndroidTest']) {
   doLast {
     ant.taskdef(name: 'report',
       classname: 'org.jacoco.ant.ReportTask',
