@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import org.json.JSONArray;
 import org.json.JSONException;
 import tech.gruppone.stalker.app.business.Organization;
@@ -34,7 +35,7 @@ public class OrganizationsModel {
   }
 
   @NonNull
-  public LiveData<List<Organization>> getOrgsLiveData() {
+  public LiveData<Map<Integer, LiveData<Organization>>> getOrgsLiveData() {
     return CurrentSessionSingleton.getInstance().getOrganizations();
   }
 }
