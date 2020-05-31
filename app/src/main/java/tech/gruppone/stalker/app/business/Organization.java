@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import lombok.Value;
 import lombok.With;
 import org.json.JSONArray;
@@ -31,7 +30,7 @@ public class Organization {
       description = data.getString("description");
       isPrivate = data.getBoolean("isPrivate");
       places = new ArrayList<>();
-      connected=false;
+      connected = false;
 
       JSONArray jsonPlaces = data.getJSONArray("places");
 
