@@ -7,7 +7,6 @@ import static org.powermock.api.support.membermodification.MemberModifier.stub;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import java.util.List;
 import java.util.Map;
 import org.junit.Assert;
 import org.junit.Test;
