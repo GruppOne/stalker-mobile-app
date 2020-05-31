@@ -11,10 +11,10 @@ import org.json.JSONObject;
 @Data
 public class OrganizationHistory {
 
-   int id;
-   List<UserOrganizationHistory> histories;
+   int userId;
+   List<UserOrganizationHistory> history;
 
-  public OrganizationHistory( @NonNull  JSONObject jsonObject) {
+  /*public OrganizationHistory( @NonNull  JSONObject jsonObject) {
 
     histories = new ArrayList<>();
     try {
@@ -28,6 +28,6 @@ public class OrganizationHistory {
     } catch (JSONException e) {
       new RuntimeException();
     }
-  }
+  }*/
 }
 
