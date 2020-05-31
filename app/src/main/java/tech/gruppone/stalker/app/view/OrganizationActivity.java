@@ -2,6 +2,7 @@ package tech.gruppone.stalker.app.view;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -46,13 +47,23 @@ public class OrganizationActivity extends FragmentActivity implements OnMapReady
             0,
             0);
 
+    Button connectButton = findViewById(R.id.connectButton);
+
+    viewModel
+        .isConnected()
+        .observe(
+            this,
+            aBoolean ->
+                connectButton.setText(
+                    getString(aBoolean ? R.string.connect : R.string.disconnect)));
+
     // Obtain the SupportMapFragment and get notified when the map is ready to be used.
     SupportMapFragment mapFragment =
         Objects.requireNonNull(
             (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map));
     mapFragment.getMapAsync(this);
 
-    findViewById(R.id.connectButton).setOnClickListener(v -> viewModel.connect());
+    connectButton.setOnClickListener(v -> viewModel.connect());
   }
 
   /**
@@ -70,7 +81,7 @@ public class OrganizationActivity extends FragmentActivity implements OnMapReady
       // TODO find a way to attach the actual Place object to the polygon in the tag (setTag()).
       //      This way, we can use the tag for fast retrieval of the place info, and we can
       //      display them in a dialog or something
-      Polygon polygon = googleMap.addPolygon(polygonOptions);
+      googleMap.addPolygon(polygonOptions);
     }
 
     googleMap.moveCamera(CameraUpdateFactory.newLatLngBounds(viewModel.getBound(), 1000, 2000, 50));
