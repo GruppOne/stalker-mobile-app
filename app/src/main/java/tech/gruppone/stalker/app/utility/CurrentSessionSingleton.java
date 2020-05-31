@@ -96,7 +96,7 @@ public class CurrentSessionSingleton {
 
     if (organization == null) {
       throw new OrganizationNotFoundException(
-          "There isn't an organization with the given id of " + organizationId);
+          "There's no organization with the given id of " + organizationId);
     }
 
     return organization;
