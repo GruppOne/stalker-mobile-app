@@ -2,12 +2,13 @@ package tech.gruppone.stalker.app.model.fragment;
 
 import static java.util.Objects.requireNonNull;
 
-import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Transformations;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 import org.json.JSONArray;
 import org.json.JSONException;
 import tech.gruppone.stalker.app.business.Organization;
@@ -95,6 +96,19 @@ public class OrganizationsModel {
 
   @NonNull
   public LiveData<Map<Integer, LiveData<Organization>>> getOrgsLiveData() {
-    return CurrentSessionSingleton.getInstance().getOrganizations();
+    return Transformations.map(
+        CurrentSessionSingleton.getInstance().getOrganizations(),
+        map -> {
+          Map<Integer, LiveData<Organization>> connected = new TreeMap<>();
+
+          for (LiveData<Organization> organizationLiveData : map.values()) {
+            Organization organization = requireNonNull(organizationLiveData.getValue());
+            if (!organization.isConnected()) {
+              connected.put(organization.getId(), organizationLiveData);
+            }
+          }
+
+          return connected;
+        });
   }
 }
