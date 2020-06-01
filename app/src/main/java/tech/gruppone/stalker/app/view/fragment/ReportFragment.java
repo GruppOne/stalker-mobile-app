@@ -11,9 +11,9 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import java.util.ArrayList;
+import java.util.List;
 import tech.gruppone.stalker.app.R;
-import tech.gruppone.stalker.app.model.fragment.ReportModel;
-import tech.gruppone.stalker.app.utility.CurrentSessionSingleton;
 import tech.gruppone.stalker.app.utility.ReportListAdapter;
 import tech.gruppone.stalker.app.viewmodel.fragment.ReportViewModel;
 
@@ -46,11 +46,15 @@ public class ReportFragment extends Fragment {
     recyclerView.setHasFixedSize(true);
     recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-    reportModel.getUsersHistory(1);
+    //reportModel.getUsersHistory(1);
 
-    System.out.println(reportModel.getIds());
 
-    ReportListAdapter reportListAdapter = new ReportListAdapter(reportModel.getIds());
+
+    List<Integer> xd= new ArrayList<>();
+    xd.add(1);
+    xd.add(2);
+
+    ReportListAdapter reportListAdapter = new ReportListAdapter(xd);
 
 
 
