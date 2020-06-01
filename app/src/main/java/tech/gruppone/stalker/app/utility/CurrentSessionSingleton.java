@@ -15,6 +15,7 @@ import lombok.Getter;
 import org.json.JSONException;
 import org.json.JSONObject;
 import tech.gruppone.stalker.app.business.Organization;
+import tech.gruppone.stalker.app.business.Place;
 import tech.gruppone.stalker.app.business.Point;
 import tech.gruppone.stalker.app.business.User;
 import tech.gruppone.stalker.app.utility.excpetions.OrganizationNotFoundException;
@@ -113,6 +114,17 @@ public class CurrentSessionSingleton {
         (MutableLiveData<Organization>) getOrganization(organizationId);
 
     organization.postValue(requireNonNull(organization.getValue()).withConnected(true));
+
+    // Needed to update the recyclerviews every time an organization is connected
+    organizations.postValue(organizations.getValue());
+  }
+
+  public void updatePlaces(int organizationId, @NonNull List<Place> places)
+      throws OrganizationNotFoundException {
+    MutableLiveData<Organization> organization =
+        (MutableLiveData<Organization>) getOrganization(organizationId);
+
+    organization.postValue(requireNonNull(organization.getValue()).withPlaces(places));
   }
 
   @NonNull

@@ -8,7 +8,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Value;
 import lombok.With;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -22,7 +21,7 @@ public class Organization {
   String name;
   String description;
   boolean isPrivate;
-  List<Place> places;
+  @With List<Place> places;
   @With boolean connected;
 
   public Organization(@NonNull JSONObject jsonOrg) {
@@ -31,15 +30,9 @@ public class Organization {
       JSONObject data = jsonOrg.getJSONObject("data");
       name = data.getString("name");
       description = data.getString("description");
-      isPrivate = data.getBoolean("isPrivate");
+      isPrivate = data.getString("organizationType").equals("private");
       places = new ArrayList<>();
       connected = false;
-
-      JSONArray jsonPlaces = data.getJSONArray("places");
-
-      for (int i = 0; i < jsonPlaces.length(); ++i) {
-        places.add(new Place(jsonPlaces.getJSONObject(i)));
-      }
     } catch (JSONException e) {
       throw new RuntimeException(e);
     }
