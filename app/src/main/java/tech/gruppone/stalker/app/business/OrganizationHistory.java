@@ -14,20 +14,20 @@ public class OrganizationHistory {
    int userId;
    List<UserOrganizationHistory> history;
 
-  /*public OrganizationHistory( @NonNull  JSONObject jsonObject) {
+  public OrganizationHistory( @NonNull  JSONObject jsonObject) {
 
-    histories = new ArrayList<>();
+    history = new ArrayList<>();
     try {
-      id = jsonObject.getInt("organizationId");
+      userId = jsonObject.getInt("userId");
       JSONArray historyArray = jsonObject.getJSONArray("history");
       for (int i = 0; i < historyArray.length(); i++) {
         UserOrganizationHistory userOrganizationHistory =
             new UserOrganizationHistory(historyArray.getJSONObject(i));
-        histories.add(userOrganizationHistory);
+        history.add(userOrganizationHistory);
       }
     } catch (JSONException e) {
       new RuntimeException();
     }
-  }*/
+  }
 }
 

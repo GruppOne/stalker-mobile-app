@@ -12,14 +12,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import tech.gruppone.stalker.app.R;
 import tech.gruppone.stalker.app.model.fragment.ReportModel;
-import tech.gruppone.stalker.app.utility.CurrentSessionSingleton;
-import tech.gruppone.stalker.app.utility.ReportListAdapter;
 import tech.gruppone.stalker.app.viewmodel.fragment.ReportViewModel;
 
 public class ReportFragment extends Fragment {
 
   private View view;
   private ReportViewModel reportModel;
+
+  public ReportFragment() {
+  }
 
   @Override
   public View onCreateView(@NonNull LayoutInflater inflater,
@@ -30,19 +31,26 @@ public class ReportFragment extends Fragment {
   }
 
   @Override
+  @NonNull
   public void onActivityCreated(@Nullable Bundle savedInstanceState) {
     super.onActivityCreated(savedInstanceState);
 
     reportModel = new ViewModelProvider(this).get(ReportViewModel.class);
-    RecyclerView recyclerView = view.findViewById(R.id.organizationRecyclerView);
+    RecyclerView recyclerView = view.findViewById(R.id.reportRecyclerView);
+
+    reportModel.getUsersHistory(1);
+
+
     recyclerView.setHasFixedSize(true);
     recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-    ReportListAdapter reportListAdapter = new ReportListAdapter();
+    /*ReportListAdapter reportListAdapter = new ReportListAdapter();
 
     reportModel.getUsersHistory(CurrentSessionSingleton.getInstance().getLoggedUser().getValue().getId());
+    CurrentSessionSingleton.getInstance().getOrganizationsName().observe(getViewLifecycleOwner(),
+      reportListAdapter.submitList());*/
 
-    recyclerView.setAdapter(reportListAdapter);
+    //recyclerView.setAdapter(reportListAdapter);
 
 
   }

@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import java.util.Objects;
 import tech.gruppone.stalker.app.R;
 import tech.gruppone.stalker.app.utility.CurrentSessionSingleton;
 import tech.gruppone.stalker.app.utility.StalkerActivity;
@@ -130,8 +131,6 @@ public class MainPageActivity extends StalkerActivity {
         .commit();
   }
 
-  private void setReportPage() {}
-
   @Override
   public boolean onCreateOptionsMenu(@NonNull Menu menu) {
     getMenuInflater().inflate(R.menu.app_bar_menu, menu);
@@ -145,5 +144,11 @@ public class MainPageActivity extends StalkerActivity {
       geofenceHandler.clearGeofenses();
     }
     super.onDestroy();
+    }
+
+  private void setReportPage() {
+    fragmentManager.beginTransaction().hide(Objects.requireNonNull(fragmentManager.findFragmentById(R.id.organizations_fragment))).hide(Objects.requireNonNull(fragmentManager.findFragmentById(R.id.connected_fragment)))
+      .show(Objects.requireNonNull(fragmentManager.findFragmentById(R.id.report_fragment)))
+      .commit();
   }
 }
