@@ -8,10 +8,9 @@
     android:id="@+id/tvOrganizationName"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="ciao mondo "
     android:textColor="@color/colorAccent"
   />
-  <TextView
+  <!--<TextView
     android:id="@+id/tvPlaceName"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
@@ -24,5 +23,5 @@
     android:layout_height="wrap_content"
     android:text="ciao mondo "
     android:textColor="@color/colorAccent"
-    />
+    /> -->
 </LinearLayout>
