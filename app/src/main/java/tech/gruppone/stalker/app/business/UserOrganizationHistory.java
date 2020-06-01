@@ -9,14 +9,14 @@ import org.json.JSONObject;
 @Data
 public class UserOrganizationHistory {
 
-  Timestamp timestamp;
+  String timestamp;
   int placeId;
   Boolean inside;
 
   public UserOrganizationHistory(@NonNull JSONObject jsonObject){
 
     try {
-      timestamp = Timestamp.valueOf(jsonObject.getString("timestamp"));
+      timestamp = jsonObject.getString("timestamp");
       placeId = jsonObject.getInt("placeId");
       inside = jsonObject.getBoolean("inside");
     } catch (JSONException e) {
