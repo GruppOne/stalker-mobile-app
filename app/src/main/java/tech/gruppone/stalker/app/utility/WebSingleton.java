@@ -138,6 +138,24 @@ public class WebSingleton {
         new AuthenticatedRequest(Method.GET, fullUrl, null, successListener, errorListener));
   }
 
+  public void getConnectedOrganizations(
+      int userId,
+      @Nullable Listener<JSONObject> successListener,
+      @Nullable ErrorListener errorListener) {
+    String fullUrl = serverUrl + "/user/" + userId + "/organizations/connections";
+    addToRequestQueue(
+        new AuthenticatedRequest(Method.GET, fullUrl, null, successListener, errorListener));
+  }
+
+  public void getPlaces(
+      int organizationId,
+      @Nullable Listener<JSONObject> successListener,
+      @Nullable ErrorListener errorListener) {
+    String fullUrl = serverUrl + "/organization/" + organizationId + "/places";
+    addToRequestQueue(
+        new AuthenticatedRequest(Method.GET, fullUrl, null, successListener, errorListener));
+  }
+
   public void connect(
       int userId,
       int organizationId,
