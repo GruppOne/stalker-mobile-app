@@ -7,11 +7,14 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import tech.gruppone.stalker.app.R;
 import tech.gruppone.stalker.app.model.fragment.ReportModel;
+import tech.gruppone.stalker.app.utility.CurrentSessionSingleton;
+import tech.gruppone.stalker.app.utility.ReportListAdapter;
 import tech.gruppone.stalker.app.viewmodel.fragment.ReportViewModel;
 
 public class ReportFragment extends Fragment {
@@ -38,15 +41,23 @@ public class ReportFragment extends Fragment {
     reportModel = new ViewModelProvider(this).get(ReportViewModel.class);
     RecyclerView recyclerView = view.findViewById(R.id.reportRecyclerView);
 
-    reportModel.getUsersHistory(1);
 
 
     recyclerView.setHasFixedSize(true);
     recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-    /*ReportListAdapter reportListAdapter = new ReportListAdapter();
+    reportModel.getUsersHistory(1);
 
-    reportModel.getUsersHistory(CurrentSessionSingleton.getInstance().getLoggedUser().getValue().getId());
+    System.out.println(reportModel.getIds());
+
+    ReportListAdapter reportListAdapter = new ReportListAdapter(reportModel.getIds());
+
+
+
+    recyclerView.setAdapter(reportListAdapter);
+
+
+    /*reportModel.getUsersHistory(CurrentSessionSingleton.getInstance().getLoggedUser().getValue().getId());
     CurrentSessionSingleton.getInstance().getOrganizationsName().observe(getViewLifecycleOwner(),
       reportListAdapter.submitList());*/
 

@@ -42,7 +42,7 @@ public class CurrentSessionSingleton {
   private final MutableLiveData<Map<Integer, LiveData<Organization>>> organizations =
       new MutableLiveData<>(new TreeMap<>());
 
-  private MutableLiveData<Map<Integer, OrganizationHistory>> userHistory = new MutableLiveData<>();
+  private MutableLiveData<Map<Integer, OrganizationHistory>> userHistory = new MutableLiveData<>(new TreeMap<>());
 
   private CurrentSessionSingleton() {}
 
@@ -234,7 +234,7 @@ public class CurrentSessionSingleton {
   }
 
   @NonNull
-  public LiveData<Map<Integer, OrganizationHistory>> getOrganizationsName() {
+  public LiveData<Map<Integer, OrganizationHistory>> getUserHistory() {
     return userHistory;
   }
 

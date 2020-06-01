@@ -1,7 +1,6 @@
 package tech.gruppone.stalker.app.model.fragment;
 
-import java.util.ArrayList;
-import java.util.List;
+
 import java.util.Map;
 import java.util.TreeMap;
 import org.json.JSONArray;
@@ -234,14 +233,17 @@ public class ReportModel {
                 JSONObject jsonHistoryObject = jsonOrganizationsHistory.getJSONObject(i);
                 int organizationId = jsonHistoryObject.getInt("organizationId");
                 OrganizationHistory organizationJson = new OrganizationHistory(jsonHistoryObject.getJSONObject("historyPerOrganization"));
-                organizationHistoryMap.put(organizationId, organizationJson);
+                organizationHistoryMap.put(organizationId, organizationJson);;
               }
-              System.out.println(str);
-              System.out.println(organizationHistoryMap);
               CurrentSessionSingleton.getInstance().setUserHistory(organizationHistoryMap);
             } catch (JSONException e) {
               e.printStackTrace();
             }
           });
   }
+
+  /*@NonNull
+  public LiveData<Map<Integer, OrganizationHistory>> getUserHistory() {
+    return CurrentSessionSingleton.getInstance().getUserHistory();
+  }*/
 }
