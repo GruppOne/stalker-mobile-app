@@ -147,8 +147,11 @@ public class MainPageActivity extends StalkerActivity {
     }
 
   private void setReportPage() {
-    fragmentManager.beginTransaction().hide(Objects.requireNonNull(fragmentManager.findFragmentById(R.id.organizations_fragment))).hide(Objects.requireNonNull(fragmentManager.findFragmentById(R.id.connected_fragment)))
-      .show(Objects.requireNonNull(fragmentManager.findFragmentById(R.id.report_fragment)))
-      .commit();
+    fragmentManager
+        .beginTransaction()
+        .hide(Objects.requireNonNull(fragmentManager.findFragmentById(R.id.connected_fragment)))
+        .hide(Objects.requireNonNull(fragmentManager.findFragmentById(R.id.organizations_fragment)))
+        .show(Objects.requireNonNull(fragmentManager.findFragmentById(R.id.report_fragment)))
+        .commit();
   }
 }

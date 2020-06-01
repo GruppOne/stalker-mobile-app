@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.DiffUtil.ItemCallback;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.ViewHolder;
+import java.util.ArrayList;
 import java.util.List;
 import tech.gruppone.stalker.app.R;
 import tech.gruppone.stalker.app.utility.ReportListAdapter.UserHistoryViewHolder;
@@ -31,7 +32,7 @@ public class ReportListAdapter extends RecyclerView.Adapter<ReportListAdapter.Us
 
   @Override
   public int getItemCount() {
-    return 0;
+    return ids.size();
   }
 
   @Override
@@ -39,7 +40,7 @@ public class ReportListAdapter extends RecyclerView.Adapter<ReportListAdapter.Us
     @NonNull UserHistoryViewHolder holder, int position) {
 
     int id = ids.get(position);
-    holder.mTextView.setText(id);
+    holder.mTextView.setText(String.valueOf(id));
 
   }
 
