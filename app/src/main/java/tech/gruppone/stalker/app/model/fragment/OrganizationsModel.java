@@ -1,5 +1,8 @@
 package tech.gruppone.stalker.app.model.fragment;
 
+import static java.util.Objects.requireNonNull;
+
+import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import java.util.ArrayList;
@@ -8,8 +11,10 @@ import java.util.Map;
 import org.json.JSONArray;
 import org.json.JSONException;
 import tech.gruppone.stalker.app.business.Organization;
+import tech.gruppone.stalker.app.business.Place;
 import tech.gruppone.stalker.app.utility.CurrentSessionSingleton;
 import tech.gruppone.stalker.app.utility.WebSingleton;
+import tech.gruppone.stalker.app.utility.excpetions.OrganizationNotFoundException;
 
 public class OrganizationsModel {
 
@@ -30,8 +35,62 @@ public class OrganizationsModel {
               }
 
               CurrentSessionSingleton.getInstance().setOrganizationList(organizations);
+
+              OrganizationsModel.this.loadConnectedOrganizations();
             },
             null);
+  }
+
+  public void loadConnectedOrganizations() {
+    WebSingleton.getInstance()
+        .getConnectedOrganizations(
+            requireNonNull(CurrentSessionSingleton.getInstance().getLoggedUser().getValue())
+                .getId(),
+            response -> {
+              try {
+                JSONArray orgsArray = response.getJSONArray("connectedOrganizationsIds");
+
+                for (int i = 0; i < orgsArray.length(); ++i) {
+                  CurrentSessionSingleton.getInstance().connectOrganization(orgsArray.getInt(i));
+                }
+
+                OrganizationsModel.this.loadConnectedPlaces();
+              } catch (JSONException | OrganizationNotFoundException e) {
+                throw new RuntimeException(e);
+              }
+            },
+            null);
+  }
+
+  public void loadConnectedPlaces() {
+    for (LiveData<Organization> organizationLiveData :
+        requireNonNull(CurrentSessionSingleton.getInstance().getOrganizations().getValue())
+            .values()) {
+      Organization organization = requireNonNull(organizationLiveData.getValue());
+
+      if (organization.isConnected()) {
+        WebSingleton.getInstance()
+            .getPlaces(
+                organization.getId(),
+                response -> {
+                  try {
+                    JSONArray placesArray = response.getJSONArray("places");
+
+                    List<Place> places = new ArrayList<>();
+
+                    for (int i = 0; i < placesArray.length(); ++i) {
+                      places.add(new Place(placesArray.getJSONObject(i)));
+                    }
+
+                    CurrentSessionSingleton.getInstance()
+                        .updatePlaces(organization.getId(), places);
+                  } catch (JSONException | OrganizationNotFoundException e) {
+                    throw new RuntimeException(e);
+                  }
+                },
+                null);
+      }
+    }
   }
 
   @NonNull
