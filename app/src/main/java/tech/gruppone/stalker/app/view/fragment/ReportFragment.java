@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 import tech.gruppone.stalker.app.R;
+import tech.gruppone.stalker.app.utility.CurrentSessionSingleton;
 import tech.gruppone.stalker.app.utility.ReportListAdapter;
 import tech.gruppone.stalker.app.viewmodel.fragment.ReportViewModel;
 
@@ -25,13 +26,6 @@ public class ReportFragment extends Fragment {
   public ReportFragment() {
   }
 
-  @Override
-  public View onCreateView(@NonNull LayoutInflater inflater,
-    @Nullable ViewGroup container,
-    @Nullable Bundle savedInstanceState) {
-    view = inflater.inflate(R.layout.report_fragment, container, false);
-    return view;
-  }
 
   @Override
   @NonNull
@@ -46,15 +40,17 @@ public class ReportFragment extends Fragment {
     recyclerView.setHasFixedSize(true);
     recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-    //reportModel.getUsersHistory(1);
+    reportModel.getUsersHistory(CurrentSessionSingleton.getInstance().getLoggedUser().getValue().getId());
 
 
 
     List<Integer> xd= new ArrayList<>();
     xd.add(1);
     xd.add(2);
+    xd.add(3);
 
     ReportListAdapter reportListAdapter = new ReportListAdapter(xd);
+    /*reportModel.getUsersLiveData().observe(getViewLifecycleOwner(), result -> reportListAdapter.notifyDataSetChanged());*/
 
 
 
@@ -68,5 +64,23 @@ public class ReportFragment extends Fragment {
     //recyclerView.setAdapter(reportListAdapter);
 
 
+  }
+
+  @Override
+  @NonNull
+  public View onCreateView(
+    @NonNull LayoutInflater inflater,
+    @Nullable ViewGroup container,
+    @Nullable Bundle savedInstanceState) {
+    view = inflater.inflate(R.layout.report_fragment, container, false);
+
+    view.findViewById(R.id.reportReloadButton)
+      .setOnClickListener(v -> ReportFragment.this.getUsersHistory());
+
+    return view;
+  }
+
+  public void getUsersHistory() {
+    reportModel.getUsersHistory(CurrentSessionSingleton.getInstance().getLoggedUser().getValue().getId());
   }
 }

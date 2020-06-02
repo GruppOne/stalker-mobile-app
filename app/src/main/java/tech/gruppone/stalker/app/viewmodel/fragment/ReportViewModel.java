@@ -2,6 +2,7 @@ package tech.gruppone.stalker.app.viewmodel.fragment;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 import java.util.ArrayList;
@@ -13,12 +14,12 @@ import lombok.EqualsAndHashCode;
 import tech.gruppone.stalker.app.business.OrganizationHistory;
 import tech.gruppone.stalker.app.model.fragment.ReportModel;
 import tech.gruppone.stalker.app.utility.CurrentSessionSingleton;
+import tech.gruppone.stalker.app.view.OrganizationActivity;
 
 @Data
 @EqualsAndHashCode(callSuper=false)
 public class ReportViewModel extends ViewModel {
 
-  private List<Integer> ids = new ArrayList<>();
 
   private ReportModel model = new ReportModel();
 
@@ -33,10 +34,16 @@ public class ReportViewModel extends ViewModel {
 
 
   @NonNull
-  public List<Integer> getOrgsLiveData() {
-    Set<Integer> keys = model.getOrgsLiveData().getValue().keySet();
-    ids.addAll(ids);
-    return ids;
+  public LiveData<List<LiveData<OrganizationHistory>>> getUsersLiveData() {
+    Map<Integer, OrganizationHistory> value = CurrentSessionSingleton.getInstance().getUserHistory()
+      .getValue();
+    List<OrganizationHistory> organizationHistoryList = new ArrayList<>(value.values());
+    List<LiveData<OrganizationHistory>>  organizationLiveDataHistoryList = new ArrayList<>();
+    for(OrganizationHistory orgList : organizationHistoryList){
+      organizationLiveDataHistoryList.add(new MutableLiveData<>(orgList));
+    }
+    return new MutableLiveData<>(organizationLiveDataHistoryList);
   }
+
 
 }
