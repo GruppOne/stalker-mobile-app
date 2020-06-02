@@ -1,5 +1,7 @@
 package tech.gruppone.stalker.app.view.fragment;
 
+import static java.util.Objects.requireNonNull;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import tech.gruppone.stalker.app.R;
@@ -41,7 +44,14 @@ public class ConnectedFragment extends Fragment {
     RecyclerView recyclerView = view.findViewById(R.id.connectedRecyclerView);
     recyclerView.setHasFixedSize(true);
 
-    recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+    LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+
+    recyclerView.setLayoutManager(layoutManager);
+
+    DividerItemDecoration dividerItemDecoration =
+        new DividerItemDecoration(requireNonNull(getActivity()), layoutManager.getOrientation());
+
+    recyclerView.addItemDecoration(dividerItemDecoration);
 
     OrganizationListAdapter adapter = new OrganizationListAdapter();
 
