@@ -45,7 +45,7 @@ public class ReportListAdapter extends RecyclerView.Adapter<ReportListAdapter.Us
 
     public UserHistoryViewHolder(@NonNull View itemView) {
       super(itemView);
-      mTextView = itemView.findViewById(R.id.tvOrganizationName);
+      mTextView = itemView.findViewById(R.id.tvTimestamp);
     }
   }
 

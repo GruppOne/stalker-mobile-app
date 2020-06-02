@@ -16,6 +16,7 @@ import java.util.List;
 import tech.gruppone.stalker.app.R;
 import tech.gruppone.stalker.app.utility.CurrentSessionSingleton;
 import tech.gruppone.stalker.app.utility.ReportListAdapter;
+import tech.gruppone.stalker.app.utility.ReportListAdapter2;
 import tech.gruppone.stalker.app.viewmodel.fragment.ReportViewModel;
 
 public class ReportFragment extends Fragment {
@@ -44,12 +45,14 @@ public class ReportFragment extends Fragment {
 
 
 
-    List<Integer> xd= new ArrayList<>();
+    /*List<Integer> xd= new ArrayList<>();
     xd.add(1);
     xd.add(2);
     xd.add(3);
 
-    ReportListAdapter reportListAdapter = new ReportListAdapter(xd);
+    ReportListAdapter reportListAdapter = new ReportListAdapter(xd);*/
+    ReportListAdapter2 reportListAdapter = new ReportListAdapter2();
+    reportModel.getUsersLiveData().observe(getViewLifecycleOwner(), reportListAdapter::submitList);
     /*reportModel.getUsersLiveData().observe(getViewLifecycleOwner(), result -> reportListAdapter.notifyDataSetChanged());*/
 
 
