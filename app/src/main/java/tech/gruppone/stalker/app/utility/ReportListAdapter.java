@@ -5,14 +5,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.DiffUtil.ItemCallback;
-import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.RecyclerView.ViewHolder;
-import java.util.ArrayList;
 import java.util.List;
 import tech.gruppone.stalker.app.R;
-import tech.gruppone.stalker.app.utility.ReportListAdapter.UserHistoryViewHolder;
 
 public class ReportListAdapter extends RecyclerView.Adapter<ReportListAdapter.UserHistoryViewHolder> {
 
