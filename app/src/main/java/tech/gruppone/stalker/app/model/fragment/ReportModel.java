@@ -223,6 +223,7 @@ public class ReportModel {
                   JSONArray jsonOrganizationsHistory = jsonObject.getJSONArray("history");
                   for (int i=0; i<jsonOrganizationsHistory.length(); i++){
                     JSONObject jsonHistoryObject = jsonOrganizationsHistory.getJSONObject(i);
+                    int organizationId = jsonHistoryObject.getInt("organizationId");
                     JSONObject organizationJson = jsonHistoryObject.getJSONObject("historyPerOrganization");
                     JSONArray historyArray = organizationJson.getJSONArray("history");
                     for (int j = 0;  j< historyArray.length(); j++) {
