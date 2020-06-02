@@ -26,6 +26,7 @@ import tech.gruppone.stalker.app.utility.web.WebSingleton;
 import tech.gruppone.stalker.app.business.OrganizationHistory;
 import tech.gruppone.stalker.app.business.Point;
 import tech.gruppone.stalker.app.business.User;
+import tech.gruppone.stalker.app.business.UserOrganizationHistory;
 
 public class CurrentSessionSingleton {
 
@@ -41,6 +42,17 @@ public class CurrentSessionSingleton {
   @SuppressLint("UseSparseArrays")
   private final MutableLiveData<Map<Integer, LiveData<Organization>>> organizations =
       new MutableLiveData<>(new TreeMap<>());
+
+  public MutableLiveData<List<UserOrganizationHistory>> getUserOrganizationHistory() {
+    return userOrganizationHistory;
+  }
+
+  public void setUserOrganizationHistory(
+    List<UserOrganizationHistory> userOrganizationHistory) {
+    this.userOrganizationHistory.postValue(userOrganizationHistory);
+  }
+
+  private MutableLiveData<List<UserOrganizationHistory>> userOrganizationHistory = new MutableLiveData<>(new ArrayList<>());
 
   private MutableLiveData<Map<Integer, OrganizationHistory>> userHistory = new MutableLiveData<>(new TreeMap<>());
 

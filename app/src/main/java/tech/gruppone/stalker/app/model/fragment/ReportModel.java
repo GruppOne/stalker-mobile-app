@@ -3,6 +3,7 @@ package tech.gruppone.stalker.app.model.fragment;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -11,6 +12,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import tech.gruppone.stalker.app.business.Organization;
 import tech.gruppone.stalker.app.business.OrganizationHistory;
+import tech.gruppone.stalker.app.business.UserOrganizationHistory;
 import tech.gruppone.stalker.app.utility.CurrentSessionSingleton;
 import tech.gruppone.stalker.app.utility.WebSingleton;
 
@@ -239,7 +241,17 @@ public class ReportModel {
                   OrganizationHistory organizationJson = new OrganizationHistory(jsonHistoryObject.getJSONObject("historyPerOrganization"));
                   organizationHistoryMap.put(organizationId, organizationJson);;
                 }
+                List <OrganizationHistory> values = new ArrayList<>(organizationHistoryMap.values());
+                List<UserOrganizationHistory> toReturn = new ArrayList<>();
+                for(OrganizationHistory org : values){
+                  List<UserOrganizationHistory> history = org.getHistory();
+                  for(UserOrganizationHistory userOrg : history){
+                    toReturn.add(userOrg);
+                  }
+                }
+                System.out.println(toReturn);
                 CurrentSessionSingleton.getInstance().setUserHistory(organizationHistoryMap);
+                CurrentSessionSingleton.getInstance().setUserOrganizationHistory(toReturn);
               } catch (JSONException e) {
                 e.printStackTrace();
               }
@@ -251,6 +263,14 @@ public class ReportModel {
   public LiveData< Map<Integer, OrganizationHistory>> getOrgsLiveData() {
     return CurrentSessionSingleton.getInstance().getUserHistory();
   }
+
+  @NonNull
+  public LiveData<List<UserOrganizationHistory>> getOrgsLiveData2() {
+    return CurrentSessionSingleton.getInstance().getUserOrganizationHistory();
+  }
+
+
+
 
 
 }
