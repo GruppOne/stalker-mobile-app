@@ -7,7 +7,7 @@ import lombok.Value;
 @Value
 public class UserOrganizationHistory {
 
-  String timestamp;
+  String timestamp;;
   int placeId;
   Boolean inside;
 
