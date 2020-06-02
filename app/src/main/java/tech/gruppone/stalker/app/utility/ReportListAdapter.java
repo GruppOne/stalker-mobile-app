@@ -5,49 +5,66 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil.ItemCallback;
+import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
-import java.util.List;
 import tech.gruppone.stalker.app.R;
+import tech.gruppone.stalker.app.business.UserOrganizationHistory;
+import tech.gruppone.stalker.app.utility.ReportListAdapter.UserOrganizationViewHolder;
 
-public class ReportListAdapter extends RecyclerView.Adapter<ReportListAdapter.UserHistoryViewHolder> {
+public class ReportListAdapter extends ListAdapter<UserOrganizationHistory, UserOrganizationViewHolder> {
 
-  public List<Integer> ids;
+  public ReportListAdapter() {
+    super(    new ItemCallback<UserOrganizationHistory>() {
+      @Override
+      public boolean areItemsTheSame(
+        @NonNull UserOrganizationHistory oldItem,
+        @NonNull UserOrganizationHistory newItem) {
+        return oldItem.equals(newItem);
+      }
 
-  public ReportListAdapter(List<Integer> ids) {
-    this.ids = ids;
+      @Override
+      public boolean areContentsTheSame(
+        @NonNull UserOrganizationHistory oldItem,
+        @NonNull UserOrganizationHistory newItem) {
+        return oldItem.getPlaceId()== oldItem.getPlaceId();
+      }
+    });
   }
+
 
   @NonNull
   @Override
-  public UserHistoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent,
+  public UserOrganizationViewHolder onCreateViewHolder(@NonNull ViewGroup parent,
     int viewType) {
     View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.itemreport_fragment, parent, false);
-    return new UserHistoryViewHolder(v);
-  }
-
-  @Override
-  public int getItemCount() {
-    return ids.size();
+    return new UserOrganizationViewHolder(v);
   }
 
   @Override
   public void onBindViewHolder(
-    @NonNull UserHistoryViewHolder holder, int position) {
-
-    int id = ids.get(position);
-    holder.mTextView.setText(String.valueOf(id));
-
+    @NonNull UserOrganizationViewHolder holder, int position) {
+    holder.bindTo(getItem(position));
   }
 
-  public static class UserHistoryViewHolder extends RecyclerView.ViewHolder{
+  public static class UserOrganizationViewHolder extends RecyclerView.ViewHolder {
 
-    private TextView mTextView;
+    private TextView Ttimestamp;
+    private TextView TplaceName;
+    private TextView Tinside;
 
-    public UserHistoryViewHolder(@NonNull View itemView) {
-      super(itemView);
-      mTextView = itemView.findViewById(R.id.tvTimestamp);
+    public UserOrganizationViewHolder(@NonNull View v) {
+      super(v);
+      Ttimestamp = v.findViewById(R.id.tvTimestamp);
+      TplaceName = v.findViewById(R.id.tvPlaceName);
+      Tinside = v.findViewById(R.id.tvInside);
+    }
+
+    public void bindTo(@NonNull UserOrganizationHistory userOrganizationHistory) {
+      Ttimestamp.setText(userOrganizationHistory.getTimestamp());
+      TplaceName.setText(String.valueOf(userOrganizationHistory.getPlaceId()));
+      Tinside.setText(userOrganizationHistory.getInside()== true ? "sei entrato alle ore ": "sei uscito alle ore");
     }
   }
-
 
 }

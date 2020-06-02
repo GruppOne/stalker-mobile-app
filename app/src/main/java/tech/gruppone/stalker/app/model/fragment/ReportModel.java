@@ -4,14 +4,11 @@ package tech.gruppone.stalker.app.model.fragment;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import tech.gruppone.stalker.app.business.Organization;
-import tech.gruppone.stalker.app.business.OrganizationHistory;
 import tech.gruppone.stalker.app.business.UserOrganizationHistory;
 import tech.gruppone.stalker.app.utility.CurrentSessionSingleton;
 import tech.gruppone.stalker.app.utility.WebSingleton;
@@ -24,19 +21,8 @@ public class ReportModel {
           .getUserHistory(
             id,
             jsonObject -> {
-              try {
-                Map<Integer, OrganizationHistory> organizationHistoryMap = new TreeMap<>();
-                JSONArray jsonOrganizationsHistory = jsonObject.getJSONArray("history");
-                for (int i=0; i<jsonOrganizationsHistory.length(); i++){
-                  JSONObject jsonHistoryObject = jsonOrganizationsHistory.getJSONObject(i);
-                  int organizationId = jsonHistoryObject.getInt("organizationId");
-                  OrganizationHistory organizationJson = new OrganizationHistory(jsonHistoryObject.getJSONObject("historyPerOrganization"));
-                  organizationHistoryMap.put(organizationId, organizationJson);
-               }
-                CurrentSessionSingleton.getInstance().setUserHistory(organizationHistoryMap);
-              } catch (JSONException e) {
-                e.printStackTrace();
-              }
+                //List<UserOrganizationHistory> toReturn = getHistory(jsonObject);
+                //return toReturn;
             },
             error -> {
               String str = "{\n"
@@ -231,44 +217,36 @@ public class ReportModel {
                 + "\n"
                 + "}";
 
-              try {
-                JSONObject jsonObject = new JSONObject(str);
-                Map<Integer, OrganizationHistory> organizationHistoryMap = new TreeMap<>();
-                JSONArray jsonOrganizationsHistory = jsonObject.getJSONArray("history");
-                for (int i=0; i<jsonOrganizationsHistory.length(); i++){
-                  JSONObject jsonHistoryObject = jsonOrganizationsHistory.getJSONObject(i);
-                  int organizationId = jsonHistoryObject.getInt("organizationId");
-                  OrganizationHistory organizationJson = new OrganizationHistory(jsonHistoryObject.getJSONObject("historyPerOrganization"));
-                  organizationHistoryMap.put(organizationId, organizationJson);;
-                }
-                List <OrganizationHistory> values = new ArrayList<>(organizationHistoryMap.values());
-                List<UserOrganizationHistory> toReturn = new ArrayList<>();
-                for(OrganizationHistory org : values){
-                  List<UserOrganizationHistory> history = org.getHistory();
-                  for(UserOrganizationHistory userOrg : history){
-                    toReturn.add(userOrg);
+                try {
+                  JSONObject jsonObject = new JSONObject(str);
+                  List<UserOrganizationHistory> userOrganizationHistories = new ArrayList<>();
+                  JSONArray jsonOrganizationsHistory = jsonObject.getJSONArray("history");
+                  for (int i=0; i<jsonOrganizationsHistory.length(); i++){
+                    JSONObject jsonHistoryObject = jsonOrganizationsHistory.getJSONObject(i);
+                    JSONObject organizationJson = jsonHistoryObject.getJSONObject("historyPerOrganization");
+                    JSONArray historyArray = organizationJson.getJSONArray("history");
+                    for (int j = 0;  j< historyArray.length(); j++) {
+                      JSONObject  userOrganizationHistory = historyArray.getJSONObject(j);
+                      String timestamp = userOrganizationHistory.getString("timestamp");
+                      int placeId = userOrganizationHistory.getInt("placeId");
+                      boolean inside = userOrganizationHistory.getBoolean("inside");
+                      userOrganizationHistories.add(new UserOrganizationHistory(timestamp, placeId, inside));
+                    }
+                    userOrganizationHistories.sort((e1, e2) -> Long.valueOf(e2.getTimestamp()).compareTo(Long.valueOf(e1.getTimestamp())));
+                    CurrentSessionSingleton.getInstance().setUserOrganizationHistory(userOrganizationHistories);
                   }
+                } catch (JSONException e) {
+                  e.printStackTrace();
                 }
-                System.out.println(toReturn);
-                CurrentSessionSingleton.getInstance().setUserHistory(organizationHistoryMap);
-                CurrentSessionSingleton.getInstance().setUserOrganizationHistory(toReturn);
-              } catch (JSONException e) {
-                e.printStackTrace();
-              }
+
             });
     }
 
 
   @NonNull
-  public LiveData< Map<Integer, OrganizationHistory>> getOrgsLiveData() {
-    return CurrentSessionSingleton.getInstance().getUserHistory();
-  }
-
-  @NonNull
-  public LiveData<List<UserOrganizationHistory>> getOrgsLiveData2() {
+  public LiveData<List<UserOrganizationHistory>> getOrgsLiveData() {
     return CurrentSessionSingleton.getInstance().getUserOrganizationHistory();
   }
-
 
 
 
