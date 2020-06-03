@@ -18,6 +18,8 @@ public class MainPageActivity extends StalkerActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_mainpage);
 
+    setSupportActionBar(findViewById(R.id.topAppBarPages));
+
     ((BottomNavigationView) findViewById(R.id.bottom_navigation))
         .setOnNavigationItemSelectedListener(
             menuItem -> {
