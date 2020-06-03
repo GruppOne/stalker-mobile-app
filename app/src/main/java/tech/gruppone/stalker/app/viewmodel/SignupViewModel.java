@@ -44,6 +44,13 @@ public class SignupViewModel extends ViewModel {
     } catch (NoSuchAlgorithmException e) {
       throw new RuntimeException(e);
     }
-    model.signup(new User(-1, email, firstName, lastName, birthDate), hashedPassword);
+    model.signup(
+        User.builder()
+            .email(email)
+            .firstName(firstName)
+            .lastName(lastName)
+            .birthDate(birthDate)
+            .build(),
+        hashedPassword);
   }
 }
