@@ -6,15 +6,22 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.selection.SelectionPredicates;
+import androidx.recyclerview.selection.SelectionTracker;
+import androidx.recyclerview.selection.SelectionTracker.SelectionObserver;
+import androidx.recyclerview.selection.StorageStrategy;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import tech.gruppone.stalker.app.R;
-import tech.gruppone.stalker.app.utility.OrganizationListAdapter;
+import tech.gruppone.stalker.app.view.recyclerview.OrgListItemDetailsLookup;
+import tech.gruppone.stalker.app.view.recyclerview.OrganizationItemKeyProvider;
+import tech.gruppone.stalker.app.view.recyclerview.OrganizationListAdapter;
 import tech.gruppone.stalker.app.viewmodel.fragment.OrganizationsViewModel;
 
 public class OrganizationsFragment extends Fragment {
@@ -49,6 +56,26 @@ public class OrganizationsFragment extends Fragment {
     viewModel.getOrgsLiveData().observe(getViewLifecycleOwner(), adapter::submitList);
 
     recyclerView.setAdapter(adapter);
+
+    SelectionTracker<Long> selectionTracker =
+        new SelectionTracker.Builder<>(
+                "organizationListSelection",
+                recyclerView,
+                new OrganizationItemKeyProvider(recyclerView),
+                new OrgListItemDetailsLookup(recyclerView),
+                StorageStrategy.createLongStorage())
+            .withSelectionPredicate(SelectionPredicates.createSelectAnything())
+            .build();
+
+    selectionTracker.addObserver(
+        new SelectionObserver<Long>() {
+          @Override
+          public void onSelectionChanged() {
+            super.onSelectionChanged();
+          }
+        });
+
+    adapter.setSelectionTracker(selectionTracker);
   }
 
   @Override
