@@ -52,6 +52,8 @@ public class CurrentSessionSingleton {
     @SuppressWarnings("ConstantConditions")
     int id = Integer.parseInt(new JWT(token).getSubject());
 
+    this.setUser(User.builder().id(id).build());
+
     WebSingleton.getInstance()
         .getUserInfo(
             id,
@@ -65,7 +67,13 @@ public class CurrentSessionSingleton {
                 String birthDate = userData.getString("birthDate");
 
                 CurrentSessionSingleton.this.setUser(
-                    new User(id, email, firstName, lastName, birthDate));
+                    User.builder()
+                        .id(id)
+                        .email(email)
+                        .firstName(firstName)
+                        .lastName(lastName)
+                        .birthDate(birthDate)
+                        .build());
               } catch (JSONException e) {
                 throw new RuntimeException(e);
               }

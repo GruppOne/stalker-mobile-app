@@ -102,6 +102,8 @@ public class LoginActivity extends StalkerActivity {
             this,
             user -> {
               if (user != null) {
+                viewModel.getUserLiveData().removeObservers(LoginActivity.this);
+
                 Intent intent = new Intent(LoginActivity.this, MainPageActivity.class);
                 startActivity(intent);
               }
