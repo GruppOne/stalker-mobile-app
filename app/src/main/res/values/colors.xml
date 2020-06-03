@@ -10,7 +10,6 @@
   <color name="whiteBackground">#ffffff</color>
   <color name="textOnMatCard">#000000</color>
   <color name="organizationDescription">#8c8c8c</color>
-  <color name="connectedOrganization">#f5f5f5</color>
   <color name="selectedOrganization">#cacaca</color>
   <color name="listBackground">#ffffff</color>
   <color name="dividerLine">#a0a0a0</color>
