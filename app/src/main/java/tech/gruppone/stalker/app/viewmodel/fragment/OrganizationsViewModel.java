@@ -2,7 +2,6 @@ package tech.gruppone.stalker.app.viewmodel.fragment;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 import java.util.ArrayList;
@@ -27,6 +26,6 @@ public class OrganizationsViewModel extends ViewModel {
 
   public void connect(Iterator<Long> organizationIds) {
     OrganizationModel organizationModel = new OrganizationModel();
-    organizationIds.forEachRemaining(id -> organizationModel.connect(id.intValue()));
+    organizationIds.forEachRemaining(id -> organizationModel.connect(id.intValue(), null));
   }
 }

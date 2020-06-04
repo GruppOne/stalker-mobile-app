@@ -17,6 +17,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import tech.gruppone.stalker.app.BuildConfig;
+import tech.gruppone.stalker.app.business.LdapCredentials;
 import tech.gruppone.stalker.app.business.Organization;
 import tech.gruppone.stalker.app.business.Place;
 import tech.gruppone.stalker.app.business.User;
@@ -159,11 +160,14 @@ public class WebSingleton {
   public void connect(
       int userId,
       int organizationId,
+      @Nullable LdapCredentials ldapCredentials,
       @Nullable Listener<JSONObject> successListener,
       @Nullable ErrorListener errorListener) {
     String fullUrl =
         serverUrl + "/user/" + userId + "/organization/" + organizationId + "/connection";
-    JSONObject body = new JSONObject();
+    // In kotlin this would have been much cuter
+    // val body = ldapCredentials?.toJSON();
+    JSONObject body = ldapCredentials != null ? ldapCredentials.toJSON() : null;
 
     addToRequestQueue(
         new AuthenticatedRequest(Method.POST, fullUrl, body, successListener, errorListener));

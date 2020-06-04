@@ -1,8 +1,10 @@
 package tech.gruppone.stalker.app.model;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.lifecycle.LiveData;
 import java.util.Objects;
+import tech.gruppone.stalker.app.business.LdapCredentials;
 import tech.gruppone.stalker.app.business.Organization;
 import tech.gruppone.stalker.app.utility.CurrentSessionSingleton;
 import tech.gruppone.stalker.app.utility.WebSingleton;
@@ -19,12 +21,13 @@ public class OrganizationModel {
     }
   }
 
-  public void connect(int organizationId) {
+  public void connect(int organizationId, @Nullable LdapCredentials ldapCredentials) {
     WebSingleton.getInstance()
         .connect(
             Objects.requireNonNull(CurrentSessionSingleton.getInstance().getLoggedUser().getValue())
                 .getId(),
             organizationId,
+            ldapCredentials,
             jsonObject -> {
               try {
                 CurrentSessionSingleton.getInstance()
