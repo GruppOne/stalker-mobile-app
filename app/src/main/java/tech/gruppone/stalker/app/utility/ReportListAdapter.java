@@ -9,7 +9,10 @@ import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.DiffUtil.ItemCallback;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Objects;
 import tech.gruppone.stalker.app.R;
 import tech.gruppone.stalker.app.business.UserOrganizationHistory;
@@ -54,13 +57,15 @@ public class ReportListAdapter extends ListAdapter<LiveData<UserOrganizationHist
 
   public static class UserOrganizationViewHolder extends RecyclerView.ViewHolder {
 
-    private TextView Ttimestamp;
+    private TextView TtimestampTime;
+    private TextView TtimestampDate;
     private TextView TplaceName;
     private TextView Tinside;
 
     public UserOrganizationViewHolder(@NonNull View v) {
       super(v);
-      Ttimestamp = v.findViewById(R.id.tvTimestamp);
+      TtimestampDate = v.findViewById(R.id.tvTimestampDate);
+      TtimestampTime = v.findViewById(R.id.tvTimestampTime);
       TplaceName = v.findViewById(R.id.tvPlaceName);
       Tinside = v.findViewById(R.id.tvInside);
     }
@@ -68,10 +73,22 @@ public class ReportListAdapter extends ListAdapter<LiveData<UserOrganizationHist
 
     public void bindTo(@NonNull LiveData<UserOrganizationHistory> userOrganizationHistory) {
       UserOrganizationHistory userOrg = Objects.requireNonNull(userOrganizationHistory.getValue());
-      Ttimestamp.setText(String.valueOf(new Date(userOrg.getTimestamp())));
+
+      TtimestampDate.setText(getDate(userOrg.getTimestamp()));
+      TtimestampTime.setText("at " + getHours(userOrg.getTimestamp()));
       TplaceName.setText(String.valueOf(userOrg.getPlaceId()));
       Tinside.setText(userOrg.getInside() ? "you entered on ": "you went out on");
       TorganizationName.setText(userOrg.getOrganizationName());
+    }
+
+    String getDate(long milliseconds){
+      DateFormat dateFormat = new SimpleDateFormat("EEEE, dd-MM-yyy", Locale.forLanguageTag("ENG"));
+      return dateFormat.format(new Date(milliseconds));
+    }
+
+    String getHours(long milliseconds){
+      DateFormat dateFormat= new SimpleDateFormat("HH:mm");
+      return  dateFormat.format(new Date(milliseconds));
     }
   }
 

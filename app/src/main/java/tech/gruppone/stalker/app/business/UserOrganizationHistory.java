@@ -1,7 +1,5 @@
 package tech.gruppone.stalker.app.business;
 
-import androidx.room.Dao;
-import java.sql.Timestamp;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.json.JSONException;
@@ -16,5 +14,16 @@ public class UserOrganizationHistory {
   Boolean inside;
 
 
+  public UserOrganizationHistory(JSONObject organizationJson, String organizationName) {
+
+    try {
+      timestamp = organizationJson.getLong("timestamp");
+      this.organizationName = organizationName;
+      placeId = organizationJson.getInt("placeId");
+      inside = organizationJson.getBoolean("inside");
+    } catch (JSONException e) {
+      e.printStackTrace();
+    }
+  }
 }
 
