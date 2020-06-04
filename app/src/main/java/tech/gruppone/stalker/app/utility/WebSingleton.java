@@ -168,4 +168,16 @@ public class WebSingleton {
     addToRequestQueue(
         new AuthenticatedRequest(Method.POST, fullUrl, body, successListener, errorListener));
   }
+
+  public void disconnect(
+      int userId,
+      int organizationId,
+      @Nullable Listener<JSONObject> successListener,
+      @Nullable ErrorListener errorListener) {
+    String fullUrl =
+        serverUrl + "/user/" + userId + "/organization/" + organizationId + "/connection";
+
+    addToRequestQueue(
+        new AuthenticatedRequest(Method.DELETE, fullUrl, null, successListener, errorListener));
+  }
 }

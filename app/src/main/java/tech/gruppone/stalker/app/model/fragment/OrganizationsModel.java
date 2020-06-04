@@ -52,7 +52,7 @@ public class OrganizationsModel {
                 JSONArray orgsArray = response.getJSONArray("connectedOrganizationsIds");
 
                 for (int i = 0; i < orgsArray.length(); ++i) {
-                  CurrentSessionSingleton.getInstance().connectOrganization(orgsArray.getInt(i));
+                  CurrentSessionSingleton.getInstance().setConnectedOrganization(orgsArray.getInt(i), true);
                 }
 
                 OrganizationsModel.this.loadConnectedPlaces();
