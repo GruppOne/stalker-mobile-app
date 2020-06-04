@@ -13,6 +13,7 @@ import com.google.android.gms.maps.model.PolygonOptions;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import tech.gruppone.stalker.app.business.LdapCredentials;
 import tech.gruppone.stalker.app.business.Organization;
 import tech.gruppone.stalker.app.business.Place;
 import tech.gruppone.stalker.app.business.Point;
@@ -23,7 +24,12 @@ public class OrganizationViewModel extends ViewModel {
   private LiveData<Organization> organization;
 
   public void connect() {
-    model.connect(requireNonNull(organization.getValue()).getId());
+    model.connect(requireNonNull(organization.getValue()).getId(), null);
+  }
+
+  public void connect(@NonNull String rdn, @NonNull String ldapPassword) {
+    model.connect(
+        requireNonNull(organization.getValue()).getId(), new LdapCredentials(rdn, ldapPassword));
   }
 
   public void disconnect() {
