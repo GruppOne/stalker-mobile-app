@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import lombok.Getter;
+import lombok.Setter;
 import org.json.JSONException;
 import org.json.JSONObject;
 import tech.gruppone.stalker.app.business.Organization;
@@ -19,6 +20,7 @@ import tech.gruppone.stalker.app.business.Place;
 import tech.gruppone.stalker.app.business.Point;
 import tech.gruppone.stalker.app.business.User;
 import tech.gruppone.stalker.app.utility.excpetions.OrganizationNotFoundException;
+import tech.gruppone.stalker.app.utility.web.WebSingleton;
 
 public class CurrentSessionSingleton {
 
@@ -26,7 +28,10 @@ public class CurrentSessionSingleton {
 
   private MutableLiveData<User> loggedUser = new MutableLiveData<>();
 
-  @Getter String jwt = "";
+  @Getter private String jwt = "";
+  @Getter private String anonymousJwt = "";
+
+  @Getter @Setter private boolean anonymous = false;
 
   @SuppressLint("UseSparseArrays")
   private MutableLiveData<Map<Integer, LiveData<Organization>>> organizations =
@@ -43,8 +48,9 @@ public class CurrentSessionSingleton {
     return loggedUser;
   }
 
-  public void setJwt(@NonNull String token) {
+  public void setJwt(@NonNull String token, @NonNull String anonymousToken) {
     jwt = token;
+    anonymousJwt = anonymousToken;
 
     // Suppressed check on null
     // If the token is invalid, the JWT constructor throws
