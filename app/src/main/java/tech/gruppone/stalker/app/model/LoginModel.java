@@ -6,7 +6,7 @@ import org.json.JSONException;
 import tech.gruppone.stalker.app.business.User;
 import tech.gruppone.stalker.app.model.fragment.OrganizationsModel;
 import tech.gruppone.stalker.app.utility.CurrentSessionSingleton;
-import tech.gruppone.stalker.app.utility.WebSingleton;
+import tech.gruppone.stalker.app.utility.web.WebSingleton;
 
 public class LoginModel {
 

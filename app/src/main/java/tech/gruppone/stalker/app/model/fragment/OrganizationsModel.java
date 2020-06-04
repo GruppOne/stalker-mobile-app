@@ -14,7 +14,7 @@ import org.json.JSONException;
 import tech.gruppone.stalker.app.business.Organization;
 import tech.gruppone.stalker.app.business.Place;
 import tech.gruppone.stalker.app.utility.CurrentSessionSingleton;
-import tech.gruppone.stalker.app.utility.WebSingleton;
+import tech.gruppone.stalker.app.utility.web.WebSingleton;
 import tech.gruppone.stalker.app.utility.excpetions.OrganizationNotFoundException;
 
 public class OrganizationsModel {
