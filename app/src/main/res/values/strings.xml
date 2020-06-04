@@ -22,9 +22,12 @@
   <string name="organizations">Organizations</string>
   <string name="connected">Connected</string>
   <string name="report">Report</string>
-  <string name="connect">connect</string>
-  <string name="disconnect">disconnect</string>
+  <string name="connect">Connect</string>
+  <string name="disconnect">Disconnect</string>
   <string name="selected">selected</string>
+  <string name="cancel">Cancel</string>
+  <string name="rdn">RDN</string>
   <string name="connect_to_these_organizations">Connect to these organizations</string>
   <string name="title_activity_organization">Map</string>
+  <string name="ldapCredentialsTitle">LDAP Credentials</string>
 </resources>
