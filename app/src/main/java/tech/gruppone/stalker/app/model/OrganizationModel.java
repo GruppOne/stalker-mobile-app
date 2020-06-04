@@ -27,7 +27,25 @@ public class OrganizationModel {
             organizationId,
             jsonObject -> {
               try {
-                CurrentSessionSingleton.getInstance().connectOrganization(organizationId);
+                CurrentSessionSingleton.getInstance()
+                    .setConnectedOrganization(organizationId, true);
+              } catch (OrganizationNotFoundException e) {
+                throw new RuntimeException(e);
+              }
+            },
+            null);
+  }
+
+  public void disconnect(int organizationId) {
+    WebSingleton.getInstance()
+        .disconnect(
+            Objects.requireNonNull(CurrentSessionSingleton.getInstance().getLoggedUser().getValue())
+                .getId(),
+            organizationId,
+            jsonObject -> {
+              try {
+                CurrentSessionSingleton.getInstance()
+                    .setConnectedOrganization(organizationId, false);
               } catch (OrganizationNotFoundException e) {
                 throw new RuntimeException(e);
               }

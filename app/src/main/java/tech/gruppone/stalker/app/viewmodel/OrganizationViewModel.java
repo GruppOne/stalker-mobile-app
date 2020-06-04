@@ -26,6 +26,10 @@ public class OrganizationViewModel extends ViewModel {
     model.connect(requireNonNull(organization.getValue()).getId());
   }
 
+  public void disconnect() {
+    model.disconnect(requireNonNull(organization.getValue()).getId());
+  }
+
   @NonNull
   public LiveData<Boolean> isConnected() {
     return Transformations.map(organization, Organization::isConnected);
