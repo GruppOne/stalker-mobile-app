@@ -24,6 +24,7 @@
   <string name="report">Report</string>
   <string name="connect">connect</string>
   <string name="disconnect">disconnect</string>
+  <string name="selected">selected</string>
   <string name="connect_to_these_organizations">Connect to these organizations</string>
   <string name="title_activity_organization">Map</string>
 </resources>
