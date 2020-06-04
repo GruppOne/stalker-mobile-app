@@ -15,7 +15,6 @@ import androidx.appcompat.view.ActionMode;
 import androidx.appcompat.view.ActionMode.Callback;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.selection.SelectionPredicates;
 import androidx.recyclerview.selection.SelectionTracker;
 import androidx.recyclerview.selection.SelectionTracker.SelectionObserver;
 import androidx.recyclerview.selection.StorageStrategy;
@@ -23,6 +22,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import tech.gruppone.stalker.app.R;
+import tech.gruppone.stalker.app.view.recyclerview.OnlyPublicSelectionPredicate;
 import tech.gruppone.stalker.app.view.recyclerview.OrgListItemDetailsLookup;
 import tech.gruppone.stalker.app.view.recyclerview.OrganizationItemKeyProvider;
 import tech.gruppone.stalker.app.view.recyclerview.OrganizationListAdapter;
@@ -69,7 +69,7 @@ public class OrganizationsFragment extends Fragment {
                 new OrganizationItemKeyProvider(recyclerView),
                 new OrgListItemDetailsLookup(recyclerView),
                 StorageStrategy.createLongStorage())
-            .withSelectionPredicate(SelectionPredicates.createSelectAnything())
+            .withSelectionPredicate(new OnlyPublicSelectionPredicate())
             .build();
 
     selectionTracker.addObserver(
