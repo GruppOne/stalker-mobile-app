@@ -4,11 +4,15 @@ import static java.util.Objects.requireNonNull;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.ActionMode;
+import androidx.appcompat.view.ActionMode.Callback;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.selection.SelectionPredicates;
@@ -28,6 +32,7 @@ public class OrganizationsFragment extends Fragment {
 
   private OrganizationsViewModel viewModel;
   private View view;
+  private ActionMode actionMode = null;
 
   public OrganizationsFragment() {
     // Required empty public constructor
@@ -72,6 +77,53 @@ public class OrganizationsFragment extends Fragment {
           @Override
           public void onSelectionChanged() {
             super.onSelectionChanged();
+
+            // Safe cast, because we only use AppCompatActivity
+            AppCompatActivity activity =
+                (AppCompatActivity) OrganizationsFragment.this.getActivity();
+
+            if (activity != null) {
+              if (selectionTracker.hasSelection() && actionMode == null) {
+                actionMode =
+                    activity.startSupportActionMode(
+                        new Callback() {
+                          @Override
+                          public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+                            mode.getMenuInflater()
+                                .inflate(R.menu.contextual_action_bar_connect, menu);
+                            return true;
+                          }
+
+                          @Override
+                          public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+                            return true;
+                          }
+
+                          @Override
+                          public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+                            if (item.getItemId() == R.id.connectMenuItem) {
+                              //viewModel.connect(selectionTracker.getSelection().iterator());
+                              selectionTracker.clearSelection();
+                              return true;
+                            }
+                            return false;
+                          }
+
+                          @Override
+                          public void onDestroyActionMode(ActionMode mode) {
+                            selectionTracker.clearSelection();
+                          }
+                        });
+              } else if (!selectionTracker.hasSelection() && actionMode != null) {
+                actionMode.finish();
+                actionMode = null;
+              }
+
+              if (selectionTracker.hasSelection() && actionMode != null) {
+                actionMode.setTitle(
+                    selectionTracker.getSelection().size() + " " + getString(R.string.selected));
+              }
+            }
           }
         });
 
