@@ -52,17 +52,21 @@ public class OrganizationActivity extends FragmentActivity implements OnMapReady
         .isConnected()
         .observe(
             this,
-            aBoolean ->
-                connectButton.setText(
-                    getString(aBoolean ? R.string.connect : R.string.disconnect)));
+            aBoolean -> {
+              connectButton.setText(getString(aBoolean ? R.string.connect : R.string.disconnect));
+
+              if (aBoolean) {
+                connectButton.setOnClickListener(v -> viewModel.connect());
+              } else {
+                connectButton.setOnClickListener(v -> viewModel.disconnect());
+              }
+            });
 
     // Obtain the SupportMapFragment and get notified when the map is ready to be used.
     SupportMapFragment mapFragment =
         Objects.requireNonNull(
             (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map));
     mapFragment.getMapAsync(this);
-
-    connectButton.setOnClickListener(v -> viewModel.connect());
   }
 
   /**
