@@ -5,29 +5,34 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
 import androidx.recyclerview.widget.DiffUtil.ItemCallback;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
+import java.util.Date;
+import java.util.Objects;
 import tech.gruppone.stalker.app.R;
 import tech.gruppone.stalker.app.business.UserOrganizationHistory;
 import tech.gruppone.stalker.app.utility.ReportListAdapter.UserOrganizationViewHolder;
 
-public class ReportListAdapter extends ListAdapter<UserOrganizationHistory, UserOrganizationViewHolder> {
+public class ReportListAdapter extends ListAdapter<LiveData<UserOrganizationHistory>, UserOrganizationViewHolder> {
 
   public ReportListAdapter() {
-    super(    new ItemCallback<UserOrganizationHistory>() {
+    super(    new ItemCallback <LiveData<UserOrganizationHistory>> (){
       @Override
       public boolean areItemsTheSame(
-        @NonNull UserOrganizationHistory oldItem,
-        @NonNull UserOrganizationHistory newItem) {
+        @NonNull LiveData <UserOrganizationHistory> oldItem,
+        @NonNull LiveData<UserOrganizationHistory> newItem) {
         return oldItem.equals(newItem);
       }
 
       @Override
       public boolean areContentsTheSame(
-        @NonNull UserOrganizationHistory oldItem,
-        @NonNull UserOrganizationHistory newItem) {
-        return oldItem.getPlaceId()== oldItem.getPlaceId();
+        @NonNull LiveData<UserOrganizationHistory> oldItem,
+        @NonNull LiveData<UserOrganizationHistory> newItem) {
+        UserOrganizationHistory oldItemValue = oldItem.getValue();
+        UserOrganizationHistory newItemValue = newItem.getValue();
+        return oldItemValue.getPlaceId() == newItemValue.getPlaceId();
       }
     });
   }
@@ -60,10 +65,13 @@ public class ReportListAdapter extends ListAdapter<UserOrganizationHistory, User
       Tinside = v.findViewById(R.id.tvInside);
     }
 
-    public void bindTo(@NonNull UserOrganizationHistory userOrganizationHistory) {
-      Ttimestamp.setText(userOrganizationHistory.getTimestamp());
-      TplaceName.setText(String.valueOf(userOrganizationHistory.getPlaceId()));
-      Tinside.setText(userOrganizationHistory.getInside()== true ? "sei entrato alle ore ": "sei uscito alle ore");
+
+    public void bindTo(@NonNull LiveData<UserOrganizationHistory> userOrganizationHistory) {
+      UserOrganizationHistory userOrg = Objects.requireNonNull(userOrganizationHistory.getValue());
+      Ttimestamp.setText(String.valueOf(new Date(userOrg.getTimestamp())));
+      TplaceName.setText(String.valueOf(userOrg.getPlaceId()));
+      Tinside.setText(userOrg.getInside() ? "you entered on ": "you went out on");
+      TorganizationName.setText(userOrg.getOrganizationName());
     }
   }
 

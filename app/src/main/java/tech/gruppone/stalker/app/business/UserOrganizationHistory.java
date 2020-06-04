@@ -1,21 +1,20 @@
 package tech.gruppone.stalker.app.business;
 
-import lombok.RequiredArgsConstructor;
-import lombok.Value;
+import androidx.room.Dao;
+import java.sql.Timestamp;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-@RequiredArgsConstructor
-@Value
+@AllArgsConstructor
+@Data
 public class UserOrganizationHistory {
 
-  String timestamp;;
+  long timestamp;;
   int placeId;
   Boolean inside;
 
 
-  public UserOrganizationHistory(String timestamp, int placeId, boolean inside) {
-    this.timestamp = timestamp;
-    this.placeId = placeId;
-    this.inside =inside;
-  }
 }
 

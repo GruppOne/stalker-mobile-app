@@ -7,7 +7,9 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import com.auth0.android.jwt.JWT;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -22,6 +24,11 @@ import tech.gruppone.stalker.app.business.Organization;
 import tech.gruppone.stalker.app.business.Place;
 import tech.gruppone.stalker.app.business.Point;
 import tech.gruppone.stalker.app.business.User;
+<<<<<<< HEAD
+=======
+import tech.gruppone.stalker.app.business.UserOrganizationHistory;
+import tech.gruppone.stalker.app.database.UserHistory;
+>>>>>>> 22eb9c3... fix: convert list into a map
 import tech.gruppone.stalker.app.utility.excpetions.OrganizationNotFoundException;
 import tech.gruppone.stalker.app.utility.web.WebSingleton;
 import tech.gruppone.stalker.app.business.Point;
@@ -37,7 +44,12 @@ public class CurrentSessionSingleton {
   @Getter private String jwt = "";
   @Getter private String anonymousJwt = "";
 
+<<<<<<< HEAD
   @Getter @Setter private boolean anonymous = false;
+=======
+
+  private MutableLiveData<Map<Long, LiveData<UserOrganizationHistory>>> userOrganizationHistory = new MutableLiveData<>(new TreeMap<>());
+>>>>>>> 22eb9c3... fix: convert list into a map
 
   @SuppressLint("UseSparseArrays")
   private final MutableLiveData<Map<Integer, LiveData<Organization>>> organizations =
@@ -230,15 +242,26 @@ public class CurrentSessionSingleton {
     return instance;
   }
 
-  public MutableLiveData<List<UserOrganizationHistory>> getUserOrganizationHistory() {
+  /*public MutableLiveData<List<UserOrganizationHistory>> getUserOrganizationHistory() {
     return userOrganizationHistory;
-  }
+  }*/
 
   public void setUserOrganizationHistory(
     List<UserOrganizationHistory> userOrganizationHistory) {
-    this.userOrganizationHistory.postValue(userOrganizationHistory);
+
+    Map<Long, LiveData<UserOrganizationHistory>> map = new TreeMap<>(Collections.reverseOrder());
+
+    for (UserOrganizationHistory userOrgHistory : userOrganizationHistory) {
+      map.put(userOrgHistory.getTimestamp(), new MutableLiveData<>(userOrgHistory));
+    }
+
+    this.userOrganizationHistory.postValue(map);
   }
 
+  @NonNull
+  public LiveData<Map<Long, LiveData<UserOrganizationHistory>>> getUserOrganizationHistory() {
+    return userOrganizationHistory;
+  }
 
 
 }
