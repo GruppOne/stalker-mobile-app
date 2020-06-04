@@ -1,4 +1,4 @@
-package tech.gruppone.stalker.app.utility;
+package tech.gruppone.stalker.app.utility.web;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 import org.json.JSONObject;
 import tech.gruppone.stalker.app.BuildConfig;
+import tech.gruppone.stalker.app.utility.CurrentSessionSingleton;
 
 public class AuthenticatedRequest extends JsonObjectRequest {
   public AuthenticatedRequest(
@@ -29,10 +30,7 @@ public class AuthenticatedRequest extends JsonObjectRequest {
 
     CurrentSessionSingleton sessionSingleton = CurrentSessionSingleton.getInstance();
 
-    String jwt =
-        canBeAnonymous() && sessionSingleton.isAnonymous()
-            ? sessionSingleton.getAnonymousJwt()
-            : sessionSingleton.getJwt();
+    String jwt = anonymous() ? sessionSingleton.getAnonymousJwt() : sessionSingleton.getJwt();
 
     if (!jwt.equals("")) {
       headers.put("Authorization", "Bearer " + jwt);
@@ -43,7 +41,7 @@ public class AuthenticatedRequest extends JsonObjectRequest {
     return headers;
   }
 
-  protected boolean canBeAnonymous() {
+  protected boolean anonymous() {
     return false;
   }
 }
