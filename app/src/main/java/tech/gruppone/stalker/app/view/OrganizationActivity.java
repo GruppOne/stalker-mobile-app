@@ -15,6 +15,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.PolygonOptions;
 import java.util.Objects;
 import tech.gruppone.stalker.app.R;
+import tech.gruppone.stalker.app.view.fragment.LdapDialogFragment;
 import tech.gruppone.stalker.app.viewmodel.OrganizationViewModel;
 
 public class OrganizationActivity extends FragmentActivity implements OnMapReadyCallback {
@@ -52,11 +53,11 @@ public class OrganizationActivity extends FragmentActivity implements OnMapReady
         .isConnected()
         .observe(
             this,
-            aBoolean -> {
-              connectButton.setText(getString(aBoolean ? R.string.connect : R.string.disconnect));
+            connected -> {
+              connectButton.setText(getString(!connected ? R.string.connect : R.string.disconnect));
 
-              if (aBoolean) {
-                connectButton.setOnClickListener(v -> viewModel.connect());
+              if (!connected) {
+                connectButton.setOnClickListener(v -> OrganizationActivity.this.onConnect());
               } else {
                 connectButton.setOnClickListener(v -> viewModel.disconnect());
               }
@@ -67,6 +68,15 @@ public class OrganizationActivity extends FragmentActivity implements OnMapReady
         Objects.requireNonNull(
             (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map));
     mapFragment.getMapAsync(this);
+  }
+
+  private void onConnect() {
+    if (viewModel.isPrivate()) {
+      LdapDialogFragment dialogFragment = new LdapDialogFragment();
+      dialogFragment.setPositiveListener((rdn, password) -> viewModel.connect(rdn, password));
+    } else {
+      viewModel.connect();
+    }
   }
 
   /**
