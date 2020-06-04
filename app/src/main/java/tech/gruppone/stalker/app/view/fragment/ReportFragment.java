@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import java.util.Objects;
 import tech.gruppone.stalker.app.R;
 import tech.gruppone.stalker.app.utility.CurrentSessionSingleton;
 import tech.gruppone.stalker.app.utility.ReportListAdapter;
@@ -18,7 +19,7 @@ import tech.gruppone.stalker.app.viewmodel.fragment.ReportViewModel;
 public class ReportFragment extends Fragment {
 
   private View view;
-  private ReportViewModel reportModel;
+  private ReportViewModel reportViewModel;
 
   public ReportFragment() {
   }
@@ -29,17 +30,20 @@ public class ReportFragment extends Fragment {
   public void onActivityCreated(@Nullable Bundle savedInstanceState) {
     super.onActivityCreated(savedInstanceState);
 
-    reportModel = new ViewModelProvider(this).get(ReportViewModel.class);
+    reportViewModel = new ViewModelProvider(this).get(ReportViewModel.class);
     RecyclerView recyclerView = view.findViewById(R.id.reportRecyclerView);
 
 
     recyclerView.setHasFixedSize(true);
     recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-    reportModel.getUsersHistory(CurrentSessionSingleton.getInstance().getLoggedUser().getValue().getId());
+
+    reportViewModel.getUsersHistory(
+      Objects.requireNonNull(CurrentSessionSingleton.getInstance().getLoggedUser().getValue()).getId());
 
     ReportListAdapter reportListAdapter = new ReportListAdapter();
-    reportModel.getUsersLiveData().observe(getViewLifecycleOwner(), reportListAdapter::submitList);
+    reportViewModel.getUsersLiveData().observe(getViewLifecycleOwner(),
+      reportListAdapter::submitList);
 
 
     recyclerView.setAdapter(reportListAdapter);
@@ -62,6 +66,7 @@ public class ReportFragment extends Fragment {
   }
 
   public void getUsersHistory() {
-    reportModel.getUsersHistory(CurrentSessionSingleton.getInstance().getLoggedUser().getValue().getId());
+    reportViewModel
+      .getUsersHistory(CurrentSessionSingleton.getInstance().getLoggedUser().getValue().getId());
   }
 }

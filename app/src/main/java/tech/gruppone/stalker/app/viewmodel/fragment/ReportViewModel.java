@@ -2,7 +2,9 @@ package tech.gruppone.stalker.app.viewmodel.fragment;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
+import java.util.ArrayList;
 import java.util.List;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -24,9 +26,9 @@ public class ReportViewModel extends ViewModel {
 
 
   @NonNull
-  public LiveData<List<UserOrganizationHistory>> getUsersLiveData() {
+  public LiveData<List<LiveData<UserOrganizationHistory>>> getUsersLiveData() {
 
-    return model.getOrgsLiveData();
+    return Transformations.map(model.getOrgsHistoryLiveData(), input -> new ArrayList<>(input.values()));
   }
 
 }
