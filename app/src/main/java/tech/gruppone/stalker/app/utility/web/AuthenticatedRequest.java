@@ -27,7 +27,12 @@ public class AuthenticatedRequest extends JsonObjectRequest {
 
     headers.put("Content-type", "application/json");
 
-    String jwt = CurrentSessionSingleton.getInstance().getJwt();
+    CurrentSessionSingleton sessionSingleton = CurrentSessionSingleton.getInstance();
+
+    String jwt =
+        canBeAnonymous() && sessionSingleton.isAnonymous()
+            ? sessionSingleton.getAnonymousJwt()
+            : sessionSingleton.getJwt();
 
     if (!jwt.equals("")) {
       headers.put("Authorization", "Bearer " + jwt);
@@ -36,5 +41,9 @@ public class AuthenticatedRequest extends JsonObjectRequest {
     }
 
     return headers;
+  }
+
+  protected boolean canBeAnonymous() {
+    return false;
   }
 }
