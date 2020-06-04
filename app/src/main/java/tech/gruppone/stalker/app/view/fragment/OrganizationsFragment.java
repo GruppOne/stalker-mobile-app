@@ -102,7 +102,7 @@ public class OrganizationsFragment extends Fragment {
                           @Override
                           public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
                             if (item.getItemId() == R.id.connectMenuItem) {
-                              //viewModel.connect(selectionTracker.getSelection().iterator());
+                              viewModel.connect(selectionTracker.getSelection().iterator());
                               selectionTracker.clearSelection();
                               return true;
                             }
