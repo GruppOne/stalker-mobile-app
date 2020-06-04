@@ -1,4 +1,4 @@
-package tech.gruppone.stalker.app.utility;
+package tech.gruppone.stalker.app.utility.web;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,6 +21,7 @@ import tech.gruppone.stalker.app.business.LdapCredentials;
 import tech.gruppone.stalker.app.business.Organization;
 import tech.gruppone.stalker.app.business.Place;
 import tech.gruppone.stalker.app.business.User;
+import tech.gruppone.stalker.app.utility.App;
 
 public class WebSingleton {
 
@@ -122,14 +123,14 @@ public class WebSingleton {
       request.put("inside", true);
       request.put("placeIds", new JSONArray(places));
       request.put("timestampMs", format.format(new Date()));
-      addToRequestQueue(new AuthenticatedRequest(Method.POST, fullUrl, request, null, null));
+      addToRequestQueue(new BarelyAuthenticatedRequest(Method.POST, fullUrl, request, null, null));
     } catch (JSONException ex) {
       throw new RuntimeException(ex);
     }
   }
 
   public void locationUpdateOutside(@NonNull Organization organization, @NonNull Place place) {
-    addToRequestQueue(new AuthenticatedRequest(Method.GET, serverUrl, null, null, null));
+    addToRequestQueue(new BarelyAuthenticatedRequest(Method.GET, serverUrl, null, null, null));
   }
 
   public void getOrganizationList(
