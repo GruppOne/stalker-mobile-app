@@ -5,8 +5,10 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import tech.gruppone.stalker.app.business.Organization;
+import tech.gruppone.stalker.app.model.OrganizationModel;
 import tech.gruppone.stalker.app.model.fragment.ConnectedModel;
 
 public class ConnectedViewModel extends ViewModel {
@@ -16,5 +18,10 @@ public class ConnectedViewModel extends ViewModel {
   public LiveData<List<LiveData<Organization>>> getConnectedOrganizations() {
     return Transformations.map(
         model.getConnectedOrganizations(), input -> new ArrayList<>(input.values()));
+  }
+
+  public void disconnect(Iterator<Long> organizationIds) {
+    OrganizationModel organizationModel = new OrganizationModel();
+    organizationIds.forEachRemaining(id -> organizationModel.disconnect(id.intValue()));
   }
 }
