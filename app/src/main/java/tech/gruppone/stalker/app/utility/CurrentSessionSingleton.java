@@ -115,13 +115,14 @@ public class CurrentSessionSingleton {
     return requireNonNull(organizations.getValue()).isEmpty();
   }
 
-  public void connectOrganization(int organizationId) throws OrganizationNotFoundException {
+  public void setConnectedOrganization(int organizationId, boolean connected)
+      throws OrganizationNotFoundException {
     // Necessary cast, since java generics are invariant
     // We wouldn't need it if they could be covariant (in kotlin, for example)
     MutableLiveData<Organization> organization =
         (MutableLiveData<Organization>) getOrganization(organizationId);
 
-    organization.postValue(requireNonNull(organization.getValue()).withConnected(true));
+    organization.postValue(requireNonNull(organization.getValue()).withConnected(connected));
 
     // Needed to update the recyclerviews every time an organization is connected
     organizations.postValue(organizations.getValue());
