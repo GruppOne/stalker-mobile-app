@@ -1,0 +1,10 @@
+<menu
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto">
+  <item
+    android:id="@+id/connectMenuItem"
+    android:icon="@drawable/ic_call_split_black_24dp"
+    android:title="@string/connect"
+    android:contentDescription="@string/connect_to_these_organizations"
+    app:showAsAction="ifRoom" />
+</menu>
