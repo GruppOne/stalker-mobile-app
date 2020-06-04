@@ -7,7 +7,6 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import com.auth0.android.jwt.JWT;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -27,8 +26,11 @@ import tech.gruppone.stalker.app.business.User;
 <<<<<<< HEAD
 =======
 import tech.gruppone.stalker.app.business.UserOrganizationHistory;
+<<<<<<< HEAD
 import tech.gruppone.stalker.app.database.UserHistory;
 >>>>>>> 22eb9c3... fix: convert list into a map
+=======
+>>>>>>> e6f5a53... fix: modify date and hours representation
 import tech.gruppone.stalker.app.utility.excpetions.OrganizationNotFoundException;
 import tech.gruppone.stalker.app.utility.web.WebSingleton;
 import tech.gruppone.stalker.app.business.Point;
@@ -45,9 +47,12 @@ public class CurrentSessionSingleton {
   @Getter private String anonymousJwt = "";
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   @Getter @Setter private boolean anonymous = false;
 =======
 
+=======
+>>>>>>> e6f5a53... fix: modify date and hours representation
   private MutableLiveData<Map<Long, LiveData<UserOrganizationHistory>>> userOrganizationHistory = new MutableLiveData<>(new TreeMap<>());
 >>>>>>> 22eb9c3... fix: convert list into a map
 
@@ -241,10 +246,6 @@ public class CurrentSessionSingleton {
     }
     return instance;
   }
-
-  /*public MutableLiveData<List<UserOrganizationHistory>> getUserOrganizationHistory() {
-    return userOrganizationHistory;
-  }*/
 
   public void setUserOrganizationHistory(
     List<UserOrganizationHistory> userOrganizationHistory) {

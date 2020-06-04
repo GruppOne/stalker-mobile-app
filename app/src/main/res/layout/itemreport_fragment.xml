@@ -5,11 +5,11 @@
   android:layout_height="wrap_content"
   android:orientation="vertical">
   <TextView
-    android:id="@+id/tvInside"
+    android:id="@+id/tvOrganizationName"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:textColor="@color/colorAccent"
-  />
+    />
   <TextView
     android:id="@+id/tvPlaceName"
     android:layout_width="wrap_content"
@@ -17,7 +17,19 @@
     android:textColor="@color/colorAccent"
     />
   <TextView
-    android:id="@+id/tvTimestamp"
+    android:id="@+id/tvInside"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textColor="@color/colorAccent"
+    />
+  <TextView
+    android:id="@+id/tvTimestampDate"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textColor="@color/colorAccent"
+    />
+  <TextView
+    android:id="@+id/tvTimestampTime"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:textColor="@color/colorAccent"
