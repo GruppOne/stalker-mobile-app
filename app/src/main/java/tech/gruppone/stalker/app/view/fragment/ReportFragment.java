@@ -2,8 +2,12 @@ package tech.gruppone.stalker.app.view.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
+import android.widget.SearchView.OnQueryTextListener;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -38,13 +42,7 @@ public class ReportFragment extends Fragment {
     recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
 
-    reportViewModel.getUsersHistory(
-      Objects.requireNonNull(CurrentSessionSingleton.getInstance().getLoggedUser().getValue()).getId());
-
     ReportListAdapter reportListAdapter = new ReportListAdapter();
-    reportViewModel.getUsersLiveData().observe(getViewLifecycleOwner(),
-      reportListAdapter::submitList);
-
 
     recyclerView.setAdapter(reportListAdapter);
 
@@ -59,6 +57,7 @@ public class ReportFragment extends Fragment {
     @Nullable ViewGroup container,
     @Nullable Bundle savedInstanceState) {
     view = inflater.inflate(R.layout.report_fragment, container, false);
+    view.findViewById(R.id.app_bar_search);
 
     view.findViewById(R.id.reportReloadButton)
       .setOnClickListener(v -> ReportFragment.this.getUsersHistory());

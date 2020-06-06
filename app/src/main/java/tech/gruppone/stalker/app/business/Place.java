@@ -7,12 +7,14 @@ import javax.vecmath.Vector3d;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 @EqualsAndHashCode
 @AllArgsConstructor
+@NoArgsConstructor
 public class Place {
 
   private enum Position {
@@ -21,14 +23,17 @@ public class Place {
     RIGHT
   }
 
-  @Getter private final int id;
-
-  @Getter private final List<Point> polyLine;
+  @Getter private int id;
+  @Getter private String name;
+  @Getter private String address;
+  @Getter private String city;
+  @Getter private List<Point> polyLine;
 
   public Place(@NonNull JSONObject jsonPlace) {
     try {
       id = jsonPlace.getInt("id");
       JSONObject data = jsonPlace.getJSONObject("data");
+      name = data.getString("name");
 
       polyLine = new ArrayList<>();
 
@@ -41,6 +46,9 @@ public class Place {
             Point.buildFromDegrees(
                 jsonPoint.getDouble("longitude"), jsonPoint.getDouble("latitude")));
       }
+      JSONObject placeInformation = data.getJSONObject("placeInfo");
+      address = placeInformation.getString("address");
+      city = placeInformation.getString("city");
     } catch (JSONException e) {
       throw new RuntimeException(e);
     }

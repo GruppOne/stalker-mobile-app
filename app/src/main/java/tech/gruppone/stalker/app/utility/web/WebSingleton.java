@@ -185,6 +185,7 @@ public class WebSingleton {
         new AuthenticatedRequest(Method.GET, fullUrl, null, successListener, errorListener));
   }
 
+
   public void connect(
       int userId,
       int organizationId,

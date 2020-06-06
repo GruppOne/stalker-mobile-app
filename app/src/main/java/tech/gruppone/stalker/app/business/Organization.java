@@ -6,6 +6,7 @@ import java.util.List;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.NoArgsConstructor;
 import lombok.Value;
 import lombok.With;
 import org.json.JSONException;
@@ -47,5 +48,15 @@ public class Organization {
       }
     }
     return ret;
+  }
+
+  public Place getPlaceWithOrganizationId(int placeId){
+    Place place = new Place();
+    for(Place p : places){
+      if(placeId == p.getId()){
+         place = p;
+      }
+    }
+    return place;
   }
 }
