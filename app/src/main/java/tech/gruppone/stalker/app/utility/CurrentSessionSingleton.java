@@ -178,7 +178,7 @@ public class CurrentSessionSingleton {
   public LiveData<Organization> getOrganization(int organizationId)
       throws OrganizationNotFoundException {
     LiveData<Organization> organization =
-        requireNonNull(organizations.getValue()).get(organizationId);
+        Objects.requireNonNull(organizations.getValue()).get(organizationId);
 
     if (organization == null) {
       throw new OrganizationNotFoundException(

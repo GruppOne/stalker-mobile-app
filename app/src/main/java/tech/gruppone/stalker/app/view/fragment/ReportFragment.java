@@ -57,7 +57,6 @@ public class ReportFragment extends Fragment {
     @Nullable ViewGroup container,
     @Nullable Bundle savedInstanceState) {
     view = inflater.inflate(R.layout.report_fragment, container, false);
-    view.findViewById(R.id.app_bar_search);
 
     view.findViewById(R.id.reportReloadButton)
       .setOnClickListener(v -> ReportFragment.this.getUsersHistory());
