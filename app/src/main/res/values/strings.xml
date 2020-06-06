@@ -27,6 +27,10 @@
   <string name="selected">selected</string>
   <string name="cancel">Cancel</string>
   <string name="rdn">RDN</string>
+  <string name="goAnonymous">Become anonymous</string>
+  <string name="goAnonymousDescription">Prevent Stalker from associating your presence in monitored places with your account</string>
+  <string name="goKnown">Become known</string>
+  <string name="goKnownDescription">Let @string/app_name associate your presence in monitored places with your account</string>
   <string name="connect_to_these_organizations">Connect to these organizations</string>
   <string name="title_activity_organization">Map</string>
   <string name="ldapCredentialsTitle">LDAP Credentials</string>
