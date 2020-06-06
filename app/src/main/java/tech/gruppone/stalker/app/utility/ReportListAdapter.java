@@ -123,7 +123,7 @@ public class ReportListAdapter  extends ListAdapter<LiveData<UserOrganizationHis
       TplaceName.setText(userOrg.getPlace().getName());
       Tinside.setText(userOrg.getInside() ? "you entered on ": "you went out on");
       TorganizationName.setText(userOrg.getOrganizationName());
-      Taddress.setText(userOrg.getPlace().getAddress());
+      Taddress.setText(userOrg.getPlace().getAddress() + ", ");
       Tcity.setText(userOrg.getPlace().getCity());
     }
 
