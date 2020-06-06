@@ -1,5 +1,6 @@
 package tech.gruppone.stalker.app.business;
 
+import java.util.Map;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.json.JSONException;
@@ -12,18 +13,22 @@ public class UserOrganizationHistory {
   long timestamp;;
   int placeId;
   Boolean inside;
+  Place place;
 
 
-  public UserOrganizationHistory(JSONObject organizationJson, String organizationName) {
+  public UserOrganizationHistory(JSONObject organizationJson, Organization organization) {
 
     try {
       timestamp = organizationJson.getLong("timestamp");
-      this.organizationName = organizationName;
+      this.organizationName = organization.getName();
       placeId = organizationJson.getInt("placeId");
       inside = organizationJson.getBoolean("inside");
-    } catch (JSONException e) {
+      place = organization.getPlaceWithOrganizationId(placeId);
+      }
+    catch (JSONException e) {
       e.printStackTrace();
     }
   }
+
 }
 
