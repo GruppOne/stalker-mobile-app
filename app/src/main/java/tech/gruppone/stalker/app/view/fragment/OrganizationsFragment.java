@@ -34,7 +34,7 @@ public class OrganizationsFragment extends Fragment {
   private View view;
 
   // To get why this is protected instead of private, see ConnectedFragment::onActivityCreated()
-  protected ActionMode actionMode = null;
+  @Nullable protected ActionMode actionMode = null;
 
   public OrganizationsFragment() {
     // Required empty public constructor
