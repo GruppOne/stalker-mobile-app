@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import android.os.Bundle;
 import android.view.Menu;
+import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
@@ -32,18 +33,18 @@ public class MainPageActivity extends StalkerActivity {
 
     setSupportActionBar(topAppBar);
 
-    requireNonNull(getSupportActionBar()).invalidateOptionsMenu();
-
-    topAppBar.getMenu().add("bubu");
-
-    requireNonNull(getSupportActionBar()).invalidateOptionsMenu();
-
     topAppBar.setOnMenuItemClickListener(
         item -> {
           if (item.getItemId() == R.id.anonymousMenuItem) {
             viewModel.toggleAnonymous();
 
             boolean anonymous = CurrentSessionSingleton.getInstance().isAnonymous();
+
+            Toast.makeText(
+                    this,
+                    anonymous ? getString(R.string.wentAnonymous) : getString(R.string.wentKnown),
+                    Toast.LENGTH_SHORT)
+                .show();
 
             item.setIcon(
                 anonymous
