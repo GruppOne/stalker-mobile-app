@@ -1,17 +1,14 @@
 package tech.gruppone.stalker.app.business;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Test;
-import org.mockito.Mockito;
 
 public class OrganizationTest {
 
@@ -23,18 +20,14 @@ public class OrganizationTest {
     int id = 1;
     String name = "unipd";
     String description = "unipd";
-    boolean priv = true;
-    JSONArray jsonPlaces = mock(JSONArray.class);
+    String priv = "private";
 
     try {
       when(jsonOrg.getInt("id")).thenReturn(id);
       when(jsonOrg.getJSONObject("data")).thenReturn(jsonData);
       when(jsonData.getString("name")).thenReturn(name);
       when(jsonData.getString("description")).thenReturn(description);
-      when(jsonData.getBoolean("isPrivate")).thenReturn(priv);
-      when(jsonData.getJSONArray("places")).thenReturn(jsonPlaces);
-
-      when(jsonPlaces.length()).thenReturn(0);
+      when(jsonData.getString("organizationType")).thenReturn(priv);
     } catch (JSONException e) {
       throw new RuntimeException(e);
     }
@@ -56,33 +49,14 @@ public class OrganizationTest {
     int id = 1;
     String name = "unipd";
     String description = "unipd";
-    boolean priv = true;
-    JSONArray jsonPlaces = mock(JSONArray.class);
-    JSONObject jsonPlace = mock(JSONObject.class);
-    JSONObject placeData = mock(JSONObject.class);
-    JSONArray jsonPolyline = Mockito.mock(JSONArray.class);
-    JSONObject jsonPoint = Mockito.mock(JSONObject.class);
+    String priv = "private";
 
     try {
       when(jsonOrg.getInt("id")).thenReturn(id);
       when(jsonOrg.getJSONObject("data")).thenReturn(jsonData);
       when(jsonData.getString("name")).thenReturn(name);
       when(jsonData.getString("description")).thenReturn(description);
-      when(jsonData.getBoolean("isPrivate")).thenReturn(priv);
-      when(jsonData.getJSONArray("places")).thenReturn(jsonPlaces);
-
-      when(jsonPlaces.length()).thenReturn(1);
-      when(jsonPlaces.getJSONObject(0)).thenReturn(jsonPlace);
-
-      Mockito.when(jsonPlace.getInt("id")).thenReturn(id);
-      Mockito.when(jsonPlace.getJSONObject("data")).thenReturn(placeData);
-      Mockito.when(placeData.getJSONArray("polygon")).thenReturn(jsonPolyline);
-
-      Mockito.when(jsonPolyline.length()).thenReturn(1);
-      Mockito.when(jsonPolyline.getJSONObject(0)).thenReturn(jsonPoint);
-
-      Mockito.when(jsonPoint.getDouble("longitude")).thenReturn(0.0);
-      Mockito.when(jsonPoint.getDouble("latitude")).thenReturn(0.0);
+      when(jsonData.getString("organizationType")).thenReturn(priv);
     } catch (JSONException e) {
       throw new RuntimeException(e);
     }
@@ -93,7 +67,6 @@ public class OrganizationTest {
     // Assert
     assertEquals(id, sut.getId());
     assertEquals(name, sut.getName());
-    assertNotEquals(new ArrayList<Place>(), sut.getPlaces());
   }
 
   @Test
