@@ -1,11 +1,13 @@
 package tech.gruppone.stalker.app.business;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import androidx.annotation.NonNull;
 import lombok.Value;
 import lombok.experimental.NonFinal;
 
 @Value
-public class Point {
+public class Point implements Parcelable {
 
   double x;
   double y;
@@ -21,6 +23,39 @@ public class Point {
     // TODO implement reverse Mercator projection
     longitude = 0;
     latitude = 0;
+  }
+
+  protected Point(Parcel in) {
+    x = in.readDouble();
+    y = in.readDouble();
+    longitude = in.readDouble();
+    latitude = in.readDouble();
+  }
+
+  public static final Creator<Point> CREATOR =
+      new Creator<Point>() {
+        @Override
+        public Point createFromParcel(Parcel in) {
+          return new Point(in);
+        }
+
+        @Override
+        public Point[] newArray(int size) {
+          return new Point[size];
+        }
+      };
+
+  @Override
+  public int describeContents() {
+    return 0;
+  }
+
+  @Override
+  public void writeToParcel(Parcel dest, int flags) {
+    dest.writeDouble(x);
+    dest.writeDouble(y);
+    dest.writeDouble(longitude);
+    dest.writeDouble(latitude);
   }
 
   @NonNull
