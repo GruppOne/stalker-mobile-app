@@ -66,7 +66,7 @@ public class OrganizationListAdapter extends ListAdapter<LiveData<Organization>,
     @Override
     public void onClick(@NonNull View v) {
       Intent intent = new Intent(context, OrganizationActivity.class);
-      intent.putExtra("organizationId", id);
+      intent.putExtra("tech.gruppone.stalker.app.organizationId", id);
       context.startActivity(intent);
     }
   }
