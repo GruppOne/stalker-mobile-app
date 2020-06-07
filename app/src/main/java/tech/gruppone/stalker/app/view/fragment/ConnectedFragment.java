@@ -52,7 +52,13 @@ public class ConnectedFragment extends Fragment {
   public void onActivityCreated(@Nullable Bundle savedInstanceState) {
     super.onActivityCreated(savedInstanceState);
 
-    viewModel = new ViewModelProvider(this).get(ConnectedViewModel.class);
+    this.viewModel = new ViewModelProvider(this).get(ConnectedViewModel.class);
+
+    // Without this local variable the jvm couldn't access the private field from the callbacks, so
+    // the compiler would create new accessors (getter/setter) for this purpose. Again, this is java
+    // being needlessly problematic just to be extra. Java and the jvm are developed together. Why
+    // add stuff to the language if the jvm doesn't support it?
+    ConnectedViewModel viewModel = this.viewModel;
 
     RecyclerView recyclerView = view.findViewById(R.id.connectedRecyclerView);
     recyclerView.setHasFixedSize(true);

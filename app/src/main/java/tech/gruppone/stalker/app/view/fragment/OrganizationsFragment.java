@@ -32,7 +32,9 @@ public class OrganizationsFragment extends Fragment {
 
   private OrganizationsViewModel viewModel;
   private View view;
-  private ActionMode actionMode = null;
+
+  // To get why this is protected instead of private, see ConnectedFragment::onActivityCreated()
+  protected ActionMode actionMode = null;
 
   public OrganizationsFragment() {
     // Required empty public constructor
@@ -43,6 +45,9 @@ public class OrganizationsFragment extends Fragment {
     super.onActivityCreated(savedInstanceState);
 
     viewModel = new ViewModelProvider(this).get(OrganizationsViewModel.class);
+
+    // To get the reason for this local variable, see ConnectedFragment::onActivityCreated()
+    OrganizationsViewModel viewModel = this.viewModel;
 
     RecyclerView recyclerView = view.findViewById(R.id.organizationRecyclerView);
     recyclerView.setHasFixedSize(true);
