@@ -7,8 +7,8 @@ import java.util.Objects;
 import tech.gruppone.stalker.app.business.LdapCredentials;
 import tech.gruppone.stalker.app.business.Organization;
 import tech.gruppone.stalker.app.utility.CurrentSessionSingleton;
-import tech.gruppone.stalker.app.utility.web.WebSingleton;
 import tech.gruppone.stalker.app.utility.excpetions.OrganizationNotFoundException;
+import tech.gruppone.stalker.app.utility.web.WebSingleton;
 
 public class OrganizationModel {
 

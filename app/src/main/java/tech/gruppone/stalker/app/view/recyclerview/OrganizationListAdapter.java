@@ -71,8 +71,7 @@ public class OrganizationListAdapter extends ListAdapter<LiveData<Organization>,
     }
   }
 
-  @Setter
-  private SelectionTracker<Long> selectionTracker=null;
+  @Setter private SelectionTracker<Long> selectionTracker = null;
 
   public OrganizationListAdapter() {
     super(
