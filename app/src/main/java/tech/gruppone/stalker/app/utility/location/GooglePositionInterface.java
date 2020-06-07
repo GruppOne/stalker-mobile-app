@@ -35,7 +35,7 @@ public abstract class GooglePositionInterface {
           @Override
           public void onLocationResult(LocationResult locationResult) {
             Intent intent = new Intent();
-            intent.putExtra("lastLocation", locationResult.getLastLocation());
+            intent.putExtra("tech.gruppone.stalker.app.lastLocation", locationResult.getLastLocation());
             LocationNotifier.enqueue(App.getAppContext(), intent);
           }
         },
