@@ -10,6 +10,7 @@ public class LdapCredentials {
   @NonNull String rdn;
   @NonNull String password;
 
+  @NonNull
   public JSONObject toJSON() {
     JSONObject object = new JSONObject();
 

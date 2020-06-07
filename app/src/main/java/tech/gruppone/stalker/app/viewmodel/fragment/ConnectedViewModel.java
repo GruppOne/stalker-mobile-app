@@ -20,7 +20,7 @@ public class ConnectedViewModel extends ViewModel {
         model.getConnectedOrganizations(), input -> new ArrayList<>(input.values()));
   }
 
-  public void disconnect(Iterator<Long> organizationIds) {
+  public void disconnect(@NonNull Iterator<Long> organizationIds) {
     OrganizationModel organizationModel = new OrganizationModel();
     organizationIds.forEachRemaining(id -> organizationModel.disconnect(id.intValue()));
   }

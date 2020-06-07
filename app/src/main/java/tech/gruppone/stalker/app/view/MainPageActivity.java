@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import android.os.Bundle;
 import android.view.Menu;
 import android.widget.Toast;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
@@ -106,7 +107,7 @@ public class MainPageActivity extends StalkerActivity {
   private void setReportPage() {}
 
   @Override
-  public boolean onCreateOptionsMenu(Menu menu) {
+  public boolean onCreateOptionsMenu(@NonNull Menu menu) {
     getMenuInflater().inflate(R.menu.app_bar_menu, menu);
     return true;
   }

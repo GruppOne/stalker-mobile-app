@@ -24,7 +24,7 @@ public class OrganizationsViewModel extends ViewModel {
     return Transformations.map(model.getOrgsLiveData(), input -> new ArrayList<>(input.values()));
   }
 
-  public void connect(Iterator<Long> organizationIds) {
+  public void connect(@NonNull Iterator<Long> organizationIds) {
     OrganizationModel organizationModel = new OrganizationModel();
     organizationIds.forEachRemaining(id -> organizationModel.connect(id.intValue(), null));
   }
