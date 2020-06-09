@@ -63,17 +63,32 @@ public class OrganizationActivity extends FragmentActivity implements OnMapReady
               }
             });
 
-    // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-    SupportMapFragment mapFragment =
-        Objects.requireNonNull(
-            (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map));
-    mapFragment.getMapAsync(this);
+    viewModel
+        .areTherePlaces()
+        .observe(
+            this,
+            placesPresent -> {
+              if (placesPresent) {
+                viewModel.areTherePlaces().removeObservers(OrganizationActivity.this);
+
+                // Obtain the SupportMapFragment and get notified when the map is ready to be
+                // used.
+                SupportMapFragment mapFragment =
+                    Objects.requireNonNull(
+                        (SupportMapFragment)
+                            getSupportFragmentManager().findFragmentById(R.id.map));
+                mapFragment.getMapAsync(OrganizationActivity.this);
+              } else {
+                viewModel.loadPlaces();
+              }
+            });
   }
 
   private void onConnect() {
     if (viewModel.isPrivate()) {
       LdapDialogFragment dialogFragment = new LdapDialogFragment();
       dialogFragment.setPositiveListener((rdn, password) -> viewModel.connect(rdn, password));
+      dialogFragment.show(getSupportFragmentManager(), "connectionLDAP");
     } else {
       viewModel.connect();
     }
