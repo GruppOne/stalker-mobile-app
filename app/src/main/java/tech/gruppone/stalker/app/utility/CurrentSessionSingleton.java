@@ -129,8 +129,15 @@ public class CurrentSessionSingleton {
         (MutableLiveData<Organization>) getOrganization(organizationId);
 
     organization.postValue(requireNonNull(organization.getValue()).withConnected(connected));
+  }
 
-    // Needed to update the recyclerviews every time an organization is connected
+  // This method needs to get called after changes to the organizations. It reloads the map
+  // livedata, posting the same value it already holds, so the same map gets "emitted", but with
+  // updated entries. Is this the best way to do it? No. Is it al least one *right* way to do this?
+  // Also no. But is it the only way I found? Yes. Would I find something better if I had more time?
+  // Also yes (I hope). Do I have this time? Unfortunately, no. Henceforth, this is what we're stuck
+  // with.
+  public void doneChanges() {
     organizations.postValue(organizations.getValue());
   }
 
