@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.Transformations;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +38,20 @@ public class OrganizationsModel {
 
               CurrentSessionSingleton.getInstance().setOrganizationList(organizations);
 
-              OrganizationsModel.this.loadConnectedOrganizations();
+              CurrentSessionSingleton.getInstance()
+                  .getOrganizations()
+                  .observeForever(
+                      new Observer<Map<Integer, LiveData<Organization>>>() {
+                        @Override
+                        public void onChanged(
+                            Map<Integer, LiveData<Organization>> integerLiveDataMap) {
+                          CurrentSessionSingleton.getInstance()
+                              .getOrganizations()
+                              .removeObserver(this);
+
+                          OrganizationsModel.this.loadConnectedOrganizations();
+                        }
+                      });
             },
             null);
   }
@@ -52,12 +66,27 @@ public class OrganizationsModel {
                 JSONArray orgsArray = response.getJSONArray("connectedOrganizationsIds");
 
                 for (int i = 0; i < orgsArray.length(); ++i) {
+                  int organizationId = orgsArray.getInt(i);
                   CurrentSessionSingleton.getInstance()
-                      .setConnectedOrganization(orgsArray.getInt(i), true);
+                      .setConnectedOrganization(organizationId, true);
+
+                  LiveData<Organization> organizationLiveData =
+                      CurrentSessionSingleton.getInstance().getOrganization(organizationId);
+
+                  organizationLiveData.observeForever(
+                      new Observer<Organization>() {
+                        @Override
+                        public void onChanged(Organization organization) {
+                          organizationLiveData.removeObserver(this);
+
+                          if (organization.isConnected()) {
+                            OrganizationsModel.this.loadConnectedPlaces(organizationId);
+                          }
+                        }
+                      });
                 }
 
                 CurrentSessionSingleton.getInstance().doneChanges();
-                OrganizationsModel.this.loadConnectedPlaces();
               } catch (JSONException | OrganizationNotFoundException e) {
                 throw new RuntimeException(e);
               }
@@ -65,35 +94,26 @@ public class OrganizationsModel {
             null);
   }
 
-  public void loadConnectedPlaces() {
-    for (LiveData<Organization> organizationLiveData :
-        requireNonNull(CurrentSessionSingleton.getInstance().getOrganizations().getValue())
-            .values()) {
-      Organization organization = requireNonNull(organizationLiveData.getValue());
+  protected void loadConnectedPlaces(int organizationId) {
+    WebSingleton.getInstance()
+        .getPlaces(
+            organizationId,
+            response -> {
+              try {
+                JSONArray placesArray = response.getJSONArray("places");
 
-      if (organization.isConnected()) {
-        WebSingleton.getInstance()
-            .getPlaces(
-                organization.getId(),
-                response -> {
-                  try {
-                    JSONArray placesArray = response.getJSONArray("places");
+                List<Place> places = new ArrayList<>();
 
-                    List<Place> places = new ArrayList<>();
+                for (int i = 0; i < placesArray.length(); ++i) {
+                  places.add(new Place(placesArray.getJSONObject(i)));
+                }
 
-                    for (int i = 0; i < placesArray.length(); ++i) {
-                      places.add(new Place(placesArray.getJSONObject(i)));
-                    }
-
-                    CurrentSessionSingleton.getInstance()
-                        .updatePlaces(organization.getId(), places);
-                  } catch (JSONException | OrganizationNotFoundException e) {
-                    throw new RuntimeException(e);
-                  }
-                },
-                null);
-      }
-    }
+                CurrentSessionSingleton.getInstance().updatePlaces(organizationId, places);
+              } catch (JSONException | OrganizationNotFoundException e) {
+                throw new RuntimeException(e);
+              }
+            },
+            null);
   }
 
   @NonNull
