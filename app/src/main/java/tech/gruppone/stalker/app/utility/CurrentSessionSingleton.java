@@ -26,7 +26,7 @@ public class CurrentSessionSingleton {
 
   private static CurrentSessionSingleton instance;
 
-  private MutableLiveData<User> loggedUser = new MutableLiveData<>();
+  private final MutableLiveData<User> loggedUser = new MutableLiveData<>();
 
   @Getter private String jwt = "";
   @Getter private String anonymousJwt = "";
@@ -34,7 +34,7 @@ public class CurrentSessionSingleton {
   @Getter @Setter private boolean anonymous = false;
 
   @SuppressLint("UseSparseArrays")
-  private MutableLiveData<Map<Integer, LiveData<Organization>>> organizations =
+  private final MutableLiveData<Map<Integer, LiveData<Organization>>> organizations =
       new MutableLiveData<>(new TreeMap<>());
 
   private CurrentSessionSingleton() {}
@@ -48,17 +48,33 @@ public class CurrentSessionSingleton {
     return loggedUser;
   }
 
-  public void setJwt(@NonNull String token, @NonNull String anonymousToken) {
+  public void setJwt(@NonNull String token) {
     jwt = token;
-    anonymousJwt = anonymousToken;
 
     // Suppressed check on null
     // If the token is invalid, the JWT constructor throws
     // If the token is valid, then it's coming out of our server, and so it holds the id
     @SuppressWarnings("ConstantConditions")
-    int id = Integer.parseInt(new JWT(token).getSubject());
+    final int id = Integer.parseInt(new JWT(token).getSubject());
 
     this.setUser(User.builder().id(id).build());
+
+    WebSingleton.getInstance()
+        .getAnonymousJwt(
+            response -> {
+              try {
+                CurrentSessionSingleton.this.setAnonymousJwt(response.getString("anonymousJwt"));
+              } catch (JSONException e) {
+                throw new RuntimeException(e);
+              }
+            },
+            null);
+  }
+
+  private void setAnonymousJwt(@NonNull String anonymousToken) {
+    anonymousJwt = anonymousToken;
+
+    final int id = requireNonNull(CurrentSessionSingleton.this.loggedUser.getValue()).getId();
 
     WebSingleton.getInstance()
         .getUserInfo(
