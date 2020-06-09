@@ -20,7 +20,7 @@ import tech.gruppone.stalker.app.business.Point;
 import tech.gruppone.stalker.app.model.OrganizationModel;
 
 public class OrganizationViewModel extends ViewModel {
-  private OrganizationModel model = new OrganizationModel();
+  private final OrganizationModel model = new OrganizationModel();
   private LiveData<Organization> organization;
 
   public void connect() {
@@ -92,6 +92,14 @@ public class OrganizationViewModel extends ViewModel {
 
   public void retrieveOrganization(int organizationId) {
     organization = model.getOrganization(organizationId);
+  }
+
+  public LiveData<Boolean> areTherePlaces() {
+    return Transformations.map(organization, input -> !input.getPlaces().isEmpty());
+  }
+
+  public void loadPlaces() {
+    model.loadPlaces(requireNonNull(organization.getValue()).getId());
   }
 
   public int getRandomColor() {
