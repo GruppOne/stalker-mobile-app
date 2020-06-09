@@ -1,16 +1,22 @@
 package tech.gruppone.stalker.app.viewmodel;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.Locale;
 import tech.gruppone.stalker.app.business.User;
+import tech.gruppone.stalker.app.model.LoginModel;
 import tech.gruppone.stalker.app.model.SignupModel;
 
 public class SignupViewModel extends ViewModel {
   SignupModel model = new SignupModel();
+
+  public LiveData<User> getUserLiveData() {
+    return new LoginModel().getUserLiveData();
+  }
 
   public boolean invalidEmail(@NonNull String email) {
     // maybe this regex could be more restrictive
