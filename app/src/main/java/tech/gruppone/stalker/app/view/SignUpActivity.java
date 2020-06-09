@@ -2,6 +2,7 @@ package tech.gruppone.stalker.app.view;
 
 import static java.util.Objects.requireNonNull;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.EditText;
 import androidx.annotation.Nullable;
@@ -91,6 +92,21 @@ public class SignUpActivity extends StalkerActivity {
 
               if (ok) {
                 viewModel.signup(email, password, firstName, lastName, birthDate);
+              }
+            });
+
+    viewModel
+        .getUserLiveData()
+        .observe(
+            this,
+            user -> {
+              if (user != null && user.isComplete()) {
+                viewModel.getUserLiveData().removeObservers(SignUpActivity.this);
+
+                Intent intent = new Intent(SignUpActivity.this, MainPageActivity.class);
+                startActivity(intent);
+
+                finish();
               }
             });
 

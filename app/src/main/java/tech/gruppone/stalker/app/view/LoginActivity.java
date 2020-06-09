@@ -101,7 +101,7 @@ public class LoginActivity extends StalkerActivity {
         .observe(
             this,
             user -> {
-              if (user != null) {
+              if (user != null && user.isComplete()) {
                 viewModel.getUserLiveData().removeObservers(LoginActivity.this);
 
                 Intent intent = new Intent(LoginActivity.this, MainPageActivity.class);
