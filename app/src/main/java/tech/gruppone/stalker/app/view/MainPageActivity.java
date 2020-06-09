@@ -3,6 +3,7 @@ package tech.gruppone.stalker.app.view;
 import static java.util.Objects.requireNonNull;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
@@ -62,29 +63,36 @@ public class MainPageActivity extends StalkerActivity {
           return false;
         });
 
-    ((BottomNavigationView) findViewById(R.id.bottom_navigation))
-        .setOnNavigationItemSelectedListener(
-            menuItem -> {
-              switch (menuItem.getItemId()) {
-                case R.id.organizations_page:
-                  MainPageActivity.this.setOrganizationsPage();
-                  return true;
-                case R.id.connected_page:
-                  MainPageActivity.this.setConnectedPage();
-                  return true;
-                case R.id.report_page:
-                  MainPageActivity.this.setReportPage();
-                  return true;
-                default:
-                  return false;
-              }
-            });
+    BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
 
-    ((BottomNavigationView) findViewById(R.id.bottom_navigation))
-        .setOnNavigationItemReselectedListener(menuItem -> {});
+    bottomNavigationView.setOnNavigationItemSelectedListener(
+        menuItem -> {
+          viewModel.setSelectedMenuItemId(menuItem.getItemId());
+          switch (menuItem.getItemId()) {
+            case R.id.organizations_page:
+              MainPageActivity.this.setOrganizationsPage();
+              return true;
+            case R.id.connected_page:
+              MainPageActivity.this.setConnectedPage();
+              return true;
+            case R.id.report_page:
+              MainPageActivity.this.setReportPage();
+              return true;
+            default:
+              return false;
+          }
+        });
 
-    setOrganizationsPage();
+    //bottomNavigationView.setOnNavigationItemReselectedListener(menuItem -> {});
 
+    bottomNavigationView.setSelectedItemId(viewModel.getSelectedMenuItemId());
+
+    // FIXME At the moment, this gets called every time the activity is created. We only want one
+    // call, at the beginning
+    // Possible solution: we set an extra in the intent from login, and in here we only do the thing
+    // if the intent has that extra, It's a bit of a taccone, but it works.
+    // Alternative: check if the bundle passed as parameter is null.
+    // It should only be null if it's the first time the activity is created
     GooglePositionInterface.startLocationUpdates(this);
   }
 
