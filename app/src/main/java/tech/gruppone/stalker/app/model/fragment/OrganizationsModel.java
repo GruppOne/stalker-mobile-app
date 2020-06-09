@@ -56,6 +56,7 @@ public class OrganizationsModel {
                       .setConnectedOrganization(orgsArray.getInt(i), true);
                 }
 
+                CurrentSessionSingleton.getInstance().doneChanges();
                 OrganizationsModel.this.loadConnectedPlaces();
               } catch (JSONException | OrganizationNotFoundException e) {
                 throw new RuntimeException(e);
