@@ -16,11 +16,7 @@ public class SignupModel {
               try {
                 String token = jsonObject.getString("jwt");
 
-                // TODO update field name for anonymous token in json as soon as server implements
-                // it
-                String anonymousToken = jsonObject.getString("anonymousJwt");
-
-                CurrentSessionSingleton.getInstance().setJwt(token, anonymousToken);
+                CurrentSessionSingleton.getInstance().setJwt(token);
               } catch (JSONException e) {
                 throw new RuntimeException(e);
               }
