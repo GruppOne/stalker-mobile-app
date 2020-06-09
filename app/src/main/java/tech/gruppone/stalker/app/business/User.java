@@ -13,4 +13,8 @@ public class User {
   String firstName;
   String lastName;
   String birthDate;
+
+  public boolean isComplete() {
+    return email != null && firstName != null && lastName != null && birthDate != null;
+  }
 }
