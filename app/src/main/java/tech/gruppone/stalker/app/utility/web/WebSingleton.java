@@ -1,5 +1,8 @@
 package tech.gruppone.stalker.app.utility.web;
 
+import static java.util.Objects.requireNonNull;
+
+import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import com.android.volley.Request;
@@ -9,25 +12,23 @@ import com.android.volley.Response.ErrorListener;
 import com.android.volley.Response.Listener;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import java.text.SimpleDateFormat;
+import com.auth0.android.jwt.JWT;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import tech.gruppone.stalker.app.BuildConfig;
 import tech.gruppone.stalker.app.business.LdapCredentials;
-import tech.gruppone.stalker.app.business.Organization;
-import tech.gruppone.stalker.app.business.Place;
 import tech.gruppone.stalker.app.business.User;
 import tech.gruppone.stalker.app.utility.App;
+import tech.gruppone.stalker.app.utility.CurrentSessionSingleton;
 
 public class WebSingleton {
 
   private static WebSingleton instance;
   private RequestQueue requestQueue;
-  private String serverUrl = BuildConfig.SERVER_URL;
+  private final String serverUrl = BuildConfig.SERVER_URL;
 
   private WebSingleton() {
     requestQueue = getRequestQueue();
@@ -119,18 +120,25 @@ public class WebSingleton {
         new AuthenticatedRequest(Method.POST, fullUrl, null, successListener, errorListener));
   }
 
-  public void locationUpdate(int userId, @NonNull List<Integer> places, boolean inside) {
+  public void locationUpdate(
+      int userId, @NonNull List<Integer> places, boolean inside, boolean anonymous) {
     String fullUrl = serverUrl + "/location/update";
     try {
       JSONObject request = new JSONObject();
 
-      SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssX", Locale.getDefault());
+      // This isn't proper, but we're going to deal with it, aren't we?
+      if (anonymous) {
+        userId =
+            Integer.parseInt(
+                requireNonNull(
+                    new JWT(CurrentSessionSingleton.getInstance().getAnonymousJwt()).getSubject()));
+      }
 
       request.put("userId", userId);
-      request.put("anonymous", false);
+      request.put("userType", anonymous ? "anonymous" : "known");
       request.put("inside", inside);
       request.put("placeIds", new JSONArray(places));
-      request.put("timestampMs", format.format(new Date()));
+      request.put("timestamp", new Date().getTime());
       addToRequestQueue(new BarelyAuthenticatedRequest(Method.POST, fullUrl, request, null, null));
     } catch (JSONException ex) {
       throw new RuntimeException(ex);
