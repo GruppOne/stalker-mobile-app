@@ -14,6 +14,7 @@ import tech.gruppone.stalker.app.model.SignupModel;
 public class SignupViewModel extends ViewModel {
   SignupModel model = new SignupModel();
 
+  @NonNull
   public LiveData<User> getUserLiveData() {
     return new LoginModel().getUserLiveData();
   }

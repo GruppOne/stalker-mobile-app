@@ -49,7 +49,8 @@ public class AuthenticatedRequest extends JsonObjectRequest {
   // We need this override because Volley natively doesn't recognize an empty response body as a
   // success, even with 204 response code.
   @Override
-  protected Response<JSONObject> parseNetworkResponse(NetworkResponse response) {
+  @NonNull
+  protected Response<JSONObject> parseNetworkResponse(@NonNull NetworkResponse response) {
     try {
       String body =
           new String(
