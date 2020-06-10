@@ -1,19 +1,25 @@
 package tech.gruppone.stalker.app.utility.location;
 
+import static java.util.Objects.requireNonNull;
+
 import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
 import androidx.annotation.NonNull;
 import androidx.core.app.JobIntentService;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import tech.gruppone.stalker.app.business.Point;
 import tech.gruppone.stalker.app.utility.CurrentSessionSingleton;
+import tech.gruppone.stalker.app.utility.room.PermanenceDatabase;
+import tech.gruppone.stalker.app.utility.room.PersistenceSingleton;
+import tech.gruppone.stalker.app.utility.room.UserPermanence;
 import tech.gruppone.stalker.app.utility.web.WebSingleton;
 
 public class LocationNotifier extends JobIntentService {
 
   static int JOB_ID = 1000;
-  private CurrentSessionSingleton currentSession = CurrentSessionSingleton.getInstance();
-  private WebSingleton web = WebSingleton.getInstance();
 
   public static void enqueue(@NonNull Context ctx, @NonNull Intent work) {
     enqueueWork(ctx, LocationNotifier.class, JOB_ID, work);
@@ -24,11 +30,32 @@ public class LocationNotifier extends JobIntentService {
     Location location = intent.getParcelableExtra("lastLocation");
     Point point = Point.buildFromDegrees(location.getLongitude(), location.getLatitude());
 
-    // getValue() can return null, so there's a warning that getId() could throw NullPtr,
-    // but the location updates only start *after* a successful login, and the login sets the user.
-    // After being set, nothing changes it, so it can never be null
-    //noinspection ConstantConditions
-    web.locationUpdateInside(
-        currentSession.getLoggedUser().getValue().getId(), currentSession.getInsidePlaces(point));
+    int userId =
+        requireNonNull(CurrentSessionSingleton.getInstance().getLoggedUser().getValue()).getId();
+    List<Integer> insidePlaces = CurrentSessionSingleton.getInstance().getInsidePlaces(point);
+    boolean anonymous = CurrentSessionSingleton.getInstance().isAnonymous();
+    PermanenceDatabase database = PersistenceSingleton.getInstance().getDatabase();
+
+    for (int placeId : insidePlaces) {
+      database
+          .userPermanenceDao()
+          .insert(
+              UserPermanence.builder()
+                  .anonymous(anonymous)
+                  .entryTimestamp(new Date())
+                  .placeId(placeId)
+                  .build());
+    }
+
+    WebSingleton.getInstance().locationUpdate(userId, insidePlaces, true, anonymous);
+
+    List<Integer> outsidePlaces = new ArrayList<>();
+
+    for (UserPermanence userPermanence : database.userPermanenceDao().wasInside(insidePlaces)) {
+      outsidePlaces.add(userPermanence.getPlaceId());
+      database.userPermanenceDao().update(userPermanence.withExitTimestamp(new Date()));
+    }
+
+    WebSingleton.getInstance().locationUpdate(userId, outsidePlaces, false, anonymous);
   }
 }
