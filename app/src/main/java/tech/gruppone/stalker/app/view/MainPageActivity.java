@@ -3,7 +3,6 @@ package tech.gruppone.stalker.app.view;
 import static java.util.Objects.requireNonNull;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
@@ -83,7 +82,7 @@ public class MainPageActivity extends StalkerActivity {
           }
         });
 
-    //bottomNavigationView.setOnNavigationItemReselectedListener(menuItem -> {});
+    // bottomNavigationView.setOnNavigationItemReselectedListener(menuItem -> {});
 
     bottomNavigationView.setSelectedItemId(viewModel.getSelectedMenuItemId());
 
