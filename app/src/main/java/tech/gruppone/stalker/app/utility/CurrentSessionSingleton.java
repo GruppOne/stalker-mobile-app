@@ -23,19 +23,10 @@ import tech.gruppone.stalker.app.business.Organization;
 import tech.gruppone.stalker.app.business.Place;
 import tech.gruppone.stalker.app.business.Point;
 import tech.gruppone.stalker.app.business.User;
-<<<<<<< HEAD
-=======
 import tech.gruppone.stalker.app.business.UserOrganizationHistory;
-<<<<<<< HEAD
 import tech.gruppone.stalker.app.database.UserHistory;
->>>>>>> 22eb9c3... fix: convert list into a map
-=======
->>>>>>> e6f5a53... fix: modify date and hours representation
 import tech.gruppone.stalker.app.utility.excpetions.OrganizationNotFoundException;
 import tech.gruppone.stalker.app.utility.web.WebSingleton;
-import tech.gruppone.stalker.app.business.Point;
-import tech.gruppone.stalker.app.business.User;
-import tech.gruppone.stalker.app.business.UserOrganizationHistory;
 
 public class CurrentSessionSingleton {
 
@@ -46,15 +37,11 @@ public class CurrentSessionSingleton {
   @Getter private String jwt = "";
   @Getter private String anonymousJwt = "";
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-  @Getter @Setter private boolean anonymous = false;
-=======
 
-=======
->>>>>>> e6f5a53... fix: modify date and hours representation
+  @Getter @Setter private boolean anonymous = false;
+
   private MutableLiveData<Map<Long, LiveData<UserOrganizationHistory>>> userOrganizationHistory = new MutableLiveData<>(new TreeMap<>());
->>>>>>> 22eb9c3... fix: convert list into a map
+
 
   @SuppressLint("UseSparseArrays")
   private final MutableLiveData<Map<Integer, LiveData<Organization>>> organizations =
@@ -238,7 +225,6 @@ public class CurrentSessionSingleton {
     public int organizationId;
   }
 
-
   @NonNull
   public static synchronized CurrentSessionSingleton getInstance() {
     if (instance == null) {
@@ -247,8 +233,7 @@ public class CurrentSessionSingleton {
     return instance;
   }
 
-  public void setUserOrganizationHistory(
-    List<UserOrganizationHistory> userOrganizationHistory) {
+  public void setUserOrganizationHistory(List<UserOrganizationHistory> userOrganizationHistory) {
 
     Map<Long, LiveData<UserOrganizationHistory>> map = new TreeMap<>(Collections.reverseOrder());
 
@@ -263,6 +248,4 @@ public class CurrentSessionSingleton {
   public LiveData<Map<Long, LiveData<UserOrganizationHistory>>> getUserOrganizationHistory() {
     return userOrganizationHistory;
   }
-
-
 }

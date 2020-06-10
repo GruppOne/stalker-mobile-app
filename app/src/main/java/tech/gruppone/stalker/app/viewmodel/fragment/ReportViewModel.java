@@ -11,24 +11,20 @@ import lombok.EqualsAndHashCode;
 import tech.gruppone.stalker.app.business.UserOrganizationHistory;
 import tech.gruppone.stalker.app.model.fragment.ReportModel;
 
-
 @Data
-@EqualsAndHashCode(callSuper=false)
+@EqualsAndHashCode(callSuper = false)
 public class ReportViewModel extends ViewModel {
-
 
   private ReportModel model = new ReportModel();
 
-  public void getUsersHistory(int id){
+  public void getUsersHistory(int id) {
     model.getUsersHistory(id);
-
   }
-
 
   @NonNull
   public LiveData<List<LiveData<UserOrganizationHistory>>> getUsersLiveData() {
 
-    return Transformations.map(model.getOrgsHistoryLiveData(), input -> new ArrayList<>(input.values()));
+    return Transformations.map(
+        model.getOrgsHistoryLiveData(), input -> new ArrayList<>(input.values()));
   }
-
 }

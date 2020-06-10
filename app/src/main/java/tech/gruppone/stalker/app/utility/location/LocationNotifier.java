@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 import tech.gruppone.stalker.app.business.Point;
+import tech.gruppone.stalker.app.database.AppDatabase;
 import tech.gruppone.stalker.app.utility.CurrentSessionSingleton;
 import tech.gruppone.stalker.app.utility.CurrentSessionSingleton.PlaceWithOrganization;
 import tech.gruppone.stalker.app.utility.room.PermanenceDatabase;
@@ -22,6 +23,10 @@ import tech.gruppone.stalker.app.utility.web.WebSingleton;
 public class LocationNotifier extends JobIntentService {
 
   static int JOB_ID = 1000;
+
+  private CurrentSessionSingleton currentSession = CurrentSessionSingleton.getInstance();
+  private WebSingleton web = WebSingleton.getInstance();
+  private AppDatabase appDatabase = AppDatabase.getInstance(getApplicationContext());
 
   public static void enqueue(@NonNull Context ctx, @NonNull Intent work) {
     enqueueWork(ctx, LocationNotifier.class, JOB_ID, work);
@@ -78,5 +83,6 @@ public class LocationNotifier extends JobIntentService {
     if (!outsidePlaces.isEmpty()) {
       WebSingleton.getInstance().locationUpdate(userId, outsidePlaces, false, anonymous);
     }
+
   }
 }

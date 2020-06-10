@@ -6,7 +6,6 @@ import java.util.List;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.NoArgsConstructor;
 import lombok.Value;
 import lombok.With;
 import org.json.JSONException;
@@ -17,7 +16,7 @@ import org.json.JSONObject;
 @Builder
 public class Organization {
 
-  int id;
+  @With int id;
 
   String name;
   String description;
@@ -50,11 +49,11 @@ public class Organization {
     return ret;
   }
 
-  public Place getPlaceWithOrganizationId(int placeId){
+  public Place getPlaceWithOrganizationId(int placeId) {
     Place place = new Place();
-    for(Place p : places){
-      if(placeId == p.getId()){
-         place = p;
+    for (Place p : places) {
+      if (placeId == p.getId()) {
+        place = p;
       }
     }
     return place;

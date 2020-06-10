@@ -2,8 +2,6 @@ package tech.gruppone.stalker.app.view.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
@@ -24,10 +22,11 @@ public class ReportFragment extends Fragment {
 
   private View view;
   private ReportViewModel reportViewModel;
+  private ReportListAdapter reportListAdapter;
+  public SearchView searchView;
+  public RecyclerView recyclerView;
 
-  public ReportFragment() {
-  }
-
+  public ReportFragment() {}
 
   @Override
   @NonNull
@@ -35,8 +34,8 @@ public class ReportFragment extends Fragment {
     super.onActivityCreated(savedInstanceState);
 
     reportViewModel = new ViewModelProvider(this).get(ReportViewModel.class);
-    RecyclerView recyclerView = view.findViewById(R.id.reportRecyclerView);
-
+    searchView = view.findViewById(R.id.reportSearch_bar);
+    recyclerView = view.findViewById(R.id.reportRecyclerView);
 
     recyclerView.setHasFixedSize(true);
     recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -45,26 +44,61 @@ public class ReportFragment extends Fragment {
     ReportListAdapter reportListAdapter = new ReportListAdapter();
 
     recyclerView.setAdapter(reportListAdapter);
+    reportViewModel.getUsersHistory(
+        Objects.requireNonNull(CurrentSessionSingleton.getInstance().getLoggedUser().getValue())
+            .getId());
 
+    reportListAdapter = new ReportListAdapter();
+;
 
+    SearchView.OnQueryTextListener queryTextListener = setSearchBarBehaviour();
+    searchView.setOnQueryTextListener(queryTextListener);
 
+    recyclerView.setAdapter(reportListAdapter);
   }
 
   @Override
   @NonNull
   public View onCreateView(
-    @NonNull LayoutInflater inflater,
-    @Nullable ViewGroup container,
-    @Nullable Bundle savedInstanceState) {
+      @NonNull LayoutInflater inflater,
+      @Nullable ViewGroup container,
+      @Nullable Bundle savedInstanceState) {
+    setHasOptionsMenu(true);
     view = inflater.inflate(R.layout.report_fragment, container, false);
-
     view.findViewById(R.id.reportReloadButton)
-      .setOnClickListener(v -> ReportFragment.this.getUsersHistory());
+        .setOnClickListener(
+            v -> {
+              ReportFragment.this.getUsersHistory();
+              searchView.setQuery("", true);
+            });
     return view;
   }
 
   public void getUsersHistory() {
-    reportViewModel
-      .getUsersHistory(CurrentSessionSingleton.getInstance().getLoggedUser().getValue().getId());
+    reportViewModel.getUsersHistory(
+        CurrentSessionSingleton.getInstance().getLoggedUser().getValue().getId());
   }
+<<<<<<< HEAD
+=======
+
+  OnQueryTextListener setSearchBarBehaviour() {
+    return new OnQueryTextListener() {
+      @Override
+      public boolean onQueryTextSubmit(String query) {
+        return false;
+      }
+
+      @Override
+      public boolean onQueryTextChange(String newText) {
+        if (searchView.getQuery().length() == 0) {
+          reportListAdapter.submitList(reportListAdapter.getDataList());
+        } else {
+          reportListAdapter.getFilter().filter(newText);
+          reportListAdapter.submitList(reportListAdapter.getFilteredData());
+        }
+        return true;
+      }
+    };
+  }
+>>>>>>> e033ffb... feat: add searchbar to report page
 }

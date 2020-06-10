@@ -154,4 +154,5 @@ public class MainPageActivity extends StalkerActivity {
         .show(Objects.requireNonNull(fragmentManager.findFragmentById(R.id.report_fragment)))
         .commit();
   }
+
 }
