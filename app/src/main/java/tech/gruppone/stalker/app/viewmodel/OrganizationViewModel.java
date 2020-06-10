@@ -94,6 +94,7 @@ public class OrganizationViewModel extends ViewModel {
     organization = model.getOrganization(organizationId);
   }
 
+  @NonNull
   public LiveData<Boolean> areTherePlaces() {
     return Transformations.map(organization, input -> !input.getPlaces().isEmpty());
   }
