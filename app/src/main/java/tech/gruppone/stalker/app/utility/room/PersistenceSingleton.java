@@ -14,7 +14,7 @@ public class PersistenceSingleton {
             .build();
   }
 
-  public synchronized PersistenceSingleton getInstance() {
+  public static synchronized PersistenceSingleton getInstance() {
     if (instance == null) {
       instance = new PersistenceSingleton();
     }
