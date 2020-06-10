@@ -3,10 +3,15 @@ package tech.gruppone.stalker.app.utility.web;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
+import com.android.volley.ParseError;
 import com.android.volley.Response;
+import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.JsonObjectRequest;
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
+import org.json.JSONException;
 import org.json.JSONObject;
 import tech.gruppone.stalker.app.BuildConfig;
 import tech.gruppone.stalker.app.utility.CurrentSessionSingleton;
@@ -39,6 +44,25 @@ public class AuthenticatedRequest extends JsonObjectRequest {
     }
 
     return headers;
+  }
+
+  // We need this override because Volley natively doesn't recognize an empty response body as a
+  // success, even with 204 response code.
+  @Override
+  protected Response<JSONObject> parseNetworkResponse(NetworkResponse response) {
+    try {
+      String body =
+          new String(
+              response.data, HttpHeaderParser.parseCharset(response.headers, PROTOCOL_CHARSET));
+
+      if (body.length() == 0) {
+        return Response.success(null, HttpHeaderParser.parseCacheHeaders(response));
+      }
+
+      return Response.success(new JSONObject(body), HttpHeaderParser.parseCacheHeaders(response));
+    } catch (UnsupportedEncodingException | JSONException e) {
+      return Response.error(new ParseError(e));
+    }
   }
 
   protected boolean anonymous() {
