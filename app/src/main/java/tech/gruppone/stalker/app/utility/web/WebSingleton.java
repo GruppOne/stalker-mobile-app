@@ -119,7 +119,7 @@ public class WebSingleton {
         new AuthenticatedRequest(Method.POST, fullUrl, null, successListener, errorListener));
   }
 
-  public void locationUpdateInside(int userId, @NonNull List<Integer> places) {
+  public void locationUpdate(int userId, @NonNull List<Integer> places, boolean inside) {
     String fullUrl = serverUrl + "/location/update";
     try {
       JSONObject request = new JSONObject();
@@ -128,17 +128,13 @@ public class WebSingleton {
 
       request.put("userId", userId);
       request.put("anonymous", false);
-      request.put("inside", true);
+      request.put("inside", inside);
       request.put("placeIds", new JSONArray(places));
       request.put("timestampMs", format.format(new Date()));
       addToRequestQueue(new BarelyAuthenticatedRequest(Method.POST, fullUrl, request, null, null));
     } catch (JSONException ex) {
       throw new RuntimeException(ex);
     }
-  }
-
-  public void locationUpdateOutside(@NonNull Organization organization, @NonNull Place place) {
-    addToRequestQueue(new BarelyAuthenticatedRequest(Method.GET, serverUrl, null, null, null));
   }
 
   public void getOrganizationList(
