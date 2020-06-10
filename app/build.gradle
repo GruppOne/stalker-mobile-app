@@ -105,6 +105,9 @@ dependencies {
 
   implementation 'com.auth0.android:jwtdecode:2.0.0'
 
+  implementation 'androidx.room:room-runtime:2.2.5'
+  annotationProcessor 'androidx.room:room-compiler:2.2.5'
+
   jacocoAnt 'org.jacoco:org.jacoco.ant:0.8.4:nodeps'
 }
 
