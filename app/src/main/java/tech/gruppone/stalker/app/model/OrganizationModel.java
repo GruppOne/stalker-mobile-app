@@ -3,14 +3,11 @@ package tech.gruppone.stalker.app.model;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.LiveData;
-import com.android.volley.Response;
-import com.android.volley.Response.Listener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 import tech.gruppone.stalker.app.business.LdapCredentials;
 import tech.gruppone.stalker.app.business.Organization;
 import tech.gruppone.stalker.app.business.Place;
@@ -61,6 +58,7 @@ public class OrganizationModel {
               try {
                 CurrentSessionSingleton.getInstance()
                     .setConnectedOrganization(organizationId, true);
+                CurrentSessionSingleton.getInstance().doneChanges();
               } catch (OrganizationNotFoundException e) {
                 throw new RuntimeException(e);
               }
@@ -78,6 +76,7 @@ public class OrganizationModel {
               try {
                 CurrentSessionSingleton.getInstance()
                     .setConnectedOrganization(organizationId, false);
+                CurrentSessionSingleton.getInstance().doneChanges();
               } catch (OrganizationNotFoundException e) {
                 throw new RuntimeException(e);
               }
