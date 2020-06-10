@@ -18,46 +18,52 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
+import lombok.Getter;
+import lombok.Setter;
 import tech.gruppone.stalker.app.R;
 import tech.gruppone.stalker.app.business.UserOrganizationHistory;
 import tech.gruppone.stalker.app.utility.ReportListAdapter.UserOrganizationViewHolder;
 
-public class ReportListAdapter  extends ListAdapter<LiveData<UserOrganizationHistory>, UserOrganizationViewHolder> implements Filterable {
+public class ReportListAdapter
+    extends ListAdapter<LiveData<UserOrganizationHistory>, UserOrganizationViewHolder>
+    implements Filterable {
 
-  List<LiveData<UserOrganizationHistory>> filteredData = new ArrayList<>();
+  @Getter @Setter List<LiveData<UserOrganizationHistory>> dataList = new ArrayList<>();
+
+  @Getter List<LiveData<UserOrganizationHistory>> filteredData = new ArrayList<>();
 
   public ReportListAdapter() {
-    super(    new ItemCallback <LiveData<UserOrganizationHistory>> (){
-      @Override
-      public boolean areItemsTheSame(
-        @NonNull LiveData <UserOrganizationHistory> oldItem,
-        @NonNull LiveData<UserOrganizationHistory> newItem) {
-        return oldItem.equals(newItem);
-      }
+    super(
+        new ItemCallback<LiveData<UserOrganizationHistory>>() {
+          @Override
+          public boolean areItemsTheSame(
+              @NonNull LiveData<UserOrganizationHistory> oldItem,
+              @NonNull LiveData<UserOrganizationHistory> newItem) {
+            return oldItem.equals(newItem);
+          }
 
-      @Override
-      public boolean areContentsTheSame(
-        @NonNull LiveData<UserOrganizationHistory> oldItem,
-        @NonNull LiveData<UserOrganizationHistory> newItem) {
-        UserOrganizationHistory oldItemValue = oldItem.getValue();
-        UserOrganizationHistory newItemValue = newItem.getValue();
-        return oldItemValue.getPlaceId() == newItemValue.getPlaceId();
-      }
-    });
+          @Override
+          public boolean areContentsTheSame(
+              @NonNull LiveData<UserOrganizationHistory> oldItem,
+              @NonNull LiveData<UserOrganizationHistory> newItem) {
+            UserOrganizationHistory oldItemValue = oldItem.getValue();
+            UserOrganizationHistory newItemValue = newItem.getValue();
+            return oldItemValue.getPlaceId() == newItemValue.getPlaceId();
+          }
+        });
   }
-
 
   @NonNull
   @Override
-  public UserOrganizationViewHolder onCreateViewHolder(@NonNull ViewGroup parent,
-    int viewType) {
-    View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.itemreport_fragment, parent, false);
+  public UserOrganizationViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    View v =
+        LayoutInflater.from(parent.getContext())
+            .inflate(R.layout.itemreport_fragment, parent, false);
     return new UserOrganizationViewHolder(v);
   }
 
   @Override
-  public void onBindViewHolder(
-    @NonNull UserOrganizationViewHolder holder, int position) {
+  public void onBindViewHolder(@NonNull UserOrganizationViewHolder holder, int position) {
     holder.bindTo(getItem(position));
   }
 
@@ -66,15 +72,16 @@ public class ReportListAdapter  extends ListAdapter<LiveData<UserOrganizationHis
     return new Filter() {
       @Override
       protected FilterResults performFiltering(CharSequence constraint) {
-        List<LiveData<UserOrganizationHistory>> userOrganizationHistory = getCurrentList();
         String charString = constraint.toString();
-        if(charString.isEmpty()){
-          filteredData = userOrganizationHistory;
-        }
-        else{
+        if (charString.isEmpty()) {
+          filteredData = dataList;
+        } else {
           List<LiveData<UserOrganizationHistory>> filteredEelements = new ArrayList<>();
-          for(LiveData<UserOrganizationHistory> useOrg : userOrganizationHistory){
-            if(Objects.requireNonNull(useOrg.getValue()).getOrganizationName().toLowerCase().contains(charString.toLowerCase())){
+          for (LiveData<UserOrganizationHistory> useOrg : dataList) {
+            if (Objects.requireNonNull(useOrg.getValue())
+                .getOrganizationName()
+                .toLowerCase()
+                .contains(constraint.toString().toLowerCase().trim())) {
               filteredEelements.add(useOrg);
             }
           }
@@ -89,6 +96,9 @@ public class ReportListAdapter  extends ListAdapter<LiveData<UserOrganizationHis
       @SuppressWarnings("unchecked")
       protected void publishResults(CharSequence constraint, FilterResults results) {
         filteredData = (List<LiveData<UserOrganizationHistory>>) results.values;
+        for (LiveData<UserOrganizationHistory> f : filteredData) {
+          System.out.println(f.getValue());
+        }
         notifyDataSetChanged();
       }
     };
@@ -121,22 +131,20 @@ public class ReportListAdapter  extends ListAdapter<LiveData<UserOrganizationHis
       TtimestampDate.setText(getDate(userOrg.getTimestamp()));
       TtimestampTime.setText("at " + getHours(userOrg.getTimestamp()));
       TplaceName.setText(userOrg.getPlace().getName());
-      Tinside.setText(userOrg.getInside() ? "you entered on ": "you went out on");
+      Tinside.setText(userOrg.getInside() ? "you entered on " : "you went out on");
       TorganizationName.setText(userOrg.getOrganizationName());
       Taddress.setText(userOrg.getPlace().getAddress() + ", ");
       Tcity.setText(userOrg.getPlace().getCity());
     }
 
-    String getDate(long milliseconds){
+    String getDate(long milliseconds) {
       DateFormat dateFormat = new SimpleDateFormat("EEEE, dd-MM-yyy", Locale.forLanguageTag("ENG"));
       return dateFormat.format(new Date(milliseconds));
     }
 
-    String getHours(long milliseconds){
-      DateFormat dateFormat= new SimpleDateFormat("HH:mm");
-      return  dateFormat.format(new Date(milliseconds));
+    String getHours(long milliseconds) {
+      DateFormat dateFormat = new SimpleDateFormat("HH:mm");
+      return dateFormat.format(new Date(milliseconds));
     }
   }
-
-
 }

@@ -31,6 +31,7 @@ public class Place {
 
   public Place(@NonNull JSONObject jsonPlace) {
     try {
+      System.out.println(jsonPlace);
       id = jsonPlace.getInt("id");
       JSONObject data = jsonPlace.getJSONObject("data");
       name = data.getString("name");

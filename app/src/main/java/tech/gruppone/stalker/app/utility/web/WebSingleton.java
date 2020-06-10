@@ -148,6 +148,7 @@ public class WebSingleton {
       request.put("userType", anonymous ? "anonymous" : "known");
       request.put("inside", inside);
       request.put("placeIds", new JSONArray(places));
+<<<<<<< HEAD:app/src/main/java/tech/gruppone/stalker/app/utility/web/WebSingleton.java
       request.put("timestamp", new Date().getTime());
 
       if (BuildConfig.DEBUG) {
@@ -155,6 +156,11 @@ public class WebSingleton {
       }
 
       addToRequestQueue(new BarelyAuthenticatedRequest(Method.POST, fullUrl, request, null, null));
+=======
+      request.put("timestampMs", format.format(new Date()));
+      System.out.println(format.format(new Date()));
+      addToRequestQueue(new AuthenticatedRequest(Method.POST, fullUrl, request, null, null));
+>>>>>>> e033ffb... feat: add searchbar to report page:app/src/main/java/tech/gruppone/stalker/app/utility/WebSingleton.java
     } catch (JSONException ex) {
       throw new RuntimeException(ex);
     }
@@ -184,7 +190,10 @@ public class WebSingleton {
     addToRequestQueue(
         new AuthenticatedRequest(Method.GET, fullUrl, null, successListener, errorListener));
   }
+<<<<<<< HEAD:app/src/main/java/tech/gruppone/stalker/app/utility/web/WebSingleton.java
 
+=======
+>>>>>>> e033ffb... feat: add searchbar to report page:app/src/main/java/tech/gruppone/stalker/app/utility/WebSingleton.java
 
   public void connect(
       int userId,
