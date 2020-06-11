@@ -6,7 +6,7 @@ import tech.gruppone.stalker.app.utility.location.GooglePositionInterface;
 public class StalkerActivity extends AppCompatActivity {
 
   void checkPermissions() {
-    GooglePositionInterface.checkPermissions(this);
+    new GooglePositionInterface().checkPermissions(this);
   }
 
   @Override
