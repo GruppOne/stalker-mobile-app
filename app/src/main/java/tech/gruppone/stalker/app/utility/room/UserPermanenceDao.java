@@ -17,11 +17,14 @@ public interface UserPermanenceDao {
   void update(@NonNull UserPermanence userPermanence);
 
   @Query("SELECT * FROM userpermanence WHERE exitTimestamp IS NULL")
+  @NonNull
   List<UserPermanence> isInside();
 
   @Query("SELECT * FROM userpermanence WHERE exitTimestamp IS NOT NULL")
+  @NonNull
   List<UserPermanence> history();
 
   @Query("SELECT * FROM userpermanence WHERE placeId NOT IN (:insideNow) AND exitTimestamp IS NULL")
+  @NonNull
   List<UserPermanence> wasInside(@NonNull List<Integer> insideNow);
 }

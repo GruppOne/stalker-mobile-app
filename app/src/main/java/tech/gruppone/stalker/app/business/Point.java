@@ -25,7 +25,7 @@ public class Point implements Parcelable {
     latitude = 0;
   }
 
-  protected Point(Parcel in) {
+  protected Point(@NonNull Parcel in) {
     x = in.readDouble();
     y = in.readDouble();
     longitude = in.readDouble();
@@ -51,7 +51,7 @@ public class Point implements Parcelable {
   }
 
   @Override
-  public void writeToParcel(Parcel dest, int flags) {
+  public void writeToParcel(@NonNull Parcel dest, int flags) {
     dest.writeDouble(x);
     dest.writeDouble(y);
     dest.writeDouble(longitude);

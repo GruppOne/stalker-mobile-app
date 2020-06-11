@@ -2,6 +2,7 @@ package tech.gruppone.stalker.app.utility.room;
 
 import static java.util.Objects.requireNonNull;
 
+import androidx.annotation.NonNull;
 import androidx.room.Room;
 import tech.gruppone.stalker.app.utility.App;
 import tech.gruppone.stalker.app.utility.CurrentSessionSingleton;
@@ -18,6 +19,7 @@ public class PersistenceSingleton {
     database = null;
   }
 
+  @NonNull
   public PermanenceDatabase getDatabase() {
     if (database == null) {
       int userId =
@@ -35,6 +37,7 @@ public class PersistenceSingleton {
     return database;
   }
 
+  @NonNull
   public static synchronized PersistenceSingleton getInstance() {
     if (instance == null) {
       instance = new PersistenceSingleton();
