@@ -84,6 +84,7 @@ public class SignUpActivity extends StalkerActivity {
                 ok = false;
               }
 
+              // TODO validate format
               if (birthDate.isEmpty()) {
                 dateInsertLayout.setErrorEnabled(true);
                 dateInsertLayout.setError(getString(R.string.emptyField));
