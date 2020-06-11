@@ -93,7 +93,7 @@ public class MainPageActivity extends StalkerActivity {
     // Alternative: check if the bundle passed as parameter is null.
     // It should only be null if it's the first time the activity is created
     if (savedInstanceState == null) {
-      GooglePositionInterface.startLocationUpdates(this);
+      new GooglePositionInterface().startLocationUpdates(this);
     }
   }
 

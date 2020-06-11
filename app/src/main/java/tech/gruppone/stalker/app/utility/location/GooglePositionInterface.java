@@ -16,33 +16,38 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
 import tech.gruppone.stalker.app.utility.App;
 
-public abstract class GooglePositionInterface {
+public class GooglePositionInterface {
+  private LocationRequest locationRequest;
 
-  private static LocationRequest locationRequest;
+  private final LocationCallback locationCallback =
+      new LocationCallback() {
+        @Override
+        public void onLocationAvailability(LocationAvailability locationAvailability) {}
 
-  public static void startLocationUpdates(@NonNull Activity activity) {
+        @Override
+        public void onLocationResult(LocationResult locationResult) {
+          Intent intent = new Intent();
+          intent.putExtra(
+              "tech.gruppone.stalker.app.lastLocation", locationResult.getLastLocation());
+          LocationNotifier.enqueue(App.getAppContext(), intent);
+        }
+      };
+
+  FusedLocationProviderClient locationProviderClient =
+      LocationServices.getFusedLocationProviderClient(App.getAppContext());
+
+  public void startLocationUpdates(@NonNull Activity activity) {
     checkPermissions(activity);
 
-    FusedLocationProviderClient locationProviderClient =
-        LocationServices.getFusedLocationProviderClient(App.getAppContext());
-
     locationProviderClient.requestLocationUpdates(
-        locationRequest,
-        new LocationCallback() {
-          @Override
-          public void onLocationAvailability(LocationAvailability locationAvailability) {}
-
-          @Override
-          public void onLocationResult(LocationResult locationResult) {
-            Intent intent = new Intent();
-            intent.putExtra("tech.gruppone.stalker.app.lastLocation", locationResult.getLastLocation());
-            LocationNotifier.enqueue(App.getAppContext(), intent);
-          }
-        },
-        Looper.getMainLooper());
+        locationRequest, locationCallback, Looper.getMainLooper());
   }
 
-  public static void checkPermissions(@NonNull Activity activity) {
+  public void stopLocationUpdates() {
+    locationProviderClient.removeLocationUpdates(locationCallback);
+  }
+
+  public void checkPermissions(@NonNull Activity activity) {
     if (locationRequest == null) {
       locationRequest = LocationRequest.create();
       locationRequest.setInterval(300000);
@@ -63,7 +68,7 @@ public abstract class GooglePositionInterface {
                   ResolvableApiException resolvableApiException = (ResolvableApiException) e;
                   resolvableApiException.startResolutionForResult(activity, 1010);
                 } catch (IntentSender.SendIntentException exc) {
-                  Toast.makeText(activity, "Nouse", Toast.LENGTH_SHORT).show();
+                  Toast.makeText(activity, "Something went wrong", Toast.LENGTH_SHORT).show();
                 }
               }
             });
