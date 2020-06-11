@@ -28,6 +28,12 @@ public class LocationNotifier extends JobIntentService {
   @Override
   protected void onHandleWork(@NonNull Intent intent) {
     Location location = intent.getParcelableExtra("lastLocation");
+
+    // This is a taccone. Whatever.
+    if (location == null) {
+      return;
+    }
+
     Point point = Point.buildFromDegrees(location.getLongitude(), location.getLatitude());
 
     int userId =
