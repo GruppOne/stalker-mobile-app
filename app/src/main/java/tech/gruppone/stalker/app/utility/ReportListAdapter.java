@@ -8,6 +8,7 @@ import android.widget.Filterable;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.DiffUtil.ItemCallback;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,9 +29,12 @@ public class ReportListAdapter
     extends ListAdapter<LiveData<UserOrganizationHistory>, UserOrganizationViewHolder>
     implements Filterable {
 
-  @Getter @Setter List<LiveData<UserOrganizationHistory>> dataList = new ArrayList<>();
+  @Getter @Setter
+  List<LiveData<UserOrganizationHistory>> dataList = getCurrentList();
 
   @Getter List<LiveData<UserOrganizationHistory>> filteredData = new ArrayList<>();
+
+  List<LiveData<UserOrganizationHistory>> updateList = new ArrayList<>();
 
   public ReportListAdapter() {
     super(
@@ -72,22 +76,32 @@ public class ReportListAdapter
     return new Filter() {
       @Override
       protected FilterResults performFiltering(CharSequence constraint) {
+        List<LiveData<UserOrganizationHistory>> userOrganizationHistory = dataList;
+        for(LiveData<UserOrganizationHistory> userOrg : dataList){
+          System.out.println(userOrg.getValue());
+        }
         String charString = constraint.toString();
         if (charString.isEmpty()) {
-          filteredData = dataList;
+          filteredData = userOrganizationHistory;
         } else {
-          List<LiveData<UserOrganizationHistory>> filteredEelements = new ArrayList<>();
-          for (LiveData<UserOrganizationHistory> useOrg : dataList) {
+          List<LiveData<UserOrganizationHistory>> filteredElements = new ArrayList<>();
+          for (LiveData<UserOrganizationHistory> useOrg : userOrganizationHistory) {
             if (Objects.requireNonNull(useOrg.getValue())
-                .getOrganizationName()
-                .toLowerCase()
-                .contains(constraint.toString().toLowerCase().trim())) {
-              filteredEelements.add(useOrg);
+                    .getOrganizationName()
+                    .toLowerCase()
+                    .contains(constraint.toString().toLowerCase().trim()))/*
+                || Objects.requireNonNull(useOrg.getValue().getPlace().getName().toLowerCase())
+                    .contains(constraint.toString().toLowerCase().trim())
+                || Objects.requireNonNull(useOrg.getValue().getPlace().getAddress().toLowerCase())
+                    .contains(constraint.toString().toLowerCase().trim())
+                || Objects.requireNonNull(useOrg.getValue().getPlace().getCity().toLowerCase())
+                    .contains(constraint.toString().toLowerCase().trim()))*/ {
+              filteredElements.add(useOrg);
             }
           }
-          filteredData = filteredEelements;
+          filteredData = filteredElements;
         }
-        FilterResults filterResults = new FilterResults();
+        FilterResults filterResults = new FilterResults();;
         filterResults.values = filteredData;
         return filterResults;
       }
@@ -96,12 +110,20 @@ public class ReportListAdapter
       @SuppressWarnings("unchecked")
       protected void publishResults(CharSequence constraint, FilterResults results) {
         filteredData = (List<LiveData<UserOrganizationHistory>>) results.values;
-        for (LiveData<UserOrganizationHistory> f : filteredData) {
-          System.out.println(f.getValue());
-        }
         notifyDataSetChanged();
+        updateList(filteredData);
       }
     };
+  }
+
+  void updateList(List<LiveData<UserOrganizationHistory>> list){
+    final UserHistorydiff diff = new UserHistorydiff(updateList, list);
+    System.out.println(list);
+    final DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(diff);
+    updateList.clear();
+    updateList.addAll(list);
+    diffResult.dispatchUpdatesTo(this);
+
   }
 
   public static class UserOrganizationViewHolder extends RecyclerView.ViewHolder {

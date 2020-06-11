@@ -6,8 +6,11 @@ import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Setter;
+import tech.gruppone.stalker.app.business.Organization;
 import tech.gruppone.stalker.app.business.UserOrganizationHistory;
 import tech.gruppone.stalker.app.model.fragment.ReportModel;
 

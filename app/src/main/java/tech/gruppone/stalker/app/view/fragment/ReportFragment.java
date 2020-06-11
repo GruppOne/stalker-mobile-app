@@ -41,15 +41,19 @@ public class ReportFragment extends Fragment {
     recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
 
-    ReportListAdapter reportListAdapter = new ReportListAdapter();
+    reportListAdapter = new ReportListAdapter();
 
     recyclerView.setAdapter(reportListAdapter);
     reportViewModel.getUsersHistory(
         Objects.requireNonNull(CurrentSessionSingleton.getInstance().getLoggedUser().getValue())
             .getId());
 
-    reportListAdapter = new ReportListAdapter();
-;
+
+
+    reportViewModel
+        .getUsersLiveData()
+        .observe(getViewLifecycleOwner(), result -> { reportListAdapter.submitList(result); reportListAdapter.setDataList(result);});
+
 
     SearchView.OnQueryTextListener queryTextListener = setSearchBarBehaviour();
     searchView.setOnQueryTextListener(queryTextListener);
@@ -78,8 +82,6 @@ public class ReportFragment extends Fragment {
     reportViewModel.getUsersHistory(
         CurrentSessionSingleton.getInstance().getLoggedUser().getValue().getId());
   }
-<<<<<<< HEAD
-=======
 
   OnQueryTextListener setSearchBarBehaviour() {
     return new OnQueryTextListener() {
@@ -90,15 +92,16 @@ public class ReportFragment extends Fragment {
 
       @Override
       public boolean onQueryTextChange(String newText) {
-        if (searchView.getQuery().length() == 0) {
+        /*if (searchView.getQuery().length() == 0) {
           reportListAdapter.submitList(reportListAdapter.getDataList());
         } else {
           reportListAdapter.getFilter().filter(newText);
           reportListAdapter.submitList(reportListAdapter.getFilteredData());
         }
+        return true; */
+        reportListAdapter.getFilter().filter(newText);
         return true;
       }
     };
   }
->>>>>>> e033ffb... feat: add searchbar to report page
 }
