@@ -1,17 +1,38 @@
 package tech.gruppone.stalker.app.utility.room;
 
+import static java.util.Objects.requireNonNull;
+
 import androidx.room.Room;
-import lombok.Getter;
 import tech.gruppone.stalker.app.utility.App;
+import tech.gruppone.stalker.app.utility.CurrentSessionSingleton;
 
 public class PersistenceSingleton {
   private static PersistenceSingleton instance;
-  @Getter private final PermanenceDatabase database;
+  private PermanenceDatabase database;
 
-  private PersistenceSingleton() {
-    database =
-        Room.databaseBuilder(App.getAppContext(), PermanenceDatabase.class, "permanence_database")
-            .build();
+  private PersistenceSingleton() {}
+
+  // This method is going to be used for the logout, when that happens we'll remove this suppression
+  @SuppressWarnings("unused")
+  public void resetDatabase() {
+    database = null;
+  }
+
+  public PermanenceDatabase getDatabase() {
+    if (database == null) {
+      int userId =
+          requireNonNull(CurrentSessionSingleton.getInstance().getLoggedUser().getValue()).getId();
+      database =
+          Room.databaseBuilder(
+                  App.getAppContext(),
+                  PermanenceDatabase.class,
+                  // If more users use the same app/smartphone, this way they hold different
+                  // chronologies:
+                  "permanence_database_" + userId)
+              .build();
+    }
+
+    return database;
   }
 
   public static synchronized PersistenceSingleton getInstance() {
