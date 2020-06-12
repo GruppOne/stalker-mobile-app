@@ -31,8 +31,8 @@ public class OrganizationActivity extends FragmentActivity implements OnMapReady
 
     Intent startingIntent = getIntent();
 
-    if (startingIntent.hasExtra("organizationId")) {
-      viewModel.retrieveOrganization(startingIntent.getIntExtra("organizationId", 0));
+    if (startingIntent.hasExtra("tech.gruppone.stalker.app.organizationId")) {
+      viewModel.retrieveOrganization(startingIntent.getIntExtra("tech.gruppone.stalker.app.organizationId", 0));
     }
 
     ((TextView) findViewById(R.id.organizationName)).setText(viewModel.getName());
