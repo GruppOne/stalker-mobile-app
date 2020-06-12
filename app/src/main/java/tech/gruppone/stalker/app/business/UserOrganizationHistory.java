@@ -1,5 +1,6 @@
 package tech.gruppone.stalker.app.business;
 
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.json.JSONException;

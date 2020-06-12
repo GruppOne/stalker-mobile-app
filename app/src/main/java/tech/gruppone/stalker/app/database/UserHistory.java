@@ -1,33 +1,26 @@
 package tech.gruppone.stalker.app.database;
 
-import androidx.room.ColumnInfo;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.room.Entity;
-import androidx.room.PrimaryKey;
-import lombok.AllArgsConstructor;
+import java.util.Date;
 import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.Value;
 
 @Entity
-@NoArgsConstructor
-@AllArgsConstructor
+@Value
 @Builder
 public class UserHistory {
-
-  @PrimaryKey(autoGenerate = true)
-  int uid;
-
-  @ColumnInfo(name = "username")
-  int username;
-
-  @ColumnInfo(name = "organization_id")
-  int organizationId;
-
-  @ColumnInfo(name = "place_id")
   int placeId;
+  @NonNull Date entryTimestamp;
+  @Nullable Date exitTimestamp;
+  boolean anonymous;
 
-  @ColumnInfo(name = "inside")
-  Boolean inside;
-
-  @ColumnInfo(name = "timestamp")
-  String timestamp;
+  public UserHistory(int placeId, @NonNull Date entryTimestamp,
+    @Nullable Date exitTimestamp, boolean anonymous) {
+    this.placeId = placeId;
+    this.entryTimestamp = entryTimestamp;
+    this.exitTimestamp = exitTimestamp;
+    this.anonymous = anonymous;
+  }
 }

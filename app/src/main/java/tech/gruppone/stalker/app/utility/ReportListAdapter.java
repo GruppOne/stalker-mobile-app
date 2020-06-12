@@ -27,7 +27,7 @@ import tech.gruppone.stalker.app.utility.ReportListAdapter.UserOrganizationViewH
 
 public class ReportListAdapter
     extends ListAdapter<LiveData<UserOrganizationHistory>, UserOrganizationViewHolder>
-    implements Filterable {
+     {
 
   @Getter @Setter
   List<LiveData<UserOrganizationHistory>> dataList = getCurrentList();
@@ -71,60 +71,7 @@ public class ReportListAdapter
     holder.bindTo(getItem(position));
   }
 
-  @Override
-  public Filter getFilter() {
-    return new Filter() {
-      @Override
-      protected FilterResults performFiltering(CharSequence constraint) {
-        List<LiveData<UserOrganizationHistory>> userOrganizationHistory = dataList;
-        for(LiveData<UserOrganizationHistory> userOrg : dataList){
-          System.out.println(userOrg.getValue());
-        }
-        String charString = constraint.toString();
-        if (charString.isEmpty()) {
-          filteredData = userOrganizationHistory;
-        } else {
-          List<LiveData<UserOrganizationHistory>> filteredElements = new ArrayList<>();
-          for (LiveData<UserOrganizationHistory> useOrg : userOrganizationHistory) {
-            if (Objects.requireNonNull(useOrg.getValue())
-                    .getOrganizationName()
-                    .toLowerCase()
-                    .contains(constraint.toString().toLowerCase().trim()))/*
-                || Objects.requireNonNull(useOrg.getValue().getPlace().getName().toLowerCase())
-                    .contains(constraint.toString().toLowerCase().trim())
-                || Objects.requireNonNull(useOrg.getValue().getPlace().getAddress().toLowerCase())
-                    .contains(constraint.toString().toLowerCase().trim())
-                || Objects.requireNonNull(useOrg.getValue().getPlace().getCity().toLowerCase())
-                    .contains(constraint.toString().toLowerCase().trim()))*/ {
-              filteredElements.add(useOrg);
-            }
-          }
-          filteredData = filteredElements;
-        }
-        FilterResults filterResults = new FilterResults();;
-        filterResults.values = filteredData;
-        return filterResults;
-      }
 
-      @Override
-      @SuppressWarnings("unchecked")
-      protected void publishResults(CharSequence constraint, FilterResults results) {
-        filteredData = (List<LiveData<UserOrganizationHistory>>) results.values;
-        notifyDataSetChanged();
-        updateList(filteredData);
-      }
-    };
-  }
-
-  void updateList(List<LiveData<UserOrganizationHistory>> list){
-    final UserHistorydiff diff = new UserHistorydiff(updateList, list);
-    System.out.println(list);
-    final DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(diff);
-    updateList.clear();
-    updateList.addAll(list);
-    diffResult.dispatchUpdatesTo(this);
-
-  }
 
   public static class UserOrganizationViewHolder extends RecyclerView.ViewHolder {
 

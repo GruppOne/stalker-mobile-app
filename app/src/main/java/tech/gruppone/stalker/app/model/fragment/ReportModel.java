@@ -8,11 +8,13 @@ import java.util.Map;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import tech.gruppone.stalker.app.business.Organization;
 import tech.gruppone.stalker.app.business.UserOrganizationHistory;
 import tech.gruppone.stalker.app.utility.CurrentSessionSingleton;
 import tech.gruppone.stalker.app.utility.web.WebSingleton;
 
 public class ReportModel {
+
 
   public void getUsersHistory(int id) {
     WebSingleton.getInstance()
@@ -33,11 +35,11 @@ public class ReportModel {
                   JSONArray historyArray = organizationJson.getJSONArray("history");
                   for (int j = 0; j < historyArray.length(); j++) {
                     JSONObject jsonUserOrganizationHistory = historyArray.getJSONObject(j);
-                    UserOrganizationHistory userOrganizationHistory =
+                    /*UserOrganizationHistory userOrganizationHistory =
                         new UserOrganizationHistory(
                             jsonUserOrganizationHistory,
                             Objects.requireNonNull(organization.getValue()));
-                    userOrganizationHistories.add(userOrganizationHistory);
+                    userOrganizationHistories.add(userOrganizationHistory);*/
                   }
                   CurrentSessionSingleton.getInstance()
                       .setUserOrganizationHistory(userOrganizationHistories);
