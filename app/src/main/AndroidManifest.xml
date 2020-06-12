@@ -26,12 +26,15 @@
       android:label="@string/title_activity_organization"
       android:name=".view.OrganizationActivity">
     </activity>
+
     <activity android:name=".utility.StalkerActivity"/>
+
     <activity android:name=".view.LoginActivity"/>
     <activity android:name=".view.SignUpActivity"/>
     <activity
       android:name=".view.MainPageActivity"
       android:parentActivityName=".view.LoginActivity">
+
       <!--
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
@@ -40,6 +43,7 @@
             -->
     </activity>
     <activity android:name=".view.Display">
+
       <!--
       <intent-filter>
         <action android:name="tech.gruppone.stalker.DISPLAY"/>
@@ -47,11 +51,17 @@
             -->
     </activity>
     <activity android:name=".view.SplashScreenActivity">
-    <intent-filter>
-      <action android:name="android.intent.action.MAIN"/>
-      <category android:name="android.intent.category.LAUNCHER"/>
-    </intent-filter>
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN"/>
+
+        <category android:name="android.intent.category.LAUNCHER"/>
+      </intent-filter>
     </activity>
+
+    <receiver
+      android:enabled="true"
+      android:name=".utility.location.GeofencesReceiver">
+    </receiver>
 
     <service
       android:name=".utility.location.LocationNotifier"
