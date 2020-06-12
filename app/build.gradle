@@ -15,7 +15,7 @@ android {
     applicationId "tech.gruppone.stalker.app"
     // TODO: check if this can be lowered
     // it's this high because otherwise instrumented tests don't work
-    minSdkVersion 26
+    minSdkVersion 24
     //noinspection OldTargetApi
     targetSdkVersion 28
     versionCode 8
