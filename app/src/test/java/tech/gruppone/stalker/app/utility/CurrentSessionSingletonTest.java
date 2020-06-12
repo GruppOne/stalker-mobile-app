@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.stream.Collectors;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -83,7 +84,10 @@ public class CurrentSessionSingletonTest {
     stub(method(CurrentSessionSingleton.class, "zeroOrganizations")).toReturn(true);
 
     // Act
-    List<Integer> result = sut.getInsidePlaces(point);
+    List<Integer> result =
+        sut.getInsidePlaces(point).stream()
+            .map(placeWithOrganization -> placeWithOrganization.placeId)
+            .collect(Collectors.toList());
 
     // Assert
     assertTrue(result.isEmpty());
@@ -108,7 +112,10 @@ public class CurrentSessionSingletonTest {
     Mockito.when(organization.getInsidePlaces(point)).thenReturn(intList);
 
     // Act
-    List<Integer> result = sut.getInsidePlaces(point);
+    List<Integer> result =
+        sut.getInsidePlaces(point).stream()
+            .map(placeWithOrganization -> placeWithOrganization.placeId)
+            .collect(Collectors.toList());
 
     // Assert
     assertFalse(result.isEmpty());

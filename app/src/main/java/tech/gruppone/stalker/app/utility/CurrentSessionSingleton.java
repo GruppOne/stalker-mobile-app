@@ -7,12 +7,13 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import com.auth0.android.jwt.JWT;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.stream.Collectors;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.Value;
 import org.json.JSONException;
 import org.json.JSONObject;
 import tech.gruppone.stalker.app.business.Organization;
@@ -166,18 +167,21 @@ public class CurrentSessionSingleton {
   }
 
   @NonNull
-  public List<Integer> getInsidePlaces(@NonNull Point point) {
-    List<Integer> ret = new ArrayList<>();
+  public List<PlaceWithOrganization> getInsidePlaces(@NonNull Point point) {
+    return requireNonNull(getOrganizations().getValue()).values().stream()
+        .map(organizationLiveData -> requireNonNull(organizationLiveData.getValue()))
+        .filter(Organization::isConnected)
+        .flatMap(
+            organization ->
+                organization.getInsidePlaces(point).stream()
+                    .map(placeId -> new PlaceWithOrganization(placeId, organization.getId())))
+        .collect(Collectors.toList());
+  }
 
-    for (LiveData<Organization> organizationLiveData :
-        requireNonNull(getOrganizations().getValue()).values()) {
-      Organization org = requireNonNull(organizationLiveData.getValue());
-      if (org.isConnected()) {
-        ret.addAll(org.getInsidePlaces(point));
-      }
-    }
-
-    return ret;
+  @Value
+  public static class PlaceWithOrganization {
+    public int placeId;
+    public int organizationId;
   }
 
   @NonNull

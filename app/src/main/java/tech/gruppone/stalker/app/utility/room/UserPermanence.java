@@ -12,13 +12,19 @@ import lombok.With;
 @Builder
 @Entity(primaryKeys = {"placeId", "entryTimestamp"})
 public class UserPermanence {
+  int organizationId;
   int placeId;
   @NonNull Date entryTimestamp;
   @Nullable @With Date exitTimestamp;
   boolean anonymous;
 
   public UserPermanence(
-      int placeId, @NonNull Date entryTimestamp, @Nullable Date exitTimestamp, boolean anonymous) {
+      int organizationId,
+      int placeId,
+      @NonNull Date entryTimestamp,
+      @Nullable Date exitTimestamp,
+      boolean anonymous) {
+    this.organizationId = organizationId;
     this.placeId = placeId;
     this.entryTimestamp = entryTimestamp;
     this.exitTimestamp = exitTimestamp;

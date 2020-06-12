@@ -10,8 +10,10 @@ import androidx.core.app.JobIntentService;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 import tech.gruppone.stalker.app.business.Point;
 import tech.gruppone.stalker.app.utility.CurrentSessionSingleton;
+import tech.gruppone.stalker.app.utility.CurrentSessionSingleton.PlaceWithOrganization;
 import tech.gruppone.stalker.app.utility.room.PermanenceDatabase;
 import tech.gruppone.stalker.app.utility.room.PersistenceSingleton;
 import tech.gruppone.stalker.app.utility.room.UserPermanence;
@@ -38,26 +40,33 @@ public class LocationNotifier extends JobIntentService {
 
     int userId =
         requireNonNull(CurrentSessionSingleton.getInstance().getLoggedUser().getValue()).getId();
-    List<Integer> insidePlaces = CurrentSessionSingleton.getInstance().getInsidePlaces(point);
+    List<PlaceWithOrganization> insidePlaces =
+        CurrentSessionSingleton.getInstance().getInsidePlaces(point);
     boolean anonymous = CurrentSessionSingleton.getInstance().isAnonymous();
     PermanenceDatabase database = PersistenceSingleton.getInstance().getDatabase();
 
-    for (int placeId : insidePlaces) {
+    for (PlaceWithOrganization placeWithOrganization : insidePlaces) {
       database
           .userPermanenceDao()
           .insert(
               UserPermanence.builder()
                   .anonymous(anonymous)
                   .entryTimestamp(new Date())
-                  .placeId(placeId)
+                  .placeId(placeWithOrganization.placeId)
+                  .organizationId(placeWithOrganization.organizationId)
                   .build());
     }
 
-    WebSingleton.getInstance().locationUpdate(userId, insidePlaces, true, anonymous);
+    List<Integer> placeIds =
+        insidePlaces.stream()
+            .map(placeWithOrganization -> placeWithOrganization.placeId)
+            .collect(Collectors.toList());
+
+    WebSingleton.getInstance().locationUpdate(userId, placeIds, true, anonymous);
 
     List<Integer> outsidePlaces = new ArrayList<>();
 
-    for (UserPermanence userPermanence : database.userPermanenceDao().wasInside(insidePlaces)) {
+    for (UserPermanence userPermanence : database.userPermanenceDao().wasInside(placeIds)) {
       outsidePlaces.add(userPermanence.getPlaceId());
       database.userPermanenceDao().update(userPermanence.withExitTimestamp(new Date()));
     }
