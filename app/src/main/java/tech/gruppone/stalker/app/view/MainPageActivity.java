@@ -54,9 +54,6 @@ public class MainPageActivity extends StalkerActivity {
 
             item.setTitle(anonymous ? R.string.goKnown : R.string.goAnonymous);
 
-            item.setContentDescription(
-                getString(
-                    anonymous ? R.string.goKnownDescription : R.string.goAnonymousDescription));
             return true;
           }
           return false;
