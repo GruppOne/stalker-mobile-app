@@ -105,14 +105,35 @@ public class CurrentSessionSingleton {
   }
 
   public void setOrganizationList(@NonNull List<Organization> orgList) {
-    @SuppressLint("UseSparseArrays")
+    /*@SuppressLint("UseSparseArrays")
     Map<Integer, LiveData<Organization>> map = new TreeMap<>();
 
     for (Organization organization : orgList) {
       map.put(organization.getId(), new MutableLiveData<>(organization));
     }
 
-    organizations.postValue(map);
+    organizations.postValue(map);*/
+
+    Map<Integer, LiveData<Organization>> organizationsMap =
+        requireNonNull(getOrganizations().getValue());
+
+    // Changes to the keySet get reflected on the map.
+    // RetainAll removes all entries that aren't in the provided collection
+    // Effectively this is removing all entries from the map that aren't in the new list
+    organizationsMap
+        .keySet()
+        .retainAll(orgList.stream().map(Organization::getId).collect(Collectors.toList()));
+
+    for (Organization organization : orgList) {
+      if (organizationsMap.containsKey(organization.getId())) {
+        ((MutableLiveData<Organization>) requireNonNull(organizationsMap.get(organization.getId())))
+            .postValue(organization);
+      } else {
+        organizationsMap.put(organization.getId(), new MutableLiveData<>(organization));
+      }
+    }
+
+    doneChanges();
   }
 
   @NonNull
