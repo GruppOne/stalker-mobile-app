@@ -12,6 +12,8 @@ import lombok.EqualsAndHashCode;
 import lombok.Setter;
 import tech.gruppone.stalker.app.business.Organization;
 import tech.gruppone.stalker.app.business.UserOrganizationHistory;
+import tech.gruppone.stalker.app.model.OrganizationModel;
+import tech.gruppone.stalker.app.model.fragment.OrganizationsModel;
 import tech.gruppone.stalker.app.model.fragment.ReportModel;
 
 @Data
@@ -19,6 +21,8 @@ import tech.gruppone.stalker.app.model.fragment.ReportModel;
 public class ReportViewModel extends ViewModel {
 
   private ReportModel model = new ReportModel();
+
+  private OrganizationModel organizationsModel = new OrganizationModel();
 
   public void getUsersHistory(int id) {
     model.getUsersHistory(id);
@@ -28,6 +32,7 @@ public class ReportViewModel extends ViewModel {
   public LiveData<List<LiveData<UserOrganizationHistory>>> getUsersLiveData() {
 
     return Transformations.map(
-        model.getOrgsHistoryLiveData(), input -> new ArrayList<>(input.values()));
+        model.getOrgsHistoryLiveData(),
+        input -> new ArrayList<>(input.values()));
   }
 }

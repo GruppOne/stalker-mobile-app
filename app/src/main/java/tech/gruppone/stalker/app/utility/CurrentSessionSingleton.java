@@ -24,7 +24,6 @@ import tech.gruppone.stalker.app.business.Place;
 import tech.gruppone.stalker.app.business.Point;
 import tech.gruppone.stalker.app.business.User;
 import tech.gruppone.stalker.app.business.UserOrganizationHistory;
-import tech.gruppone.stalker.app.database.UserHistory;
 import tech.gruppone.stalker.app.utility.excpetions.OrganizationNotFoundException;
 import tech.gruppone.stalker.app.utility.web.WebSingleton;
 
@@ -39,6 +38,7 @@ public class CurrentSessionSingleton {
 
 
   @Getter @Setter private boolean anonymous = false;
+  ;
 
   private MutableLiveData<Map<Long, LiveData<UserOrganizationHistory>>> userOrganizationHistory = new MutableLiveData<>(new TreeMap<>());
 
@@ -47,7 +47,6 @@ public class CurrentSessionSingleton {
   private final MutableLiveData<Map<Integer, LiveData<Organization>>> organizations =
       new MutableLiveData<>(new TreeMap<>());
 
-  private MutableLiveData<List<UserOrganizationHistory>> userOrganizationHistory = new MutableLiveData<>(new ArrayList<>());
 
   private CurrentSessionSingleton() {}
 
@@ -123,6 +122,7 @@ public class CurrentSessionSingleton {
             },
             null);
   }
+
 
   public void setOrganizationList(@NonNull List<Organization> orgList) {
     /*@SuppressLint("UseSparseArrays")
