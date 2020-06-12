@@ -1,4 +1,4 @@
-package tech.gruppone.stalker.app.database;
+/*package tech.gruppone.stalker.app.database;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,15 +12,17 @@ import lombok.Value;
 @Builder
 public class UserHistory {
   int placeId;
+  int organizationId;
   @NonNull Date entryTimestamp;
   @Nullable Date exitTimestamp;
   boolean anonymous;
 
-  public UserHistory(int placeId, @NonNull Date entryTimestamp,
+  public UserHistory(int placeId, int organizationId, @NonNull Date entryTimestamp,
     @Nullable Date exitTimestamp, boolean anonymous) {
     this.placeId = placeId;
+    this.organizationId = organizationId;
     this.entryTimestamp = entryTimestamp;
     this.exitTimestamp = exitTimestamp;
     this.anonymous = anonymous;
   }
-}
+}*/

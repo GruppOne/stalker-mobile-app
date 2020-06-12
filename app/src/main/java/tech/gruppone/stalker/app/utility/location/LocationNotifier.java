@@ -12,7 +12,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 import tech.gruppone.stalker.app.business.Point;
-import tech.gruppone.stalker.app.database.AppDatabase;
+//import tech.gruppone.stalker.app.database.AppDatabase;
 import tech.gruppone.stalker.app.utility.CurrentSessionSingleton;
 import tech.gruppone.stalker.app.utility.CurrentSessionSingleton.PlaceWithOrganization;
 import tech.gruppone.stalker.app.utility.room.PermanenceDatabase;
@@ -26,7 +26,6 @@ public class LocationNotifier extends JobIntentService {
 
   private CurrentSessionSingleton currentSession = CurrentSessionSingleton.getInstance();
   private WebSingleton web = WebSingleton.getInstance();
-  private AppDatabase appDatabase = AppDatabase.getInstance(getApplicationContext());
 
   public static void enqueue(@NonNull Context ctx, @NonNull Intent work) {
     enqueueWork(ctx, LocationNotifier.class, JOB_ID, work);

@@ -33,6 +33,12 @@ public class ReportViewModel extends ViewModel {
 
     return Transformations.map(
         model.getOrgsHistoryLiveData(),
-        input -> new ArrayList<>(input.values()));
+        input -> {
+          List<LiveData<UserOrganizationHistory>> liveData = new ArrayList<>(input.values());
+          for(LiveData<UserOrganizationHistory>  userOrganizationHistoryLiveData : liveData){
+              organizationsModel.loadPlaces(userOrganizationHistoryLiveData.getValue().getOrganizationId());
+          }
+          return liveData;
+        });
   }
 }
