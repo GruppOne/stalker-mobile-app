@@ -1,4 +1,4 @@
-package tech.gruppone.stalker.app.database;
+/*package tech.gruppone.stalker.app.database;
 
 import androidx.room.Dao;
 import androidx.room.Insert;
@@ -12,14 +12,17 @@ import java.util.List;
 public interface UserHistoryDao {
 
   @Insert
-  void insertAll(UserHistory userHistory);
+  void insert(UserHistory userHistory);
 
   @Update
   void update(UserHistory userHistory);
+
+  @Query("SELECT * FROM UserHistory WHERE exitTimestamp IS null")
+  List<UserHistory> getInsidePlaces();
 
   @Query("DELETE FROM UserHistory")
   void deleteAll();
 
   @Query("SELECT COUNT(*) FROM UserHistory")
   int checkIfEmpty();
-}
+}*/

@@ -265,12 +265,14 @@ public class ReportModel {
                   }
                   CurrentSessionSingleton.getInstance()
                       .setUserOrganizationHistory(userOrganizationHistories);
+                  //userOrganizationHistories.sort(Comparator.comparingLong(UserOrganizationHistory::getTimestamp));
                 }
               } catch (JSONException | OrganizationNotFoundException e) {
                 e.printStackTrace();
               }
             });
   }
+
 
   @NonNull
   public LiveData<Map<Long, LiveData<UserOrganizationHistory>>> getOrgsHistoryLiveData() {

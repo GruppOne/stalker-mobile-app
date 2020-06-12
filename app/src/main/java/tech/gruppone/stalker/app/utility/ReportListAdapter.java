@@ -29,13 +29,6 @@ public class ReportListAdapter
     extends ListAdapter<LiveData<UserOrganizationHistory>, UserOrganizationViewHolder>
      {
 
-  @Getter @Setter
-  List<LiveData<UserOrganizationHistory>> dataList = getCurrentList();
-
-  @Getter List<LiveData<UserOrganizationHistory>> filteredData = new ArrayList<>();
-
-  List<LiveData<UserOrganizationHistory>> updateList = new ArrayList<>();
-
   public ReportListAdapter() {
     super(
         new ItemCallback<LiveData<UserOrganizationHistory>>() {
@@ -70,7 +63,6 @@ public class ReportListAdapter
   public void onBindViewHolder(@NonNull UserOrganizationViewHolder holder, int position) {
     holder.bindTo(getItem(position));
   }
-
 
 
   public static class UserOrganizationViewHolder extends RecyclerView.ViewHolder {

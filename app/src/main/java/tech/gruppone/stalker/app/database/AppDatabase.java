@@ -1,4 +1,4 @@
-package tech.gruppone.stalker.app.database;
+/*package tech.gruppone.stalker.app.database;
 
 import android.content.Context;
 import androidx.room.Database;
@@ -26,4 +26,4 @@ public abstract class AppDatabase extends RoomDatabase {
     }
     return INSTANCE;
   }
-}
+}*/
