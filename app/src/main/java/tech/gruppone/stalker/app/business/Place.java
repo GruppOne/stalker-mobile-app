@@ -21,9 +21,9 @@ public class Place {
     RIGHT
   }
 
-  @Getter private int id;
+  @Getter private final int id;
 
-  @Getter private List<Point> polyLine;
+  @Getter private final List<Point> polyLine;
 
   public Place(@NonNull JSONObject jsonPlace) {
     try {
@@ -93,5 +93,17 @@ public class Place {
       // if(crossProduct.z<0)
       return Position.RIGHT;
     }
+  }
+
+  public Point getCenter() {
+    Point center =
+        polyLine
+            .parallelStream()
+            .reduce(
+                new Point(),
+                (point1, point2) ->
+                    new Point(point1.getX() + point2.getX(), point1.getY() + point2.getY()));
+
+    return new Point(center.getX() / polyLine.size(), center.getY() / polyLine.size());
   }
 }
