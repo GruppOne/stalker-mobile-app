@@ -15,13 +15,13 @@ import tech.gruppone.stalker.app.R;
 import tech.gruppone.stalker.app.utility.CurrentSessionSingleton;
 import tech.gruppone.stalker.app.utility.StalkerActivity;
 import tech.gruppone.stalker.app.utility.location.GeofenceHandler;
-import tech.gruppone.stalker.app.utility.location.GooglePositionInterface;
 import tech.gruppone.stalker.app.viewmodel.MainPageViewModel;
 
 public class MainPageActivity extends StalkerActivity {
 
   FragmentManager fragmentManager = getSupportFragmentManager();
 
+  @SuppressWarnings("unused")
   GeofenceHandler geofenceHandler = new GeofenceHandler(this);
 
   MainPageViewModel viewModel;
@@ -85,10 +85,6 @@ public class MainPageActivity extends StalkerActivity {
     // bottomNavigationView.setOnNavigationItemReselectedListener(menuItem -> {});
 
     bottomNavigationView.setSelectedItemId(viewModel.getSelectedMenuItemId());
-
-    if (savedInstanceState == null) {
-      new GooglePositionInterface().startLocationUpdates(this);
-    }
   }
 
   private void setOrganizationsPage() {
