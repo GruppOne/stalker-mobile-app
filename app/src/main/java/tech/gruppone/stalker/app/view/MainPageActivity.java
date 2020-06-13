@@ -14,12 +14,15 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import tech.gruppone.stalker.app.R;
 import tech.gruppone.stalker.app.utility.CurrentSessionSingleton;
 import tech.gruppone.stalker.app.utility.StalkerActivity;
+import tech.gruppone.stalker.app.utility.location.GeofenceHandler;
 import tech.gruppone.stalker.app.utility.location.GooglePositionInterface;
 import tech.gruppone.stalker.app.viewmodel.MainPageViewModel;
 
 public class MainPageActivity extends StalkerActivity {
 
   FragmentManager fragmentManager = getSupportFragmentManager();
+
+  GeofenceHandler geofenceHandler = new GeofenceHandler(this);
 
   MainPageViewModel viewModel;
 
@@ -83,12 +86,6 @@ public class MainPageActivity extends StalkerActivity {
 
     bottomNavigationView.setSelectedItemId(viewModel.getSelectedMenuItemId());
 
-    // FIXME At the moment, this gets called every time the activity is created. We only want one
-    // call, at the beginning
-    // Possible solution: we set an extra in the intent from login, and in here we only do the thing
-    // if the intent has that extra, It's a bit of a taccone, but it works.
-    // Alternative: check if the bundle passed as parameter is null.
-    // It should only be null if it's the first time the activity is created
     if (savedInstanceState == null) {
       new GooglePositionInterface().startLocationUpdates(this);
     }
