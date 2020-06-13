@@ -3,6 +3,7 @@ package tech.gruppone.stalker.app.model;
 import androidx.annotation.NonNull;
 import org.json.JSONException;
 import tech.gruppone.stalker.app.business.User;
+import tech.gruppone.stalker.app.model.fragment.OrganizationsModel;
 import tech.gruppone.stalker.app.utility.CurrentSessionSingleton;
 import tech.gruppone.stalker.app.utility.web.WebSingleton;
 
@@ -20,6 +21,8 @@ public class SignupModel {
               } catch (JSONException e) {
                 throw new RuntimeException(e);
               }
+
+              new OrganizationsModel().loadOrganizations();
             },
             null);
   }
