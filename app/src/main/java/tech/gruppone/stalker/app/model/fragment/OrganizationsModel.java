@@ -52,12 +52,12 @@ public class OrganizationsModel {
                               .getOrganizations()
                               .removeObserver(this);
                           OrganizationsModel.this.loadConnectedOrganizations();
-                          for(Organization org : organizations){
-                            organizationModel.loadPlaces(org.getId());
-                          }
 
                         }
                       });
+                for(Organization org : organizations){
+                            organizationModel.loadPlaces(org.getId());
+                          }
             },
             null);
   }
