@@ -3,6 +3,7 @@ package tech.gruppone.stalker.app.utility.location;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import androidx.annotation.NonNull;
 import com.google.android.gms.location.Geofence;
 import com.google.android.gms.location.GeofencingEvent;
 import java.util.List;
@@ -15,7 +16,7 @@ public class GeofencesReceiver extends BroadcastReceiver {
   private final GooglePositionInterface googlePositionInterface = new GooglePositionInterface();
 
   @Override
-  public void onReceive(Context context, Intent intent) {
+  public void onReceive(@NonNull Context context, @NonNull Intent intent) {
     GeofencingEvent geofencingEvent = GeofencingEvent.fromIntent(intent);
 
     if (geofencingEvent.hasError()) {

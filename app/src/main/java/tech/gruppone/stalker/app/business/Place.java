@@ -95,6 +95,7 @@ public class Place {
     }
   }
 
+  @NonNull
   public Point getCenter() {
     Point center =
         polyLine
