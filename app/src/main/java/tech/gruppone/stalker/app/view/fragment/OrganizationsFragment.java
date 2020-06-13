@@ -27,7 +27,6 @@ import tech.gruppone.stalker.app.view.recyclerview.OrgListItemDetailsLookup;
 import tech.gruppone.stalker.app.view.recyclerview.OrganizationItemKeyProvider;
 import tech.gruppone.stalker.app.view.recyclerview.OrganizationListAdapter;
 import tech.gruppone.stalker.app.viewmodel.fragment.OrganizationsViewModel;
-import tech.gruppone.stalker.app.viewmodel.fragment.ReportViewModel;
 
 public class OrganizationsFragment extends Fragment {
 

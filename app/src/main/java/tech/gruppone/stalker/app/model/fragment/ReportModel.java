@@ -28,21 +28,21 @@ public class ReportModel {
                   JSONObject jsonHistoryObject = jsonOrganizationsHistory.getJSONObject(i);
                   int organizationId = jsonHistoryObject.getInt("organizationId");
                   LiveData<Organization> organization =
-                      Objects.requireNonNull(
-                          CurrentSessionSingleton.getInstance().getOrganization(organizationId));
+                    Objects.requireNonNull(
+                      CurrentSessionSingleton.getInstance().getOrganization(organizationId));
                   JSONObject organizationJson =
-                      jsonHistoryObject.getJSONObject("historyPerOrganization");
+                    jsonHistoryObject.getJSONObject("historyPerOrganization");
                   JSONArray historyArray = organizationJson.getJSONArray("history");
                   for (int j = 0; j < historyArray.length(); j++) {
                     JSONObject jsonUserOrganizationHistory = historyArray.getJSONObject(j);
-                    /*UserOrganizationHistory userOrganizationHistory =
-                        new UserOrganizationHistory(
-                            jsonUserOrganizationHistory,
-                            Objects.requireNonNull(organization.getValue()));
-                    userOrganizationHistories.add(userOrganizationHistory);*/
+                    UserOrganizationHistory userOrganizationHistory =
+                      new UserOrganizationHistory(
+                        jsonUserOrganizationHistory,
+                        Objects.requireNonNull(organization.getValue()));
+                    userOrganizationHistories.add(userOrganizationHistory);
                   }
                   CurrentSessionSingleton.getInstance()
-                      .setUserOrganizationHistory(userOrganizationHistories);
+                    .setUserOrganizationHistory(userOrganizationHistories);
                 }
               } catch (JSONException | OrganizationNotFoundException e) {
                 e.printStackTrace();
@@ -265,7 +265,6 @@ public class ReportModel {
                   }
                   CurrentSessionSingleton.getInstance()
                       .setUserOrganizationHistory(userOrganizationHistories);
-                  //userOrganizationHistories.sort(Comparator.comparingLong(UserOrganizationHistory::getTimestamp));
                 }
               } catch (JSONException | OrganizationNotFoundException e) {
                 e.printStackTrace();
