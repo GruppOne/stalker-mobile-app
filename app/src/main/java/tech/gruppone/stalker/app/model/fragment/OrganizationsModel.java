@@ -14,11 +14,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import tech.gruppone.stalker.app.business.Organization;
 import tech.gruppone.stalker.app.business.Place;
+import tech.gruppone.stalker.app.model.OrganizationModel;
 import tech.gruppone.stalker.app.utility.CurrentSessionSingleton;
 import tech.gruppone.stalker.app.utility.excpetions.OrganizationNotFoundException;
 import tech.gruppone.stalker.app.utility.web.WebSingleton;
 
 public class OrganizationsModel {
+
+  OrganizationModel organizationModel = new OrganizationModel();
 
   public void loadOrganizations() {
     WebSingleton.getInstance()
@@ -48,13 +51,17 @@ public class OrganizationsModel {
                           CurrentSessionSingleton.getInstance()
                               .getOrganizations()
                               .removeObserver(this);
-
                           OrganizationsModel.this.loadConnectedOrganizations();
+                          for(Organization org : organizations){
+                            organizationModel.loadPlaces(org.getId());
+                          }
+
                         }
                       });
             },
             null);
   }
+
 
   public void loadConnectedOrganizations() {
     WebSingleton.getInstance()

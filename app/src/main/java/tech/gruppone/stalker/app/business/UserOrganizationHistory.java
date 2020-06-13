@@ -2,19 +2,22 @@ package tech.gruppone.stalker.app.business;
 
 import java.util.List;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.With;
 import org.json.JSONException;
 import org.json.JSONObject;
+import tech.gruppone.stalker.app.utility.CurrentSessionSingleton;
 
 @AllArgsConstructor
 @Data
+@Builder
 public class UserOrganizationHistory {
 
   long timestamp;;
   int placeId;
-  int organizationId;
   Place place;
-  String organizationName;
+  Organization organization;
   Boolean inside;
 
 
@@ -22,9 +25,8 @@ public class UserOrganizationHistory {
 
     try {
       timestamp = organizationJson.getLong("timestamp");
-      this.organizationName = organization.getName();
+      this.organization = organization;
       placeId = organizationJson.getInt("placeId");
-      organizationId = organization.getId();
       inside = organizationJson.getBoolean("inside");
       place = organization.getPlaceWithOrganizationId(placeId);
     } catch (JSONException e) {
