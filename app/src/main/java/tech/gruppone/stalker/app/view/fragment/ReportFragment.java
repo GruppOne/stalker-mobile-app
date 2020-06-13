@@ -34,6 +34,11 @@ public class ReportFragment extends Fragment {
     super.onActivityCreated(savedInstanceState);
 
     reportViewModel = new ViewModelProvider(this).get(ReportViewModel.class);
+
+
+    reportViewModel.getUsersHistory(
+      Objects.requireNonNull(CurrentSessionSingleton.getInstance().getLoggedUser().getValue())
+        .getId());
     searchView = view.findViewById(R.id.reportSearch_bar);
     recyclerView = view.findViewById(R.id.reportRecyclerView);
 
@@ -44,16 +49,6 @@ public class ReportFragment extends Fragment {
     reportListAdapter = new ReportListAdapter();
 
     recyclerView.setAdapter(reportListAdapter);
-    reportViewModel.getUsersHistory(
-        Objects.requireNonNull(CurrentSessionSingleton.getInstance().getLoggedUser().getValue())
-            .getId());
-
-
-
-    reportViewModel
-        .getUsersLiveData()
-        .observe(getViewLifecycleOwner(), result -> { reportListAdapter.submitList(result); reportListAdapter.setDataList(result);});
-
 
     SearchView.OnQueryTextListener queryTextListener = setSearchBarBehaviour();
     searchView.setOnQueryTextListener(queryTextListener);

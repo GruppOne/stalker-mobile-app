@@ -65,6 +65,8 @@ public class ReportListAdapter
   }
 
 
+
+
   public static class UserOrganizationViewHolder extends RecyclerView.ViewHolder {
 
     private TextView TtimestampTime;
@@ -93,7 +95,7 @@ public class ReportListAdapter
       TtimestampTime.setText("at " + getHours(userOrg.getTimestamp()));
       TplaceName.setText(userOrg.getPlace().getName());
       Tinside.setText(userOrg.getInside() ? "you entered on " : "you went out on");
-      TorganizationName.setText(userOrg.getOrganizationName());
+      TorganizationName.setText(userOrg.getOrganization().getName());
       Taddress.setText(userOrg.getPlace().getAddress() + ", ");
       Tcity.setText(userOrg.getPlace().getCity());
     }

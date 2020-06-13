@@ -6,14 +6,10 @@ import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Predicate;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.Setter;
-import tech.gruppone.stalker.app.business.Organization;
+import lombok.EqualsAndHashCode;;
 import tech.gruppone.stalker.app.business.UserOrganizationHistory;
 import tech.gruppone.stalker.app.model.OrganizationModel;
-import tech.gruppone.stalker.app.model.fragment.OrganizationsModel;
 import tech.gruppone.stalker.app.model.fragment.ReportModel;
 
 @Data
@@ -22,7 +18,7 @@ public class ReportViewModel extends ViewModel {
 
   private ReportModel model = new ReportModel();
 
-  private OrganizationModel organizationsModel = new OrganizationModel();
+  private OrganizationModel organizationModel = new OrganizationModel();
 
   public void getUsersHistory(int id) {
     model.getUsersHistory(id);
@@ -33,12 +29,7 @@ public class ReportViewModel extends ViewModel {
 
     return Transformations.map(
         model.getOrgsHistoryLiveData(),
-        input -> {
-          List<LiveData<UserOrganizationHistory>> liveData = new ArrayList<>(input.values());
-          for(LiveData<UserOrganizationHistory>  userOrganizationHistoryLiveData : liveData){
-              organizationsModel.loadPlaces(userOrganizationHistoryLiveData.getValue().getOrganizationId());
-          }
-          return liveData;
-        });
+        input ->  new ArrayList<>(input.values()));
   }
+
 }

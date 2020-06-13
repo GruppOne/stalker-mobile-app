@@ -36,9 +36,8 @@ public class CurrentSessionSingleton {
   @Getter private String jwt = "";
   @Getter private String anonymousJwt = "";
 
-
   @Getter @Setter private boolean anonymous = false;
-  ;
+
 
   private MutableLiveData<Map<Long, LiveData<UserOrganizationHistory>>> userOrganizationHistory = new MutableLiveData<>(new TreeMap<>());
 
@@ -122,7 +121,6 @@ public class CurrentSessionSingleton {
             },
             null);
   }
-
 
   public void setOrganizationList(@NonNull List<Organization> orgList) {
     /*@SuppressLint("UseSparseArrays")

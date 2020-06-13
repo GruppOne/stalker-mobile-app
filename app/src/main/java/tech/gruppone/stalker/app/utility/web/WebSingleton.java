@@ -195,6 +195,14 @@ public class WebSingleton {
 =======
 >>>>>>> e033ffb... feat: add searchbar to report page:app/src/main/java/tech/gruppone/stalker/app/utility/WebSingleton.java
 
+  public void getPlace( int organizationId, int placeId,
+    @Nullable Listener<JSONObject> successListener,
+    @Nullable ErrorListener errorListener){
+    String fullUrl = serverUrl + "/organization/" + organizationId + "/place/" + placeId;
+    addToRequestQueue(
+      new AuthenticatedRequest(Method.GET, fullUrl, null, successListener, errorListener));
+  }
+
   public void connect(
       int userId,
       int organizationId,
