@@ -7,11 +7,9 @@ import androidx.lifecycle.ViewModel;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import tech.gruppone.stalker.app.business.Organization;
 import tech.gruppone.stalker.app.model.OrganizationModel;
 import tech.gruppone.stalker.app.model.fragment.OrganizationsModel;
-import tech.gruppone.stalker.app.utility.CurrentSessionSingleton;
 
 public class OrganizationsViewModel extends ViewModel {
 

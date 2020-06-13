@@ -1,33 +1,27 @@
 package tech.gruppone.stalker.app.utility;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
-import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.DiffUtil.ItemCallback;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
-import lombok.Getter;
-import lombok.Setter;
 import tech.gruppone.stalker.app.R;
 import tech.gruppone.stalker.app.business.UserOrganizationHistory;
 import tech.gruppone.stalker.app.utility.ReportListAdapter.UserOrganizationViewHolder;
 
+@SuppressLint("SetTextI18n")
 public class ReportListAdapter
-    extends ListAdapter<LiveData<UserOrganizationHistory>, UserOrganizationViewHolder>
-     {
+    extends ListAdapter<LiveData<UserOrganizationHistory>, UserOrganizationViewHolder> {
 
   public ReportListAdapter() {
     super(
@@ -64,9 +58,6 @@ public class ReportListAdapter
     holder.bindTo(getItem(position));
   }
 
-
-
-
   public static class UserOrganizationViewHolder extends RecyclerView.ViewHolder {
 
     private TextView TtimestampTime;
@@ -75,6 +66,7 @@ public class ReportListAdapter
     private TextView Taddress;
     private TextView Tcity;
     private TextView Tinside;
+    private TextView TorganizationName;
 
     public UserOrganizationViewHolder(@NonNull View v) {
       super(v);
@@ -87,14 +79,13 @@ public class ReportListAdapter
       Tcity = v.findViewById(R.id.tvPlaceCity);
     }
 
-
     public void bindTo(@NonNull LiveData<UserOrganizationHistory> userOrganizationHistory) {
       UserOrganizationHistory userOrg = Objects.requireNonNull(userOrganizationHistory.getValue());
 
       TtimestampDate.setText(getDate(userOrg.getTimestamp()));
       TtimestampTime.setText("at " + getHours(userOrg.getTimestamp()));
       TplaceName.setText(userOrg.getPlace().getName());
-      Tinside.setText(userOrg.getInside() ? "you entered on " : "you went out on");
+      Tinside.setText(userOrg.getInside() ? "you entered on" : "you went out on");
       TorganizationName.setText(userOrg.getOrganization().getName());
       Taddress.setText(userOrg.getPlace().getAddress() + ", ");
       Tcity.setText(userOrg.getPlace().getCity());
@@ -106,8 +97,8 @@ public class ReportListAdapter
     }
 
     String getHours(long milliseconds) {
-      DateFormat dateFormat = new SimpleDateFormat("HH:mm");
+      DateFormat dateFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
       return dateFormat.format(new Date(milliseconds));
     }
   }
-}
+ }

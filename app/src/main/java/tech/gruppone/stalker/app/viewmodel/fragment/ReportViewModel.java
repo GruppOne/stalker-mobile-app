@@ -7,10 +7,11 @@ import androidx.lifecycle.ViewModel;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Data;
-import lombok.EqualsAndHashCode;;
+import lombok.EqualsAndHashCode;
 import tech.gruppone.stalker.app.business.UserOrganizationHistory;
 import tech.gruppone.stalker.app.model.OrganizationModel;
 import tech.gruppone.stalker.app.model.fragment.ReportModel;
+
 
 @Data
 @EqualsAndHashCode(callSuper = false)

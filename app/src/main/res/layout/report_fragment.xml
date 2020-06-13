@@ -9,7 +9,7 @@
   <android.widget.SearchView
     android:id="@+id/reportSearch_bar"
     android:layout_width="match_parent"
-    android:layout_height="40dp"
+    android:layout_height="50dp"
     android:background="@color/colorSecondary"
     android:queryHint="search"
     android:title="menu_search_bar"

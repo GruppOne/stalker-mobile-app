@@ -12,13 +12,14 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 import tech.gruppone.stalker.app.business.Point;
-//import tech.gruppone.stalker.app.database.AppDatabase;
 import tech.gruppone.stalker.app.utility.CurrentSessionSingleton;
 import tech.gruppone.stalker.app.utility.CurrentSessionSingleton.PlaceWithOrganization;
 import tech.gruppone.stalker.app.utility.room.PermanenceDatabase;
 import tech.gruppone.stalker.app.utility.room.PersistenceSingleton;
 import tech.gruppone.stalker.app.utility.room.UserPermanence;
 import tech.gruppone.stalker.app.utility.web.WebSingleton;
+
+//import tech.gruppone.stalker.app.database.AppDatabase;
 
 public class LocationNotifier extends JobIntentService {
 

@@ -9,11 +9,15 @@ import android.widget.SearchView.OnQueryTextListener;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import tech.gruppone.stalker.app.R;
+import tech.gruppone.stalker.app.business.UserOrganizationHistory;
 import tech.gruppone.stalker.app.utility.CurrentSessionSingleton;
 import tech.gruppone.stalker.app.utility.ReportListAdapter;
 import tech.gruppone.stalker.app.viewmodel.fragment.ReportViewModel;
@@ -23,8 +27,9 @@ public class ReportFragment extends Fragment {
   private View view;
   private ReportViewModel reportViewModel;
   private ReportListAdapter reportListAdapter;
-  public SearchView searchView;
-  public RecyclerView recyclerView;
+  private List<LiveData<UserOrganizationHistory>> currentList = new ArrayList<>();
+  private SearchView searchView;
+  private RecyclerView recyclerView;
 
   public ReportFragment() {}
 
@@ -36,9 +41,6 @@ public class ReportFragment extends Fragment {
     reportViewModel = new ViewModelProvider(this).get(ReportViewModel.class);
 
 
-    reportViewModel.getUsersHistory(
-      Objects.requireNonNull(CurrentSessionSingleton.getInstance().getLoggedUser().getValue())
-        .getId());
     searchView = view.findViewById(R.id.reportSearch_bar);
     recyclerView = view.findViewById(R.id.reportRecyclerView);
 
@@ -49,6 +51,14 @@ public class ReportFragment extends Fragment {
     reportListAdapter = new ReportListAdapter();
 
     recyclerView.setAdapter(reportListAdapter);
+    reportViewModel
+        .getUsersLiveData()
+        .observe(
+            getViewLifecycleOwner(),
+            result -> {
+              reportListAdapter.submitList(result);
+              currentList = result;
+            });
 
     SearchView.OnQueryTextListener queryTextListener = setSearchBarBehaviour();
     searchView.setOnQueryTextListener(queryTextListener);
@@ -87,14 +97,35 @@ public class ReportFragment extends Fragment {
 
       @Override
       public boolean onQueryTextChange(String newText) {
-        /*if (searchView.getQuery().length() == 0) {
-          reportListAdapter.submitList(reportListAdapter.getDataList());
+        if (searchView.getQuery().length() == 0) {
+          reportListAdapter.submitList(currentList);
+          recyclerView.scrollToPosition(0);
         } else {
-          reportListAdapter.getFilter().filter(newText);
-          reportListAdapter.submitList(reportListAdapter.getFilteredData());
+          List<LiveData<UserOrganizationHistory>> filteredData = new ArrayList<>();
+          List<LiveData<UserOrganizationHistory>> userOrganizationHistory = currentList;
+          if (newText.isEmpty()) {
+            filteredData = userOrganizationHistory;
+          } else {
+            List<LiveData<UserOrganizationHistory>> filteredElements = new ArrayList<>();
+            for (LiveData<UserOrganizationHistory> useOrg : userOrganizationHistory) {
+              if (Objects.requireNonNull(useOrg.getValue())
+                      .getOrganization()
+                      .getName()
+                      .toLowerCase()
+                      .contains(newText.toLowerCase().trim())
+                  || Objects.requireNonNull(useOrg.getValue().getPlace().getName().toLowerCase())
+                      .contains(newText.toLowerCase().trim())
+                  || Objects.requireNonNull(useOrg.getValue().getPlace().getAddress().toLowerCase())
+                      .contains(newText.toLowerCase().trim())
+                  || Objects.requireNonNull(useOrg.getValue().getPlace().getCity().toLowerCase())
+                      .contains(newText.toLowerCase().trim())) {
+                filteredElements.add(useOrg);
+                filteredData = filteredElements;
+              }
+            }
+          }
+          reportListAdapter.submitList(filteredData);
         }
-        return true; */
-        reportListAdapter.getFilter().filter(newText);
         return true;
       }
     };
