@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import tech.gruppone.stalker.app.business.User;
 import tech.gruppone.stalker.app.business.UserOrganizationHistory;
 import tech.gruppone.stalker.app.model.OrganizationModel;
 import tech.gruppone.stalker.app.model.fragment.ReportModel;
@@ -30,7 +31,13 @@ public class ReportViewModel extends ViewModel {
 
     return Transformations.map(
         model.getOrgsHistoryLiveData(),
-        input ->  new ArrayList<>(input.values()));
+        input ->{
+          List<LiveData<UserOrganizationHistory>> liveData = new ArrayList<>(input.values());
+          for(LiveData<UserOrganizationHistory> userOrganizationHistoryLiveData : liveData){
+            organizationModel.loadPlaces(userOrganizationHistoryLiveData.getValue().getOrganization().getId());
+          }
+          return liveData;
+        });
   }
 
 }
