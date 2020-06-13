@@ -83,6 +83,8 @@ public class GeofenceHandler {
                             RANGE_IN_METERS)
                         .setTransitionTypes(
                             Geofence.GEOFENCE_TRANSITION_DWELL | Geofence.GEOFENCE_TRANSITION_EXIT)
+                        .setLoiteringDelay(60000)
+                        .setExpirationDuration(Geofence.NEVER_EXPIRE)
                         .build())
             .collect(Collectors.toList());
 
