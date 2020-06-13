@@ -9,20 +9,18 @@ import lombok.experimental.NonFinal;
 @Value
 public class Point implements Parcelable {
 
-  double x;
-  double y;
+  @NonFinal double x;
+  @NonFinal double y;
 
-  // TODO implement reverse Mercator projection
   @NonFinal double longitude;
   @NonFinal double latitude;
 
-  private Point(double x, double y) {
+  public Point(double x, double y) {
     this.x = x;
     this.y = y;
 
-    // TODO implement reverse Mercator projection
-    longitude = 0;
-    latitude = 0;
+    this.longitude = longitudeMercator(x);
+    this.latitude = latitudeMercator(y);
   }
 
   protected Point(@NonNull Parcel in) {
@@ -30,6 +28,13 @@ public class Point implements Parcelable {
     y = in.readDouble();
     longitude = in.readDouble();
     latitude = in.readDouble();
+  }
+
+  public Point() {
+    x = 0;
+    y = 0;
+    longitude = 0;
+    latitude = 0;
   }
 
   public static final Creator<Point> CREATOR =
@@ -60,9 +65,10 @@ public class Point implements Parcelable {
 
   @NonNull
   public static Point buildFromDegrees(double longitude, double latitude) {
-    Point point = new Point(xMercator(longitude), yMercator(latitude));
+    Point point = new Point();
 
-    // TODO implement reverse Mercator projection
+    point.x = xMercator(longitude);
+    point.y = yMercator(latitude);
     point.longitude = longitude;
     point.latitude = latitude;
 
@@ -78,25 +84,20 @@ public class Point implements Parcelable {
     return EARTH_EQUAT_RADIUS * Math.toRadians(longitude);
   }
 
+  private static double longitudeMercator(double x) {
+    return Math.toDegrees(x / EARTH_EQUAT_RADIUS);
+  }
+
   private static double yMercator(double latitude) {
     // Above 89.5° or below -89.5° the projection breaks
     latitude = Math.min(Math.max(latitude, -89.5), 89.5);
 
-    // Mercator projection:
-    double earthDimensionalRateNormalized =
-        1.0 - Math.pow(EARTH_POLAR_RADIUS / EARTH_EQUAT_RADIUS, 2);
+    latitude = Math.toRadians(latitude);
 
-    double latitudeOnEarthProj =
-        Math.sqrt(earthDimensionalRateNormalized) * Math.sin(Math.toRadians(latitude));
+    return Math.log(Math.tan(latitude) + 1 / Math.cos(latitude));
+  }
 
-    latitudeOnEarthProj =
-        Math.pow(
-            ((1.0 - latitudeOnEarthProj) / (1.0 + latitudeOnEarthProj)),
-            0.5 * Math.sqrt(earthDimensionalRateNormalized));
-
-    double inputOnEarthProjNormalized =
-        Math.tan(0.5 * ((Math.PI * 0.5) - Math.toRadians(latitude))) / latitudeOnEarthProj;
-
-    return (-1) * EARTH_EQUAT_RADIUS * Math.log(inputOnEarthProjNormalized);
+  private static double latitudeMercator(double y) {
+    return Math.toDegrees(Math.atan(Math.sinh(y)));
   }
 }
