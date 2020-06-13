@@ -36,9 +36,7 @@ public class GooglePositionInterface {
   FusedLocationProviderClient locationProviderClient =
       LocationServices.getFusedLocationProviderClient(App.getAppContext());
 
-  public void startLocationUpdates(@NonNull Activity activity) {
-    checkPermissions(activity);
-
+  public void startLocationUpdates() {
     locationProviderClient.requestLocationUpdates(
         locationRequest, locationCallback, Looper.getMainLooper());
   }
