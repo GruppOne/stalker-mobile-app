@@ -22,7 +22,7 @@ public class MainPageActivity extends StalkerActivity {
   FragmentManager fragmentManager = getSupportFragmentManager();
 
   @SuppressWarnings("unused")
-  GeofenceHandler geofenceHandler = new GeofenceHandler(this);
+  GeofenceHandler geofenceHandler = null;
 
   MainPageViewModel viewModel;
 
@@ -32,6 +32,8 @@ public class MainPageActivity extends StalkerActivity {
     setContentView(R.layout.activity_mainpage);
 
     viewModel = new ViewModelProvider(this).get(MainPageViewModel.class);
+
+    geofenceHandler = new GeofenceHandler(this);
 
     MaterialToolbar topAppBar = findViewById(R.id.topAppBarPages);
 
