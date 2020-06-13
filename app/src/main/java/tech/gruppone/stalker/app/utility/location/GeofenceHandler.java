@@ -54,9 +54,13 @@ public class GeofenceHandler {
               oldIds.removeAll(
                   connectedPlaces.parallelStream().map(Place::getId).collect(Collectors.toList()));
 
-              stopGeofences(oldIds);
+              if (!oldIds.isEmpty()) {
+                stopGeofences(oldIds);
+              }
 
-              addGeofences(connectedPlaces);
+              if (!connectedPlaces.isEmpty()) {
+                addGeofences(connectedPlaces);
+              }
             });
   }
 
