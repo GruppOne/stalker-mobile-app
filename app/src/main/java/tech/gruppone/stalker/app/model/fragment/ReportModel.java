@@ -302,4 +302,3 @@ public class ReportModel {
     return CurrentSessionSingleton.getInstance().getUserOrganizationHistory();
   }
 }
-
