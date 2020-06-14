@@ -15,7 +15,7 @@ public class LdapCredentials {
     JSONObject object = new JSONObject();
 
     try {
-      object.put("rdn", rdn);
+      object.put("ldapCn", rdn);
       object.put("ldapPassword", password);
     } catch (JSONException e) {
       throw new RuntimeException(e);

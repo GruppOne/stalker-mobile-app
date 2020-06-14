@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import android.app.Dialog;
 import android.os.Bundle;
+import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
@@ -32,23 +33,32 @@ public class LdapDialogFragment extends DialogFragment {
   @Override
   public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
     FragmentActivity activity = requireNonNull(getActivity());
+    View dialogView =
+        activity
+            .getLayoutInflater()
+            .inflate(
+                R.layout.ldap_credential_dialog_content,
+                activity.findViewById(R.id.organizationDetailsLayout),
+                false);
+
     return new MaterialAlertDialogBuilder(activity)
         .setTitle(R.string.ldapCredentialsTitle)
-        .setView(R.layout.ldap_credential_dialog_content)
+        .setView(dialogView)
         .setPositiveButton(
             R.string.connect,
             (dialog, which) -> {
               if (positiveListener != null) {
                 String rdn =
                     requireNonNull(
-                            ((TextInputLayout) activity.findViewById(R.id.ldapRdnInputLayout))
+                            ((TextInputLayout) dialogView.findViewById(R.id.ldapRdnInputLayout))
                                 .getEditText())
                         .getText()
                         .toString();
 
                 String password =
                     requireNonNull(
-                            ((TextInputLayout) activity.findViewById(R.id.ldapPasswordInputLayout))
+                            ((TextInputLayout)
+                                    dialogView.findViewById(R.id.ldapPasswordInputLayout))
                                 .getEditText())
                         .getText()
                         .toString();
