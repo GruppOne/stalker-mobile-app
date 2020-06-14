@@ -37,6 +37,7 @@
       android:backgroundTint="@color/whiteBackground"
       android:layout_marginTop="8dp">
       <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/organizationDetailsLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="8dp"
