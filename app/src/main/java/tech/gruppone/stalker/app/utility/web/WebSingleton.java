@@ -54,10 +54,10 @@ public class WebSingleton {
   }
 
   public void login(
-    @NonNull String email,
-    @NonNull String passwordHash,
-    @Nullable Listener<JSONObject> successListener,
-    @Nullable ErrorListener errorListener) {
+      @NonNull String email,
+      @NonNull String passwordHash,
+      @Nullable Listener<JSONObject> successListener,
+      @Nullable ErrorListener errorListener) {
     String fullUrl = serverUrl + "/user/login";
     JSONObject requestBody = new JSONObject();
 
@@ -69,24 +69,24 @@ public class WebSingleton {
     }
 
     addToRequestQueue(
-      new JsonObjectRequest(Method.POST, fullUrl, requestBody, successListener, errorListener));
+        new JsonObjectRequest(Method.POST, fullUrl, requestBody, successListener, errorListener));
   }
 
   public void logout(
-    int userId,
-    @Nullable Listener<JSONObject> successListener,
-    @Nullable ErrorListener errorListener) {
+      int userId,
+      @Nullable Listener<JSONObject> successListener,
+      @Nullable ErrorListener errorListener) {
     String fullUrl = serverUrl + "/user/" + userId + "/logout";
 
     addToRequestQueue(
-      new JsonObjectRequest(Method.POST, fullUrl, null, successListener, errorListener));
+        new JsonObjectRequest(Method.POST, fullUrl, null, successListener, errorListener));
   }
 
   public void signup(
-    @NonNull User user,
-    @NonNull String passwordHash,
-    @Nullable Listener<JSONObject> successListener,
-    @Nullable ErrorListener errorListener) {
+      @NonNull User user,
+      @NonNull String passwordHash,
+      @Nullable Listener<JSONObject> successListener,
+      @Nullable ErrorListener errorListener) {
     String fullUrl = serverUrl + "/users";
     JSONObject requestBody = new JSONObject();
     JSONObject loginData = new JSONObject();
@@ -108,17 +108,17 @@ public class WebSingleton {
     }
 
     addToRequestQueue(
-      new JsonObjectRequest(Method.POST, fullUrl, requestBody, successListener, errorListener));
+        new JsonObjectRequest(Method.POST, fullUrl, requestBody, successListener, errorListener));
   }
 
   public void getUserInfo(
-    int id,
-    @Nullable Listener<JSONObject> successListener,
-    @Nullable ErrorListener errorListener) {
+      int id,
+      @Nullable Listener<JSONObject> successListener,
+      @Nullable ErrorListener errorListener) {
     String fullUrl = serverUrl + "/user/" + id;
 
     addToRequestQueue(
-      new AuthenticatedRequest(Method.GET, fullUrl, null, successListener, errorListener));
+        new AuthenticatedRequest(Method.GET, fullUrl, null, successListener, errorListener));
   }
 
   public void getAnonymousJwt(
@@ -155,10 +155,10 @@ public class WebSingleton {
   }
 
   public void getOrganizationList(
-    @Nullable Listener<JSONObject> successListener, @Nullable ErrorListener errorListener) {
+      @Nullable Listener<JSONObject> successListener, @Nullable ErrorListener errorListener) {
     String fullUrl = serverUrl + "/organizations";
     addToRequestQueue(
-      new AuthenticatedRequest(Method.GET, fullUrl, null, successListener, errorListener));
+        new AuthenticatedRequest(Method.GET, fullUrl, null, successListener, errorListener));
   }
 
   public void getConnectedOrganizations(
@@ -192,7 +192,7 @@ public class WebSingleton {
     JSONObject body = ldapCredentials != null ? ldapCredentials.toJSON() : null;
 
     addToRequestQueue(
-      new AuthenticatedRequest(Method.POST, fullUrl, body, successListener, errorListener));
+        new AuthenticatedRequest(Method.POST, fullUrl, body, successListener, errorListener));
   }
 
   public void disconnect(

@@ -17,6 +17,7 @@
   <string name="invalidEmail">Invalid email</string>
   <string name="emptyPassword">Insert your password</string>
   <string name="invalidPassword">The password must be between 8 and 32 characters long, and must contain at least a lowercase letter, an uppercase letter, and a number</string>
+  <string name="invalidPasswordConfirm">The passwords do not match</string>
   <string name="emptyField">Fill this field</string>
   <string name="logoImageDescription">Picture of Stalker logo</string>
   <string name="organizations">Organizations</string>
