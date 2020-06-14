@@ -9,6 +9,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.auth0.android.jwt.JWT;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 import lombok.Getter;
@@ -38,10 +39,20 @@ public class CurrentSessionSingleton {
   private final MutableLiveData<Map<Integer, LiveData<Organization>>> organizations =
       new MutableLiveData<>(new TreeMap<>());
 
-  private CurrentSessionSingleton() {}
+  private CurrentSessionSingleton() {
+  }
 
   public void setUser(@NonNull User user) {
     loggedUser.postValue(user);
+  }
+
+  public static void logout() {
+    WebSingleton.getInstance()
+      .logout(
+        Objects.requireNonNull(CurrentSessionSingleton.getInstance().getLoggedUser().getValue())
+          .getId(),
+        null,
+        null);
   }
 
   @NonNull
@@ -143,13 +154,13 @@ public class CurrentSessionSingleton {
 
   @NonNull
   public LiveData<Organization> getOrganization(int organizationId)
-      throws OrganizationNotFoundException {
+    throws OrganizationNotFoundException {
     LiveData<Organization> organization =
-        requireNonNull(organizations.getValue()).get(organizationId);
+      requireNonNull(organizations.getValue()).get(organizationId);
 
     if (organization == null) {
       throw new OrganizationNotFoundException(
-          "There's no organization with the given id of " + organizationId);
+        "There's no organization with the given id of " + organizationId);
     }
 
     return organization;
@@ -164,7 +175,7 @@ public class CurrentSessionSingleton {
     // Necessary cast, since java generics are invariant
     // We wouldn't need it if they could be covariant (in kotlin, for example)
     MutableLiveData<Organization> organization =
-        (MutableLiveData<Organization>) getOrganization(organizationId);
+      (MutableLiveData<Organization>) getOrganization(organizationId);
 
     organization.postValue(requireNonNull(organization.getValue()).withConnected(connected));
   }
