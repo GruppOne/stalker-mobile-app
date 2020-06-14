@@ -21,7 +21,6 @@ import tech.gruppone.stalker.app.utility.web.WebSingleton;
 
 public class OrganizationsModel {
 
-  OrganizationModel organizationModel = new OrganizationModel();
 
   public void loadOrganizations() {
     WebSingleton.getInstance()
@@ -52,12 +51,8 @@ public class OrganizationsModel {
                               .getOrganizations()
                               .removeObserver(this);
                           OrganizationsModel.this.loadConnectedOrganizations();
-
                         }
                       });
-                for(Organization org : organizations){
-                            organizationModel.loadPlaces(org.getId());
-                          }
             },
             null);
   }
