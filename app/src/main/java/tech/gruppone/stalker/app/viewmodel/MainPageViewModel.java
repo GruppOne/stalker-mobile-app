@@ -11,6 +11,10 @@ public class MainPageViewModel extends ViewModel {
   private final MainPageModel model = new MainPageModel();
   @Getter @Setter @IdRes private int selectedMenuItemId = R.id.organizations_page;
 
+  public static void logout() {
+    CurrentSessionSingleton.logout();
+  }
+
   public void toggleAnonymous() {
     model.toggleAnonymous();
   }

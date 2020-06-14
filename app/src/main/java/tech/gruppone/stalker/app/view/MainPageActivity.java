@@ -2,6 +2,8 @@ package tech.gruppone.stalker.app.view;
 
 import static java.util.Objects.requireNonNull;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.widget.Toast;
@@ -15,11 +17,27 @@ import tech.gruppone.stalker.app.R;
 import tech.gruppone.stalker.app.utility.CurrentSessionSingleton;
 import tech.gruppone.stalker.app.utility.StalkerActivity;
 import tech.gruppone.stalker.app.utility.location.GeofenceHandler;
+import tech.gruppone.stalker.app.utility.location.GooglePositionInterface;
 import tech.gruppone.stalker.app.viewmodel.MainPageViewModel;
 
 public class MainPageActivity extends StalkerActivity {
 
   FragmentManager fragmentManager = getSupportFragmentManager();
+  DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+    @Override
+    public void onClick(DialogInterface dialog, int which) {
+      switch (which) {
+        case DialogInterface.BUTTON_POSITIVE:
+          MainPageViewModel.logout();
+          MainPageActivity.super.onBackPressed();
+          break;
+
+        case DialogInterface.BUTTON_NEGATIVE:
+          //Do nothing
+          break;
+      }
+    }
+  };
 
   @SuppressWarnings("unused")
   GeofenceHandler geofenceHandler = null;
@@ -87,6 +105,13 @@ public class MainPageActivity extends StalkerActivity {
     // bottomNavigationView.setOnNavigationItemReselectedListener(menuItem -> {});
 
     bottomNavigationView.setSelectedItemId(viewModel.getSelectedMenuItemId());
+  }
+
+  @Override
+  public void onBackPressed() {
+    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+    builder.setMessage("Do you want to logout?").setPositiveButton("Yes", dialogClickListener)
+      .setNegativeButton("No", dialogClickListener).show();
   }
 
   private void setOrganizationsPage() {
