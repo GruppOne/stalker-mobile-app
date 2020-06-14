@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import tech.gruppone.stalker.app.R;
 import tech.gruppone.stalker.app.model.MainPageModel;
+import tech.gruppone.stalker.app.utility.CurrentSessionSingleton;
 
 public class MainPageViewModel extends ViewModel {
   private final MainPageModel model = new MainPageModel();
