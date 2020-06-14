@@ -2,11 +2,9 @@ package tech.gruppone.stalker.app.view;
 
 import static java.util.Objects.requireNonNull;
 
-import android.content.Intent;
 import android.app.DatePickerDialog;
-import android.app.DatePickerDialog.OnDateSetListener;
+import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.PorterDuff.Mode;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
@@ -42,42 +40,58 @@ public class SignUpActivity extends StalkerActivity {
 
     TextInputLayout emailInsertLayout = findViewById(R.id.emailSignupEditText);
     TextInputLayout passwordInsertLayout = findViewById(R.id.passwordSignupEditText);
+    TextInputLayout passwordConfirmLayout = findViewById(R.id.passwordConfirmSignupEditText);
     TextInputLayout firstNameInsertLayout = findViewById(R.id.firstNameEditText);
     TextInputLayout lastNameInsertLayout = findViewById(R.id.lastNameEditText);
     TextInputLayout dateInsertLayout = findViewById(R.id.dateEditText);
 
     defineStandardListener(emailInsertLayout);
     defineStandardListener(passwordInsertLayout);
+    defineStandardListener(passwordConfirmLayout);
     defineStandardListener(firstNameInsertLayout);
     defineStandardListener(lastNameInsertLayout);
     defineStandardListener(dateInsertLayout);
 
     EditText emailInsertEditText = requireNonNull(emailInsertLayout.getEditText());
     EditText passwordInsertEditText = requireNonNull(passwordInsertLayout.getEditText());
+    EditText passwordConfirmEditText = requireNonNull(passwordConfirmLayout.getEditText());
     EditText firstNameInsertEditText = requireNonNull(firstNameInsertLayout.getEditText());
     EditText lastNameInsertEditText = requireNonNull(lastNameInsertLayout.getEditText());
     EditText dateInsertEditText = requireNonNull(dateInsertLayout.getEditText());
 
     dateInsertEditText.setInputType(InputType.TYPE_NULL);
-    dateInsertEditText.setOnClickListener(v -> {
-      final Calendar cldr = Calendar.getInstance();
-      int day = cldr.get(Calendar.DAY_OF_MONTH);
-      int month = cldr.get(Calendar.MONTH);
-      int year = cldr.get(Calendar.YEAR);
-      // date picker dialog
-      picker = new DatePickerDialog(this,
-        (view, year1, monthOfYear, dayOfMonth) -> dateInsertEditText.setText(String.format("%04d", year1) + "-" + String.format("%02d", (monthOfYear + 1)) + "-" + String.format("%02d", dayOfMonth)), year, month, day);
-      picker.show();
-      picker.getDatePicker().getTouchables().get(0).performClick();
-      picker.getButton(DatePickerDialog.BUTTON_NEGATIVE).setTextColor(Color.WHITE);
-      picker.getButton(DatePickerDialog.BUTTON_POSITIVE).setTextColor(Color.WHITE);
-    });
+    dateInsertEditText.setOnClickListener(
+        v -> {
+          final Calendar cldr = Calendar.getInstance();
+          int day = cldr.get(Calendar.DAY_OF_MONTH);
+          int month = cldr.get(Calendar.MONTH);
+          int year = cldr.get(Calendar.YEAR);
+          // date picker dialog
+          picker =
+              new DatePickerDialog(
+                  this,
+                  (view, year1, monthOfYear, dayOfMonth) ->
+                      dateInsertEditText.setText(
+                          String.format("%04d", year1)
+                              + "-"
+                              + String.format("%02d", (monthOfYear + 1))
+                              + "-"
+                              + String.format("%02d", dayOfMonth)),
+                  year,
+                  month,
+                  day);
+          picker.show();
+          picker.getDatePicker().getTouchables().get(0).performClick();
+          picker.getButton(DatePickerDialog.BUTTON_NEGATIVE).setTextColor(Color.WHITE);
+          picker.getButton(DatePickerDialog.BUTTON_POSITIVE).setTextColor(Color.WHITE);
+        });
 
     findViewById(R.id.signupButton)
         .setOnClickListener(
             v -> {
               String email = emailInsertEditText.getText().toString();
               String password = passwordInsertEditText.getText().toString();
+              String confirmedPassword = passwordConfirmEditText.getText().toString();
               String firstName = firstNameInsertEditText.getText().toString();
               String lastName = lastNameInsertEditText.getText().toString();
               String birthDate = dateInsertEditText.getText().toString();
@@ -101,6 +115,16 @@ public class SignUpActivity extends StalkerActivity {
               } else if (viewModel.invalidPassword(password)) {
                 passwordInsertLayout.setErrorEnabled(true);
                 passwordInsertLayout.setError(getString(R.string.invalidPassword));
+                ok = false;
+              }
+
+              if (confirmedPassword.isEmpty()) {
+                passwordConfirmLayout.setErrorEnabled(true);
+                passwordConfirmLayout.setError(getString(R.string.emptyField));
+                ok = false;
+              } else if (!password.equals(confirmedPassword)) {
+                passwordConfirmLayout.setErrorEnabled(true);
+                passwordConfirmLayout.setError(getString(R.string.invalidPasswordConfirm));
                 ok = false;
               }
 
@@ -182,18 +206,18 @@ public class SignUpActivity extends StalkerActivity {
     EditText editText = requireNonNull(layout.getEditText());
 
     editText.addTextChangedListener(
-      new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+        new TextWatcher() {
+          @Override
+          public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {
-          layout.setError(null);
-          layout.setErrorEnabled(false);
-        }
+          @Override
+          public void onTextChanged(CharSequence s, int start, int before, int count) {
+            layout.setError(null);
+            layout.setErrorEnabled(false);
+          }
 
-        @Override
-        public void afterTextChanged(Editable s) {}
-      });
+          @Override
+          public void afterTextChanged(Editable s) {}
+        });
   }
 }

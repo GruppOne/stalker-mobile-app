@@ -9,10 +9,8 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
-import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textfield.TextInputLayout;
 import tech.gruppone.stalker.app.R;
 import tech.gruppone.stalker.app.utility.StalkerActivity;
@@ -63,13 +61,13 @@ public class LoginActivity extends StalkerActivity {
 
           @Override
           public void onTextChanged(CharSequence s, int start, int before, int count) {
-      passwordInsertLayout.setError(null);
-      passwordInsertLayout.setErrorEnabled(false);
-    }
+            passwordInsertLayout.setError(null);
+            passwordInsertLayout.setErrorEnabled(false);
+          }
 
-    @Override
-    public void afterTextChanged(Editable s) {}
-  });
+          @Override
+          public void afterTextChanged(Editable s) {}
+        });
 
     findViewById(R.id.loginButton)
         .setOnClickListener(

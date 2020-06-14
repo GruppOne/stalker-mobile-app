@@ -157,6 +157,25 @@
               android:textColor="@color/textOnMatCard"
               />
           </com.google.android.material.textfield.TextInputLayout>
+          <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/passwordConfirmSignupEditText"
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:boxStrokeColor="@color/colorAccent"
+            android:textColorHint="@color/colorAccent"
+            app:hintTextColor="@color/textOnMatCard"
+            android:hint="Confirm password"
+            app:endIconMode="password_toggle"
+            app:endIconTint="@color/textOnMatCard"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            <com.google.android.material.textfield.TextInputEditText
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:inputType="textPassword"
+              android:textColor="@color/textOnMatCard"
+              />
+          </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
         <!-- Buttons -->
