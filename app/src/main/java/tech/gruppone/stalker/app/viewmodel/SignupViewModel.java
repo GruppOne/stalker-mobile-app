@@ -7,13 +7,17 @@ import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.Locale;
 import tech.gruppone.stalker.app.business.User;
 import tech.gruppone.stalker.app.model.LoginModel;
 import tech.gruppone.stalker.app.model.SignupModel;
 
 public class SignupViewModel extends ViewModel {
+
   SignupModel model = new SignupModel();
+  private final String EMAIL_PATTERN = "^[a-zA-Z0-9_!#$%&Æ*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
 
   @NonNull
   public LiveData<User> getUserLiveData() {
@@ -22,27 +26,32 @@ public class SignupViewModel extends ViewModel {
 
   public boolean invalidEmail(@NonNull String email) {
     // maybe this regex could be more restrictive
-    return !email.matches("^[a-zA-Z0-9_!#$%&Æ*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$");
+    return !email.matches(EMAIL_PATTERN);
+  }
+
+  public boolean invalidDate(String date) {
+    LocalDate parsed = LocalDate.parse(date);
+    return parsed != null;
   }
 
   public boolean invalidPassword(@NonNull String password) {
     // between 8 and 32 characters
     return password.length() <= 8
-        || password.length() >= 32
-        // contains at least a lowercase letter
-        || password.equals(password.toUpperCase(Locale.getDefault()))
-        // contains at least an uppercase letter
-        || password.equals(password.toLowerCase(Locale.getDefault()))
-        // contains at least a number
-        || !password.matches(".*\\d.*");
+      || password.length() >= 32
+      // contains at least a lowercase letter
+      || password.equals(password.toUpperCase(Locale.getDefault()))
+      // contains at least an uppercase letter
+      || password.equals(password.toLowerCase(Locale.getDefault()))
+      // contains at least a number
+      || !password.matches(".*\\d.*");
   }
 
   public void signup(
-      @NonNull String email,
-      @NonNull String password,
-      @NonNull String firstName,
-      @NonNull String lastName,
-      @NonNull String birthDate) {
+    @NonNull String email,
+    @NonNull String password,
+    @NonNull String firstName,
+    @NonNull String lastName,
+    @NonNull String birthDate) {
     String hashedPassword;
 
     try {
