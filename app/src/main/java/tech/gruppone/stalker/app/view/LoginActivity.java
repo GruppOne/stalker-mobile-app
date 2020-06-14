@@ -4,11 +4,15 @@ import static java.util.Objects.requireNonNull;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
+import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textfield.TextInputLayout;
 import tech.gruppone.stalker.app.R;
 import tech.gruppone.stalker.app.utility.StalkerActivity;
@@ -59,13 +63,13 @@ public class LoginActivity extends StalkerActivity {
 
           @Override
           public void onTextChanged(CharSequence s, int start, int before, int count) {
-            passwordInsertLayout.setError(null);
-            passwordInsertLayout.setErrorEnabled(false);
-          }
+      passwordInsertLayout.setError(null);
+      passwordInsertLayout.setErrorEnabled(false);
+    }
 
-          @Override
-          public void afterTextChanged(Editable s) {}
-        });
+    @Override
+    public void afterTextChanged(Editable s) {}
+  });
 
     findViewById(R.id.loginButton)
         .setOnClickListener(
@@ -92,6 +96,7 @@ public class LoginActivity extends StalkerActivity {
               }
 
               if (ok) {
+                startSpin();
                 viewModel.login(email, password);
               }
             });
@@ -103,6 +108,7 @@ public class LoginActivity extends StalkerActivity {
             user -> {
               if (user != null && user.isComplete()) {
                 viewModel.getUserLiveData().removeObservers(LoginActivity.this);
+                stopSpin();
 
                 Intent intent = new Intent(LoginActivity.this, MainPageActivity.class);
                 startActivity(intent);
@@ -116,5 +122,28 @@ public class LoginActivity extends StalkerActivity {
               Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
               startActivity(intent);
             });
+  }
+
+  private void startSpin() {
+    findViewById(R.id.fadeBackground).setVisibility(View.VISIBLE);
+    findViewById(R.id.fadeBackground).animate().alpha(0.3f);
+    findViewById(R.id.loading_spinner).animate();
+    findViewById(R.id.loginButton).setEnabled(false);
+    findViewById(R.id.emailLoginEditText).setEnabled(false);
+    findViewById(R.id.passwordLoginEditText).setEnabled(false);
+
+    new Handler().postDelayed(() -> stopSpin(), 5000);
+  }
+
+  private void stopSpin() {
+    findViewById(R.id.fadeBackground).animate().alpha(0).withEndAction(this::hideFadeBackground);
+    findViewById(R.id.loading_spinner).animate().cancel();
+    findViewById(R.id.loginButton).setEnabled(true);
+    findViewById(R.id.emailLoginEditText).setEnabled(true);
+    findViewById(R.id.passwordLoginEditText).setEnabled(true);
+  }
+
+  private void hideFadeBackground() {
+    findViewById(R.id.fadeBackground).setVisibility(View.GONE);
   }
 }
