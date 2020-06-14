@@ -16,10 +16,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import lombok.SneakyThrows;
+import org.json.JSONException;
 import tech.gruppone.stalker.app.R;
 import tech.gruppone.stalker.app.business.UserOrganizationHistory;
 import tech.gruppone.stalker.app.utility.CurrentSessionSingleton;
 import tech.gruppone.stalker.app.utility.ReportListAdapter;
+import tech.gruppone.stalker.app.utility.excpetions.OrganizationNotFoundException;
 import tech.gruppone.stalker.app.viewmodel.fragment.ReportViewModel;
 
 public class ReportFragment extends Fragment {
@@ -33,6 +36,7 @@ public class ReportFragment extends Fragment {
 
   public ReportFragment() {}
 
+  @SneakyThrows
   @Override
   @NonNull
   public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -77,13 +81,19 @@ public class ReportFragment extends Fragment {
     view.findViewById(R.id.reportReloadButton)
         .setOnClickListener(
             v -> {
-              ReportFragment.this.getUsersHistory();
+              try {
+                ReportFragment.this.getUsersHistory();
+              } catch (OrganizationNotFoundException e) {
+                e.printStackTrace();
+              } catch (JSONException e) {
+                e.printStackTrace();
+              }
               searchView.setQuery("", true);
             });
     return view;
   }
 
-  public void getUsersHistory() {
+  public void getUsersHistory() throws OrganizationNotFoundException, JSONException {
     reportViewModel.getUsersHistory(
         CurrentSessionSingleton.getInstance().getLoggedUser().getValue().getId());
   }

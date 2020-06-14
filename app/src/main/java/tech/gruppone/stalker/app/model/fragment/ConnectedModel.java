@@ -8,6 +8,7 @@ import androidx.lifecycle.Transformations;
 import java.util.Map;
 import java.util.TreeMap;
 import tech.gruppone.stalker.app.business.Organization;
+import tech.gruppone.stalker.app.model.OrganizationModel;
 import tech.gruppone.stalker.app.utility.CurrentSessionSingleton;
 
 public class ConnectedModel {
