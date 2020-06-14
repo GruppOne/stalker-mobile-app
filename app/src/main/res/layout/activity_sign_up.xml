@@ -1,181 +1,204 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:app="http://schemas.android.com/apk/res-auto"
-  xmlns:tools="http://schemas.android.com/tools"
-  tools:context=".view.SignUpActivity"
+<ScrollView
+  xmlns:android="http://schemas.android.com/apk/res/android"
   android:layout_width="match_parent"
+  android:fillViewport="true"
   android:layout_height="match_parent">
-
-  <include layout="@layout/page_template"/>
-
-  <TextView
-    android:id="@+id/signUpTitleText"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintLeft_toLeftOf="parent"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="200dp"
-    android:layout_marginStart="8dp"
-    android:text="@string/signUp"
-    android:textSize="20sp"
-    android:textColor="@color/whiteText"
-    android:textAppearance="?attr/textAppearanceHeadline6"
-    />
-
-  <com.google.android.material.card.MaterialCardView
-    app:layout_constraintTop_toBottomOf="@id/signUpTitleText"
-    android:backgroundTint="@color/whiteBackground"
+  <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".view.SignUpActivity"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="8dp"
-    android:layout_marginLeft="8dp"
-    android:layout_marginRight="8dp">
+    android:layout_height="match_parent">
 
-    <LinearLayout
+    <include layout="@layout/page_template"/>
+
+    <TextView
+      android:id="@+id/signUpTitleText"
+      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintLeft_toLeftOf="parent"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="200dp"
+      android:layout_marginStart="8dp"
+      android:text="@string/signUp"
+      android:textSize="20sp"
+      android:textColor="@color/whiteText"
+      android:textAppearance="?attr/textAppearanceHeadline6"
+      />
+
+    <com.google.android.material.card.MaterialCardView
+      app:layout_constraintTop_toBottomOf="@id/signUpTitleText"
+      android:backgroundTint="@color/whiteBackground"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:orientation="vertical">
+      android:layout_marginTop="8dp"
+      android:layout_marginLeft="8dp"
+      android:layout_marginRight="8dp">
 
-      <!-- Inputs -->
       <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
         android:orientation="vertical">
+
+        <!-- Inputs -->
         <LinearLayout
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:orientation="horizontal"
-          android:weightSum="100"
-          android:baselineAligned="false">
-          <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/firstNameEditText"
-            android:layout_width="0dp"
+          android:layout_margin="8dp"
+          android:orientation="vertical">
+          <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="50"
-            android:layout_marginEnd="4dp"
+            android:orientation="horizontal"
+            android:weightSum="100"
+            android:baselineAligned="false">
+            <com.google.android.material.textfield.TextInputLayout
+              android:id="@+id/firstNameEditText"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_weight="50"
+              android:layout_marginEnd="4dp"
+              app:boxStrokeColor="@color/colorAccent"
+              android:textColorHint="@color/colorAccent"
+              app:hintTextColor="@color/textOnMatCard"
+              android:hint="@string/firstName"
+              app:endIconMode="custom"
+              app:endIconDrawable="@drawable/ic_person_outline_black_24dp"
+              app:endIconTint="@color/textOnMatCard"
+              style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+              <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:textColor="@color/textOnMatCard"
+                />
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+              android:id="@+id/lastNameEditText"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_weight="50"
+              android:layout_marginStart="4dp"
+              app:boxStrokeColor="@color/colorAccent"
+              android:textColorHint="@color/colorAccent"
+              app:hintTextColor="@color/textOnMatCard"
+              android:hint="@string/lastName"
+              app:endIconMode="custom"
+              app:endIconDrawable="@drawable/ic_person_outline_black_24dp"
+              app:endIconTint="@color/textOnMatCard"
+              style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+              <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:textColor="@color/textOnMatCard"
+                />
+            </com.google.android.material.textfield.TextInputLayout>
+          </LinearLayout>
+          <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/dateEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             app:boxStrokeColor="@color/colorAccent"
             android:textColorHint="@color/colorAccent"
             app:hintTextColor="@color/textOnMatCard"
-            android:hint="@string/firstName"
+            android:hint="Birth date"
             app:endIconMode="custom"
-            app:endIconDrawable="@drawable/ic_person_outline_black_24dp"
+            android:clickable="true"
+            app:endIconDrawable="@drawable/ic_event_black_24dp"
             app:endIconTint="@color/textOnMatCard"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
             <com.google.android.material.textfield.TextInputEditText
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:inputType="text"
+              android:inputType="date"
+              android:focusable="false"
               android:textColor="@color/textOnMatCard"
               />
           </com.google.android.material.textfield.TextInputLayout>
           <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/lastNameEditText"
-            android:layout_width="0dp"
+            android:id="@+id/emailSignupEditText"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="50"
-            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
             app:boxStrokeColor="@color/colorAccent"
             android:textColorHint="@color/colorAccent"
             app:hintTextColor="@color/textOnMatCard"
-            android:hint="@string/lastName"
+            android:hint="@string/email"
             app:endIconMode="custom"
-            app:endIconDrawable="@drawable/ic_person_outline_black_24dp"
+            app:endIconDrawable="@drawable/ic_email_black_24dp"
             app:endIconTint="@color/textOnMatCard"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
             <com.google.android.material.textfield.TextInputEditText
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:inputType="text"
+              android:inputType="textEmailAddress"
+              android:textColor="@color/textOnMatCard"
+              />
+          </com.google.android.material.textfield.TextInputLayout>
+          <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/passwordSignupEditText"
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:boxStrokeColor="@color/colorAccent"
+            android:textColorHint="@color/colorAccent"
+            app:hintTextColor="@color/textOnMatCard"
+            android:hint="@string/password"
+            app:endIconMode="password_toggle"
+            app:endIconTint="@color/textOnMatCard"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            <com.google.android.material.textfield.TextInputEditText
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:inputType="textPassword"
               android:textColor="@color/textOnMatCard"
               />
           </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
-        <com.google.android.material.textfield.TextInputLayout
-          android:id="@+id/dateEditText"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_marginTop="8dp"
-          app:boxStrokeColor="@color/colorAccent"
-          android:textColorHint="@color/colorAccent"
-          app:hintTextColor="@color/textOnMatCard"
-          android:hint="@string/birth"
-          app:endIconMode="custom"
-          app:endIconDrawable="@drawable/ic_event_black_24dp"
-          app:endIconTint="@color/textOnMatCard"
-          style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-          <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="date"
-            android:textColor="@color/textOnMatCard"
-            />
-        </com.google.android.material.textfield.TextInputLayout>
-        <com.google.android.material.textfield.TextInputLayout
-          android:id="@+id/emailSignupEditText"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:layout_marginTop="8dp"
-          app:boxStrokeColor="@color/colorAccent"
-          android:textColorHint="@color/colorAccent"
-          app:hintTextColor="@color/textOnMatCard"
-          android:hint="@string/email"
-          app:endIconMode="custom"
-          app:endIconDrawable="@drawable/ic_email_black_24dp"
-          app:endIconTint="@color/textOnMatCard"
-          style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-          <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
-            android:textColor="@color/textOnMatCard"
-            />
-        </com.google.android.material.textfield.TextInputLayout>
-        <com.google.android.material.textfield.TextInputLayout
-          android:id="@+id/passwordSignupEditText"
-          android:layout_marginTop="8dp"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          app:boxStrokeColor="@color/colorAccent"
-          android:textColorHint="@color/colorAccent"
-          app:hintTextColor="@color/textOnMatCard"
-          android:hint="@string/password"
-          app:endIconMode="password_toggle"
-          app:endIconTint="@color/textOnMatCard"
-          style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-          <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:textColor="@color/textOnMatCard"
-            />
-        </com.google.android.material.textfield.TextInputLayout>
-      </LinearLayout>
 
-      <!-- Buttons -->
-      <LinearLayout
-        android:layout_width="match_parent"
+        <!-- Buttons -->
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_margin="8dp"
+          android:orientation="vertical">
+          <com.google.android.material.button.MaterialButton
+            android:id="@+id/signupButton"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            app:backgroundTint="@color/colorAccent"
+            android:textColor="@color/whiteText"
+            android:text="@string/signUp"/>
+          <Button
+            android:id="@+id/goToLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/goToLogin"
+            android:textAllCaps="false"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            />
+        </LinearLayout>
+      </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+    <com.google.android.material.card.MaterialCardView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:id="@+id/fadeBackground"
+      android:visibility="gone"
+      android:alpha="0"
+      android:backgroundTint="@color/cardview_light_background">
+      <ProgressBar
+        android:id="@+id/loading_spinner"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:orientation="vertical">
-        <com.google.android.material.button.MaterialButton
-          android:id="@+id/signupButton"
-          android:layout_width="match_parent"
-          android:layout_height="60dp"
-          app:backgroundTint="@color/colorAccent"
-          android:textColor="@color/whiteText"
-          android:text="@string/signUp"/>
-        <Button
-          android:id="@+id/goToLogin"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_marginTop="8dp"
-          android:text="@string/goToLogin"
-          android:textAllCaps="false"
-          style="@style/Widget.MaterialComponents.Button.TextButton"
-          />
-      </LinearLayout>
-    </LinearLayout>
-  </com.google.android.material.card.MaterialCardView>
+        android:indeterminateTintMode="src_atop"
+        android:indeterminateTint="@color/cardview_dark_background"
+        android:layout_gravity="center"/>
+    </com.google.android.material.card.MaterialCardView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+  </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
