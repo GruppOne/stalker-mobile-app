@@ -46,15 +46,17 @@ public class LocationNotifier extends JobIntentService {
     PermanenceDatabase database = PersistenceSingleton.getInstance().getDatabase();
 
     for (PlaceWithOrganization placeWithOrganization : insidePlaces) {
-      database
-          .userPermanenceDao()
-          .insert(
-              UserPermanence.builder()
-                  .anonymous(anonymous)
-                  .entryTimestamp(new Date())
-                  .placeId(placeWithOrganization.placeId)
-                  .organizationId(placeWithOrganization.organizationId)
-                  .build());
+      if (database.userPermanenceDao().openEntry(placeWithOrganization.placeId).isEmpty()) {
+        database
+            .userPermanenceDao()
+            .insert(
+                UserPermanence.builder()
+                    .anonymous(anonymous)
+                    .entryTimestamp(new Date())
+                    .placeId(placeWithOrganization.placeId)
+                    .organizationId(placeWithOrganization.organizationId)
+                    .build());
+      }
     }
 
     List<Integer> placeIds =
@@ -62,7 +64,9 @@ public class LocationNotifier extends JobIntentService {
             .map(placeWithOrganization -> placeWithOrganization.placeId)
             .collect(Collectors.toList());
 
-    WebSingleton.getInstance().locationUpdate(userId, placeIds, true, anonymous);
+    if (!placeIds.isEmpty()) {
+      WebSingleton.getInstance().locationUpdate(userId, placeIds, true, anonymous);
+    }
 
     List<Integer> outsidePlaces = new ArrayList<>();
 
@@ -71,6 +75,8 @@ public class LocationNotifier extends JobIntentService {
       database.userPermanenceDao().update(userPermanence.withExitTimestamp(new Date()));
     }
 
-    WebSingleton.getInstance().locationUpdate(userId, outsidePlaces, false, anonymous);
+    if (!outsidePlaces.isEmpty()) {
+      WebSingleton.getInstance().locationUpdate(userId, outsidePlaces, false, anonymous);
+    }
   }
 }
