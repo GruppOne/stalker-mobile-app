@@ -2,6 +2,7 @@ package tech.gruppone.stalker.app.utility.web;
 
 import static java.util.Objects.requireNonNull;
 
+import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import com.android.volley.Request;
@@ -148,6 +149,9 @@ public class WebSingleton {
       request.put("inside", inside);
       request.put("placeIds", new JSONArray(places));
       request.put("timestamp", new Date().getTime());
+
+      Log.i("update", request.toString());
+
       addToRequestQueue(new BarelyAuthenticatedRequest(Method.POST, fullUrl, request, null, null));
     } catch (JSONException ex) {
       throw new RuntimeException(ex);
