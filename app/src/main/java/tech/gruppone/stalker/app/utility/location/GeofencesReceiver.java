@@ -31,6 +31,8 @@ public class GeofencesReceiver extends BroadcastReceiver {
         googlePositionInterface.startLocationUpdates();
       }
 
+      Log.i("geofence receiver", "enter");
+
       nearPlaceIds.addAll(
           geofencingEvent
               .getTriggeringGeofences()
@@ -46,6 +48,8 @@ public class GeofencesReceiver extends BroadcastReceiver {
               .map(Geofence::getRequestId)
               .map(Integer::parseInt)
               .collect(Collectors.toList()));
+
+      Log.i("geofence receiver", "exit");
 
       if (nearPlaceIds.isEmpty()) {
         googlePositionInterface.stopLocationUpdates();
