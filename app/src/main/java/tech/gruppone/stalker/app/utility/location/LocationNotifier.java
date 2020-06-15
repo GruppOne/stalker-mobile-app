@@ -29,7 +29,7 @@ public class LocationNotifier extends JobIntentService {
 
   @Override
   protected void onHandleWork(@NonNull Intent intent) {
-    Location location = intent.getParcelableExtra("lastLocation");
+    Location location = intent.getParcelableExtra("tech.gruppone.stalker.app.lastLocation");
 
     // This is a taccone. Whatever.
     if (location == null) {
