@@ -86,8 +86,8 @@ public class GeofenceHandler {
                             centers.get(i).getLongitude(),
                             RANGE_IN_METERS)
                         .setTransitionTypes(
-                            Geofence.GEOFENCE_TRANSITION_DWELL | Geofence.GEOFENCE_TRANSITION_EXIT)
-                        .setLoiteringDelay(60000)
+                            Geofence.GEOFENCE_TRANSITION_ENTER | Geofence.GEOFENCE_TRANSITION_EXIT)
+                        //.setLoiteringDelay(600)
                         .setExpirationDuration(Geofence.NEVER_EXPIRE)
                         .build())
             .collect(Collectors.toList());
@@ -95,7 +95,7 @@ public class GeofenceHandler {
     GeofencingRequest geofencingRequest =
         new GeofencingRequest.Builder()
             .addGeofences(newGeofences)
-            .setInitialTrigger(GeofencingRequest.INITIAL_TRIGGER_DWELL)
+            .setInitialTrigger(GeofencingRequest.INITIAL_TRIGGER_ENTER)
             .build();
 
     geofencingClient

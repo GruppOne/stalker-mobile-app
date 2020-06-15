@@ -3,6 +3,7 @@ package tech.gruppone.stalker.app.utility.location;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import androidx.annotation.NonNull;
 import com.google.android.gms.location.Geofence;
 import com.google.android.gms.location.GeofencingEvent;
@@ -25,7 +26,7 @@ public class GeofencesReceiver extends BroadcastReceiver {
 
     int transitionType = geofencingEvent.getGeofenceTransition();
 
-    if (transitionType == Geofence.GEOFENCE_TRANSITION_DWELL) {
+    if (transitionType == Geofence.GEOFENCE_TRANSITION_ENTER) {
       if (nearPlaceIds.isEmpty()) {
         googlePositionInterface.startLocationUpdates();
       }
