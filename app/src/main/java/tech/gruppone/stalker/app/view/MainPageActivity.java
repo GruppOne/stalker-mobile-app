@@ -2,7 +2,6 @@ package tech.gruppone.stalker.app.view;
 
 import static java.util.Objects.requireNonNull;
 
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +13,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import tech.gruppone.stalker.app.R;
 import tech.gruppone.stalker.app.utility.CurrentSessionSingleton;
 import tech.gruppone.stalker.app.utility.StalkerActivity;
@@ -107,8 +107,7 @@ public class MainPageActivity extends StalkerActivity {
 
   @Override
   public void onBackPressed() {
-    AlertDialog.Builder builder = new AlertDialog.Builder(this);
-    builder
+    new MaterialAlertDialogBuilder(this)
         .setMessage("Do you want to logout?")
         .setPositiveButton("Yes", dialogClickListener)
         .setNegativeButton("No", dialogClickListener)
