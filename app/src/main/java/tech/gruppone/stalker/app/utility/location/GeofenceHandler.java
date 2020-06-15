@@ -87,7 +87,7 @@ public class GeofenceHandler {
                             RANGE_IN_METERS)
                         .setTransitionTypes(
                             Geofence.GEOFENCE_TRANSITION_ENTER | Geofence.GEOFENCE_TRANSITION_EXIT)
-                        //.setLoiteringDelay(600)
+                        // .setLoiteringDelay(600)
                         .setExpirationDuration(Geofence.NEVER_EXPIRE)
                         .build())
             .collect(Collectors.toList());
@@ -113,5 +113,11 @@ public class GeofenceHandler {
     }
 
     return pendingIntent;
+  }
+
+  public void clearGeofenses() {
+    geofencingClient.removeGeofences(
+        geofences.parallelStream().map(Geofence::getRequestId).collect(Collectors.toList()));
+    new GooglePositionInterface().stopLocationUpdates();
   }
 }
