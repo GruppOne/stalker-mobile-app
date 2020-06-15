@@ -2,6 +2,7 @@ package tech.gruppone.stalker.app.model.fragment;
 
 import static java.util.Objects.requireNonNull;
 
+import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
@@ -67,8 +68,6 @@ public class OrganizationsModel {
 
                 for (int i = 0; i < orgsArray.length(); ++i) {
                   int organizationId = orgsArray.getInt(i);
-                  CurrentSessionSingleton.getInstance()
-                      .setConnectedOrganization(organizationId, true);
 
                   LiveData<Organization> organizationLiveData =
                       CurrentSessionSingleton.getInstance().getOrganization(organizationId);
@@ -77,13 +76,15 @@ public class OrganizationsModel {
                       new Observer<Organization>() {
                         @Override
                         public void onChanged(Organization organization) {
-                          organizationLiveData.removeObserver(this);
-
                           if (organization.isConnected()) {
+                            organizationLiveData.removeObserver(this);
                             OrganizationsModel.this.loadConnectedPlaces(organizationId);
                           }
                         }
                       });
+
+                  CurrentSessionSingleton.getInstance()
+                      .setConnectedOrganization(organizationId, true);
                 }
 
                 CurrentSessionSingleton.getInstance().doneChanges();
@@ -109,6 +110,7 @@ public class OrganizationsModel {
                 }
 
                 CurrentSessionSingleton.getInstance().updatePlaces(organizationId, places);
+                CurrentSessionSingleton.getInstance().doneChanges();
               } catch (JSONException | OrganizationNotFoundException e) {
                 throw new RuntimeException(e);
               }
