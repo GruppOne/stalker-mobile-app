@@ -2,6 +2,7 @@ package tech.gruppone.stalker.app.view;
 
 import static java.util.Objects.requireNonNull;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -31,6 +32,7 @@ public class SignUpActivity extends StalkerActivity {
     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
   }
 
+  @SuppressLint("SetTextI18n")
   @Override
   protected void onCreate(@Nullable Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -179,7 +181,7 @@ public class SignUpActivity extends StalkerActivity {
     findViewById(R.id.loading_spinner).animate();
     setEnabledToPageControl(false);
 
-    new Handler().postDelayed(() -> stopSpin(), 5000);
+    new Handler().postDelayed(this::stopSpin, 5000);
   }
 
   private void stopSpin() {

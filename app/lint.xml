@@ -10,4 +10,10 @@
   <issue id="UnusedResources">
     <ignore path="*/res/*"/>
   </issue>
+  <issue id="DefaultLocale">
+    <ignore path="*"/>
+  </issue>
+  <issue id="HardcodedText">
+    <ignore path="*"/>
+  </issue>
 </lint>
