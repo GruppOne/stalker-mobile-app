@@ -17,7 +17,13 @@ import com.google.android.gms.location.LocationSettingsRequest;
 import tech.gruppone.stalker.app.utility.App;
 
 public class GooglePositionInterface {
-  private LocationRequest locationRequest;
+  private static LocationRequest locationRequest =
+      LocationRequest.create()
+          .setInterval(300000)
+          .setExpirationDuration(500000000)
+          .setFastestInterval(150000)
+          .setMaxWaitTime(300000)
+          .setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
 
   private final LocationCallback locationCallback =
       new LocationCallback() {
@@ -46,13 +52,6 @@ public class GooglePositionInterface {
   }
 
   public void checkPermissions(@NonNull Activity activity) {
-    if (locationRequest == null) {
-      locationRequest = LocationRequest.create();
-      locationRequest.setInterval(300000);
-      locationRequest.setFastestInterval(150000);
-      locationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
-    }
-
     LocationSettingsRequest.Builder builder =
         new LocationSettingsRequest.Builder().addLocationRequest(locationRequest);
 
