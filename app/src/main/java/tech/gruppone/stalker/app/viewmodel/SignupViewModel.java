@@ -1,5 +1,6 @@
 package tech.gruppone.stalker.app.viewmodel;
 
+import android.annotation.SuppressLint;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
@@ -7,7 +8,8 @@ import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.time.LocalDate;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
 import java.util.Locale;
 import tech.gruppone.stalker.app.business.User;
 import tech.gruppone.stalker.app.model.LoginModel;
@@ -16,6 +18,7 @@ import tech.gruppone.stalker.app.model.SignupModel;
 public class SignupViewModel extends ViewModel {
 
   SignupModel model = new SignupModel();
+  @SuppressWarnings("FieldCanBeLocal")
   private final String EMAIL_PATTERN = "^[a-zA-Z0-9_!#$%&Æ*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
 
   @NonNull
@@ -28,9 +31,11 @@ public class SignupViewModel extends ViewModel {
     return !email.matches(EMAIL_PATTERN);
   }
 
-  public boolean invalidDate(String date) {
-    LocalDate parsed = LocalDate.parse(date);
-    return parsed != null;
+  @SuppressLint("SimpleDateFormat")
+  public boolean invalidDate(@NonNull String date) {
+    // LocalDate parsed = LocalDate.parse(date); //API 26
+
+    return new SimpleDateFormat("yyyy-MM-dd").parse(date, new ParsePosition(0)) != null;
   }
 
   public boolean invalidPassword(@NonNull String password) {

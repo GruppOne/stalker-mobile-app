@@ -150,7 +150,9 @@ public class WebSingleton {
       request.put("placeIds", new JSONArray(places));
       request.put("timestamp", new Date().getTime());
 
-      Log.i("update", request.toString());
+      if (BuildConfig.DEBUG) {
+        Log.i("update", request.toString());
+      }
 
       addToRequestQueue(new BarelyAuthenticatedRequest(Method.POST, fullUrl, request, null, null));
     } catch (JSONException ex) {
