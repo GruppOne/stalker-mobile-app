@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
@@ -17,7 +18,6 @@ import tech.gruppone.stalker.app.R;
 import tech.gruppone.stalker.app.utility.CurrentSessionSingleton;
 import tech.gruppone.stalker.app.utility.StalkerActivity;
 import tech.gruppone.stalker.app.utility.location.GeofenceHandler;
-import tech.gruppone.stalker.app.utility.location.GooglePositionInterface;
 import tech.gruppone.stalker.app.viewmodel.MainPageViewModel;
 
 public class MainPageActivity extends StalkerActivity {
@@ -137,5 +137,14 @@ public class MainPageActivity extends StalkerActivity {
   public boolean onCreateOptionsMenu(@NonNull Menu menu) {
     getMenuInflater().inflate(R.menu.app_bar_menu, menu);
     return true;
+  }
+
+  @Override
+  protected void onDestroy() {
+    if (isFinishing()) {
+      Log.i("finishing", "closing the activity");
+      geofenceHandler.clearGeofenses();
+    }
+    super.onDestroy();
   }
 }
