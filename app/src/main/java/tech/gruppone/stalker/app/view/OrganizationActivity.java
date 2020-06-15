@@ -106,6 +106,8 @@ public class OrganizationActivity extends FragmentActivity implements OnMapReady
   @Override
   public void onMapReady(@NonNull GoogleMap googleMap) {
 
+    googleMap.clear();
+
     for (PolygonOptions polygonOptions : viewModel.getPolygons()) {
       // TODO find a way to attach the actual Place object to the polygon in the tag (setTag()).
       //      This way, we can use the tag for fast retrieval of the place info, and we can
