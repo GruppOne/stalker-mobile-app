@@ -115,6 +115,7 @@ public class OrganizationActivity extends FragmentActivity implements OnMapReady
       googleMap.addPolygon(polygonOptions);
     }
 
-    googleMap.moveCamera(CameraUpdateFactory.newLatLngBounds(viewModel.getBound(), 2000, 1000, 150));
+    googleMap.moveCamera(
+        CameraUpdateFactory.newLatLngBounds(viewModel.getBound(), 2000, 1000, 150));
   }
 }

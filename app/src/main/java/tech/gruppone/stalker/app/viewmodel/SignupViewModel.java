@@ -18,6 +18,7 @@ import tech.gruppone.stalker.app.model.SignupModel;
 public class SignupViewModel extends ViewModel {
 
   SignupModel model = new SignupModel();
+
   @SuppressWarnings("FieldCanBeLocal")
   private final String EMAIL_PATTERN = "^[a-zA-Z0-9_!#$%&Æ*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
 
