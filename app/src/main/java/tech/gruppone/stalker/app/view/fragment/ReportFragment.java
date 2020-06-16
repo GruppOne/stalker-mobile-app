@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import lombok.Getter;
 import lombok.SneakyThrows;
 import org.json.JSONException;
 import tech.gruppone.stalker.app.R;
@@ -29,9 +30,13 @@ public class ReportFragment extends Fragment {
 
   private View view;
   private ReportViewModel reportViewModel;
+  @Getter
   private ReportListAdapter reportListAdapter;
+  @Getter
   private List<LiveData<UserOrganizationHistory>> currentList = new ArrayList<>();
+  @Getter
   private SearchView searchView;
+  @Getter
   private RecyclerView recyclerView;
 
   public ReportFragment() {}
@@ -83,8 +88,6 @@ public class ReportFragment extends Fragment {
             v -> {
               try {
                 ReportFragment.this.getUsersHistory();
-              } catch (OrganizationNotFoundException e) {
-                e.printStackTrace();
               } catch (JSONException e) {
                 e.printStackTrace();
               }
@@ -93,7 +96,7 @@ public class ReportFragment extends Fragment {
     return view;
   }
 
-  public void getUsersHistory() throws OrganizationNotFoundException, JSONException {
+  public void getUsersHistory() throws JSONException {
     reportViewModel.getUsersHistory(
         CurrentSessionSingleton.getInstance().getLoggedUser().getValue().getId());
   }
@@ -107,12 +110,12 @@ public class ReportFragment extends Fragment {
 
       @Override
       public boolean onQueryTextChange(String newText) {
-        if (searchView.getQuery().length() == 0) {
-          reportListAdapter.submitList(currentList);
-          recyclerView.scrollToPosition(0);
+        if (getSearchView().getQuery().length() == 0) {
+          getReportListAdapter().submitList(getCurrentList());
+          getRecyclerView().scrollToPosition(0);
         } else {
           List<LiveData<UserOrganizationHistory>> filteredData = new ArrayList<>();
-          List<LiveData<UserOrganizationHistory>> userOrganizationHistory = currentList;
+          List<LiveData<UserOrganizationHistory>> userOrganizationHistory = getCurrentList();
           if (newText.isEmpty()) {
             filteredData = userOrganizationHistory;
           } else {
@@ -134,7 +137,7 @@ public class ReportFragment extends Fragment {
               }
             }
           }
-          reportListAdapter.submitList(filteredData);
+          getReportListAdapter().submitList(filteredData);
         }
         return true;
       }

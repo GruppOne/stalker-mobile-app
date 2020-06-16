@@ -1,10 +1,11 @@
 package tech.gruppone.stalker.app.business;
 
-
+import androidx.annotation.NonNull;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,11 +23,11 @@ public class UserOrganizationHistory {
   Organization organization;
   Boolean inside;
 
-
-  public UserOrganizationHistory(JSONObject organizationJson, Organization organization) {
+  public UserOrganizationHistory(
+    @NonNull JSONObject organizationJson, @NonNull Organization organization) {
 
     try {
-      DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
+      DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ", Locale.getDefault());
       Date date = format.parse(organizationJson.getString("timestamp"));
       this.timestamp = date.getTime();
       this.organization = organization;
