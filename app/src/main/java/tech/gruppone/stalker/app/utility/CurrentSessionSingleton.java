@@ -26,6 +26,7 @@ import tech.gruppone.stalker.app.business.UserOrganizationHistory;
 import tech.gruppone.stalker.app.utility.excpetions.OrganizationNotFoundException;
 import tech.gruppone.stalker.app.utility.web.WebSingleton;
 
+@SuppressLint("KotlinPropertyAccess")
 public class CurrentSessionSingleton {
 
   private static CurrentSessionSingleton instance;
