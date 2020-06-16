@@ -94,35 +94,6 @@ public class CurrentSessionSingletonTest {
   }
 
   @Test
-  public void getInsidePlaces_NotEmptyList() {
-    // Arrange
-    final CurrentSessionSingleton sut = CurrentSessionSingleton.getInstance();
-    final Point point = Point.buildFromDegrees(0, 0);
-    final Organization organization = mock(Organization.class);
-    final Map<Integer, LiveData<Organization>> organizationMap = new TreeMap<>();
-    organizationMap.put(1, new MutableLiveData<>(organization));
-    final List<Integer> intList = new ArrayList<>();
-    intList.add(1);
-
-    stub(method(CurrentSessionSingleton.class, "zeroOrganizations")).toReturn(false);
-    stub(method(CurrentSessionSingleton.class, "getOrganizations"))
-        .toReturn(new MutableLiveData<>(organizationMap));
-
-    Mockito.when(organization.isConnected()).thenReturn(true);
-    Mockito.when(organization.getInsidePlaces(point)).thenReturn(intList);
-
-    // Act
-    List<Integer> result =
-        sut.getInsidePlaces(point).stream()
-            .map(placeWithOrganization -> placeWithOrganization.placeId)
-            .collect(Collectors.toList());
-
-    // Assert
-    assertFalse(result.isEmpty());
-    assertEquals(1, result.size());
-  }
-
-  @Test
   public void getInstance_notNull() {
     // Arrange
     final CurrentSessionSingleton sut = CurrentSessionSingleton.getInstance();
