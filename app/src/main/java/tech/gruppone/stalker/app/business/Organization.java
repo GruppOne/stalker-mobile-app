@@ -50,6 +50,7 @@ public class Organization {
     return ret;
   }
 
+  @NonNull
   public Place getPlaceWithOrganizationId(int placeId) {
     Place place = new Place();
     for (Place p : places) {
