@@ -19,14 +19,9 @@ import tech.gruppone.stalker.app.utility.room.PersistenceSingleton;
 import tech.gruppone.stalker.app.utility.room.UserPermanence;
 import tech.gruppone.stalker.app.utility.web.WebSingleton;
 
-//import tech.gruppone.stalker.app.database.AppDatabase;
-
 public class LocationNotifier extends JobIntentService {
 
   static int JOB_ID = 1000;
-
-  private CurrentSessionSingleton currentSession = CurrentSessionSingleton.getInstance();
-  private WebSingleton web = WebSingleton.getInstance();
 
   public static void enqueue(@NonNull Context ctx, @NonNull Intent work) {
     enqueueWork(ctx, LocationNotifier.class, JOB_ID, work);
@@ -44,30 +39,30 @@ public class LocationNotifier extends JobIntentService {
     Point point = Point.buildFromDegrees(location.getLongitude(), location.getLatitude());
 
     int userId =
-        requireNonNull(CurrentSessionSingleton.getInstance().getLoggedUser().getValue()).getId();
+      requireNonNull(CurrentSessionSingleton.getInstance().getLoggedUser().getValue()).getId();
     List<PlaceWithOrganization> insidePlaces =
-        CurrentSessionSingleton.getInstance().getInsidePlaces(point);
+      CurrentSessionSingleton.getInstance().getInsidePlaces(point);
     boolean anonymous = CurrentSessionSingleton.getInstance().isAnonymous();
     PermanenceDatabase database = PersistenceSingleton.getInstance().getDatabase();
 
     for (PlaceWithOrganization placeWithOrganization : insidePlaces) {
       if (database.userPermanenceDao().openEntry(placeWithOrganization.placeId).isEmpty()) {
         database
-            .userPermanenceDao()
-            .insert(
-                UserPermanence.builder()
-                    .anonymous(anonymous)
-                    .entryTimestamp(new Date())
-                    .placeId(placeWithOrganization.placeId)
-                    .organizationId(placeWithOrganization.organizationId)
-                    .build());
+          .userPermanenceDao()
+          .insert(
+            UserPermanence.builder()
+              .anonymous(anonymous)
+              .entryTimestamp(new Date())
+              .placeId(placeWithOrganization.placeId)
+              .organizationId(placeWithOrganization.organizationId)
+              .build());
       }
     }
 
     List<Integer> placeIds =
-        insidePlaces.stream()
-            .map(placeWithOrganization -> placeWithOrganization.placeId)
-            .collect(Collectors.toList());
+      insidePlaces.stream()
+        .map(placeWithOrganization -> placeWithOrganization.placeId)
+        .collect(Collectors.toList());
 
     if (!placeIds.isEmpty()) {
       WebSingleton.getInstance().locationUpdate(userId, placeIds, true, anonymous);
@@ -83,6 +78,5 @@ public class LocationNotifier extends JobIntentService {
     if (!outsidePlaces.isEmpty()) {
       WebSingleton.getInstance().locationUpdate(userId, outsidePlaces, false, anonymous);
     }
-
   }
 }

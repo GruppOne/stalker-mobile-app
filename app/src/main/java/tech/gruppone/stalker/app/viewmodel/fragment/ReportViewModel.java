@@ -2,23 +2,16 @@ package tech.gruppone.stalker.app.viewmodel.fragment;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.Transformations;
 import androidx.lifecycle.ViewModel;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.json.JSONArray;
 import org.json.JSONException;
-import tech.gruppone.stalker.app.business.Place;
-import tech.gruppone.stalker.app.business.User;
 import tech.gruppone.stalker.app.business.UserOrganizationHistory;
 import tech.gruppone.stalker.app.model.OrganizationModel;
 import tech.gruppone.stalker.app.model.fragment.ReportModel;
-import tech.gruppone.stalker.app.utility.CurrentSessionSingleton;
-import tech.gruppone.stalker.app.utility.excpetions.OrganizationNotFoundException;
-import tech.gruppone.stalker.app.utility.web.WebSingleton;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -28,7 +21,7 @@ public class ReportViewModel extends ViewModel {
 
   private OrganizationModel organizationModel = new OrganizationModel();
 
-  public void getUsersHistory(int id) throws OrganizationNotFoundException, JSONException {
+  public void getUsersHistory(int id) throws JSONException {
     model.getUsersHistory(id);
   }
 

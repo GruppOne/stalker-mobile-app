@@ -6,8 +6,6 @@ import java.util.List;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
-import lombok.Setter;
 import lombok.Value;
 import lombok.With;
 import org.json.JSONException;
