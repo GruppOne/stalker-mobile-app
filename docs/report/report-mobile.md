@@ -24,6 +24,7 @@ Per regolare il consumo della batteria, come citato sopra. Ci siamo affidati all
 Abbiamo scelto il profilo *bilanciato* poiché andiamo a tenere traccia di luoghi con una dimensione sufficientemente grande da non richiedere una accuratezza elevata e allo stesso tempo ci consente di aumentare la durata della batteria sotto tracciamento.
 
 ## Test
+
 Sono stati eseguiti test di unità e test strumentali per tutti gli elementi della mobile application, arrivando ad una code coverage complessiva dell'**82.7%**.
 
 ## Problemi Aperti
