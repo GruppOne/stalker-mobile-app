@@ -21,15 +21,15 @@ import tech.gruppone.stalker.app.utility.CurrentSessionSingleton;
 @PrepareForTest({CurrentSessionSingleton.class})
 public class MainPageModelTest {
 
-    @Test
+  @Test
   public void loadOrganizations() {
-    //Arrange
+    // Arrange
     final MainPageModel sut = new MainPageModel();
 
-    //Act
+    // Act
     sut.loadOrganizations();
 
-    //Assert
+    // Assert
 
   }
 

@@ -43,8 +43,8 @@ public class Place {
         JSONObject jsonPoint = jsonPolyLine.getJSONObject(i);
 
         polyLine.add(
-          Point.buildFromDegrees(
-            jsonPoint.getDouble("longitude"), jsonPoint.getDouble("latitude")));
+            Point.buildFromDegrees(
+                jsonPoint.getDouble("longitude"), jsonPoint.getDouble("latitude")));
       }
       JSONObject placeInformation = data.getJSONObject("placeInfo");
       address = placeInformation.getString("address");
@@ -81,13 +81,13 @@ public class Place {
 
   @NonNull
   private static Position relativePosition(
-    @NonNull Point origin, @NonNull Point vertex, @NonNull Point point) {
+      @NonNull Point origin, @NonNull Point vertex, @NonNull Point point) {
     Vector3d baseDirection =
-      new Vector3d(vertex.getX() - origin.getX(), vertex.getY() - origin.getY(), 0);
+        new Vector3d(vertex.getX() - origin.getX(), vertex.getY() - origin.getY(), 0);
     baseDirection.normalize();
 
     Vector3d trialDirection =
-      new Vector3d(point.getX() - origin.getX(), point.getY() - origin.getY(), 0);
+        new Vector3d(point.getX() - origin.getX(), point.getY() - origin.getY(), 0);
     trialDirection.normalize();
 
     Vector3d crossProduct = new Vector3d();
@@ -106,12 +106,12 @@ public class Place {
   @NonNull
   public Point getCenter() {
     Point center =
-      polyLine
-        .parallelStream()
-        .reduce(
-          new Point(),
-          (point1, point2) ->
-            new Point(point1.getX() + point2.getX(), point1.getY() + point2.getY()));
+        polyLine
+            .parallelStream()
+            .reduce(
+                new Point(),
+                (point1, point2) ->
+                    new Point(point1.getX() + point2.getX(), point1.getY() + point2.getY()));
 
     return new Point(center.getX() / polyLine.size(), center.getY() / polyLine.size());
   }

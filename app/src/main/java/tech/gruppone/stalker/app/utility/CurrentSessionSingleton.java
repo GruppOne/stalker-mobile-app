@@ -38,14 +38,12 @@ public class CurrentSessionSingleton {
 
   @Getter @Setter private boolean anonymous = false;
 
-
-  private MutableLiveData<Map<Long, LiveData<UserOrganizationHistory>>> userOrganizationHistory = new MutableLiveData<>(new TreeMap<>());
-
+  private MutableLiveData<Map<Long, LiveData<UserOrganizationHistory>>> userOrganizationHistory =
+      new MutableLiveData<>(new TreeMap<>());
 
   @SuppressLint("UseSparseArrays")
   private final MutableLiveData<Map<Integer, LiveData<Organization>>> organizations =
       new MutableLiveData<>(new TreeMap<>());
-
 
   private CurrentSessionSingleton() {}
 

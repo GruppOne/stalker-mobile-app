@@ -214,84 +214,84 @@ public class ReportModel {
         + "\n"
         + "}";*/
     WebSingleton.getInstance()
-      .getUserHistory(
-        id,
-        jsonObject -> {
-          System.out.println(jsonObject);
-          // JSONObject jsonObject = new JSONObject(str);
-          List<UserOrganizationHistory> userOrganizationHistories = new ArrayList<>();
-          try {
-            JSONArray jsonOrganizationsHistory = jsonObject.getJSONArray("history");
-            for (int i = 0; i < jsonOrganizationsHistory.length(); i++) {
+        .getUserHistory(
+            id,
+            jsonObject -> {
+              System.out.println(jsonObject);
+              // JSONObject jsonObject = new JSONObject(str);
+              List<UserOrganizationHistory> userOrganizationHistories = new ArrayList<>();
+              try {
+                JSONArray jsonOrganizationsHistory = jsonObject.getJSONArray("history");
+                for (int i = 0; i < jsonOrganizationsHistory.length(); i++) {
 
-              JSONObject jsonHistoryObject = jsonOrganizationsHistory.getJSONObject(i);
-              int organizationId = jsonHistoryObject.getInt("organizationId");
-              LiveData<Organization> organization =
-                Objects.requireNonNull(
-                  CurrentSessionSingleton.getInstance().getOrganization(organizationId));
+                  JSONObject jsonHistoryObject = jsonOrganizationsHistory.getJSONObject(i);
+                  int organizationId = jsonHistoryObject.getInt("organizationId");
+                  LiveData<Organization> organization =
+                      Objects.requireNonNull(
+                          CurrentSessionSingleton.getInstance().getOrganization(organizationId));
 
-              JSONObject organizationJson =
-                jsonHistoryObject.getJSONObject("historyPerOrganization");
+                  JSONObject organizationJson =
+                      jsonHistoryObject.getJSONObject("historyPerOrganization");
 
-              JSONArray historyArray = organizationJson.getJSONArray("history");
+                  JSONArray historyArray = organizationJson.getJSONArray("history");
 
-              LiveData<List<Place>> placeList =
-                new MutableLiveData<>(
-                  Objects.requireNonNull(organization.getValue()).getPlaces());
+                  LiveData<List<Place>> placeList =
+                      new MutableLiveData<>(
+                          Objects.requireNonNull(organization.getValue()).getPlaces());
 
-              placeList.observeForever(
-                new Observer<List<Place>>() {
-                  @Override
-                  public void onChanged(List<Place> dataList) {
-                    if (!Objects.requireNonNull(placeList.getValue()).isEmpty()) {
-                      placeList.removeObserver(this);
-                      try {
-                        userOrganizationHistories.addAll(
-                          ReportModel.this.getUsersOrganizationHistory(
-                            historyArray, organization.getValue()));
-                      } catch (JSONException e) {
-                        e.printStackTrace();
-                      }
-                    } else {
-                      WebSingleton.getInstance()
-                        .getPlaces(
-                          organizationId,
-                          jsonObject -> {
+                  placeList.observeForever(
+                      new Observer<List<Place>>() {
+                        @Override
+                        public void onChanged(List<Place> dataList) {
+                          if (!Objects.requireNonNull(placeList.getValue()).isEmpty()) {
+                            placeList.removeObserver(this);
                             try {
-                              JSONArray placesArray = jsonObject.getJSONArray("places");
-
-                              List<Place> places = new ArrayList<>();
-
-                              for (int i = 0; i < placesArray.length(); ++i) {
-                                places.add(new Place(placesArray.getJSONObject(i)));
-                              }
-                              CurrentSessionSingleton.getInstance()
-                                .updatePlaces(organizationId, places);
-                            } catch (JSONException | OrganizationNotFoundException e) {
-                              throw new RuntimeException(e);
+                              userOrganizationHistories.addAll(
+                                  ReportModel.this.getUsersOrganizationHistory(
+                                      historyArray, organization.getValue()));
+                            } catch (JSONException e) {
+                              e.printStackTrace();
                             }
-                          },
-                          null);
-                    }
-                  }
-                });
-            }
-            CurrentSessionSingleton.getInstance()
-              .setUserOrganizationHistory(userOrganizationHistories);
-          } catch (JSONException | OrganizationNotFoundException e) {
-            e.printStackTrace();
-          }
-        },
-        null);
+                          } else {
+                            WebSingleton.getInstance()
+                                .getPlaces(
+                                    organizationId,
+                                    jsonObject -> {
+                                      try {
+                                        JSONArray placesArray = jsonObject.getJSONArray("places");
+
+                                        List<Place> places = new ArrayList<>();
+
+                                        for (int i = 0; i < placesArray.length(); ++i) {
+                                          places.add(new Place(placesArray.getJSONObject(i)));
+                                        }
+                                        CurrentSessionSingleton.getInstance()
+                                            .updatePlaces(organizationId, places);
+                                      } catch (JSONException | OrganizationNotFoundException e) {
+                                        throw new RuntimeException(e);
+                                      }
+                                    },
+                                    null);
+                          }
+                        }
+                      });
+                }
+                CurrentSessionSingleton.getInstance()
+                    .setUserOrganizationHistory(userOrganizationHistories);
+              } catch (JSONException | OrganizationNotFoundException e) {
+                e.printStackTrace();
+              }
+            },
+            null);
   }
 
   List<UserOrganizationHistory> getUsersOrganizationHistory(
-    JSONArray jsonHistoryObject, Organization organization) throws JSONException {
+      JSONArray jsonHistoryObject, Organization organization) throws JSONException {
     List<UserOrganizationHistory> userOrganizationHistories = new ArrayList<>();
     for (int j = 0; j < jsonHistoryObject.length(); j++) {
       JSONObject jsonUserOrganizationHistory = jsonHistoryObject.getJSONObject(j);
       UserOrganizationHistory userOrganizationHistory =
-        new UserOrganizationHistory(jsonUserOrganizationHistory, organization);
+          new UserOrganizationHistory(jsonUserOrganizationHistory, organization);
       userOrganizationHistories.add(userOrganizationHistory);
     }
     return userOrganizationHistories;

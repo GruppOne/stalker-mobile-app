@@ -39,30 +39,30 @@ public class LocationNotifier extends JobIntentService {
     Point point = Point.buildFromDegrees(location.getLongitude(), location.getLatitude());
 
     int userId =
-      requireNonNull(CurrentSessionSingleton.getInstance().getLoggedUser().getValue()).getId();
+        requireNonNull(CurrentSessionSingleton.getInstance().getLoggedUser().getValue()).getId();
     List<PlaceWithOrganization> insidePlaces =
-      CurrentSessionSingleton.getInstance().getInsidePlaces(point);
+        CurrentSessionSingleton.getInstance().getInsidePlaces(point);
     boolean anonymous = CurrentSessionSingleton.getInstance().isAnonymous();
     PermanenceDatabase database = PersistenceSingleton.getInstance().getDatabase();
 
     for (PlaceWithOrganization placeWithOrganization : insidePlaces) {
       if (database.userPermanenceDao().openEntry(placeWithOrganization.placeId).isEmpty()) {
         database
-          .userPermanenceDao()
-          .insert(
-            UserPermanence.builder()
-              .anonymous(anonymous)
-              .entryTimestamp(new Date())
-              .placeId(placeWithOrganization.placeId)
-              .organizationId(placeWithOrganization.organizationId)
-              .build());
+            .userPermanenceDao()
+            .insert(
+                UserPermanence.builder()
+                    .anonymous(anonymous)
+                    .entryTimestamp(new Date())
+                    .placeId(placeWithOrganization.placeId)
+                    .organizationId(placeWithOrganization.organizationId)
+                    .build());
       }
     }
 
     List<Integer> placeIds =
-      insidePlaces.stream()
-        .map(placeWithOrganization -> placeWithOrganization.placeId)
-        .collect(Collectors.toList());
+        insidePlaces.stream()
+            .map(placeWithOrganization -> placeWithOrganization.placeId)
+            .collect(Collectors.toList());
 
     if (!placeIds.isEmpty()) {
       WebSingleton.getInstance().locationUpdate(userId, placeIds, true, anonymous);
