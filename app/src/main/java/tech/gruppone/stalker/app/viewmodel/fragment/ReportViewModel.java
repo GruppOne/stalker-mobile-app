@@ -21,7 +21,7 @@ public class ReportViewModel extends ViewModel {
 
   private OrganizationModel organizationModel = new OrganizationModel();
 
-  public void getUsersHistory(int id) throws JSONException {
+  public void getUsersHistory(int id) {
     model.getUsersHistory(id);
   }
 
