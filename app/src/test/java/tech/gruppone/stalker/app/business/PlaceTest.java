@@ -3,6 +3,7 @@ package tech.gruppone.stalker.app.business;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,7 @@ public class PlaceTest {
     // Arrange
     JSONObject jsonPlace = Mockito.mock(JSONObject.class);
     JSONObject placeData = mock(JSONObject.class);
+    JSONObject placeInfo = mock(JSONObject.class);
     int id = 1;
     JSONArray jsonPolyline = Mockito.mock(JSONArray.class);
 
@@ -27,6 +29,9 @@ public class PlaceTest {
       Mockito.when(jsonPlace.getInt("id")).thenReturn(id);
       Mockito.when(jsonPlace.getJSONObject("data")).thenReturn(placeData);
       Mockito.when(placeData.getJSONArray("polygon")).thenReturn(jsonPolyline);
+      when(placeData.getJSONObject("placeInfo")).thenReturn(placeInfo);
+      when(placeInfo.getString("address")).thenReturn("address");
+      when(placeInfo.getString("city")).thenReturn("city");
 
       Mockito.when(jsonPolyline.length()).thenReturn(0);
     } catch (JSONException e) {
@@ -46,6 +51,7 @@ public class PlaceTest {
     // Arrange
     JSONObject jsonPlace = Mockito.mock(JSONObject.class);
     JSONObject placeData = mock(JSONObject.class);
+    JSONObject placeInfo = mock(JSONObject.class);
     int id = 1;
     JSONArray jsonPolyline = Mockito.mock(JSONArray.class);
     JSONObject jsonPoint = Mockito.mock(JSONObject.class);
@@ -54,6 +60,9 @@ public class PlaceTest {
       Mockito.when(jsonPlace.getInt("id")).thenReturn(id);
       Mockito.when(jsonPlace.getJSONObject("data")).thenReturn(placeData);
       Mockito.when(placeData.getJSONArray("polygon")).thenReturn(jsonPolyline);
+      when(placeData.getJSONObject("placeInfo")).thenReturn(placeInfo);
+      when(placeInfo.getString("address")).thenReturn("address");
+      when(placeInfo.getString("city")).thenReturn("city");
 
       Mockito.when(jsonPolyline.length()).thenReturn(1);
       Mockito.when(jsonPolyline.getJSONObject(0)).thenReturn(jsonPoint);
@@ -81,7 +90,7 @@ public class PlaceTest {
     pairList.add(Point.buildFromDegrees(45.411442, 11.887945));
     pairList.add(Point.buildFromDegrees(45.411554, 11.887474));
 
-    final Place instance = new Place(1, pairList);
+    final Place instance = new Place("name", "address", "city", 1, pairList);
 
     // Act
     final boolean isInside = instance.isInside(Point.buildFromDegrees(45.411329, 11.887631));
@@ -99,7 +108,7 @@ public class PlaceTest {
     pairList.add(Point.buildFromDegrees(45.411442, 11.887945));
     pairList.add(Point.buildFromDegrees(45.411554, 11.887474));
 
-    final Place instance = new Place(1, pairList);
+    final Place instance = new Place("name", "address", "city", 1, pairList);
 
     // Act
     final boolean isInside = instance.isInside(Point.buildFromDegrees(45.411463, 11.886950));
@@ -117,7 +126,7 @@ public class PlaceTest {
     pairList.add(Point.buildFromDegrees(45.411442, 11.887945));
     pairList.add(Point.buildFromDegrees(45.411554, 11.887474));
 
-    final Place instance = new Place(1, pairList);
+    final Place instance = new Place("name", "address", "city", 1, pairList);
 
     // Act
     final boolean isInside = instance.isInside(Point.buildFromDegrees(45.411554, 11.887474));
