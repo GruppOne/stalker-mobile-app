@@ -19,10 +19,10 @@ import tech.gruppone.stalker.app.utility.App;
 public class GooglePositionInterface {
   private static LocationRequest locationRequest =
       LocationRequest.create()
-          .setInterval(30000)
+          .setInterval(5000)
           .setExpirationDuration(500000000)
-          .setFastestInterval(30000)
-          .setMaxWaitTime(30000)
+          .setFastestInterval(5000)
+          .setMaxWaitTime(5000)
           .setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
 
   private final LocationCallback locationCallback =
