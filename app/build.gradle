@@ -112,16 +112,10 @@ dependencies {
   implementation 'androidx.room:room-runtime:2.2.5'
   annotationProcessor 'androidx.room:room-compiler:2.2.5'
 
-<<<<<<< HEAD
   jacocoAnt 'org.jacoco:org.jacoco.ant:0.8.4:nodeps'
-=======
-
-
 
   implementation "androidx.room:room-runtime:2.2.5"
   annotationProcessor "androidx.room:room-compiler:2.2.5"
-
->>>>>>> e033ffb... feat: add searchbar to report page
 }
 
 jacoco {
