@@ -24,7 +24,7 @@ public class UserOrganizationHistory {
   Boolean inside;
 
   public UserOrganizationHistory(
-    @NonNull JSONObject organizationJson, @NonNull Organization organization) {
+      @NonNull JSONObject organizationJson, @NonNull Organization organization) {
 
     try {
       DateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ", Locale.getDefault());

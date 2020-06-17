@@ -101,4 +101,4 @@ public class ReportListAdapter
       return dateFormat.format(new Date(milliseconds));
     }
   }
- }
+}

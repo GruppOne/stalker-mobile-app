@@ -44,13 +44,11 @@ public class ReportFragment extends Fragment {
 
     reportViewModel = new ViewModelProvider(this).get(ReportViewModel.class);
 
-
     searchView = view.findViewById(R.id.reportSearch_bar);
     recyclerView = view.findViewById(R.id.reportRecyclerView);
 
     recyclerView.setHasFixedSize(true);
     recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
 
     reportListAdapter = new ReportListAdapter();
 
