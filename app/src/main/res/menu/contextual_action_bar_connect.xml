@@ -6,5 +6,5 @@
     android:icon="@drawable/ic_call_merge_black_24dp"
     android:title="@string/connect"
     android:contentDescription="@string/connect_to_these_organizations"
-    app:showAsAction="ifRoom" />/>
+    app:showAsAction="ifRoom" />
 </menu>
