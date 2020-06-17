@@ -28,6 +28,4 @@ public class OrganizationsViewModel extends ViewModel {
     OrganizationModel organizationModel = new OrganizationModel();
     organizationIds.forEachRemaining(id -> organizationModel.connect(id.intValue(), null));
   }
-
-
 }

@@ -20,7 +20,6 @@ import tech.gruppone.stalker.app.utility.web.WebSingleton;
 
 public class OrganizationsModel {
 
-
   public void loadOrganizations() {
     WebSingleton.getInstance()
         .getOrganizationList(
@@ -55,7 +54,6 @@ public class OrganizationsModel {
             },
             null);
   }
-
 
   public void loadConnectedOrganizations() {
     WebSingleton.getInstance()
