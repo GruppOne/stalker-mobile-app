@@ -57,7 +57,7 @@ public class OrganizationsFragment extends Fragment {
     recyclerView.setLayoutManager(layoutManager);
 
     DividerItemDecoration dividerItemDecoration =
-        new DividerItemDecoration(requireNonNull(getActivity()), layoutManager.getOrientation());
+      new DividerItemDecoration(requireNonNull(getActivity()), layoutManager.getOrientation());
 
     recyclerView.addItemDecoration(dividerItemDecoration);
 
@@ -68,69 +68,69 @@ public class OrganizationsFragment extends Fragment {
     recyclerView.setAdapter(adapter);
 
     SelectionTracker<Long> selectionTracker =
-        new SelectionTracker.Builder<>(
-                "organizationListSelection",
-                recyclerView,
-                new OrganizationItemKeyProvider(recyclerView),
-                new OrgListItemDetailsLookup(recyclerView),
-                StorageStrategy.createLongStorage())
-            .withSelectionPredicate(new OnlyPublicSelectionPredicate())
-            .build();
+      new SelectionTracker.Builder<>(
+        "organizationListSelection",
+        recyclerView,
+        new OrganizationItemKeyProvider(recyclerView),
+        new OrgListItemDetailsLookup(recyclerView),
+        StorageStrategy.createLongStorage())
+        .withSelectionPredicate(new OnlyPublicSelectionPredicate())
+        .build();
 
     selectionTracker.addObserver(
-        new SelectionObserver<Long>() {
-          @Override
-          public void onSelectionChanged() {
-            super.onSelectionChanged();
+      new SelectionObserver<Long>() {
+        @Override
+        public void onSelectionChanged() {
+          super.onSelectionChanged();
 
-            // Safe cast, because we only use AppCompatActivity
-            AppCompatActivity activity =
-                (AppCompatActivity) OrganizationsFragment.this.getActivity();
+          // Safe cast, because we only use AppCompatActivity
+          AppCompatActivity activity =
+            (AppCompatActivity) OrganizationsFragment.this.getActivity();
 
-            if (activity != null) {
-              if (selectionTracker.hasSelection() && actionMode == null) {
-                actionMode =
-                    activity.startSupportActionMode(
-                        new Callback() {
-                          @Override
-                          public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-                            mode.getMenuInflater()
-                                .inflate(R.menu.contextual_action_bar_connect, menu);
-                            return true;
-                          }
+          if (activity != null) {
+            if (selectionTracker.hasSelection() && actionMode == null) {
+              actionMode =
+                activity.startSupportActionMode(
+                  new Callback() {
+                    @Override
+                    public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+                      mode.getMenuInflater()
+                        .inflate(R.menu.contextual_action_bar_connect, menu);
+                      return true;
+                    }
 
-                          @Override
-                          public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-                            return true;
-                          }
+                    @Override
+                    public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+                      return true;
+                    }
 
-                          @Override
-                          public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-                            if (item.getItemId() == R.id.connectMenuItem) {
-                              viewModel.connect(selectionTracker.getSelection().iterator());
-                              selectionTracker.clearSelection();
-                              return true;
-                            }
-                            return false;
-                          }
+                    @Override
+                    public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+                      if (item.getItemId() == R.id.connectMenuItem) {
+                        viewModel.connect(selectionTracker.getSelection().iterator());
+                        selectionTracker.clearSelection();
+                        return true;
+                      }
+                      return false;
+                    }
 
-                          @Override
-                          public void onDestroyActionMode(ActionMode mode) {
-                            selectionTracker.clearSelection();
-                          }
-                        });
-              } else if (!selectionTracker.hasSelection() && actionMode != null) {
-                actionMode.finish();
-                actionMode = null;
-              }
+                    @Override
+                    public void onDestroyActionMode(ActionMode mode) {
+                      selectionTracker.clearSelection();
+                    }
+                  });
+            } else if (!selectionTracker.hasSelection() && actionMode != null) {
+              actionMode.finish();
+              actionMode = null;
+            }
 
-              if (selectionTracker.hasSelection() && actionMode != null) {
-                actionMode.setTitle(
-                    selectionTracker.getSelection().size() + " " + getString(R.string.selected));
-              }
+            if (selectionTracker.hasSelection() && actionMode != null) {
+              actionMode.setTitle(
+                selectionTracker.getSelection().size() + " " + getString(R.string.selected));
             }
           }
-        });
+        }
+      });
 
     adapter.setSelectionTracker(selectionTracker);
   }
@@ -138,13 +138,16 @@ public class OrganizationsFragment extends Fragment {
   @Override
   @NonNull
   public View onCreateView(
-      @NonNull LayoutInflater inflater,
-      @Nullable ViewGroup container,
-      @Nullable Bundle savedInstanceState) {
+    @NonNull LayoutInflater inflater,
+    @Nullable ViewGroup container,
+    @Nullable Bundle savedInstanceState) {
     view = inflater.inflate(R.layout.organizations_fragment, container, false);
 
     view.findViewById(R.id.reloadButton)
-        .setOnClickListener(v -> OrganizationsFragment.this.loadOrganizations());
+      .setOnClickListener(
+        v -> {
+          OrganizationsFragment.this.loadOrganizations();
+        });
 
     return view;
   }

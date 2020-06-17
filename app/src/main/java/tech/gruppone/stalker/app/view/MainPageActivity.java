@@ -1,7 +1,5 @@
 package tech.gruppone.stalker.app.view;
 
-import static java.util.Objects.requireNonNull;
-
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
@@ -25,18 +23,18 @@ public class MainPageActivity extends StalkerActivity {
 
   FragmentManager fragmentManager = getSupportFragmentManager();
   DialogInterface.OnClickListener dialogClickListener =
-      (dialog, which) -> {
-        switch (which) {
-          case DialogInterface.BUTTON_POSITIVE:
-            MainPageViewModel.logout();
-            MainPageActivity.super.onBackPressed();
-            break;
+    (dialog, which) -> {
+      switch (which) {
+        case DialogInterface.BUTTON_POSITIVE:
+          MainPageViewModel.logout();
+          MainPageActivity.super.onBackPressed();
+          break;
 
-          case DialogInterface.BUTTON_NEGATIVE:
-            // Do nothing
-            break;
-        }
-      };
+        case DialogInterface.BUTTON_NEGATIVE:
+          // Do nothing
+          break;
+      }
+    };
 
   @SuppressWarnings("unused")
   GeofenceHandler geofenceHandler = null;
@@ -57,49 +55,49 @@ public class MainPageActivity extends StalkerActivity {
     setSupportActionBar(topAppBar);
 
     topAppBar.setOnMenuItemClickListener(
-        item -> {
-          if (item.getItemId() == R.id.anonymousMenuItem) {
-            viewModel.toggleAnonymous();
+      item -> {
+        if (item.getItemId() == R.id.anonymousMenuItem) {
+          viewModel.toggleAnonymous();
 
-            boolean anonymous = CurrentSessionSingleton.getInstance().isAnonymous();
+          boolean anonymous = CurrentSessionSingleton.getInstance().isAnonymous();
 
-            Toast.makeText(
-                    this,
-                    anonymous ? getString(R.string.wentAnonymous) : getString(R.string.wentKnown),
-                    Toast.LENGTH_SHORT)
-                .show();
+          Toast.makeText(
+            this,
+            anonymous ? getString(R.string.wentAnonymous) : getString(R.string.wentKnown),
+            Toast.LENGTH_SHORT)
+            .show();
 
-            item.setIcon(
-                anonymous
-                    ? R.drawable.ic_visibility_black_24dp
-                    : R.drawable.ic_visibility_off_black_24dp);
+          item.setIcon(
+            anonymous
+              ? R.drawable.ic_visibility_black_24dp
+              : R.drawable.ic_visibility_off_black_24dp);
 
-            item.setTitle(anonymous ? R.string.goKnown : R.string.goAnonymous);
+          item.setTitle(anonymous ? R.string.goKnown : R.string.goAnonymous);
 
-            return true;
-          }
-          return false;
-        });
+          return true;
+        }
+        return false;
+      });
 
     BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
 
     bottomNavigationView.setOnNavigationItemSelectedListener(
-        menuItem -> {
-          viewModel.setSelectedMenuItemId(menuItem.getItemId());
-          switch (menuItem.getItemId()) {
-            case R.id.organizations_page:
-              MainPageActivity.this.setOrganizationsPage();
-              return true;
-            case R.id.connected_page:
-              MainPageActivity.this.setConnectedPage();
-              return true;
-            case R.id.report_page:
-              MainPageActivity.this.setReportPage();
-              return true;
-            default:
-              return false;
-          }
-        });
+      menuItem -> {
+        viewModel.setSelectedMenuItemId(menuItem.getItemId());
+        switch (menuItem.getItemId()) {
+          case R.id.organizations_page:
+            MainPageActivity.this.setOrganizationsPage();
+            return true;
+          case R.id.connected_page:
+            MainPageActivity.this.setConnectedPage();
+            return true;
+          case R.id.report_page:
+            MainPageActivity.this.setReportPage();
+            return true;
+          default:
+            return false;
+        }
+      });
 
     // bottomNavigationView.setOnNavigationItemReselectedListener(menuItem -> {});
 
@@ -109,26 +107,38 @@ public class MainPageActivity extends StalkerActivity {
   @Override
   public void onBackPressed() {
     new MaterialAlertDialogBuilder(this)
-        .setMessage("Do you want to logout?")
-        .setPositiveButton("Yes", dialogClickListener)
-        .setNegativeButton("No", dialogClickListener)
-        .show();
+      .setMessage("Do you want to logout?")
+      .setPositiveButton("Yes", dialogClickListener)
+      .setNegativeButton("No", dialogClickListener)
+      .show();
   }
 
   private void setOrganizationsPage() {
     fragmentManager
-        .beginTransaction()
-        .hide(requireNonNull(fragmentManager.findFragmentById(R.id.connected_fragment)))
-        .show(requireNonNull(fragmentManager.findFragmentById(R.id.organizations_fragment)))
-        .commit();
+      .beginTransaction()
+      .hide(Objects.requireNonNull(fragmentManager.findFragmentById(R.id.connected_fragment)))
+      .hide(Objects.requireNonNull(fragmentManager.findFragmentById(R.id.report_fragment)))
+      .show(Objects.requireNonNull(fragmentManager.findFragmentById(R.id.organizations_fragment)))
+      .commit();
   }
 
   private void setConnectedPage() {
     fragmentManager
-        .beginTransaction()
-        .hide(requireNonNull(fragmentManager.findFragmentById(R.id.organizations_fragment)))
-        .show(requireNonNull(fragmentManager.findFragmentById(R.id.connected_fragment)))
-        .commit();
+      .beginTransaction()
+      .hide(Objects.requireNonNull(fragmentManager.findFragmentById(R.id.organizations_fragment)))
+      .hide(Objects.requireNonNull(fragmentManager.findFragmentById(R.id.report_fragment)))
+      .show(Objects.requireNonNull(fragmentManager.findFragmentById(R.id.connected_fragment)))
+      .commit();
+  }
+
+  private void setReportPage() {
+    ;
+    fragmentManager
+      .beginTransaction()
+      .hide(Objects.requireNonNull(fragmentManager.findFragmentById(R.id.connected_fragment)))
+      .hide(Objects.requireNonNull(fragmentManager.findFragmentById(R.id.organizations_fragment)))
+      .show(Objects.requireNonNull(fragmentManager.findFragmentById(R.id.report_fragment)))
+      .commit();
   }
 
   @Override
@@ -144,15 +154,5 @@ public class MainPageActivity extends StalkerActivity {
       geofenceHandler.clearGeofenses();
     }
     super.onDestroy();
-    }
-
-  private void setReportPage() {
-    fragmentManager
-        .beginTransaction()
-        .hide(Objects.requireNonNull(fragmentManager.findFragmentById(R.id.connected_fragment)))
-        .hide(Objects.requireNonNull(fragmentManager.findFragmentById(R.id.organizations_fragment)))
-        .show(Objects.requireNonNull(fragmentManager.findFragmentById(R.id.report_fragment)))
-        .commit();
   }
-
 }

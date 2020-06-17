@@ -23,21 +23,16 @@ import tech.gruppone.stalker.app.R;
 import tech.gruppone.stalker.app.business.UserOrganizationHistory;
 import tech.gruppone.stalker.app.utility.CurrentSessionSingleton;
 import tech.gruppone.stalker.app.utility.ReportListAdapter;
-import tech.gruppone.stalker.app.utility.excpetions.OrganizationNotFoundException;
 import tech.gruppone.stalker.app.viewmodel.fragment.ReportViewModel;
 
 public class ReportFragment extends Fragment {
 
   private View view;
   private ReportViewModel reportViewModel;
-  @Getter
-  private ReportListAdapter reportListAdapter;
-  @Getter
-  private List<LiveData<UserOrganizationHistory>> currentList = new ArrayList<>();
-  @Getter
-  private SearchView searchView;
-  @Getter
-  private RecyclerView recyclerView;
+  @Getter private ReportListAdapter reportListAdapter;
+  @Getter private List<LiveData<UserOrganizationHistory>> currentList = new ArrayList<>();
+  @Getter private SearchView searchView;
+  @Getter private RecyclerView recyclerView;
 
   public ReportFragment() {}
 

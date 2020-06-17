@@ -231,7 +231,8 @@ public class CurrentSessionSingleton {
     return instance;
   }
 
-  public void setUserOrganizationHistory(@NonNull List<UserOrganizationHistory> userOrganizationHistory) {
+  public void setUserOrganizationHistory(
+      @NonNull List<UserOrganizationHistory> userOrganizationHistory) {
 
     Map<Long, LiveData<UserOrganizationHistory>> map = new TreeMap<>(Collections.reverseOrder());
 

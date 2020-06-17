@@ -21,8 +21,7 @@ public class Organization {
   String name;
   String description;
   boolean isPrivate;
-  @With
-  List<Place> places;
+  @With List<Place> places;
   @With boolean connected;
 
   public Organization(@NonNull JSONObject jsonOrg) {
